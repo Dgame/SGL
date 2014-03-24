@@ -1,0 +1,24 @@
+#include <System\Power.h>
+
+Power::Power(uint32 sec, uint8 perc, State _state) : seconds(sec), percent(perc), state(_state) {
+
+}
+
+/**
+* Returns the PowerInfo structure with the currently power informations
+*
+* See: PowerInfo struct
+*/
+Power Power::GetInfo() {
+	int secs, pct;
+	SDL_PowerState state = SDL_GetPowerInfo(&secs, &pct);
+
+	return Power(secs, pct, static_cast<State>(state));
+}
+
+/**
+* Returns the available RAM
+*/
+uint16 Power::GetRAM() {
+	return SDL_GetSystemRAM();
+}
