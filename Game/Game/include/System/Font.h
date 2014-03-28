@@ -62,18 +62,12 @@ namespace sgl {
 			None = TTF_HINTING_NONE
 		};
 
-		enum class Mode : short {
-			Solid,
-			Shaded,
-			Blended
-		};
-
 		explicit Font(const std::string& filename, uint8 fontSize = 0) {
 			loadFromFile(filename, fontSize);
 		}
 
 		void loadFromFile(const std::string& filename, uint8 fontSize);
-		Surface render(const std::string& text, std::array<Color*, 2>& color, Mode mode = Mode::Solid) const;
+		//Surface render(const std::string& text, std::array<Color*, 2>& color, Mode mode = Mode::Solid) const;
 
 		void Font::setStyle(Font::Style style) {
 			TTF_SetFontStyle(_ttf.get(), static_cast<int>(style));

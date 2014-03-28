@@ -8,16 +8,33 @@ namespace sgl {
 	class String : public Drawable {
 	private:
 		std::string _text;
+		bool _changed;
 
 	public:
-		explicit String(const std::string& str);
+		enum class Mode : short {
+			Solid,
+			Shaded,
+			Blended
+		};
+
+		Mode mode;
+
+		explicit String(const std::string& str, Mode m = Mode::Solid);
 
 		void operator =(const std::string& str) {
-			_text = str;
+			if (str != _text) {
+				_text = str;
+				_changed = true;
+			}
 		}
 
 		void operator =(const String& txt) {
-			_text = txt._text;
+			const std::string& str = txt._text;
+
+			if (str != _text) {
+				_text = str;
+				_changed = true;
+			}
 		}
 
 	protected:

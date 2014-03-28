@@ -17,27 +17,27 @@ namespace sgl {
 		_ttf = std::shared_ptr<TTF_Font>(font, TTF_CloseFont);
 	}
 
-	Surface Font::render(const std::string& text, std::array<Color*, 2>& color, Mode mode) const {
-		SDL_Surface* srfc = nullptr;
+	//Surface Font::render(const std::string& text, std::array<Color*, 2>& color, Mode mode) const {
+	//	SDL_Surface* srfc = nullptr;
 
-		SDL_Color fg;
-		SDL_Color bg;
+	//	SDL_Color fg;
+	//	SDL_Color bg;
 
-		Color::Copy(color[0], fg, Color::Black);
-		Color::Copy(color[1], bg, Color::Transparent);
+	//	Color::Copy(color[0], fg, Color::Black);
+	//	Color::Copy(color[1], bg, Color::Transparent);
 
-		switch (mode) {
-			case Mode::Solid:
-				srfc = TTF_RenderUTF8_Solid(_ttf.get(), text.c_str(), fg);
-				break;
-			case Mode::Shaded:
-				srfc = TTF_RenderUTF8_Shaded(_ttf.get(), text.c_str(), fg, bg);
-				break;
-			case Mode::Blended:
-				srfc = TTF_RenderUTF8_Blended(_ttf.get(), text.c_str(), fg);
-				break;
-		}
+	//	switch (mode) {
+	//		case Mode::Solid:
+	//			srfc = TTF_RenderUTF8_Solid(_ttf.get(), text.c_str(), fg);
+	//			break;
+	//		case Mode::Shaded:
+	//			srfc = TTF_RenderUTF8_Shaded(_ttf.get(), text.c_str(), fg, bg);
+	//			break;
+	//		case Mode::Blended:
+	//			srfc = TTF_RenderUTF8_Blended(_ttf.get(), text.c_str(), fg);
+	//			break;
+	//	}
 
-		return Surface(srfc);
-	}
+	//	return Surface(srfc);
+	//}
 }
