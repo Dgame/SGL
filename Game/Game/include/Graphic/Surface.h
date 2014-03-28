@@ -65,6 +65,7 @@ public:
 
 public:
 	explicit Surface();
+	explicit Surface(SDL_Surface* srfc);
 	explicit Surface(const std::string& filename);
 	explicit Surface(uint16 width, uint16 height, uint8 depth = DEFAULT_DEPTH);
 	explicit Surface(void* pixels, uint16 width, uint16 height, uint8 depth = DEFAULT_DEPTH);

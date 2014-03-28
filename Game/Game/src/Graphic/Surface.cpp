@@ -4,6 +4,10 @@ Surface::Surface() : _surface(nullptr) {
 
 }
 
+Surface::Surface(SDL_Surface* srfc) : _surface(srfc) {
+
+}
+
 Surface::Surface(const std::string& filename) {
 	this->loadFromFile(filename);
 }
@@ -61,7 +65,7 @@ Surface Surface::subSurface(const ShortRect& rect) {
 }
 
 void Surface::setColorKey(const Color& col, bool enable) const {
-	uint32 key = SDL_MapRGBA(_surface->format, col.r, col.g, col.b, col.alpha);
+	uint32 key = SDL_MapRGBA(_surface->format, col.red, col.green, col.blue, col.alpha);
 	SDL_SetColorKey(_surface.get(), enable, key);
 }
 
@@ -76,7 +80,7 @@ Color Surface::getColorKey() const {
 }
 
 void Surface::setColorMod(const Color& col) const {
-	SDL_SetSurfaceColorMod(_surface.get(), col.r, col.g, col.b);
+	SDL_SetSurfaceColorMod(_surface.get(), col.red, col.green, col.blue);
 	SDL_SetSurfaceAlphaMod(_surface.get(), col.alpha);
 }
 

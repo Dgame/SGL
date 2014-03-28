@@ -20,10 +20,12 @@
     <ClInclude Include="include\Graphic\Sprite.h" />
     <ClInclude Include="include\Graphic\Surface.h" />
     <ClInclude Include="include\Graphic\Texture.h" />
+    <ClInclude Include="include\Graphic\String.h" />
     <ClInclude Include="include\Math\Rect.h" />
     <ClInclude Include="include\Math\Vector2.h" />
     <ClInclude Include="include\Math\Vertex.h" />
     <ClInclude Include="include\System\Clock.h" />
+    <ClInclude Include="include\System\Font.h" />
     <ClInclude Include="include\System\Keyboard.h" />
     <ClInclude Include="include\System\Mouse.h" />
     <ClInclude Include="include\System\Power.h" />
@@ -37,7 +39,9 @@
     <ClCompile Include="src\Graphic\Sprite.cpp" />
     <ClCompile Include="src\Graphic\Surface.cpp" />
     <ClCompile Include="src\Graphic\Texture.cpp" />
+    <ClCompile Include="src\Graphic\String.cpp" />
     <ClCompile Include="src\Math\Vertex.cpp" />
+    <ClCompile Include="src\System\Font.cpp" />
     <ClCompile Include="src\System\Keyboard.cpp" />
     <ClCompile Include="src\System\Power.cpp" />
     <ClCompile Include="src\System\Clock.cpp" />
@@ -75,13 +79,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\C\SDL2_ttf-2.0.12\include;C:\Users\Besitzer\Documents\Visual Studio 2013\Projects\Game\Game\include;D:\C\SDL2_image-2.0.0\include;D:\C\SDL2-2.0.3\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\C\SDL2_ttf-2.0.12\lib\x86;D:\C\SDL2_image-2.0.0\lib\x86;D:\C\SDL2-2.0.3\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>E:\C\SDL2_ttf-2.0.12\include;C:\Users\Besitzer\Documents\GitHub\sgl\Game\Game\include;E:\C\SDL2_image-2.0.0\include;E:\C\SDL2-2.0.3\include;$(IncludePath)</IncludePath>
+    <LibraryPath>E:\C\SDL2_ttf-2.0.12\lib\x86;E:\C\SDL2_image-2.0.0\lib\x86;E:\C\SDL2-2.0.3\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>D:\C\SDL2_ttf-2.0.12\include;C:\Users\Besitzer\Documents\Visual Studio 2013\Projects\Game\Game\include;D:\C\SDL2_image-2.0.0\include;D:\C\SDL2-2.0.3\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\C\SDL2_ttf-2.0.12\lib\x86;D:\C\SDL2_image-2.0.0\lib\x86;D:\C\SDL2-2.0.3\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>E:\C\SDL2_ttf-2.0.12\include;C:\Users\Besitzer\Documents\GitHub\sgl\Game\Game\include;E:\C\SDL2_image-2.0.0\include;E:\C\SDL2-2.0.3\include;$(IncludePath)</IncludePath>
+    <LibraryPath>E:\C\SDL2_ttf-2.0.12\lib\x86;E:\C\SDL2_image-2.0.0\lib\x86;E:\C\SDL2-2.0.3\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

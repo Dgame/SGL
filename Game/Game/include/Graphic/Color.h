@@ -2,6 +2,7 @@
 #define COLOR_HPP
 
 #include <array>
+#include <SDL.h>
 #include <Core/Types.h>
 
 struct Color {
@@ -13,15 +14,16 @@ struct Color {
 	static const Color Yellow;
 	static const Color Transparent;
 
-	uint8 r, g, b, alpha;
+	uint8 red, green, blue, alpha;
 
 	explicit Color(uint8 pr, uint8 pg, uint8 pb, uint8 pa = 255);
 
 	Color withTransparency(uint8 pa) const {
-		return Color(r, g, b, pa);
+		return Color(red, green, blue, pa);
 	}
 
 	static Color GL(float pr, float pg, float pb, float pa = 1.f);
+	static void Copy(const Color* from, SDL_Color& too, const Color& def);
 };
 
 bool operator ==(const Color& lhs, const Color& rhs);

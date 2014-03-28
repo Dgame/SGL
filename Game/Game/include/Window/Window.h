@@ -153,7 +153,7 @@ public:
 	* This is also the background color of the window.
 	*/
 	void setClearColor(const Color& col) const {
-		glClearColor(col.r, col.g, col.b, col.alpha);
+		glClearColor(col.red, col.green, col.blue, col.alpha);
 	}
 
 	/**
