@@ -7,10 +7,14 @@
 #include <Graphic\Sprite.h>
 #include <System\Clock.h>
 #include <Graphic\Shape.h>
+#include <System\Font.h>
+#include <Graphic\String.h>
+#include <Graphic\Spritesheet.h>
+#include <Audio/Sound.h>
 
 int main() {
-	Window wnd(640, 480, "Test");
-	wnd.setVerticalSync(Window::Sync::Disable);
+	sgl::Window wnd(640, 480, "Test");
+	wnd.setVerticalSync(sgl::Window::Sync::Disable);
 	wnd.framerateLimit = 30;
 
 	uint32 pixels[256] = {
@@ -47,37 +51,52 @@ int main() {
 		0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff,
 		0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff
 	};
-	Surface icon(pixels, 16, 16, 32);
+
+	sgl::Surface icon(pixels, 16, 16, 32);
 
 	wnd.setIcon(icon);
 
-	Surface wiki("wiki.png");
-	Texture wiki_tex(wiki);
-	Sprite wiki_sprite(wiki_tex);
+	sgl::Surface wiki("wiki.png");
+	sgl::Texture wiki_tex(wiki);
+	sgl::Sprite wiki_sprite(wiki_tex);
 	wiki_sprite.position.set(200, 200);
 
-	Surface wiki2(wiki.pixels(), wiki.width(), wiki.height(), 24);
+	sgl::Surface wiki2(wiki.pixels(), wiki.width(), wiki.height(), 24);
 	wiki2.saveToFile("Wiki2.png");
-	Texture wiki2_tex(wiki2);
-	Sprite wiki_sprite2(wiki2_tex);
+	sgl::Texture wiki2_tex(wiki2);
+	sgl::Sprite wiki_sprite2(wiki2_tex);
 	wiki_sprite2.position.set(100, 100);
 
-	Texture icon_tex(icon);
-	Sprite icon_sprite(icon_tex);
+	sgl::Texture icon_tex(icon);
+	sgl::Sprite icon_sprite(icon_tex);
 
-	//std::cout << SDL_GetError() << std::endl;
-
-	Shape s(Shape::Type::Quad);
-	std::array<float, 8> vs = { 275, 15, 475, 15, 475, 215, 275, 215 };
-	std::array<float, 8> ts = { 0, 0, 1, 0, 1, 1, 0, 1 };
+	sgl::Shape s(sgl::Shape::Type::Quad);
+	std::array<float, 8> vs = {275, 15, 475, 15, 475, 215, 275, 215};
+	std::array<float, 8> ts = {0, 0, 1, 0, 1, 1, 0, 1};
 
 	s.addVertices(vs);
-	s.setColor(Color::Blue);
+	s.setColor(sgl::Color::Blue);
 	s.setTextureCoordinates(ts);
-	s.bindTexture(&wiki_tex);
+	s.texture = &wiki_tex;
 	//s.fill = true;
 
-	Clock clock;
+	sgl::Font fnt("font/arial.ttf", 32);
+	sgl::String str(fnt, "Ein Test");
+	str.position = sgl::Vector2f(100, 25);
+	str.mode = sgl::Font::Mode::Shaded;
+
+	sgl::Surface explo("test_3.png");
+	sgl::Texture explo_tex(explo);
+
+	sgl::Spritesheet explosion(explo_tex, 1);
+	explosion.tickOffset = 150;
+	explosion.view = sgl::ShortRect(0, 0, 43, 59);
+	explosion.position = sgl::Vector2f(360, 300);
+
+	sgl::Sound sound1("expl.wav");
+	sgl::Sound sound2("orchestral.ogg");
+	
+	sgl::Clock clock;
 
 	Event event;
 	while (wnd.isOpen()) {
@@ -89,8 +108,30 @@ int main() {
 				case Event::Type::KeyDown:
 					if (event.keyboard.key == Keyboard::Code::Escape)
 						Event::Push(Event::Type::Quit);
-					else
-						s.move(10, 0);
+					else {
+						switch (event.keyboard.key) {
+							case Keyboard::Code::Up:
+								s.move(0, -10);
+								break;
+							case Keyboard::Code::Down:
+								s.move(0, 10);
+								break;
+							case Keyboard::Code::Left:
+								s.move(-10, 0);
+								break;
+							case Keyboard::Code::Right:
+								s.move(10, 0);
+								break;
+							case Keyboard::Code::Num1:
+								sound1.play();
+								break;
+							case Keyboard::Code::Num2:
+								sound2.play();
+								break;
+							default:
+								str = "You pressed a Key";
+						}
+					}
 					break;
 			}
 
@@ -98,7 +139,7 @@ int main() {
 		}
 
 		//printf("Frame\n");
-		printf("Frames: %d\n", clock.getCurrentFps());
+		//printf("Frames: %d\n", clock.getCurrentFps());
 
 		wnd.clear();
 
@@ -106,6 +147,12 @@ int main() {
 		wnd.draw(wiki_sprite);
 		wnd.draw(wiki_sprite2);
 		wnd.draw(s);
+		wnd.draw(str);
+		//wnd.draw(text_sprite);
+
+		explosion.row = 1;
+		explosion.slide(sgl::Spritesheet::Grid::Row);
+		wnd.draw(explosion);
 
 		//icon_sprite.position.y += 1;
 		//icon_sprite.position.x += 1;
@@ -113,10 +160,10 @@ int main() {
 		wnd.display();
 	}
 
-	Color black = Color::Black;
-	Color gl = Color::GL(0.8f, 0.8f, 0.8f);
+	//Color black = Color::Black;
+	//Color gl = Color::GL(0.8f, 0.8f, 0.8f);
 
-	std::cout << "end of main " << Window::Count() << std::endl;
+	//std::cout << "end of main " << Window::Count() << std::endl;
 
 	return 0;
 }

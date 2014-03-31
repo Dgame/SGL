@@ -40,6 +40,15 @@
     <Filter Include="Quelldateien\Window">
       <UniqueIdentifier>{5ebeade7-b480-42b0-8faf-2c56541a94a0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Quelldateien\Core">
+      <UniqueIdentifier>{f8d9725b-225c-497d-a69e-263267463466}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Audio">
+      <UniqueIdentifier>{1f5f757a-a6b8-44ab-866e-827a68ad8385}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Audio">
+      <UniqueIdentifier>{07e79c87-88f3-4e6f-9a2a-74a6e960f3bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\System\Clock.h">
@@ -102,6 +111,15 @@
     <ClInclude Include="include\Graphic\String.h">
       <Filter>Headerdateien\Graphic</Filter>
     </ClInclude>
+    <ClInclude Include="include\Graphic\Spritesheet.h">
+      <Filter>Headerdateien\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Audio\Sound.h">
+      <Filter>Headerdateien\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Audio\Music.h">
+      <Filter>Headerdateien\Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -145,6 +163,18 @@
     </ClCompile>
     <ClCompile Include="src\Graphic\String.cpp">
       <Filter>Quelldateien\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Graphic\Spritesheet.cpp">
+      <Filter>Quelldateien\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\OpenGL.cpp">
+      <Filter>Quelldateien\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Audio\Sound.cpp">
+      <Filter>Quelldateien\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Audio\Music.cpp">
+      <Filter>Quelldateien\Audio</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

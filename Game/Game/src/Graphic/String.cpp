@@ -1,31 +1,58 @@
 #include <Graphic\String.h>
 
 namespace sgl {
-	String::String(const std::string& str, Mode m) : _text(str), mode(m) {
+	String::String(Font& fnt, const std::string& str) :
+		mode(Font::Mode::Solid), _text(str), font(fnt),
+		fg(nullptr), bg(nullptr), _texture(new Texture())
+	{
+		update();
+	}
 
+	void String::operator =(const std::string& str) {
+		if (str != _text) {
+			_text = str;
+			_changed = true;
+		}
+	}
+
+	void String::operator =(const String& txt) {
+		const std::string& str = txt._text;
+
+		if (str != _text) {
+			_text = str;
+			_changed = true;
+		}
+	}
+
+	void String::_update() const {
+		_changed = false;
+
+		Surface srfc = font.render(_text, this->fg, this->bg, mode);
+		_texture->loadFrom(srfc);
 	}
 
 	void String::draw(const Window& wnd) const {
-		//SDL_Surface* srfc = nullptr;
+		if (_changed)
+			_update();
 
-		//SDL_Color fg;
-		//SDL_Color bg;
+		float dx = position.x, dy = position.y;
+		float dw = _texture->width();
+		float dh = _texture->height();
 
-		//Color::Copy(color[0], fg, Color::Black);
-		//Color::Copy(color[1], bg, Color::Transparent);
+		const float vertices[] = {
+			dx, dy,
+			dx + dw, dy,
+			dx + dw, dy + dh,
+			dx, dy + dh
+		};
 
-		//switch (mode) {
-		//	case Mode::Solid:
-		//		srfc = TTF_RenderUTF8_Solid(_ttf.get(), text.c_str(), fg);
-		//		break;
-		//	case Mode::Shaded:
-		//		srfc = TTF_RenderUTF8_Shaded(_ttf.get(), text.c_str(), fg, bg);
-		//		break;
-		//	case Mode::Blended:
-		//		srfc = TTF_RenderUTF8_Blended(_ttf.get(), text.c_str(), fg);
-		//		break;
-		//}
+		static const float texCoords[] = {
+			0, 0,
+			1, 0,
+			1, 1,
+			0, 1
+		};
 
-		//Surface s = Surface(srfc);
+		wnd.draw(vertices, texCoords, *_texture);
 	}
 }

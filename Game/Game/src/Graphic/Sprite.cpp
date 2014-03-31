@@ -1,10 +1,14 @@
 #include <Graphic\Sprite.h>
 
-void Sprite::draw(const Window& wnd) const {
-	if (_texture != nullptr) {
-		float dx = position.x, dy = position.y;
-		float dw = _texture->width();
-		float dh = _texture->height();
+namespace sgl {
+	Sprite::Sprite(Texture& tex) : position(0, 0), texture(tex) {
+
+	}
+
+	void Sprite::draw(const Window& wnd) const {
+		float dx = this->position.x, dy = this->position.y;
+		float dw = this->width();
+		float dh = this->height();
 
 		const float vertices[] = {
 			dx, dy,
@@ -13,13 +17,13 @@ void Sprite::draw(const Window& wnd) const {
 			dx, dy + dh
 		};
 
-		static const float texCoords[] = {0, 0, 1, 0, 1, 1, 0, 1};
+		static const float texCoords[] = {
+			0, 0,
+			1, 0,
+			1, 1,
+			0, 1
+		};
 
-		glVertexPointer(2, GL_FLOAT, 0, vertices);
-		glTexCoordPointer(2, GL_FLOAT, 0, texCoords);
-
-		_texture->bind();
-
-		glDrawArrays(GL_QUADS, 0, 8);
+		wnd.draw(vertices, texCoords, this->texture);
 	}
 }

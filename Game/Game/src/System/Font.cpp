@@ -2,42 +2,42 @@
 
 namespace sgl {
 	void Font::loadFromFile(const std::string& filename, uint8 fontSize) {
-		_filename = filename;
-
 		_fontSize = fontSize == 0 ? _fontSize : fontSize;
 		if (_fontSize == 0)
 			_fontSize = 12;
 
-		TTF_Font* font = TTF_OpenFont(filename.c_str(), _fontSize);
-		if (font == nullptr) {
+		_ttf = TTF_OpenFont(filename.c_str(), _fontSize);
+		if (_ttf == nullptr) {
 			printf("Could not load font %s. TTF Error: %s.", filename.c_str(), TTF_GetError());
 			throw "Error while opening TTF_Font";
 		}
-
-		_ttf = std::shared_ptr<TTF_Font>(font, TTF_CloseFont);
 	}
 
-	//Surface Font::render(const std::string& text, std::array<Color*, 2>& color, Mode mode) const {
-	//	SDL_Surface* srfc = nullptr;
+	Surface Font::render(const std::string& text, Color* fg, Color* bg, Mode mode) const {
+		SDL_Color _fg;
+		SDL_Color _bg;
 
-	//	SDL_Color fg;
-	//	SDL_Color bg;
+		Color::Copy(fg, _fg, Color::Black);
+		Color::Copy(bg, _bg, Color::White);
 
-	//	Color::Copy(color[0], fg, Color::Black);
-	//	Color::Copy(color[1], bg, Color::Transparent);
+		SDL_Surface* srfc = nullptr;
+		switch (mode) {
+			case Mode::Solid:
+				srfc = TTF_RenderUTF8_Solid(_ttf, text.c_str(), _fg);
+				break;
+			case Mode::Shaded:
+				srfc = TTF_RenderUTF8_Shaded(_ttf, text.c_str(), _fg, _bg);
+				break;
+			case Mode::Blended:
+				srfc = TTF_RenderUTF8_Blended(_ttf, text.c_str(), _fg);
+				break;
+		}
 
-	//	switch (mode) {
-	//		case Mode::Solid:
-	//			srfc = TTF_RenderUTF8_Solid(_ttf.get(), text.c_str(), fg);
-	//			break;
-	//		case Mode::Shaded:
-	//			srfc = TTF_RenderUTF8_Shaded(_ttf.get(), text.c_str(), fg, bg);
-	//			break;
-	//		case Mode::Blended:
-	//			srfc = TTF_RenderUTF8_Blended(_ttf.get(), text.c_str(), fg);
-	//			break;
-	//	}
+		SDL_PixelFormat fmt = *srfc->format;
+		fmt.BitsPerPixel = 24;
+		SDL_Surface* new_srfc = SDL_ConvertSurface(srfc, &fmt, 0);
+		SDL_FreeSurface(srfc);
 
-	//	return Surface(srfc);
-	//}
+		return Surface(new_srfc);
+	}
 }

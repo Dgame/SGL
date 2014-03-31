@@ -1,80 +1,84 @@
 #include <Graphic\Texture.h>
+#include <Core\OpenGL.h>
 
-Texture::Texture() {
-	glGenTextures(1, &_gl_id);
-}
+namespace sgl {
+	Texture::Texture() {
+		glGenTextures(1, &_texId);
+	}
 
-Texture::Texture(const Surface& srfc) : Texture() {
-	this->loadFrom(srfc);
-}
+	Texture::Texture(const Surface& srfc, Format format) : Texture() {
+		this->loadFrom(srfc, format);
+	}
 
-void Texture::loadFrom(const Surface& srfc) {
-	Format fmt = srfc.depth() == 32 ? Format::RGBA : Format::RGB;
+	void Texture::loadFrom(const Surface& srfc, Format format) {
+		if (format == Format::None) {
+			if (srfc.isMask(Surface::Mask::Red, 0xff000000))
+				format = srfc.bits() == 32 ? Format::BGRA : Format::BGR;
+			else
+				format = srfc.bits() == 32 ? Format::RGBA : Format::RGB;
+		}
 
-	this->loadFromMemory(srfc.pixels(), srfc.width(), srfc.height(), fmt);
-}
+		this->loadFromMemory(srfc.pixels(), srfc.width(), srfc.height(), format);
+	}
 
-void Texture::loadFromMemory(void* pixels, uint16 width, uint16 height, Format fmt) {
-	if (fmt == Format::None)
-		_format = Format::RGB;
-	else
-		_format = fmt;
+	void Texture::loadFromMemory(const void* pixels, uint16 width, uint16 height, Format fmt) {
+		_format = fmt == Format::None ? Format::RGB : fmt;
 
-	this->bind();
+		this->bind();
 
-	GLenum gl_fmt = static_cast<GLenum>(_format);
+		GLenum gl_fmt = static_cast<GLenum>(_format);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, gl_fmt,
-		width, height, 0, gl_fmt, GL_UNSIGNED_BYTE, pixels);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S,
-		_repeat ? GL_REPEAT : GL_CLAMP);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T,
-		_repeat ? GL_REPEAT : GL_CLAMP);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
-		_smooth ? GL_LINEAR : GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
-		_smooth ? GL_LINEAR : GL_NEAREST);
-	//glGenerateMipmap(GL_TEXTURE_2D); // We want MipMaps
+		glCheck(glBindTexture(GL_TEXTURE_2D, _texId));
+		glCheck(glTexImage2D(GL_TEXTURE_2D, 0, gl_fmt, width, height, 0, gl_fmt, GL_UNSIGNED_BYTE, pixels));
+		glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, _repeat ? GL_REPEAT : GL_CLAMP));
+		glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, _repeat ? GL_REPEAT : GL_CLAMP));
+		glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, _smooth ? GL_LINEAR : GL_NEAREST));
+		glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, _smooth ? GL_LINEAR : GL_NEAREST));
 
-	_width = width;
-	_height = height;
-}
+		_width = width;
+		_height = height;
 
-void Texture::copy(Texture& tex, const ShortRect& rect) const {
-	std::unique_ptr<uint32> pixel = tex.pixels();
+		this->unbind();
+	}
 
-	update(rect, pixel.get());
-}
+	void Texture::copy(Texture& tex, const ShortRect& rect) const {
+		std::unique_ptr<uint32> pixel = tex.pixels();
+		update(rect, pixel.get());
+	}
 
-void Texture::update(const ShortRect& rect, void* pixels) const {
-	uint16 width = rect.width;
-	uint16 height = rect.height;
+	void Texture::update(const ShortRect& rect, const void* pixels) const {
+		uint16 width = rect.width;
+		uint16 height = rect.height;
 
-	uint16 x = rect.x;
-	uint16 y = rect.y;
+		uint16 x = rect.x;
+		uint16 y = rect.y;
 
-	this->bind();
+		this->bind();
 
-	glTexSubImage2D(GL_TEXTURE_2D, 0, x, y, width, height,
-		static_cast<GLenum>(_format), GL_UNSIGNED_BYTE, pixels);
-}
+		glTexSubImage2D(GL_TEXTURE_2D, 0, x, y, width, height,
+			static_cast<GLenum>(_format), GL_UNSIGNED_BYTE, pixels);
 
-std::unique_ptr<uint32> Texture::pixels() const {
-	uint8 depth = 0;
-	if (_format == Format::RGBA || _format == Format::BGRA)
-		depth = 32;
-	else
-		depth = 24;
+		this->unbind();
+	}
 
-	const uint32 msize = _width * _height * (depth / 8);
-	if (msize == 0)
-		return nullptr;
+	std::unique_ptr<uint32> Texture::pixels() const {
+		uint8 depth = 0;
+		if (_format == Format::RGBA || _format == Format::BGRA)
+			depth = 32;
+		else
+			depth = 24;
 
-	this->bind();
+		const uint32 msize = _width * _height * (depth / 8);
+		if (msize == 0)
+			return nullptr;
 
-	std::unique_ptr<uint32> ptr = std::unique_ptr<uint32>(new uint32[msize]);
+		this->bind();
 
-	glGetTexImage(GL_TEXTURE_2D, 0, static_cast<GLenum>(_format), GL_UNSIGNED_BYTE, ptr.get());
+		std::unique_ptr<uint32> ptr = std::unique_ptr<uint32>(new uint32[msize]);
+		glGetTexImage(GL_TEXTURE_2D, 0, static_cast<GLenum>(_format), GL_UNSIGNED_BYTE, ptr.get());
 
-	return std::move(ptr);
+		this->unbind();
+
+		return std::move(ptr);
+	}
 }

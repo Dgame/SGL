@@ -1,6 +1,5 @@
 #pragma once
 
-#include <memory>
 #include <string>
 #include <SDL_ttf.h>
 #include <Core\Types.h>
@@ -9,8 +8,7 @@
 namespace sgl {
 	class Font {
 	private:
-		std::shared_ptr<TTF_Font> _ttf;
-		std::string _filename;
+		TTF_Font* _ttf;
 		uint8 _fontSize;
 
 	public:
@@ -62,27 +60,38 @@ namespace sgl {
 			None = TTF_HINTING_NONE
 		};
 
+		enum class Mode : short {
+			Solid,
+			Shaded,
+			Blended
+		};
+
 		explicit Font(const std::string& filename, uint8 fontSize = 0) {
 			loadFromFile(filename, fontSize);
 		}
 
+		virtual ~Font() {
+			TTF_CloseFont(_ttf);
+		}
+
 		void loadFromFile(const std::string& filename, uint8 fontSize);
-		//Surface render(const std::string& text, std::array<Color*, 2>& color, Mode mode = Mode::Solid) const;
 
 		void Font::setStyle(Font::Style style) {
-			TTF_SetFontStyle(_ttf.get(), static_cast<int>(style));
+			TTF_SetFontStyle(_ttf, static_cast<int>(style));
 		}
 
 		Font::Style Font::getStyle() const {
-			return static_cast<Style>(TTF_GetFontStyle(_ttf.get()));
+			return static_cast<Style>(TTF_GetFontStyle(_ttf));
 		}
 
 		void Font::setHint(Font::Hint hint) {
-			TTF_SetFontHinting(_ttf.get(), static_cast<int>(hint));
+			TTF_SetFontHinting(_ttf, static_cast<int>(hint));
 		}
 
 		Font::Hint Font::getHint() const {
-			return static_cast<Hint>(TTF_GetFontHinting(_ttf.get()));
+			return static_cast<Hint>(TTF_GetFontHinting(_ttf));
 		}
+
+		Surface render(const std::string& text, Color* fg = nullptr, Color* bg = nullptr, Mode mode = Mode::Solid) const;
 	};
 }
