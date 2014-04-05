@@ -1,11 +1,11 @@
-#pragma once
+#ifndef SPRITE_HPP
+#define SPRITE_HPP
 
-
-#include <Graphic\Drawable.h>
-#include <Graphic\Texture.h>
-#include <Math\Vector2.h>
-#include <Math\Rect.h>
-#include <Window\Window.h>
+#include <Graphic\Drawable.hpp>
+#include <Graphic\Texture.hpp>
+#include <Math\Vector2.hpp>
+#include <Math\Rect.hpp>
+#include <Window\Window.hpp>
 
 namespace sgl {
 	class Sprite : public Drawable {
@@ -42,3 +42,5 @@ namespace sgl {
 		}
 	};
 }
+
+#endif

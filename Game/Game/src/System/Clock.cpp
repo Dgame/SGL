@@ -1,4 +1,4 @@
-#include <System\Clock.h>
+#include <System\Clock.hpp>
 
 namespace sgl {
 	/**
@@ -12,7 +12,7 @@ namespace sgl {
 	* To convert the Clock milliseconds to minutes
 	*/
 	float asMinutes(uint32 n) {
-		float secs = asSeconds(n);
+		const float secs = asSeconds(n);
 
 		return secs >= 60 ? (secs / 60) : 0;
 	}
@@ -21,7 +21,7 @@ namespace sgl {
 	* To convert the Clock milliseconds to hours
 	*/
 	uint16 asHours(uint32 n) {
-		float mins = asMinutes(n);
+		const float mins = asMinutes(n);
 
 		return mins >= 60 ? static_cast<uint16>(mins / 60.f) : 0;
 	}
@@ -39,8 +39,8 @@ namespace sgl {
 	* Calculate the <b>remaining</b> time.
 	*/
 	Time Time::Remain(Time time) {
-		float min = time.minutes;
-		float sec = time.seconds;
+		const float min = time.minutes;
+		const float sec = time.seconds;
 
 		time.minutes -= time.hours * 60;
 		time.minutes = floor(time.minutes);
@@ -58,7 +58,7 @@ namespace sgl {
 	* Returns the current framerate per seconds.
 	*/
 	uint32 Clock::getCurrentFps() {
-		uint32 elapsed_ticks = getElapsedTicks();
+		const uint32 elapsed_ticks = getElapsedTicks();
 
 		if (elapsed_ticks >= 1000) {
 			_currentFps = _numFrames;

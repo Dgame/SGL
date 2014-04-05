@@ -1,4 +1,4 @@
-#include <System\Font.h>
+#include <System\Font.hpp>
 
 namespace sgl {
 	void Font::loadFromFile(const std::string& filename, uint8 fontSize) {
@@ -32,6 +32,9 @@ namespace sgl {
 				srfc = TTF_RenderUTF8_Blended(_ttf, text.c_str(), _fg);
 				break;
 		}
+
+		if (srfc == nullptr)
+			throw "NULL Surface";
 
 		SDL_PixelFormat fmt = *srfc->format;
 		fmt.BitsPerPixel = 24;

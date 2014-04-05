@@ -27,8 +27,15 @@
 
 #endif
 
-// In debug mode, perform a test on every OpenGL call
+#if _DEBUG
+
 #define glCheck(call) ((call), glCheckError(__FILE__, __LINE__))
+
+#else
+
+#define glCheck(call) (call)
+
+#endif
 
 void glCheckError(const char* file, unsigned int line);
 

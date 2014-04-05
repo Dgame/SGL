@@ -7,9 +7,9 @@
 
 #include <string>
 #include <SDL_image.h>
-#include <Core\Types.h>
-#include <Math\Rect.h>
-#include <Graphic\Color.h>
+#include <Core\Types.hpp>
+#include <Math\Rect.hpp>
+#include <Graphic\Color.hpp>
 
 #define DEFAULT_DEPTH 32
 
@@ -73,8 +73,9 @@ namespace sgl {
 			SDL_FreeSurface(_surface);
 		}
 
-
-		void setIconFor(uint32 winId) const;
+		SDL_Surface* ptr() const {
+			return _surface;
+		}
 
 		void loadFromFile(const std::string& filename);
 		void loadFromMemory(void* pixel, uint16 width, uint16 height, uint8 depth = DEFAULT_DEPTH);

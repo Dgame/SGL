@@ -1,9 +1,10 @@
-#pragma once
+#ifndef FONT_HPP
+#define FONT_HPP
 
 #include <string>
 #include <SDL_ttf.h>
-#include <Core\Types.h>
-#include <Graphic\Surface.h>
+#include <Core\Types.hpp>
+#include <Graphic\Surface.hpp>
 
 namespace sgl {
 	class Font {
@@ -95,3 +96,5 @@ namespace sgl {
 		Surface render(const std::string& text, Color* fg = nullptr, Color* bg = nullptr, Mode mode = Mode::Solid) const;
 	};
 }
+
+#endif

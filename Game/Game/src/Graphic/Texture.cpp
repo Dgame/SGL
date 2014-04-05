@@ -1,5 +1,5 @@
-#include <Graphic\Texture.h>
-#include <Core\OpenGL.h>
+#include <Graphic\Texture.hpp>
+#include <Core\OpenGL.hpp>
 
 namespace sgl {
 	Texture::Texture() {
@@ -26,7 +26,7 @@ namespace sgl {
 
 		this->bind();
 
-		GLenum gl_fmt = static_cast<GLenum>(_format);
+		const GLenum gl_fmt = static_cast<GLenum>(_format);
 
 		glCheck(glBindTexture(GL_TEXTURE_2D, _texId));
 		glCheck(glTexImage2D(GL_TEXTURE_2D, 0, gl_fmt, width, height, 0, gl_fmt, GL_UNSIGNED_BYTE, pixels));
@@ -47,11 +47,10 @@ namespace sgl {
 	}
 
 	void Texture::update(const ShortRect& rect, const void* pixels) const {
-		uint16 width = rect.width;
-		uint16 height = rect.height;
-
-		uint16 x = rect.x;
-		uint16 y = rect.y;
+		const uint16 width = rect.width;
+		const uint16 height = rect.height;
+		const uint16 x = rect.x;
+		const uint16 y = rect.y;
 
 		this->bind();
 

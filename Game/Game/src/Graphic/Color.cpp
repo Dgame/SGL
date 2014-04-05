@@ -1,4 +1,4 @@
-#include <Graphic/Color.h>
+#include <Graphic/Color.hpp>
 
 namespace sgl {
 	const Color Color::Black(0, 0, 0);

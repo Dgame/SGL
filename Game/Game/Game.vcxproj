@@ -11,29 +11,36 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Audio\Music.h" />
-    <ClInclude Include="include\Audio\Sound.h" />
-    <ClInclude Include="include\Core\OpenGL.h" />
-    <ClInclude Include="include\Core\Output.h" />
-    <ClInclude Include="include\Core\Types.h" />
-    <ClInclude Include="include\Graphic\Color.h" />
-    <ClInclude Include="include\Graphic\Drawable.h" />
-    <ClInclude Include="include\Graphic\Shape.h" />
-    <ClInclude Include="include\Graphic\Sprite.h" />
-    <ClInclude Include="include\Graphic\Spritesheet.h" />
-    <ClInclude Include="include\Graphic\Surface.h" />
-    <ClInclude Include="include\Graphic\Texture.h" />
-    <ClInclude Include="include\Graphic\String.h" />
-    <ClInclude Include="include\Math\Rect.h" />
-    <ClInclude Include="include\Math\Vector2.h" />
-    <ClInclude Include="include\Math\Vertex.h" />
-    <ClInclude Include="include\System\Clock.h" />
-    <ClInclude Include="include\System\Font.h" />
-    <ClInclude Include="include\System\Keyboard.h" />
-    <ClInclude Include="include\System\Mouse.h" />
-    <ClInclude Include="include\System\Power.h" />
-    <ClInclude Include="include\Window\Event.h" />
-    <ClInclude Include="include\Window\Window.h" />
+    <ClInclude Include="include\Audio.hpp" />
+    <ClInclude Include="include\Audio\Music.hpp" />
+    <ClInclude Include="include\Audio\Sound.hpp" />
+    <ClInclude Include="include\Core\OpenGL.hpp" />
+    <ClInclude Include="include\Core\Output.hpp" />
+    <ClInclude Include="include\Core\Range.hpp" />
+    <ClInclude Include="include\Core\Types.hpp" />
+    <ClInclude Include="include\Graphic.hpp" />
+    <ClInclude Include="include\Graphic\Color.hpp" />
+    <ClInclude Include="include\Graphic\Drawable.hpp" />
+    <ClInclude Include="include\Graphic\Shape.hpp" />
+    <ClInclude Include="include\Graphic\Sprite.hpp" />
+    <ClInclude Include="include\Graphic\Spritesheet.hpp" />
+    <ClInclude Include="include\Graphic\Surface.hpp" />
+    <ClInclude Include="include\Graphic\Texture.hpp" />
+    <ClInclude Include="include\Graphic\String.hpp" />
+    <ClInclude Include="include\Math.hpp" />
+    <ClInclude Include="include\Math\Rect.hpp" />
+    <ClInclude Include="include\Math\Vector2.hpp" />
+    <ClInclude Include="include\Math\Vertex.hpp" />
+    <ClInclude Include="include\System.hpp" />
+    <ClInclude Include="include\System\Clock.hpp" />
+    <ClInclude Include="include\System\Font.hpp" />
+    <ClInclude Include="include\System\Keyboard.hpp" />
+    <ClInclude Include="include\System\Mouse.hpp" />
+    <ClInclude Include="include\System\Power.hpp" />
+    <ClInclude Include="include\System\System.hpp" />
+    <ClInclude Include="include\Window.hpp" />
+    <ClInclude Include="include\Window\Event.hpp" />
+    <ClInclude Include="include\Window\Window.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -50,8 +57,10 @@
     <ClCompile Include="src\Math\Vertex.cpp" />
     <ClCompile Include="src\System\Font.cpp" />
     <ClCompile Include="src\System\Keyboard.cpp" />
+    <ClCompile Include="src\System\Mouse.cpp" />
     <ClCompile Include="src\System\Power.cpp" />
     <ClCompile Include="src\System\Clock.cpp" />
+    <ClCompile Include="src\System\System.cpp" />
     <ClCompile Include="src\Window\Event.cpp" />
     <ClCompile Include="src\Window\Window.cpp" />
   </ItemGroup>
@@ -98,10 +107,11 @@
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <DisableSpecificWarnings>4244;4512</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -111,14 +121,16 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <DisableSpecificWarnings>4244;4512;</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

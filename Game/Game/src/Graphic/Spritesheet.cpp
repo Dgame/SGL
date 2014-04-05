@@ -1,4 +1,4 @@
-#include <Graphic\Spritesheet.h>
+#include <Graphic\Spritesheet.hpp>
 
 namespace sgl {
 	Spritesheet::Spritesheet(Texture& tex, int16 loopCount) : Sprite(tex), _lastTick(0), tickOffset(0), row(0) {
@@ -6,9 +6,10 @@ namespace sgl {
 	}
 
 	void Spritesheet::draw(const Window& wnd) const {
-		float dx = this->position.x, dy = this->position.y;
-		float dw = this->width();
-		float dh = this->height();
+		const float dx = this->position.x;
+		const float dy = this->position.y;
+		const float dw = this->width();
+		const float dh = this->height();
 
 		const float vertices[] = {
 			dx, dy,
@@ -17,10 +18,10 @@ namespace sgl {
 			dx, dy + dh
 		};
 
-		float tx = (0.f + this->view.x) / Sprite::texture.width();
-		float ty = (0.f + this->view.y) / Sprite::texture.height();
-		float tw = (0.f + this->view.width) / Sprite::texture.width();
-		float th = (0.f + this->view.height) / Sprite::texture.height();
+		const float tx = (0.f + this->view.x) / Sprite::texture.width();
+		const float ty = (0.f + this->view.y) / Sprite::texture.height();
+		const float tw = (0.f + this->view.width) / Sprite::texture.width();
+		const float th = (0.f + this->view.height) / Sprite::texture.height();
 
 		const float texCoords[] = {
 			tx, ty,

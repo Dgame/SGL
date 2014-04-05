@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include <Core\OpenGL.h>
+#include <Core\OpenGL.hpp>
 
 void glCheckError(const char* file, unsigned int line) {
 	// Get the last error

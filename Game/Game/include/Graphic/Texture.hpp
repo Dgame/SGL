@@ -1,13 +1,14 @@
-#pragma once
+#ifndef TEXTURE_HPP
+#define TEXTURE_HPP
 
 #ifdef _DEBUG
-#include <Core\Output.h>
+#include <Core\Output.hpp>
 #endif
 #include <memory>
-#include <Core\OpenGL.h>
-#include <Core\Types.h>
-#include <Math\Rect.h>
-#include <Graphic\Surface.h>
+#include <Core\OpenGL.hpp>
+#include <Core\Types.hpp>
+#include <Math\Rect.hpp>
+#include <Graphic\Surface.hpp>
 
 namespace sgl {
 	class Texture {
@@ -92,3 +93,5 @@ namespace sgl {
 		std::unique_ptr<uint32> pixels() const;
 	};
 }
+
+#endif

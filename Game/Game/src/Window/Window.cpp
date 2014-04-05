@@ -1,4 +1,4 @@
-#include <Window/Window.h>
+#include <Window/Window.hpp>
 
 void _sdl_init() {
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
@@ -38,10 +38,10 @@ void _sdl_init() {
 		return _sdl_quit();
 	}
 
-	const uint32 Channels = 256;
+	const uint16 Channels = 256;
 
 	Mix_AllocateChannels(Channels);
-	int reserved_count = Mix_ReserveChannels(Channels);
+	const int reserved_count = Mix_ReserveChannels(Channels);
 	if (reserved_count != Channels) {
 		printf("reserved %d channels from default mixing.\n", reserved_count);
 		printf("%d channels were not reserved!\n", Channels);
@@ -85,7 +85,6 @@ namespace sgl {
 			_glContext = SDL_GL_CreateContext(_window);
 			if (_glContext == nullptr)
 				throw "Error while creating gl context. Check SDL_GetError for more information.";
-
 #if _DEBUG
 			char* GL_version = (char*) glGetString(GL_VERSION);
 			char* GL_vendor = (char*) glGetString(GL_VENDOR);
@@ -93,7 +92,6 @@ namespace sgl {
 
 			println(GL_version, " - ", GL_vendor, " - ", GL_renderer);
 #endif
-
 			glMatrixMode(GL_PROJECTION);
 			glLoadIdentity();
 
@@ -116,7 +114,6 @@ namespace sgl {
 
 			// Hints
 			glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST);
-
 			glOrtho(0, rect.width, rect.height, 0, 1, -1);
 
 			setVerticalSync(Sync::Enable);

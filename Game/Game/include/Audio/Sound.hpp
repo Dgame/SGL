@@ -1,8 +1,9 @@
-#pragma once
+#ifndef SOUND_HPP
+#define SOUND_HPP
 
 #include <string>
 #include <SDL_mixer.h>
-#include <Core\Types.h>
+#include <Core\Types.hpp>
 
 namespace sgl {
 	class Sound {
@@ -56,3 +57,5 @@ namespace sgl {
 		static uint16 CountPaused();
 	};
 }
+
+#endif

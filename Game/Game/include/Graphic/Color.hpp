@@ -3,7 +3,7 @@
 
 #include <array>
 #include <SDL.h>
-#include <Core/Types.h>
+#include <Core/Types.hpp>
 
 namespace sgl {
 	struct Color {

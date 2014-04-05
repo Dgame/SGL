@@ -1,26 +1,26 @@
-#include <System\Keyboard.h>
+#include <System\Keyboard.hpp>
 
-namespace Keyboard {
-	const uint8* GetState() {
+namespace sgl {
+	const uint8* Keyboard::GetState() {
 		return SDL_GetKeyboardState(nullptr);
 	}
 
-	bool IsPressed(Code code) {
+	bool Keyboard::IsPressed(Code code) {
 		SDL_Scancode scancode = SDL_GetScancodeFromKey(static_cast<SDL_Keycode>(code));
 		const uint8* keys = GetState();
 
 		return keys[scancode] == 1;
 	}
 
-	Mod GetModifier() {
+	Keyboard::Mod Keyboard::GetModifier() {
 		return static_cast<Mod>(SDL_GetModState());
 	}
 
-	void SetModifier(Mod mod) {
+	void Keyboard::SetModifier(Mod mod) {
 		SDL_SetModState(static_cast<SDL_Keymod>(mod));
 	}
 
-	bool HasScreenSupport() {
+	bool Keyboard::HasScreenSupport() {
 		return SDL_HasScreenKeyboardSupport() == SDL_TRUE;
 	}
 }

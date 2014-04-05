@@ -1,4 +1,4 @@
-#include <Graphic\Sprite.h>
+#include <Graphic\Sprite.hpp>
 
 namespace sgl {
 	Sprite::Sprite(Texture& tex) : position(0, 0), texture(tex) {

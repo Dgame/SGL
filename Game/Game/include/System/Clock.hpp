@@ -1,8 +1,9 @@
-#pragma once
+#ifndef CLOCK_HPP
+#define CLOCK_HPP
 
 #include <math.h>
 #include <SDL.h>
-#include <Core\Types.h>
+#include <Core\Types.hpp>
 
 namespace sgl {
 	/**
@@ -103,3 +104,5 @@ namespace sgl {
 		static void Wait(uint32 msecs);
 	};
 }
+
+#endif

@@ -1,9 +1,10 @@
-#pragma once
+#ifndef MUSIC_HPP
+#define MUSIC_HPP
 
 #include <string>
 #include <SDL_mixer.h>
-#include <Core\Types.h>
-#include <Math\Vector2.h>
+#include <Core\Types.hpp>
+#include <Math\Vector2.hpp>
 
 namespace sgl {
 	class Music {
@@ -79,3 +80,5 @@ namespace sgl {
 		Fading isFading() const;
 	};
 }
+
+#endif

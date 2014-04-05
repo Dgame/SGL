@@ -51,74 +51,95 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\System\Clock.h">
-      <Filter>Headerdateien\System</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Graphic\Color.h">
-      <Filter>Headerdateien\Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Graphic\Drawable.h">
-      <Filter>Headerdateien\Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Window\Event.h">
-      <Filter>Headerdateien\Window</Filter>
-    </ClInclude>
-    <ClInclude Include="include\System\Keyboard.h">
-      <Filter>Headerdateien\System</Filter>
-    </ClInclude>
-    <ClInclude Include="include\System\Mouse.h">
-      <Filter>Headerdateien\System</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Core\OpenGL.h">
-      <Filter>Headerdateien\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Core\Output.h">
-      <Filter>Headerdateien\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="include\System\Power.h">
-      <Filter>Headerdateien\System</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Math\Rect.h">
-      <Filter>Headerdateien\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Graphic\Shape.h">
-      <Filter>Headerdateien\Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Graphic\Sprite.h">
-      <Filter>Headerdateien\Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Graphic\Surface.h">
-      <Filter>Headerdateien\Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Graphic\Texture.h">
-      <Filter>Headerdateien\Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Core\Types.h">
-      <Filter>Headerdateien\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Math\Vector2.h">
-      <Filter>Headerdateien\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Math\Vertex.h">
-      <Filter>Headerdateien\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Window\Window.h">
-      <Filter>Headerdateien\Window</Filter>
-    </ClInclude>
-    <ClInclude Include="include\System\Font.h">
-      <Filter>Headerdateien\System</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Graphic\String.h">
-      <Filter>Headerdateien\Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Graphic\Spritesheet.h">
-      <Filter>Headerdateien\Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Audio\Sound.h">
+    <ClInclude Include="include\Audio\Music.hpp">
       <Filter>Headerdateien\Audio</Filter>
     </ClInclude>
-    <ClInclude Include="include\Audio\Music.h">
+    <ClInclude Include="include\Audio\Sound.hpp">
       <Filter>Headerdateien\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Core\OpenGL.hpp">
+      <Filter>Headerdateien\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Core\Output.hpp">
+      <Filter>Headerdateien\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Core\Types.hpp">
+      <Filter>Headerdateien\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Math\Rect.hpp">
+      <Filter>Headerdateien\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Math\Vector2.hpp">
+      <Filter>Headerdateien\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Math\Vertex.hpp">
+      <Filter>Headerdateien\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\System\Clock.hpp">
+      <Filter>Headerdateien\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\System\Font.hpp">
+      <Filter>Headerdateien\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\System\Keyboard.hpp">
+      <Filter>Headerdateien\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\System\Mouse.hpp">
+      <Filter>Headerdateien\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\System\Power.hpp">
+      <Filter>Headerdateien\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Window\Event.hpp">
+      <Filter>Headerdateien\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Window\Window.hpp">
+      <Filter>Headerdateien\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Graphic\Color.hpp">
+      <Filter>Headerdateien\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Graphic\Drawable.hpp">
+      <Filter>Headerdateien\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Graphic\Shape.hpp">
+      <Filter>Headerdateien\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Graphic\Sprite.hpp">
+      <Filter>Headerdateien\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Graphic\Spritesheet.hpp">
+      <Filter>Headerdateien\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Graphic\String.hpp">
+      <Filter>Headerdateien\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Graphic\Surface.hpp">
+      <Filter>Headerdateien\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Graphic\Texture.hpp">
+      <Filter>Headerdateien\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="include\System\System.hpp">
+      <Filter>Headerdateien\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Core\Range.hpp">
+      <Filter>Headerdateien\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Audio.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Graphic.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Math.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="include\System.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Window.hpp">
+      <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -175,6 +196,12 @@
     </ClCompile>
     <ClCompile Include="src\Audio\Music.cpp">
       <Filter>Quelldateien\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\Mouse.cpp">
+      <Filter>Quelldateien\System</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\System.cpp">
+      <Filter>Quelldateien\System</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

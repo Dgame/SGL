@@ -1,4 +1,4 @@
-#include <Audio/Music.h>
+#include <Audio/Music.hpp>
 
 namespace sgl {
 	Music::Music(const std::string& filename, int8 volume) {
@@ -18,7 +18,6 @@ namespace sgl {
 
 	void Music::play(int8 loops, int16 delay) const {
 		loops = loops > 0 ? loops - 1 : loops;
-
 		Mix_FadeInMusic(_music, loops, delay);
 	}
 

@@ -1,8 +1,9 @@
-#pragma once
+#ifndef SPRITESHEET_HPP
+#define SPRITESHEET_HPP
 
-#include <Graphic\Sprite.h>
-#include <Math\Rect.h>
-#include <System\Clock.h>
+#include <Graphic\Sprite.hpp>
+#include <Math\Rect.hpp>
+#include <System\Clock.hpp>
 
 namespace sgl {
 	class Spritesheet : public Sprite {
@@ -58,3 +59,5 @@ namespace sgl {
 		}
 	};
 }
+
+#endif

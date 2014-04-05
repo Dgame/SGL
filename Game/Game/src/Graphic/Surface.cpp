@@ -1,4 +1,4 @@
-#include <Graphic\Surface.h>
+#include <Graphic\Surface.hpp>
 
 namespace sgl {
 	Surface::Surface() : _surface(nullptr) {
@@ -19,12 +19,6 @@ namespace sgl {
 
 	Surface::Surface(void* pixels, uint16 width, uint16 height, uint8 depth) {
 		this->loadFromMemory(pixels, width, height, depth);
-	}
-
-	void Surface::setIconFor(uint32 winId) const {
-		SDL_Window* wnd = SDL_GetWindowFromID(winId);
-		if (wnd != nullptr)
-			SDL_SetWindowIcon(wnd, _surface);
 	}
 
 	void Surface::loadFromFile(const std::string& filename) {
@@ -66,7 +60,7 @@ namespace sgl {
 	}
 
 	void Surface::setColorKey(const Color& col, bool enable) const {
-		uint32 key = SDL_MapRGBA(_surface->format, col.red, col.green, col.blue, col.alpha);
+		const uint32 key = SDL_MapRGBA(_surface->format, col.red, col.green, col.blue, col.alpha);
 		SDL_SetColorKey(_surface, enable, key);
 	}
 

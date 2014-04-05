@@ -1,7 +1,8 @@
-#pragma once
+#ifndef POWER_HPP
+#define POWER_HPP
 
 #include <SDL.h>
-#include <Core\Types.h>
+#include <Core\Types.hpp>
 
 namespace sgl {
 	struct Power {
@@ -36,10 +37,8 @@ namespace sgl {
 		 *
 		 * See: PowerInfo struct
 		 */
-		static Power GetInfo();
-		/**
-		* Returns the available RAM
-		*/
-		static uint16 GetRAM();
+		static Power Info();
 	};
 }
+
+#endif

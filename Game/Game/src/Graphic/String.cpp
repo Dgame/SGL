@@ -1,4 +1,4 @@
-#include <Graphic\String.h>
+#include <Graphic\String.hpp>
 
 namespace sgl {
 	String::String(Font& fnt, const std::string& str) :
@@ -24,6 +24,30 @@ namespace sgl {
 		}
 	}
 
+	void String::format(const char* fmt, ...) {
+		std::string retStr("");
+
+		if (fmt != nullptr) {
+			va_list marker = nullptr;
+			// initialize variable arguments
+			va_start(marker, fmt);
+			// Get formatted string length adding one for NULL
+			const int len = _vscprintf(fmt, marker) + 1;
+			// Create a char vector to hold the formatted string.
+			std::vector<char> buffer(len, '\0');
+			const int nWritten = _vsnprintf_s(&buffer[0], buffer.size(), len, fmt, marker);
+			if (nWritten > 0)
+				retStr = &buffer[0];
+			// Reset variable arguments
+			va_end(marker);
+		}
+
+		if (retStr.length() != 0 && _text != retStr) {
+			_text = retStr;
+			_changed = true;
+		}
+	}
+
 	void String::_update() const {
 		_changed = false;
 
@@ -35,9 +59,10 @@ namespace sgl {
 		if (_changed)
 			_update();
 
-		float dx = position.x, dy = position.y;
-		float dw = _texture->width();
-		float dh = _texture->height();
+		const float dx = position.x;
+		const float dy = position.y;
+		const float dw = _texture->width();
+		const float dh = _texture->height();
 
 		const float vertices[] = {
 			dx, dy,

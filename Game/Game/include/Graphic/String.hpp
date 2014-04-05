@@ -1,13 +1,15 @@
-#pragma once
+#ifndef STRING_HPP
+#define STRING_HPP
 
 #include <string>
-#include <memory>
-#include <Graphic\Drawable.h>
-#include <Graphic\Color.h>
-#include <Graphic\Texture.h>
-#include <System\Font.h>
-#include <Math\Vector2.h>
-#include <Window\Window.h>
+#include <stdarg.h>
+#include <vector>
+#include <Graphic\Drawable.hpp>
+#include <Graphic\Color.hpp>
+#include <Graphic\Texture.hpp>
+#include <System\Font.hpp>
+#include <Math\Vector2.hpp>
+#include <Window\Window.hpp>
 
 namespace sgl {
 	class String : public Drawable {
@@ -32,8 +34,14 @@ namespace sgl {
 		void operator =(const std::string& str);
 		void operator =(const String& txt);
 
+		void format(const char* fmt, ...);
+
 		void update() {
 			_changed = true;
+		}
+
+		void clear() {
+			_text.clear();
 		}
 
 	protected:
@@ -41,3 +49,5 @@ namespace sgl {
 		virtual void draw(const Window& wnd) const;
 	};
 }
+
+#endif

@@ -1,8 +1,32 @@
-#include <Graphic\Shape.h>
+#include <Graphic\Shape.hpp>
 
 namespace sgl {
 	Shape::Shape(Type _type) : type(_type), lineWidth(1), fill(false) {
 
+	}
+
+	void Shape::addVertices(Range<float> range) {
+		for (uint16 i = 0, j = 0; i < range.length / 2; i++, j += 2) {
+			this->vertices.emplace_back(Vertex(range[j], range[j + 1]));
+		}
+	}
+
+	void Shape::setVertices(Range<float> range) {
+		const uint32 count = min(range.length, this->vertices.size());
+
+		for (uint32 i = 0, j = 0; i < count; i++, j += 2) {
+			this->vertices[i].x = range[j];
+			this->vertices[i].y = range[j + 1];
+		}
+	}
+
+	void Shape::setTextureCoordinates(Range<float> range) {
+		const uint32 count = min(range.length, this->vertices.size());
+
+		for (uint32 i = 0, j = 0; i < count; i++, j += 2) {
+			this->vertices[i].tx = range[j];
+			this->vertices[i].ty = range[j + 1];
+		}
 	}
 
 	void Shape::draw(const Window& wnd) const {

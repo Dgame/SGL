@@ -2,7 +2,7 @@
 #define WINDOW_HPP
 
 #if _DEBUG
-#include <Core\Output.h>
+#include <Core\Output.hpp>
 #endif
 #include <string>
 #include <SDL.h>
@@ -11,18 +11,18 @@
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
 
-#include <Core\OpenGL.h>
-#include <Core\Types.h>
-#include <Graphic\Color.h>
-#include <Graphic\Surface.h>
-#include <Graphic\Drawable.h>
-#include <Graphic\Texture.h>
-#include <Math\Rect.h>
-#include <Math\Vector2.h>
-#include <System\Clock.h>
+#include <Core\OpenGL.hpp>
+#include <Core\Types.hpp>
+#include <Graphic\Color.hpp>
+#include <Graphic\Surface.hpp>
+#include <Graphic\Drawable.hpp>
+#include <Graphic\Texture.hpp>
+#include <Math\Rect.hpp>
+#include <Math\Vector2.hpp>
+#include <System\Clock.hpp>
 
-void _sdl_init();
-void _sdl_quit();
+static void _sdl_init();
+static void _sdl_quit();
 
 namespace sgl {
 	class Window {
@@ -143,7 +143,7 @@ namespace sgl {
 		}
 
 		void setIcon(const Surface& icon) const {
-			icon.setIconFor(this->id());
+			SDL_SetWindowIcon(_window, icon.ptr());
 		}
 
 		void clear(uint32 flags = 0) const {
@@ -158,6 +158,18 @@ namespace sgl {
 		*/
 		void setClearColor(const Color& col) const {
 			glClearColor(col.red, col.green, col.blue, col.alpha);
+		}
+
+		void setPosition(int16 x, int16 y) const {
+			SDL_WarpMouseInWindow(_window, x, y);
+		}
+
+		void setPosition(const Vector2s& position) const {
+			setPosition(position.x, position.y);
+		}
+
+		bool hasMouseFocus() const {
+			return SDL_GetMouseFocus() == _window;
 		}
 
 		/**

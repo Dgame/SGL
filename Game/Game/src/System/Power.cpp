@@ -1,4 +1,4 @@
-#include <System\Power.h>
+#include <System\Power.hpp>
 
 namespace sgl {
 	Power::Power(uint32 sec, uint8 perc, State _state) : seconds(sec), percent(perc), state(_state) {
@@ -10,17 +10,10 @@ namespace sgl {
 	*
 	* See: PowerInfo struct
 	*/
-	Power Power::GetInfo() {
+	Power Power::Info() {
 		int secs, pct;
 		SDL_PowerState state = SDL_GetPowerInfo(&secs, &pct);
 
 		return Power(secs, pct, static_cast<State>(state));
-	}
-
-	/**
-	* Returns the available RAM
-	*/
-	uint16 Power::GetRAM() {
-		return SDL_GetSystemRAM();
 	}
 }

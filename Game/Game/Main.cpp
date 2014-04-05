@@ -1,21 +1,13 @@
 #include <iostream>
-#include <Window\Event.h>
-#include <Window/Window.h>
-#include <Graphic\Surface.h>
-#include <Graphic\Color.h>
-#include <Graphic\Texture.h>
-#include <Graphic\Sprite.h>
-#include <System\Clock.h>
-#include <Graphic\Shape.h>
-#include <System\Font.h>
-#include <Graphic\String.h>
-#include <Graphic\Spritesheet.h>
-#include <Audio/Sound.h>
+#include <Graphic.hpp>
+#include <System.hpp>
+#include <Audio.hpp>
+#include <Window.hpp>
 
 int main() {
 	sgl::Window wnd(640, 480, "Test");
 	wnd.setVerticalSync(sgl::Window::Sync::Disable);
-	wnd.framerateLimit = 30;
+	//wnd.framerateLimit = 30;
 
 	uint32 pixels[256] = {
 		0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff,
@@ -71,12 +63,9 @@ int main() {
 	sgl::Sprite icon_sprite(icon_tex);
 
 	sgl::Shape s(sgl::Shape::Type::Quad);
-	std::array<float, 8> vs = {275, 15, 475, 15, 475, 215, 275, 215};
-	std::array<float, 8> ts = {0, 0, 1, 0, 1, 1, 0, 1};
-
-	s.addVertices(vs);
+	s.addVertices({275, 15, 475, 15, 475, 215, 275, 215});
 	s.setColor(sgl::Color::Blue);
-	s.setTextureCoordinates(ts);
+	s.setTextureCoordinates({0, 0, 1, 0, 1, 1, 0, 1});
 	s.texture = &wiki_tex;
 	//s.fill = true;
 
@@ -88,44 +77,50 @@ int main() {
 	sgl::Surface explo("test_3.png");
 	sgl::Texture explo_tex(explo);
 
-	sgl::Spritesheet explosion(explo_tex, 1);
-	explosion.tickOffset = 150;
-	explosion.view = sgl::ShortRect(0, 0, 43, 59);
-	explosion.position = sgl::Vector2f(360, 300);
+	sgl::Spritesheet animation(explo_tex);
+	animation.tickOffset = 150;
+	animation.view = sgl::ShortRect(0, 0, 43, 59);
+	animation.position = sgl::Vector2f(360, 300);
 
 	sgl::Sound sound1("expl.wav");
 	sgl::Sound sound2("orchestral.ogg");
-	
+
+	//sgl::Mouse::SetCursor(sgl::Mouse::Cursor::SizeNS);
+	sgl::Mouse::SetCursor(icon);
+
+	std::cout << (sgl::System::Platform() == sgl::System::OS::Windows ? "Du bist auf Windows" : "Unbekanntes OS")
+		<< ". RAM = " << sgl::System::RAM() << " Cores = " << sgl::System::CountGPU() << std::endl;
+
 	sgl::Clock clock;
 
-	Event event;
+	sgl::Event event;
 	while (wnd.isOpen()) {
-		while (Event::Poll(event)) {
+		while (sgl::Event::Poll(event)) {
 			switch (event.type) {
-				case Event::Type::Quit:
+				case sgl::Event::Type::Quit:
 					wnd.close();
 					break;
-				case Event::Type::KeyDown:
-					if (event.keyboard.key == Keyboard::Code::Escape)
-						Event::Push(Event::Type::Quit);
+				case sgl::Event::Type::KeyDown:
+					if (event.keyboard.key == sgl::Keyboard::Code::Escape)
+						sgl::Event::Push(sgl::Event::Type::Quit);
 					else {
 						switch (event.keyboard.key) {
-							case Keyboard::Code::Up:
+							case sgl::Keyboard::Code::Up:
 								s.move(0, -10);
 								break;
-							case Keyboard::Code::Down:
+							case sgl::Keyboard::Code::Down:
 								s.move(0, 10);
 								break;
-							case Keyboard::Code::Left:
+							case sgl::Keyboard::Code::Left:
 								s.move(-10, 0);
 								break;
-							case Keyboard::Code::Right:
+							case sgl::Keyboard::Code::Right:
 								s.move(10, 0);
 								break;
-							case Keyboard::Code::Num1:
+							case sgl::Keyboard::Code::Num1:
 								sound1.play();
 								break;
-							case Keyboard::Code::Num2:
+							case sgl::Keyboard::Code::Num2:
 								sound2.play();
 								break;
 							default:
@@ -133,6 +128,7 @@ int main() {
 						}
 					}
 					break;
+				default: break;
 			}
 
 			//printf("Event Loop\n");
@@ -140,6 +136,7 @@ int main() {
 
 		//printf("Frame\n");
 		//printf("Frames: %d\n", clock.getCurrentFps());
+		str.format("Framerate is %d", clock.getCurrentFps());
 
 		wnd.clear();
 
@@ -150,9 +147,9 @@ int main() {
 		wnd.draw(str);
 		//wnd.draw(text_sprite);
 
-		explosion.row = 1;
-		explosion.slide(sgl::Spritesheet::Grid::Row);
-		wnd.draw(explosion);
+		animation.row = 1;
+		animation.slide(sgl::Spritesheet::Grid::Row);
+		wnd.draw(animation);
 
 		//icon_sprite.position.y += 1;
 		//icon_sprite.position.x += 1;
