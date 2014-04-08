@@ -48,13 +48,13 @@ int main() {
 
 	wnd.setIcon(icon);
 
-	sgl::Surface wiki("wiki.png");
+	sgl::Surface wiki("samples/Images/wiki.png");
 	sgl::Texture wiki_tex(wiki);
 	sgl::Sprite wiki_sprite(wiki_tex);
 	wiki_sprite.position.set(200, 200);
 
 	sgl::Surface wiki2(wiki.pixels(), wiki.width(), wiki.height(), 24);
-	wiki2.saveToFile("Wiki2.png");
+	wiki2.saveToFile("samples/Images/Wiki2.png");
 	sgl::Texture wiki2_tex(wiki2);
 	sgl::Sprite wiki_sprite2(wiki2_tex);
 	wiki_sprite2.position.set(100, 100);
@@ -69,12 +69,12 @@ int main() {
 	s.texture = &wiki_tex;
 	//s.fill = true;
 
-	sgl::Font fnt("font/arial.ttf", 32);
+	sgl::Font fnt("samples/Font/arial.ttf", 32);
 	sgl::String str(fnt, "Ein Test");
 	str.position = sgl::Vector2f(100, 25);
 	str.mode = sgl::Font::Mode::Shaded;
 
-	sgl::Surface explo("test_3.png");
+	sgl::Surface explo("samples/Images/test_3.png");
 	sgl::Texture explo_tex(explo);
 
 	sgl::Spritesheet animation(explo_tex);
@@ -82,8 +82,8 @@ int main() {
 	animation.view = sgl::ShortRect(0, 0, 43, 59);
 	animation.position = sgl::Vector2f(360, 300);
 
-	sgl::Sound sound1("expl.wav");
-	sgl::Sound sound2("orchestral.ogg");
+	sgl::Sound sound1("samples/Audio/expl.wav");
+	sgl::Sound sound2("samples/Audio/orchestral.ogg");
 
 	//sgl::Mouse::SetCursor(sgl::Mouse::Cursor::SizeNS);
 	sgl::Mouse::SetCursor(icon);

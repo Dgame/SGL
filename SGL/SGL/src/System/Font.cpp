@@ -9,7 +9,7 @@ namespace sgl {
 		_ttf = TTF_OpenFont(filename.c_str(), _fontSize);
 		if (_ttf == nullptr) {
 			printf("Could not load font %s. TTF Error: %s.", filename.c_str(), TTF_GetError());
-			throw "Error while opening TTF_Font";
+			exit(1);
 		}
 	}
 
@@ -33,8 +33,10 @@ namespace sgl {
 				break;
 		}
 
-		if (srfc == nullptr)
-			throw "NULL Surface";
+		if (srfc == nullptr) {
+			printf("NULL Surface: %s\n", SDL_GetError());
+			exit(1);
+		}
 
 		SDL_PixelFormat fmt = *srfc->format;
 		fmt.BitsPerPixel = 24;

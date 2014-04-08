@@ -2,7 +2,7 @@
 
 void _sdl_init() {
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-		std::cerr << "SDL_Init Error: " << SDL_GetError() << std::endl;
+		printf("SDL_Init Error: %s\n", SDL_GetError());
 
 		return _sdl_quit();
 	}
@@ -11,8 +11,8 @@ void _sdl_init() {
 	int flags = IMG_INIT_JPG | IMG_INIT_PNG;
 	int initted = IMG_Init(flags);
 	if ((initted & flags) != flags) {
-		std::cerr << "IMG_Init: Failed to init required jpg and png support." << std::endl;
-		std::cerr << "IMG_Init: \n" << IMG_GetError() << std::endl;
+		printf("IMG_Init: Failed to init required jpg and png support.\n");
+		printf("IMG_Init: %s\n", IMG_GetError());
 
 		return _sdl_quit();
 	}
@@ -77,14 +77,17 @@ namespace sgl {
 		_winCount++;
 
 		_window = SDL_CreateWindow(title.c_str(), rect.x, rect.y, rect.width, rect.height, static_cast<int>(style));
-
-		if (_window == nullptr)
-			throw "Error by creating a SDL2 window. Check SDL_GetError for more information.";
+		if (_window == nullptr) {
+			printf("Error by creating a SDL2 window: %s.\n", SDL_GetError());
+			exit(1);
+		}
 
 		if (style & Style::OpenGL) {
 			_glContext = SDL_GL_CreateContext(_window);
-			if (_glContext == nullptr)
-				throw "Error while creating gl context. Check SDL_GetError for more information.";
+			if (_glContext == nullptr) {
+				printf("Error while creating gl context: %s\n", SDL_GetError());
+				exit(1);
+			}
 #if _DEBUG
 			char* GL_version = (char*) glGetString(GL_VERSION);
 			char* GL_vendor = (char*) glGetString(GL_VENDOR);
@@ -164,8 +167,10 @@ namespace sgl {
 	bool Window::setVerticalSync(Sync sync) const {
 		if (sync == Sync::Enable || sync == Sync::Disable)
 			return SDL_GL_SetSwapInterval(static_cast<int>(sync)) == 0;
-		else
-			throw "Unknown sync mode. Sync mode must be one of Sync.Enable, Sync.Disable.";
+		else {
+			printf("Unknown sync mode. Sync mode must be one of Sync.Enable, Sync.Disable.\n");
+			exit(1);
+		}
 	}
 
 	void Window::draw(const float* vertices, const float* texCoords, const Texture& texture) const {

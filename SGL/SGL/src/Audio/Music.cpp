@@ -10,9 +10,8 @@ namespace sgl {
 		_music = Mix_LoadMUS(filename.c_str());
 
 		if (!_music) {
-			printf("Mix_LoadMUS(\"music.mp3\"): %s\n", Mix_GetError());
-
-			throw "Unable to load Music";
+			printf("Unable to load Music %s: %s\n", filename.c_str(), Mix_GetError());
+			exit(1);
 		}
 	}
 
