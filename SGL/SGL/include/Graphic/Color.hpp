@@ -23,6 +23,7 @@ namespace sgl {
 		}
 
 		static Color GL(float pr, float pg, float pb, float pa = 1.f);
+		static std::array<float, 4> AsGL(const Color& col);
 		static void Copy(const Color* from, SDL_Color& too, const Color& def);
 	};
 

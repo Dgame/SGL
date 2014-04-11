@@ -22,6 +22,16 @@ namespace sgl {
 		return result;
 	}
 
+	std::array<float, 4> Color::AsGL(const Color& col) {
+		std::array<float, 4> arr;
+		arr[0] = col.red / 255;
+		arr[1] = col.green/ 255;
+		arr[2] = col.blue / 255;
+		arr[3] = col.alpha / 255;
+
+		return std::move(arr);
+	}
+
 	void Color::Copy(const Color* from, SDL_Color& too, const Color& def) {
 		if (from == nullptr) {
 			too.r = def.red;

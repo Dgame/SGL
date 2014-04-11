@@ -52,12 +52,14 @@ namespace sgl {
 
 	template <typename T>
 	Range<T>::Range(std::initializer_list<T> liste) : length(liste.size()) {
-		this->ptr = std::shared_ptr<T>(new T[liste.size()]);
+		T* ptr = new T[liste.size()];
 
 		uint32 i = 0;
 		for (const T& val : liste) {
-			this->ptr.get()[i++] = val;
+			ptr[i++] = val;
 		}
+
+		this->ptr = std::shared_ptr<T>(ptr);
 	}
 
 	template <typename T>

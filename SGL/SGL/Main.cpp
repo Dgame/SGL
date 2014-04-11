@@ -6,6 +6,7 @@
 
 int main() {
 	sgl::Window wnd(640, 480, "Test");
+	//wnd.setClearColor(sgl::Color::Blue);
 	wnd.setVerticalSync(sgl::Window::Sync::Disable);
 	//wnd.framerateLimit = 30;
 

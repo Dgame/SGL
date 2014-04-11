@@ -146,9 +146,7 @@ namespace sgl {
 			SDL_SetWindowIcon(_window, icon.ptr());
 		}
 
-		void clear(uint32 flags = 0) const {
-			if (flags == 0)
-				flags = GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT;
+		void clear(uint32 flags = GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT) const {
 			glClear(flags);
 		}
 
@@ -157,7 +155,9 @@ namespace sgl {
 		* This is also the background color of the window.
 		*/
 		void setClearColor(const Color& col) const {
-			glClearColor(col.red, col.green, col.blue, col.alpha);
+			std::array<float, 4> gl_col = Color::AsGL(col);
+
+			glClearColor(gl_col[0], gl_col[1], gl_col[2], gl_col[3]);
 		}
 
 		void setPosition(int16 x, int16 y) const {
