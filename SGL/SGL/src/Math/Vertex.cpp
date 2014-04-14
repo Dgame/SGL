@@ -10,9 +10,9 @@ namespace sgl {
 	}
 
 	void Vertex::setColor(const Color& col) {
-		r = col.red > 1 ? col.red / 255.f : col.red;
-		g = col.green > 1 ? col.green / 255.f : col.green;
-		b = col.blue > 1 ? col.blue / 255.f : col.blue;
-		a = col.alpha > 1 ? col.alpha / 255.f : col.alpha;
+		this->r = col.red > 1 ? col.red / 255.f : col.red;
+		this->g = col.green > 1 ? col.green / 255.f : col.green;
+		this->b = col.blue > 1 ? col.blue / 255.f : col.blue;
+		this->a = col.alpha > 1 ? col.alpha / 255.f : col.alpha;
 	}
 }

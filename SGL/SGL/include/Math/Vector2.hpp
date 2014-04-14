@@ -96,6 +96,8 @@ namespace sgl {
 		return strm << "Vector2<" << typeid(T).name() << ">(" << vec.x << ';' << vec.y << ")";
 	}
 
+	// #1
+
 	template<typename T>
 	void operator +=(Vector2<T>& vec, T value) {
 		vec.x += value;
@@ -120,6 +122,34 @@ namespace sgl {
 		vec.y /= value;
 	}
 
+	// #2
+
+	template<typename T>
+	void operator +=(Vector2<T>& lhs, const Vector2<T>& rhs) {
+		lhs.x += rhs.x;
+		lhs.y += rhs.y;
+	}
+
+	template<typename T>
+	void operator -=(Vector2<T>& lhs, const Vector2<T>& rhs) {
+		lhs.x -= rhs.x;
+		lhs.y -= rhs.y;
+	}
+
+	template<typename T>
+	void operator *=(Vector2<T>& lhs, const Vector2<T>& rhs) {
+		lhs.x *= rhs.x;
+		lhs.y *= rhs.y;
+	}
+
+	template<typename T>
+	void operator /=(Vector2<T>& lhs, const Vector2<T>& rhs) {
+		lhs.x /= rhs.x;
+		lhs.y /= rhs.y;
+	}
+
+	// #3
+
 	template<typename T>
 	Vector2<T> operator +(const Vector2<T>& lhs, const Vector2<T>& rhs) {
 		return Vector2<T>(lhs.x + rhs.x, lhs.y + rhs.y);
@@ -138,6 +168,28 @@ namespace sgl {
 	template<typename T>
 	Vector2<T> operator /(const Vector2<T>& lhs, const Vector2<T>& rhs) {
 		return Vector2<T>(lhs.x / rhs.x, lhs.y / rhs.y);
+	}
+
+	// #4
+
+	template<typename T>
+	Vector2<T> operator +(const Vector2<T>& vec, T value) {
+		return Vector2f(vec.x + value, vec.y + value);
+	}
+
+	template<typename T>
+	Vector2<T> operator -(const Vector2<T>& vec, T value) {
+		return Vector2f(vec.x - value, vec.y - value);
+	}
+
+	template<typename T>
+	Vector2<T> operator *(const Vector2<T>& vec, T value) {
+		return Vector2f(vec.x * value, vec.y * value);
+	}
+
+	template<typename T>
+	Vector2<T> operator /(const Vector2<T>& vec, T value) {
+		return Vector2f(vec.x / value, vec.y / value);
 	}
 
 	using Vector2f = Vector2<float>;

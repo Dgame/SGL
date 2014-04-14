@@ -6,6 +6,9 @@ namespace sgl {
 	}
 
 	void Shape::addVertices(Range<float> range) {
+		if (range.length == 0)
+			return;
+
 		for (uint16 i = 0, j = 0; i < range.length / 2; i++, j += 2) {
 			this->vertices.emplace_back(Vertex(range[j], range[j + 1]));
 		}
@@ -13,6 +16,9 @@ namespace sgl {
 
 	void Shape::setVertices(Range<float> range) {
 		const uint32 count = min(range.length, this->vertices.size());
+
+		if (count == 0)
+			return this->addVertices(range);
 
 		for (uint32 i = 0, j = 0; i < count; i++, j += 2) {
 			this->vertices[i].x = range[j];
