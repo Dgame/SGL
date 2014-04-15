@@ -11,58 +11,58 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Audio.hpp" />
-    <ClInclude Include="include\Audio\Music.hpp" />
-    <ClInclude Include="include\Audio\Sound.hpp" />
-    <ClInclude Include="include\Core\OpenGL.hpp" />
-    <ClInclude Include="include\Core\Output.hpp" />
-    <ClInclude Include="include\Core\Range.hpp" />
-    <ClInclude Include="include\Core\Types.hpp" />
-    <ClInclude Include="include\Graphic.hpp" />
-    <ClInclude Include="include\Graphic\Color.hpp" />
-    <ClInclude Include="include\Graphic\Drawable.hpp" />
-    <ClInclude Include="include\Graphic\Shape.hpp" />
-    <ClInclude Include="include\Graphic\Sprite.hpp" />
-    <ClInclude Include="include\Graphic\Spritesheet.hpp" />
-    <ClInclude Include="include\Graphic\Surface.hpp" />
-    <ClInclude Include="include\Graphic\Texture.hpp" />
-    <ClInclude Include="include\Graphic\String.hpp" />
-    <ClInclude Include="include\Math.hpp" />
-    <ClInclude Include="include\Math\Rect.hpp" />
-    <ClInclude Include="include\Math\Vector2.hpp" />
-    <ClInclude Include="include\Math\Vertex.hpp" />
-    <ClInclude Include="include\System.hpp" />
-    <ClInclude Include="include\System\Clock.hpp" />
-    <ClInclude Include="include\System\Font.hpp" />
-    <ClInclude Include="include\System\Keyboard.hpp" />
-    <ClInclude Include="include\System\Mouse.hpp" />
-    <ClInclude Include="include\System\Power.hpp" />
-    <ClInclude Include="include\System\System.hpp" />
-    <ClInclude Include="include\Window.hpp" />
-    <ClInclude Include="include\Window\Event.hpp" />
-    <ClInclude Include="include\Window\Window.hpp" />
+    <ClInclude Include="include\SGL\Audio.hpp" />
+    <ClInclude Include="include\SGL\Audio\Music.hpp" />
+    <ClInclude Include="include\SGL\Audio\Sound.hpp" />
+    <ClInclude Include="include\SGL\Core\OpenGL.hpp" />
+    <ClInclude Include="include\SGL\Core\Output.hpp" />
+    <ClInclude Include="include\SGL\Core\Range.hpp" />
+    <ClInclude Include="include\SGL\Core\Types.hpp" />
+    <ClInclude Include="include\SGL\Graphic.hpp" />
+    <ClInclude Include="include\SGL\Graphic\Color.hpp" />
+    <ClInclude Include="include\SGL\Graphic\Drawable.hpp" />
+    <ClInclude Include="include\SGL\Graphic\Shape.hpp" />
+    <ClInclude Include="include\SGL\Graphic\Sprite.hpp" />
+    <ClInclude Include="include\SGL\Graphic\Spritesheet.hpp" />
+    <ClInclude Include="include\SGL\Graphic\String.hpp" />
+    <ClInclude Include="include\SGL\Graphic\Surface.hpp" />
+    <ClInclude Include="include\SGL\Graphic\Texture.hpp" />
+    <ClInclude Include="include\SGL\Math.hpp" />
+    <ClInclude Include="include\SGL\Math\Rect.hpp" />
+    <ClInclude Include="include\SGL\Math\Vector2.hpp" />
+    <ClInclude Include="include\SGL\Math\Vertex.hpp" />
+    <ClInclude Include="include\SGL\System.hpp" />
+    <ClInclude Include="include\SGL\System\Clock.hpp" />
+    <ClInclude Include="include\SGL\System\Font.hpp" />
+    <ClInclude Include="include\SGL\System\Keyboard.hpp" />
+    <ClInclude Include="include\SGL\System\Mouse.hpp" />
+    <ClInclude Include="include\SGL\System\Power.hpp" />
+    <ClInclude Include="include\SGL\System\System.hpp" />
+    <ClInclude Include="include\SGL\Window.hpp" />
+    <ClInclude Include="include\SGL\Window\Event.hpp" />
+    <ClInclude Include="include\SGL\Window\Window.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="src\Audio\Music.cpp" />
-    <ClCompile Include="src\Audio\Sound.cpp" />
-    <ClCompile Include="src\Core\OpenGL.cpp" />
-    <ClCompile Include="src\Graphic\Color.cpp" />
-    <ClCompile Include="src\Graphic\Shape.cpp" />
-    <ClCompile Include="src\Graphic\Sprite.cpp" />
-    <ClCompile Include="src\Graphic\Spritesheet.cpp" />
-    <ClCompile Include="src\Graphic\Surface.cpp" />
-    <ClCompile Include="src\Graphic\Texture.cpp" />
-    <ClCompile Include="src\Graphic\String.cpp" />
-    <ClCompile Include="src\Math\Vertex.cpp" />
-    <ClCompile Include="src\System\Font.cpp" />
-    <ClCompile Include="src\System\Keyboard.cpp" />
-    <ClCompile Include="src\System\Mouse.cpp" />
-    <ClCompile Include="src\System\Power.cpp" />
-    <ClCompile Include="src\System\Clock.cpp" />
-    <ClCompile Include="src\System\System.cpp" />
-    <ClCompile Include="src\Window\Event.cpp" />
-    <ClCompile Include="src\Window\Window.cpp" />
+    <ClCompile Include="src\SGL\Audio\Music.cpp" />
+    <ClCompile Include="src\SGL\Audio\Sound.cpp" />
+    <ClCompile Include="src\SGL\Core\OpenGL.cpp" />
+    <ClCompile Include="src\SGL\Graphic\Color.cpp" />
+    <ClCompile Include="src\SGL\Graphic\Shape.cpp" />
+    <ClCompile Include="src\SGL\Graphic\Sprite.cpp" />
+    <ClCompile Include="src\SGL\Graphic\Spritesheet.cpp" />
+    <ClCompile Include="src\SGL\Graphic\String.cpp" />
+    <ClCompile Include="src\SGL\Graphic\Surface.cpp" />
+    <ClCompile Include="src\SGL\Graphic\Texture.cpp" />
+    <ClCompile Include="src\SGL\Math\Vertex.cpp" />
+    <ClCompile Include="src\SGL\System\Clock.cpp" />
+    <ClCompile Include="src\SGL\System\Font.cpp" />
+    <ClCompile Include="src\SGL\System\Keyboard.cpp" />
+    <ClCompile Include="src\SGL\System\Mouse.cpp" />
+    <ClCompile Include="src\SGL\System\Power.cpp" />
+    <ClCompile Include="src\SGL\System\System.cpp" />
+    <ClCompile Include="src\SGL\Window\Event.cpp" />
+    <ClCompile Include="src\SGL\Window\Window.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B90471E1-330E-479E-BFA8-3DB13BB5F02C}</ProjectGuid>
@@ -95,8 +95,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>E:\C\SDL2_mixer-2.0.0\include;E:\C\SDL2_ttf-2.0.12\include;C:\Users\Besitzer\Documents\GitHub\sgl\SGL\SGL\include;E:\C\SDL2_image-2.0.0\include;E:\C\SDL2-2.0.3\include;$(IncludePath)</IncludePath>
-    <LibraryPath>E:\C\SDL2_mixer-2.0.0\lib\x86;E:\C\SDL2_ttf-2.0.12\lib\x86;E:\C\SDL2_image-2.0.0\lib\x86;E:\C\SDL2-2.0.3\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\C\SDL2_mixer-2.0.0\include;C:\C\SDL2_ttf-2.0.12\include;C:\Users\rswhite\Documents\GitHub\sgl\SGL\SGL\include;C:\C\SDL2_image-2.0.0\include;C:\C\SDL2-2.0.3\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\C\SDL2_mixer-2.0.0\lib\x86;C:\C\SDL2_ttf-2.0.12\lib\x86;C:\C\SDL2_image-2.0.0\lib\x86;C:\C\SDL2-2.0.3\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>

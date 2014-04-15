@@ -1,8 +1,8 @@
 #include <iostream>
-#include <Graphic.hpp>
-#include <System.hpp>
-#include <Audio.hpp>
-#include <Window.hpp>
+#include <SGL/Graphic.hpp>
+#include <SGL/System.hpp>
+#include <SGL/Audio.hpp>
+#include <SGL/Window.hpp>
 
 int main() {
 	sgl::Window wnd(640, 480, "Test");
