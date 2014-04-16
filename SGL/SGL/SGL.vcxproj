@@ -71,7 +71,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -95,8 +95,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\C\SDL2_mixer-2.0.0\include;C:\C\SDL2_ttf-2.0.12\include;C:\Users\rswhite\Documents\GitHub\sgl\SGL\SGL\include;C:\C\SDL2_image-2.0.0\include;C:\C\SDL2-2.0.3\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\C\SDL2_mixer-2.0.0\lib\x86;C:\C\SDL2_ttf-2.0.12\lib\x86;C:\C\SDL2_image-2.0.0\lib\x86;C:\C\SDL2-2.0.3\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>E:\C\SDL2_mixer-2.0.0\include;E:\C\SDL2_ttf-2.0.12\include;C:\Users\Besitzer\Documents\GitHub\sgl\SGL\SGL\include;E:\C\SDL2_image-2.0.0\include;E:\C\SDL2-2.0.3\include;$(IncludePath)</IncludePath>
+    <LibraryPath>E:\C\SDL2_mixer-2.0.0\lib\x86;E:\C\SDL2_ttf-2.0.12\lib\x86;E:\C\SDL2_image-2.0.0\lib\x86;E:\C\SDL2-2.0.3\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>

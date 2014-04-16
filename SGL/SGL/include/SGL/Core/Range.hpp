@@ -20,7 +20,7 @@ namespace sgl {
 			return _pos != other._pos;
 		}
 
-		T& operator *() const;
+		T operator *() const;
 
 		const Iterator<T>& operator ++() {
 			++_pos;
@@ -45,18 +45,18 @@ namespace sgl {
 			return Iterator<T>(this, this->length);
 		}
 
-		T& operator [](uint32 index) const {
+		T operator [](uint32 index) const {
 			return this->ptr.get()[index];
 		}
 	};
 
 	template <typename T>
 	Range<T>::Range(std::initializer_list<T> liste) : length(liste.size()) {
-		T* ptr = new T[liste.size()];
+		T* ptr = new T[this->length];
 
 		uint32 i = 0;
-		for (const T& val : liste) {
-			ptr[i++] = val;
+		for (T val : liste) {
+			ptr[i++] = static_cast<T>(val);
 		}
 
 		this->ptr = std::shared_ptr<T>(ptr);
@@ -68,7 +68,7 @@ namespace sgl {
 	}
 
 	template <typename T>
-	T& Iterator<T>::operator *() const {
+	T Iterator<T>::operator *() const {
 		return _p_vec->ptr[_pos];
 	}
 }

@@ -25,7 +25,7 @@ namespace sgl {
 		* Checks whether this Rect contains the given coordinates.
 		*/
 		bool contains(T x, T y) const {
-			return (x >= this.x) && (x < this.x + this.width) && (y >= this.y) && (y < this.y + this.height);
+			return (x >= this->x) && (x < this->x + this->width) && (y >= this->y) && (y < this->y + this->height);
 		}
 
 		bool intersects(const Rect<T>& rect, Rect<T>* overlap = nullptr) const;

@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <math.h>
+#include <SGL\Core\Types.hpp>
 
 namespace sgl {
 	template<typename T>

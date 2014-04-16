@@ -1,11 +1,20 @@
 #include <SGL/Graphic\Shape.hpp>
 
 namespace sgl {
-	Shape::Shape(Type _type) : type(_type), lineWidth(1), fill(false) {
+	Shape::Shape(Type _type) : type(_type), texture(nullptr), lineWidth(1), fill(false) {
 
 	}
 
-	void Shape::addVertices(Range<float> range) {
+	void Shape::addVertices(const ShortRect& rect) {
+		this->vertices.reserve(4);
+
+		this->vertices.emplace_back(Vertex(rect.x, rect.y));
+		this->vertices.emplace_back(Vertex(rect.x + rect.width, rect.y));
+		this->vertices.emplace_back(Vertex(rect.x + rect.width, rect.y + rect.height));
+		this->vertices.emplace_back(Vertex(rect.x, rect.y + rect.height));
+	}
+
+	void Shape::addVertices(const Range<float> range) {
 		if (range.length == 0)
 			return;
 
@@ -14,11 +23,11 @@ namespace sgl {
 		}
 	}
 
-	void Shape::setVertices(Range<float> range) {
+	void Shape::updateVertices(const Range<float> range) {
 		const uint32 count = min(range.length, this->vertices.size());
 
 		if (count == 0)
-			return this->addVertices(range);
+			return this->addVertices(std::move(range));
 
 		for (uint32 i = 0, j = 0; i < count; i++, j += 2) {
 			this->vertices[i].x = range[j];
@@ -26,7 +35,7 @@ namespace sgl {
 		}
 	}
 
-	void Shape::setTextureCoordinates(Range<float> range) {
+	void Shape::setTextureCoordinates(const Range<float> range) {
 		const uint32 count = min(range.length, this->vertices.size());
 
 		for (uint32 i = 0, j = 0; i < count; i++, j += 2) {
@@ -35,7 +44,7 @@ namespace sgl {
 		}
 	}
 
-	void Shape::draw(const Window& wnd) const {
+	void Shape::draw(const Window&) const {
 		if (this->vertices.size() == 0)
 			return;
 

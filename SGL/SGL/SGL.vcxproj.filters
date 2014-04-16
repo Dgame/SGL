@@ -13,192 +13,198 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Headerdateien\Core">
-      <UniqueIdentifier>{df6001b0-4306-43c6-b6d6-8b2afd6d1745}</UniqueIdentifier>
+    <Filter Include="Headerdateien\SGL">
+      <UniqueIdentifier>{8a0e222d-5f74-4cdb-97a4-105956e496e1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headerdateien\Graphics">
-      <UniqueIdentifier>{fe83d3c8-efe1-42c5-befb-8c9d275abef9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Headerdateien\Window">
-      <UniqueIdentifier>{0d066fe1-4aff-490e-8608-6f7679443e56}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Headerdateien\Math">
+    <Filter Include="Headerdateien\SGL\Math">
       <UniqueIdentifier>{4c511576-a626-4978-a2be-21da900e6e4f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headerdateien\Audio">
+    <Filter Include="Headerdateien\SGL\Audio">
       <UniqueIdentifier>{a76cae98-5512-431d-b831-632fab2db646}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headerdateien\System">
+    <Filter Include="Headerdateien\SGL\Core">
+      <UniqueIdentifier>{df6001b0-4306-43c6-b6d6-8b2afd6d1745}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\SGL\Graphics">
+      <UniqueIdentifier>{fe83d3c8-efe1-42c5-befb-8c9d275abef9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\SGL\Window">
+      <UniqueIdentifier>{0d066fe1-4aff-490e-8608-6f7679443e56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\SGL\System">
       <UniqueIdentifier>{04195a34-2cc7-42ba-a088-da0a7cce4baf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Quelldateien\Core">
-      <UniqueIdentifier>{a4f0e9d5-f240-4bb4-ae72-07097b20f5d7}</UniqueIdentifier>
+    <Filter Include="Quelldateien\SGL">
+      <UniqueIdentifier>{6bebaa19-4787-4df0-b26a-79e5744eeec7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Quelldateien\Math">
-      <UniqueIdentifier>{09c95faf-bf8a-41e2-b935-833ec8c683dd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\Window">
-      <UniqueIdentifier>{a2d29a5f-8f80-4bae-aba6-49410593674b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\Audio">
+    <Filter Include="Quelldateien\SGL\Audio">
       <UniqueIdentifier>{821f3696-3bb5-4d29-a3d0-e8d07b0e1c4a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Quelldateien\Graphics">
+    <Filter Include="Quelldateien\SGL\Core">
+      <UniqueIdentifier>{a4f0e9d5-f240-4bb4-ae72-07097b20f5d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\SGL\Graphics">
       <UniqueIdentifier>{7cef9b98-7c91-40bc-982b-70c305955863}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Quelldateien\System">
+    <Filter Include="Quelldateien\SGL\Math">
+      <UniqueIdentifier>{09c95faf-bf8a-41e2-b935-833ec8c683dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\SGL\Window">
+      <UniqueIdentifier>{a2d29a5f-8f80-4bae-aba6-49410593674b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\SGL\System">
       <UniqueIdentifier>{edf35fb2-a96d-4377-8d71-305d1214db74}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\SGL\Audio\Music.hpp">
-      <Filter>Headerdateien\Audio</Filter>
+      <Filter>Headerdateien\SGL\Audio</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Audio\Sound.hpp">
-      <Filter>Headerdateien\Audio</Filter>
+      <Filter>Headerdateien\SGL\Audio</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Core\OpenGL.hpp">
-      <Filter>Headerdateien\Core</Filter>
+      <Filter>Headerdateien\SGL\Core</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Core\Output.hpp">
-      <Filter>Headerdateien\Core</Filter>
+      <Filter>Headerdateien\SGL\Core</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Core\Range.hpp">
-      <Filter>Headerdateien\Core</Filter>
+      <Filter>Headerdateien\SGL\Core</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Core\Types.hpp">
-      <Filter>Headerdateien\Core</Filter>
+      <Filter>Headerdateien\SGL\Core</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Graphic\String.hpp">
-      <Filter>Headerdateien\Graphics</Filter>
+      <Filter>Headerdateien\SGL\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Graphic\Surface.hpp">
-      <Filter>Headerdateien\Graphics</Filter>
+      <Filter>Headerdateien\SGL\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Graphic\Texture.hpp">
-      <Filter>Headerdateien\Graphics</Filter>
+      <Filter>Headerdateien\SGL\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Graphic\Color.hpp">
-      <Filter>Headerdateien\Graphics</Filter>
+      <Filter>Headerdateien\SGL\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Graphic\Drawable.hpp">
-      <Filter>Headerdateien\Graphics</Filter>
+      <Filter>Headerdateien\SGL\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Graphic\Shape.hpp">
-      <Filter>Headerdateien\Graphics</Filter>
+      <Filter>Headerdateien\SGL\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Graphic\Sprite.hpp">
-      <Filter>Headerdateien\Graphics</Filter>
+      <Filter>Headerdateien\SGL\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Graphic\Spritesheet.hpp">
-      <Filter>Headerdateien\Graphics</Filter>
+      <Filter>Headerdateien\SGL\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Math\Vertex.hpp">
-      <Filter>Headerdateien\Math</Filter>
+      <Filter>Headerdateien\SGL\Math</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Math\Rect.hpp">
-      <Filter>Headerdateien\Math</Filter>
+      <Filter>Headerdateien\SGL\Math</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Math\Vector2.hpp">
-      <Filter>Headerdateien\Math</Filter>
+      <Filter>Headerdateien\SGL\Math</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\System\System.hpp">
-      <Filter>Headerdateien\System</Filter>
+      <Filter>Headerdateien\SGL\System</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\System\Clock.hpp">
-      <Filter>Headerdateien\System</Filter>
+      <Filter>Headerdateien\SGL\System</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\System\Font.hpp">
-      <Filter>Headerdateien\System</Filter>
+      <Filter>Headerdateien\SGL\System</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\System\Keyboard.hpp">
-      <Filter>Headerdateien\System</Filter>
+      <Filter>Headerdateien\SGL\System</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\System\Mouse.hpp">
-      <Filter>Headerdateien\System</Filter>
+      <Filter>Headerdateien\SGL\System</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\System\Power.hpp">
-      <Filter>Headerdateien\System</Filter>
+      <Filter>Headerdateien\SGL\System</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Window\Window.hpp">
-      <Filter>Headerdateien\Window</Filter>
+      <Filter>Headerdateien\SGL\Window</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Window\Event.hpp">
-      <Filter>Headerdateien\Window</Filter>
+      <Filter>Headerdateien\SGL\Window</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Window.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="include\SGL\Audio.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="include\SGL\Graphic.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="include\SGL\Math.hpp">
-      <Filter>Headerdateien</Filter>
+      <Filter>Headerdateien\SGL</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\System.hpp">
-      <Filter>Headerdateien</Filter>
+      <Filter>Headerdateien\SGL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SGL\Math.hpp">
+      <Filter>Headerdateien\SGL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SGL\Graphic.hpp">
+      <Filter>Headerdateien\SGL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SGL\Audio.hpp">
+      <Filter>Headerdateien\SGL</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\SGL\Audio\Sound.cpp">
-      <Filter>Quelldateien\Audio</Filter>
+      <Filter>Quelldateien\SGL\Audio</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\Audio\Music.cpp">
-      <Filter>Quelldateien\Audio</Filter>
+      <Filter>Quelldateien\SGL\Audio</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\Core\OpenGL.cpp">
-      <Filter>Quelldateien\Core</Filter>
+      <Filter>Quelldateien\SGL\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\Graphic\Surface.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
+      <Filter>Quelldateien\SGL\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\Graphic\Texture.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
+      <Filter>Quelldateien\SGL\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\Graphic\Color.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
+      <Filter>Quelldateien\SGL\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\Graphic\Shape.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
+      <Filter>Quelldateien\SGL\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\Graphic\Sprite.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
+      <Filter>Quelldateien\SGL\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\Graphic\Spritesheet.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
+      <Filter>Quelldateien\SGL\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\Graphic\String.cpp">
-      <Filter>Quelldateien\Graphics</Filter>
+      <Filter>Quelldateien\SGL\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\Math\Vertex.cpp">
-      <Filter>Quelldateien\Math</Filter>
+      <Filter>Quelldateien\SGL\Math</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\System\System.cpp">
-      <Filter>Quelldateien\System</Filter>
+      <Filter>Quelldateien\SGL\System</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\System\Clock.cpp">
-      <Filter>Quelldateien\System</Filter>
+      <Filter>Quelldateien\SGL\System</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\System\Font.cpp">
-      <Filter>Quelldateien\System</Filter>
+      <Filter>Quelldateien\SGL\System</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\System\Keyboard.cpp">
-      <Filter>Quelldateien\System</Filter>
+      <Filter>Quelldateien\SGL\System</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\System\Mouse.cpp">
-      <Filter>Quelldateien\System</Filter>
+      <Filter>Quelldateien\SGL\System</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\System\Power.cpp">
-      <Filter>Quelldateien\System</Filter>
+      <Filter>Quelldateien\SGL\System</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\Window\Window.cpp">
-      <Filter>Quelldateien\Window</Filter>
+      <Filter>Quelldateien\SGL\Window</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\Window\Event.cpp">
-      <Filter>Quelldateien\Window</Filter>
+      <Filter>Quelldateien\SGL\Window</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Quelldateien</Filter>

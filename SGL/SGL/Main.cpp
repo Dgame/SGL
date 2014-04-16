@@ -65,10 +65,26 @@ int main() {
 
 	sgl::Shape s(sgl::Shape::Type::Quad);
 	s.addVertices({275, 15, 475, 15, 475, 215, 275, 215});
-	s.setColor(sgl::Color::Blue);
 	s.setTextureCoordinates({0, 0, 1, 0, 1, 1, 0, 1});
+	s.setColor(sgl::Color::Blue);
 	s.texture = &wiki_tex;
 	//s.fill = true;
+
+	/*
+	sgl::Vector2f vf(4, 2);
+	sgl::Vector2s vs(2, 3);
+
+	s.move(vf);
+	s.move(sgl::Vector2f(vs.x, vs.y));
+
+	sgl::Range<float> range = {vs.x, vs.y};
+
+	std::vector<float> vs = {1, 2, 3};
+	sgl::Range<float> range(&vs[0], vs.size());
+	*/
+
+	sgl::Shape test(sgl::Shape::Type::Quad);
+	test.addVertices({50, 150, 100, 150, 100, 200, 50, 200});
 
 	sgl::Font fnt("samples/Font/arial.ttf", 32);
 	sgl::String str(fnt, "Ein Test");

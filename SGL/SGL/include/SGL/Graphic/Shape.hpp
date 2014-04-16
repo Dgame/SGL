@@ -16,7 +16,7 @@
 namespace sgl {
 	class Shape : public Drawable {
 	protected:
-		virtual void draw(const Window& wnd) const override;
+		virtual void draw(const Window&) const override;
 
 	public:
 		enum class Type {
@@ -32,22 +32,25 @@ namespace sgl {
 		};
 
 		std::vector<Vertex> vertices;
-		Texture* texture = nullptr;
+		Texture* texture;
 		Type type;
 		uint8 lineWidth;
 		bool fill;
 
 		explicit Shape(Type type);
 
-		void addVertices(Range<float> range);
-		void setVertices(Range<float> range);
-		void setTextureCoordinates(Range<float> range);
+		void addVertices(const Range<float> range);
+		void addVertices(const ShortRect& rect);
+
+		void updateVertices(const Range<float> range);
+
+		void setTextureCoordinates(const Range<float> range);
 
 		void setColor(const Color& col);
 		void move(float x, float y);
 
 		void move(const Vector2f& vec) {
-			move(vec.x, vec.y);
+			this->move(vec.x, vec.y);
 		}
 	};
 }
