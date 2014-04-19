@@ -123,7 +123,19 @@ namespace sgl {
 			SDL_SetWindowSize(_window, width, height);
 		}
 
-		Vector2us getSize() const;
+		uint16 width() const {
+			int w;
+			SDL_GetWindowSize(_window, &w, nullptr);
+
+			return w;
+		}
+
+		uint16 height() const {
+			int h;
+			SDL_GetWindowSize(_window, nullptr, &h);
+
+			return h;
+		}
 
 		void setTitle(const std::string& title) const {
 			SDL_SetWindowTitle(_window, title.c_str());

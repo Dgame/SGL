@@ -149,13 +149,6 @@ namespace sgl {
 		return Vector2s(x, y);
 	}
 
-	Vector2us Window::getSize() const {
-		int w, h;
-		SDL_GetWindowSize(_window, &w, &h);
-
-		return Vector2us(w, h);
-	}
-
 	/**
 	* Set the Syncronisation mode of this window.
 	* Default Syncronisation is <code>Sync.Enable</code>.
