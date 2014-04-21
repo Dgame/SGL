@@ -2,13 +2,14 @@
 #define SPRITE_HPP
 
 #include <SGL/Graphic\Drawable.hpp>
+#include <SGL/Graphic\Transformable.hpp>
 #include <SGL/Graphic\Texture.hpp>
 #include <SGL/Math\Vector2.hpp>
 #include <SGL/Math\Rect.hpp>
 #include <SGL/Window\Window.hpp>
 
 namespace sgl {
-	class Sprite : public Drawable {
+	class Sprite : public Drawable, public Transform {
 	protected:
 		virtual void draw(const Window& wnd) const override;
 

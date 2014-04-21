@@ -2,7 +2,7 @@
 #define SHAPE_HPP
 
 #include <vector>
-#include <array>
+#include <algorithm>
 #if _DEBUG
 #include <SGL/Core\Output.hpp>
 #endif
@@ -11,10 +11,11 @@
 #include <SGL/Core\Range.hpp>
 #include <SGL/Math\Vertex.hpp>
 #include <SGL/Graphic\Drawable.hpp>
+#include <SGL/Graphic\Transformable.hpp>
 #include <SGL/Graphic\Texture.hpp>
 
 namespace sgl {
-	class Shape : public Drawable {
+	class Shape : public Drawable, public Transform {
 	protected:
 		virtual void draw(const Window&) const override;
 
@@ -42,9 +43,10 @@ namespace sgl {
 		void addVertices(const Range<float> range);
 		void addVertices(const ShortRect& rect);
 
-		void updateVertices(const Range<float> range);
+		void updateVertices(const Range<float> range, uint16 offset = 0);
+		void updateVertices(const ShortRect& rect, uint16 offset = 0);
 
-		void setTextureCoordinates(const Range<float> range);
+		void updateTextureCoordinates(const Range<float> range, uint16 offset = 0);
 
 		void setColor(const Color& col);
 		void move(float x, float y);

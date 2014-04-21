@@ -4,7 +4,12 @@
 #if defined(_WIN32) || defined(__WIN32__)
 
 #ifdef _MSC_VER
+
 #include <windows.h>
+
+#undef min
+#undef max
+
 #endif
 
 #include <GL/gl.h>

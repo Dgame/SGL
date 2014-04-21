@@ -1,3 +1,4 @@
+#include <SGL\Core\Scope.hpp>
 #include <SGL/Graphic\Sprite.hpp>
 
 namespace sgl {
@@ -6,9 +7,10 @@ namespace sgl {
 	}
 
 	void Sprite::draw(const Window& wnd) const {
-		float dx = this->position.x, dy = this->position.y;
-		float dw = this->width();
-		float dh = this->height();
+		const float dx = this->position.x;
+		const float dy = this->position.y;
+		const float dw = this->width();
+		const float dh = this->height();
 
 		const float vertices[] = {
 			dx, dy,
@@ -24,6 +26,9 @@ namespace sgl {
 			0, 1
 		};
 
+		glMatrixScope mat;
+
+		Transform::_applyTransformation(dx + (dw / 2), dy + (dh / 2));
 		wnd.draw(vertices, texCoords, this->texture);
 	}
 }

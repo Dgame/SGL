@@ -14,9 +14,11 @@
     <ClInclude Include="include\SGL\Audio.hpp" />
     <ClInclude Include="include\SGL\Audio\Music.hpp" />
     <ClInclude Include="include\SGL\Audio\Sound.hpp" />
+    <ClInclude Include="include\SGL\Core\Array.hpp" />
     <ClInclude Include="include\SGL\Core\OpenGL.hpp" />
     <ClInclude Include="include\SGL\Core\Output.hpp" />
     <ClInclude Include="include\SGL\Core\Range.hpp" />
+    <ClInclude Include="include\SGL\Core\Scope.hpp" />
     <ClInclude Include="include\SGL\Core\Types.hpp" />
     <ClInclude Include="include\SGL\Graphic.hpp" />
     <ClInclude Include="include\SGL\Graphic\Color.hpp" />
@@ -27,6 +29,7 @@
     <ClInclude Include="include\SGL\Graphic\String.hpp" />
     <ClInclude Include="include\SGL\Graphic\Surface.hpp" />
     <ClInclude Include="include\SGL\Graphic\Texture.hpp" />
+    <ClInclude Include="include\SGL\Graphic\Transformable.hpp" />
     <ClInclude Include="include\SGL\Math.hpp" />
     <ClInclude Include="include\SGL\Math\Rect.hpp" />
     <ClInclude Include="include\SGL\Math\Vector2.hpp" />
@@ -54,6 +57,7 @@
     <ClCompile Include="src\SGL\Graphic\String.cpp" />
     <ClCompile Include="src\SGL\Graphic\Surface.cpp" />
     <ClCompile Include="src\SGL\Graphic\Texture.cpp" />
+    <ClCompile Include="src\SGL\Graphic\Transformable.cpp" />
     <ClCompile Include="src\SGL\Math\Vertex.cpp" />
     <ClCompile Include="src\SGL\System\Clock.cpp" />
     <ClCompile Include="src\SGL\System\Font.cpp" />

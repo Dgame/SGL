@@ -28,8 +28,9 @@ namespace sgl {
 			this->y += y;
 		}
 
-		float angle(const Vector2<T>& vec, bool inDegrees = true) const;
-		Vector2<T> normalized() const;
+		float angleBetween(const Vector2<T>& vec, bool inDegrees = true) const;
+		Vector2<T> rotate(float angle) const;
+		Vector2<T> normalize() const;
 
 		/**
 		* Calculate the diff between two vectors.
@@ -58,7 +59,7 @@ namespace sgl {
 	}
 
 	template <typename T>
-	float Vector2<T>::angle(const Vector2<T>& vec, bool inDegrees = true) const {
+	float Vector2<T>::angleBetween(const Vector2<T>& vec, bool inDegrees = true) const {
 		const float angle = std::acosf(this->scalar(vec) / (this->length() * vec.length()));
 		if (inDegrees)
 			return angle * 180 / PI;
@@ -66,11 +67,20 @@ namespace sgl {
 		return angle;
 	}
 
+	template <typename T>
+	Vector2<T> Vector2<T>::rotate(float angle) const {
+		const float radians = angle * M_PI / 180.f;
+		const T nx = static_cast<T>(this->x * std::cos(radians) - this->y * std::sin(radians));
+		const T ny = static_cast<T>(this->x * std::sin(radians) + this->y * std::cos(radians));
+
+		return Vector2<T>(nx, ny);
+	}
+
 	/**
 	* Normalize the vector in which the coordinates are divided by the length.
 	*/
 	template <typename T>
-	Vector2<T> Vector2<T>::normalized() const {
+	Vector2<T> Vector2<T>::normalize() const {
 		Vector2<T> result = *this;
 
 		const float len = this->length();

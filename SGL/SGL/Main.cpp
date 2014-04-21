@@ -53,6 +53,7 @@ int main() {
 	sgl::Texture wiki_tex(wiki);
 	sgl::Sprite wiki_sprite(wiki_tex);
 	wiki_sprite.position.set(200, 200);
+	wiki_sprite.rotate(25);
 
 	sgl::Surface wiki2(wiki.pixels(), wiki.width(), wiki.height(), 24);
 	wiki2.saveToFile("samples/Images/Wiki2.png");
@@ -65,7 +66,7 @@ int main() {
 
 	sgl::Shape s(sgl::Shape::Type::Quad);
 	s.addVertices({275, 15, 475, 15, 475, 215, 275, 215});
-	s.setTextureCoordinates({0, 0, 1, 0, 1, 1, 0, 1});
+	s.updateTextureCoordinates({0, 0, 1, 0, 1, 1, 0, 1});
 	s.setColor(sgl::Color::Blue);
 	s.texture = &wiki_tex;
 	//s.fill = true;
@@ -108,6 +109,31 @@ int main() {
 	std::cout << (sgl::System::Platform() == sgl::System::OS::Windows ? "Du bist auf Windows" : "Unbekanntes OS")
 		<< ". RAM = " << sgl::System::RAM() << " Cores = " << sgl::System::CountGPU() << std::endl;
 
+	/*
+	sgl::Vector2f vec(16, 24);
+	vec = vec.rotate(250);
+	std::cout << vec << std::endl;
+	vec = vec.rotate(-250);
+	std::cout << vec << std::endl;
+	*/
+	/*
+	sgl::Vector2f vecs[4] = {
+		sgl::Vector2f(3, 4),
+		sgl::Vector2f(5, 4),
+		sgl::Vector2f(5, 2),
+		sgl::Vector2f(3, 2),
+	};
+
+	for (sgl::Vector2f& v : vecs) {
+		v.x += 1;
+		v.y -= 1;
+		std::cout << "Vorher: " << v << std::endl;
+		auto pos = v.rotate(25);
+		pos.x -= 1;
+		pos.y += 1;
+		std::cout << "Nachher ->  " << pos << std::endl;
+	}
+	*/
 	sgl::Clock clock;
 
 	sgl::Event event;
@@ -139,6 +165,14 @@ int main() {
 								break;
 							case sgl::Keyboard::Code::Num2:
 								sound2.play();
+								break;
+							case sgl::Keyboard::Code::Space:
+								//s.rotate(360 - 50);
+								s.setRotation(0);
+								break;
+							case sgl::Keyboard::Code::LAlt:
+								//s.setRotation(15);
+								s.rotate(15);
 								break;
 							default:
 								str = "You pressed a Key";

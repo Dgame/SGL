@@ -1,4 +1,6 @@
-#include <iostream>
+#ifndef RANGE_HPP
+#define RANGE_HPP
+
 #include <memory>
 #include <initializer_list>
 #include <SGL/Core\Types.hpp>
@@ -20,7 +22,7 @@ namespace sgl {
 			return _pos != other._pos;
 		}
 
-		T operator *() const;
+		T& operator *() const;
 
 		const Iterator<T>& operator ++() {
 			++_pos;
@@ -28,6 +30,16 @@ namespace sgl {
 			return *this;
 		}
 	};
+
+	template <typename T>
+	Iterator<T>::Iterator(const Range<T>* p_vec, uint32 pos) : _pos(pos), _p_vec(p_vec) {
+
+	}
+
+	template <typename T>
+	T& Iterator<T>::operator *() const {
+		return _p_vec->ptr[_pos];
+	}
 
 	template <typename T>
 	class Range {
@@ -45,7 +57,7 @@ namespace sgl {
 			return Iterator<T>(this, this->length);
 		}
 
-		T operator [](uint32 index) const {
+		T& operator [](uint32 index) const {
 			return this->ptr.get()[index];
 		}
 	};
@@ -61,14 +73,6 @@ namespace sgl {
 
 		this->ptr = std::shared_ptr<T>(ptr);
 	}
-
-	template <typename T>
-	Iterator<T>::Iterator(const Range<T>* p_vec, uint32 pos) : _pos(pos), _p_vec(p_vec) {
-
-	}
-
-	template <typename T>
-	T Iterator<T>::operator *() const {
-		return _p_vec->ptr[_pos];
-	}
 }
+
+#endif

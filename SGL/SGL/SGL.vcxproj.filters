@@ -147,6 +147,15 @@
     <ClInclude Include="include\SGL\Audio.hpp">
       <Filter>Headerdateien\SGL</Filter>
     </ClInclude>
+    <ClInclude Include="include\SGL\Core\Array.hpp">
+      <Filter>Headerdateien\SGL\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SGL\Graphic\Transformable.hpp">
+      <Filter>Headerdateien\SGL\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SGL\Core\Scope.hpp">
+      <Filter>Headerdateien\SGL\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\SGL\Audio\Sound.cpp">
@@ -208,6 +217,9 @@
     </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SGL\Graphic\Transformable.cpp">
+      <Filter>Quelldateien\SGL\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

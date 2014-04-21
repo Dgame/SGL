@@ -59,8 +59,8 @@ namespace sgl {
 		if (_changed)
 			_update();
 
-		const float dx = position.x;
-		const float dy = position.y;
+		const float dx = this->position.x;
+		const float dy = this->position.y;
 		const float dw = _texture->width();
 		const float dh = _texture->height();
 
