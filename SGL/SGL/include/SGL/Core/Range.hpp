@@ -10,21 +10,21 @@ namespace sgl {
 	class Range;
 
 	template <typename T>
-	class Iterator {
+	class RangeIterator {
 	private:
 		uint32 _pos;
 		const Range<T>* _p_vec;
 
 	public:
-		Iterator(const Range<T>* p_vec, uint32 pos);
+		RangeIterator(const Range<T>* p_vec, uint32 pos);
 
-		bool operator !=(const Iterator<T>& other) const {
+		bool operator !=(const RangeIterator<T>& other) const {
 			return _pos != other._pos;
 		}
 
 		T& operator *() const;
 
-		const Iterator<T>& operator ++() {
+		const RangeIterator<T>& operator ++() {
 			++_pos;
 
 			return *this;
@@ -32,12 +32,12 @@ namespace sgl {
 	};
 
 	template <typename T>
-	Iterator<T>::Iterator(const Range<T>* p_vec, uint32 pos) : _pos(pos), _p_vec(p_vec) {
+	RangeIterator<T>::RangeIterator(const Range<T>* p_vec, uint32 pos) : _pos(pos), _p_vec(p_vec) {
 
 	}
 
 	template <typename T>
-	T& Iterator<T>::operator *() const {
+	T& RangeIterator<T>::operator *() const {
 		return _p_vec->ptr[_pos];
 	}
 
@@ -49,12 +49,12 @@ namespace sgl {
 
 		Range(std::initializer_list<T> liste);
 
-		Iterator<T> begin() const {
-			return Iterator<T>(this, 0);
+		RangeIterator<T> begin() const {
+			return RangeIterator<T>(this, 0);
 		}
 
-		Iterator<T> end() const {
-			return Iterator<T>(this, this->length);
+		RangeIterator<T> end() const {
+			return RangeIterator<T>(this, this->length);
 		}
 
 		T& operator [](uint32 index) const {

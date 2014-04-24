@@ -2,10 +2,14 @@
 #define COLOR_HPP
 
 #include <array>
+#include <sstream>
 #include <SDL.h>
 #include <SGL/Core/Types.hpp>
+#include <SGL\Core\Array.hpp>
 
 namespace sgl {
+	static Array<uint16, 4> convertFromHex(const std::string& hex);
+
 	struct Color {
 		static const Color Black;
 		static const Color White;
@@ -17,6 +21,7 @@ namespace sgl {
 		uint8 red, green, blue, alpha;
 
 		explicit Color(uint8 pr, uint8 pg, uint8 pb, uint8 pa = 255);
+		explicit Color(const std::string& hex);
 
 		Color withTransparency(uint8 pa) const {
 			return Color(red, green, blue, pa);
@@ -30,6 +35,7 @@ namespace sgl {
 	bool operator ==(const Color& lhs, const Color& rhs);
 	bool operator !=(const Color& lhs, const Color& rhs);
 
+	std::ostream& operator <<(std::ostream& strm, const Color& col);
 }
 
 #endif

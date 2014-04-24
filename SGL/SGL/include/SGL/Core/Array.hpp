@@ -9,21 +9,21 @@ namespace sgl {
 	struct Array;
 
 	template <typename T, uint32 N>
-	class Iterator {
+	class ArrayIterator {
 	private:
 		uint32 _pos;
 		const Array<T, N>* _parr;
 
 	public:
-		Iterator(const Array<T, N>* parr, uint32 pos);
+		ArrayIterator(const Array<T, N>* parr, uint32 pos);
 
-		bool operator !=(const Iterator<T, N>& other) const {
+		bool operator !=(const ArrayIterator<T, N>& other) const {
 			return _pos != other._pos;
 		}
 
 		const T& operator *() const;
 
-		const Iterator<T, N>& operator ++() {
+		const ArrayIterator<T, N>& operator ++() {
 			++_pos;
 
 			return *this;
@@ -31,12 +31,12 @@ namespace sgl {
 	};
 
 	template <typename T, uint32 N>
-	Iterator<T, N>::Iterator(const Array<T, N>* parr, uint32 pos) : _pos(pos), _parr(parr) {
+	ArrayIterator<T, N>::ArrayIterator(const Array<T, N>* parr, uint32 pos) : _pos(pos), _parr(parr) {
 
 	}
 
 	template <typename T, uint32 N>
-	const T& Iterator<T, N>::operator *() const {
+	const T& ArrayIterator<T, N>::operator *() const {
 		return _parr->data[_pos];
 	}
 
@@ -57,17 +57,21 @@ namespace sgl {
 			return N;
 		}
 
-		Iterator<T, N> begin() const {
-			return Iterator<T, N>(this, 0);
+		ArrayIterator<T, N> begin() const {
+			return ArrayIterator<T, N>(this, 0);
 		}
 
-		Iterator<T, N> end() const {
-			return Iterator<T, N>(this, N);
+		ArrayIterator<T, N> end() const {
+			return ArrayIterator<T, N>(this, N);
 		}
 
 		void operator =(std::initializer_list<T> range);
 
 		T& operator [](uint32 index) {
+			return this->data[index];
+		}
+
+		const T& at(uint32 index) const {
 			return this->data[index];
 		}
 	};

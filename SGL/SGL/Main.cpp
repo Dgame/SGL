@@ -113,6 +113,9 @@ int main() {
 	box.addVertices(sgl::ShortRect(20, 200, 50, 50));
 	box.calculateCenter();
 
+	sgl::Color darkgreen("033b22");
+	std::cout << darkgreen << std::endl;
+
 	sgl::Clock clock;
 
 	sgl::Event event;
