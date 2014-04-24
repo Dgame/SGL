@@ -16,8 +16,14 @@ namespace sgl {
 
 		}
 
-		virtual void setRotation(float rotation) = 0;
-		virtual void rotate(float angle) = 0;
+		virtual void setRotation(float rotation) {
+			_rotation = EnsureRotationRange(rotation);
+		}
+
+		virtual void rotate(float angle) {
+			_rotation += angle;
+			_rotation = EnsureRotationRange(_rotation);
+		}
 
 		float getRotation() const {
 			return _rotation;
@@ -32,14 +38,23 @@ namespace sgl {
 		virtual ~Transform() {
 
 		}
+	};
 
-		void setRotation(float rotation) override {
-			_rotation = EnsureRotationRange(rotation);
+	class GraphTransform : public Transform {
+	protected:
+		void _applyTransformation() const {
+			Transform::_applyTransformation(this->center.x, this->center.y);
 		}
 
-		void rotate(float angle) override {
-			_rotation += angle;
-			_rotation = EnsureRotationRange(_rotation);
+	public:
+		Vector2f center;
+
+		virtual ~GraphTransform() {
+
+		}
+
+		virtual void calculateCenter() {
+
 		}
 	};
 }

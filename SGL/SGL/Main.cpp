@@ -109,31 +109,10 @@ int main() {
 	std::cout << (sgl::System::Platform() == sgl::System::OS::Windows ? "Du bist auf Windows" : "Unbekanntes OS")
 		<< ". RAM = " << sgl::System::RAM() << " Cores = " << sgl::System::CountGPU() << std::endl;
 
-	/*
-	sgl::Vector2f vec(16, 24);
-	vec = vec.rotate(250);
-	std::cout << vec << std::endl;
-	vec = vec.rotate(-250);
-	std::cout << vec << std::endl;
-	*/
-	/*
-	sgl::Vector2f vecs[4] = {
-		sgl::Vector2f(3, 4),
-		sgl::Vector2f(5, 4),
-		sgl::Vector2f(5, 2),
-		sgl::Vector2f(3, 2),
-	};
+	sgl::Shape box(sgl::Shape::Type::Quad);
+	box.addVertices(sgl::ShortRect(20, 200, 50, 50));
+	box.calculateCenter();
 
-	for (sgl::Vector2f& v : vecs) {
-		v.x += 1;
-		v.y -= 1;
-		std::cout << "Vorher: " << v << std::endl;
-		auto pos = v.rotate(25);
-		pos.x -= 1;
-		pos.y += 1;
-		std::cout << "Nachher ->  " << pos << std::endl;
-	}
-	*/
 	sgl::Clock clock;
 
 	sgl::Event event;
@@ -167,12 +146,8 @@ int main() {
 								sound2.play();
 								break;
 							case sgl::Keyboard::Code::Space:
-								//s.rotate(360 - 50);
-								s.setRotation(0);
-								break;
-							case sgl::Keyboard::Code::LAlt:
-								//s.setRotation(15);
-								s.rotate(15);
+								box.rotate(15);
+								box.move(8, 0);
 								break;
 							default:
 								str = "You pressed a Key";
@@ -194,6 +169,7 @@ int main() {
 		wnd.draw(icon_sprite);
 		wnd.draw(wiki_sprite);
 		wnd.draw(wiki_sprite2);
+		wnd.draw(box);
 		wnd.draw(s);
 		wnd.draw(str);
 		//wnd.draw(text_sprite);

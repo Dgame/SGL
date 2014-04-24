@@ -28,6 +28,7 @@ namespace sgl {
 		uint32 count = std::min(range.length, this->vertices.size());
 		if (count == 0)
 			return this->addVertices(std::move(range));
+
 		count += offset;
 
 		for (uint32 i = offset, j = 0; i < count; i++, j += 2) {
@@ -58,6 +59,7 @@ namespace sgl {
 		uint32 count = std::min(range.length, this->vertices.size());
 		if (count == 0)
 			return;
+
 		count += offset;
 
 		for (uint32 i = offset, j = 0; i < count; i++, j += 2) {
@@ -82,7 +84,8 @@ namespace sgl {
 		const Vertex* vptr = &this->vertices[0];
 
 		glMatrixScope mat;
-		Transform::_applyTransformation(0, 0);
+
+		GraphTransform::_applyTransformation();
 
 		glVertexPointer(2, GL_FLOAT, sizeof(Vertex), &vptr->x);
 		glColorPointer(4, GL_FLOAT, sizeof(Vertex), &vptr->r);
@@ -100,6 +103,25 @@ namespace sgl {
 			this->texture->unbind();
 	}
 
+	void Shape::calculateCenter() {
+		const Vertex& v0 = this->vertices[0];
+
+		float maxx = v0.x, minx = v0.x;
+		float maxy = v0.y, miny = v0.y;
+
+		for (uint32 i = 1; i < this->vertices.size(); i++) {
+			const Vertex& vi = this->vertices[i];
+
+			maxx = std::max(maxx, vi.x);
+			minx = std::min(minx, vi.x);
+			maxy = std::max(maxy, vi.y);
+			miny = std::min(miny, vi.y);
+		}
+
+		GraphTransform::center.set((maxx - minx) / 2 + minx,
+								   (maxy - miny) / 2 + miny);
+	}
+
 	void Shape::setColor(const Color& col) {
 		for (Vertex& v : this->vertices) {
 			v.setColor(col);
@@ -111,5 +133,7 @@ namespace sgl {
 			v.x += x;
 			v.y += y;
 		}
+
+		GraphTransform::center.move(x, y);
 	}
 }

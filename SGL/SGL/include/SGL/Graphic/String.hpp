@@ -3,6 +3,7 @@
 
 #include <string>
 #include <stdarg.h>
+#include <memory>
 #include <vector>
 #include <SGL/Graphic\Drawable.hpp>
 #include <SGL/Graphic\Color.hpp>
@@ -16,7 +17,11 @@ namespace sgl {
 	private:
 		mutable bool _changed;
 		std::string _text;
-		Texture* _texture;
+		std::unique_ptr<Texture> _texture;
+
+	protected:
+		void _update() const;
+		virtual void draw(const Window& wnd) const;
 
 	public:
 		Font::Mode mode;
@@ -28,7 +33,7 @@ namespace sgl {
 		explicit String(Font& fnt, const std::string& str = "");
 
 		virtual ~String() {
-			delete _texture;
+
 		}
 
 		void operator =(const std::string& str);
@@ -43,10 +48,6 @@ namespace sgl {
 		void clear() {
 			_text.clear();
 		}
-
-	protected:
-		void _update() const;
-		virtual void draw(const Window& wnd) const;
 	};
 }
 

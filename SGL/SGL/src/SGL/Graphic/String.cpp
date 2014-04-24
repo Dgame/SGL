@@ -2,7 +2,7 @@
 
 namespace sgl {
 	String::String(Font& fnt, const std::string& str) :
-		mode(Font::Mode::Solid), _text(str), font(fnt),
+		mode(Font::Mode::Solid), _text(str), font(fnt), _changed(true),
 		fg(nullptr), bg(nullptr), _texture(new Texture())
 	{
 		update();

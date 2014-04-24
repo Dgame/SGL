@@ -15,7 +15,7 @@
 #include <SGL/Graphic\Texture.hpp>
 
 namespace sgl {
-	class Shape : public Drawable, public Transform {
+	class Shape : public Drawable, public GraphTransform {
 	protected:
 		virtual void draw(const Window&) const override;
 
@@ -48,13 +48,17 @@ namespace sgl {
 
 		void updateTextureCoordinates(const Range<float> range, uint16 offset = 0);
 
+		void calculateCenter() override;
 		void setColor(const Color& col);
 		void move(float x, float y);
-
-		void move(const Vector2f& vec) {
-			this->move(vec.x, vec.y);
-		}
+		template <typename T>
+		void move(const Vector2<T>& vec);
 	};
+
+	template <typename T>
+	void Shape::move(const Vector2<T>& vec) {
+		this->move(vec.x, vec.y);
+	}
 }
 
 #endif
