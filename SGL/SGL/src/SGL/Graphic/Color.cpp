@@ -51,7 +51,7 @@ namespace sgl {
 			ss << std::hex << ac.data;
 			ss >> rgba.data[3];
 		} else {
-			rgba.data[3] = 0;
+			rgba.data[3] = 255;
 		}
 
 		return std::move(rgba);
