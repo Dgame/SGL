@@ -28,15 +28,16 @@ namespace sgl {
 		};
 
 	private:
-		uint32 _texId;
-		uint16 _width;
-		uint16 _height;
-
-		bool _repeat, _smooth;
+		uint32 _texId = 0;
+		uint16 _width = 0;
+		uint16 _height = 0;
 
 		Format _format;
 
 	public:
+		bool repeat = true;
+		bool smooth = false;
+
 		explicit Texture();
 		explicit Texture(const Surface& srfc, Format format = Format::None);
 
@@ -46,14 +47,6 @@ namespace sgl {
 
 		void loadFrom(const Surface& srfc, Format format = Format::None);
 		void loadFromMemory(const void* pixels, uint16 width, uint16 height, Format format = Format::None);
-
-		void enableRepeat(bool repeat) {
-			_repeat = repeat;
-		}
-
-		void enableSmooth(bool smooth) {
-			_smooth = smooth;
-		}
 
 		uint16 width() const {
 			return _width;
@@ -92,6 +85,8 @@ namespace sgl {
 
 		std::unique_ptr<uint32> pixels() const;
 	};
+
+	static uint8 fmtToBytes(Texture::Format fmt);
 }
 
 #endif

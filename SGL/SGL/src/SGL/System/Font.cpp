@@ -4,7 +4,7 @@ namespace sgl {
 	void Font::loadFromFile(const std::string& filename, uint8 fontSize) {
 		_fontSize = fontSize == 0 ? _fontSize : fontSize;
 		if (_fontSize == 0)
-			_fontSize = 12;
+			_fontSize = DefaultSize;
 
 		_ttf = TTF_OpenFont(filename.c_str(), _fontSize);
 		if (_ttf == nullptr) {
@@ -33,16 +33,26 @@ namespace sgl {
 				break;
 		}
 
-		if (srfc == nullptr) {
-			printf("NULL Surface: %s\n", SDL_GetError());
-			exit(1);
+		//if (srfc == nullptr) {
+		//	printf("NULL Surface: %s\n", SDL_GetError());
+		//	exit(1);
+		//}
+
+		if (srfc->format->BitsPerPixel < 24) {
+			SDL_PixelFormat fmt = *srfc->format;
+			fmt.BitsPerPixel = 24;
+
+			SDL_Surface* new_srfc = SDL_ConvertSurface(srfc, &fmt, 0);
+			SDL_FreeSurface(srfc);
+
+			//if (new_srfc == nullptr) {
+			//	printf("NULL Surface (convert): %s\n", SDL_GetError());
+			//	exit(1);
+			//}
+
+			return Surface(new_srfc);
 		}
 
-		SDL_PixelFormat fmt = *srfc->format;
-		fmt.BitsPerPixel = 24;
-		SDL_Surface* new_srfc = SDL_ConvertSurface(srfc, &fmt, 0);
-		SDL_FreeSurface(srfc);
-
-		return Surface(new_srfc);
+		return Surface(srfc);
 	}
 }

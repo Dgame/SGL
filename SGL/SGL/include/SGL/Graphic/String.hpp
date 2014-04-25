@@ -15,20 +15,19 @@
 namespace sgl {
 	class String : public Drawable {
 	private:
-		mutable bool _changed;
 		std::string _text;
 		std::unique_ptr<Texture> _texture;
 
 	protected:
-		void _update() const;
+		void _update();
 		virtual void draw(const Window& wnd) const;
 
 	public:
 		Font::Mode mode;
 		Vector2f position;
 		Font& font;
-		Color* fg;
-		Color* bg;
+		Color fg;
+		Color bg;
 
 		explicit String(Font& fnt, const std::string& str = "");
 
@@ -36,17 +35,18 @@ namespace sgl {
 
 		}
 
+		void update() {
+			_update();
+		}
+
 		void operator =(const std::string& str);
 		void operator =(const String& txt);
 
 		void format(const char* fmt, ...);
 
-		void update() {
-			_changed = true;
-		}
-
 		void clear() {
 			_text.clear();
+			_update();
 		}
 	};
 }

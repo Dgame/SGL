@@ -13,6 +13,8 @@ namespace sgl {
 		uint8 _fontSize;
 
 	public:
+		static const uint8 DefaultSize = 10;
+
 		enum class Style {
 			/*
 			* Used to indicate regular, normal, plain rendering style.
@@ -67,7 +69,7 @@ namespace sgl {
 			Blended
 		};
 
-		explicit Font(const std::string& filename, uint8 fontSize = 0) {
+		explicit Font(const std::string& filename, uint8 fontSize = DefaultSize) {
 			loadFromFile(filename, fontSize);
 		}
 
@@ -75,7 +77,7 @@ namespace sgl {
 			TTF_CloseFont(_ttf);
 		}
 
-		void loadFromFile(const std::string& filename, uint8 fontSize);
+		void loadFromFile(const std::string& filename, uint8 fontSize = 0);
 
 		void Font::setStyle(Font::Style style) {
 			TTF_SetFontStyle(_ttf, static_cast<int>(style));

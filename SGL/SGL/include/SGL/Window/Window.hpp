@@ -167,7 +167,7 @@ namespace sgl {
 		* This is also the background color of the window.
 		*/
 		void setClearColor(const Color& col) const {
-			std::array<float, 4> gl_col = Color::AsGL(col);
+			const std::array<float, 4> gl_col = Color::InGLMode(col);
 
 			glClearColor(gl_col[0], gl_col[1], gl_col[2], gl_col[3]);
 		}

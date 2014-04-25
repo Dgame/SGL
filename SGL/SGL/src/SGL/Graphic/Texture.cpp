@@ -2,6 +2,26 @@
 #include <SGL/Core\OpenGL.hpp>
 
 namespace sgl {
+	uint8 fmtToBytes(Texture::Format fmt) {
+		switch (fmt) {
+			default:
+			case Texture::Format::None:
+				return 0;
+			case Texture::Format::BGR:
+			case Texture::Format::RGB:
+				return 3;
+			case Texture::Format::RGBA:
+			case Texture::Format::BGRA:
+				return 4;
+			case Texture::Format::RGBA16:
+				return 2;
+			case Texture::Format::RGBA8:
+				return 1;
+			case Texture::Format::Alpha:
+				return 4;
+		}
+	}
+
 	Texture::Texture() {
 		glGenTextures(1, &_texId);
 	}
@@ -17,7 +37,7 @@ namespace sgl {
 			else
 				format = srfc.bits() == 32 ? Format::RGBA : Format::RGB;
 		}
-
+		
 		this->loadFromMemory(srfc.pixels(), srfc.width(), srfc.height(), format);
 	}
 
@@ -26,14 +46,12 @@ namespace sgl {
 
 		this->bind();
 
-		const GLenum gl_fmt = static_cast<GLenum>(_format);
-
 		glCheck(glBindTexture(GL_TEXTURE_2D, _texId));
-		glCheck(glTexImage2D(GL_TEXTURE_2D, 0, gl_fmt, width, height, 0, gl_fmt, GL_UNSIGNED_BYTE, pixels));
-		glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, _repeat ? GL_REPEAT : GL_CLAMP));
-		glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, _repeat ? GL_REPEAT : GL_CLAMP));
-		glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, _smooth ? GL_LINEAR : GL_NEAREST));
-		glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, _smooth ? GL_LINEAR : GL_NEAREST));
+		glCheck(glTexImage2D(GL_TEXTURE_2D, 0, fmtToBytes(_format), width, height, 0, static_cast<GLenum>(_format), GL_UNSIGNED_BYTE, pixels));
+		glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, this->repeat ? GL_REPEAT : GL_CLAMP));
+		glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, this->repeat ? GL_REPEAT : GL_CLAMP));
+		glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, this->smooth ? GL_LINEAR : GL_NEAREST));
+		glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, this->smooth ? GL_LINEAR : GL_NEAREST));
 
 		_width = width;
 		_height = height;
@@ -55,7 +73,7 @@ namespace sgl {
 		this->bind();
 
 		glTexSubImage2D(GL_TEXTURE_2D, 0, x, y, width, height,
-			static_cast<GLenum>(_format), GL_UNSIGNED_BYTE, pixels);
+						static_cast<GLenum>(_format), GL_UNSIGNED_BYTE, pixels);
 
 		this->unbind();
 	}
@@ -73,11 +91,11 @@ namespace sgl {
 
 		this->bind();
 
-		std::unique_ptr<uint32> ptr = std::unique_ptr<uint32>(new uint32[msize]);
-		glGetTexImage(GL_TEXTURE_2D, 0, static_cast<GLenum>(_format), GL_UNSIGNED_BYTE, ptr.get());
+		uint32* ptr = new uint32[msize];
+		glGetTexImage(GL_TEXTURE_2D, 0, static_cast<GLenum>(_format), GL_UNSIGNED_BYTE, ptr);
 
 		this->unbind();
 
-		return std::move(ptr);
+		return std::unique_ptr<uint32>(ptr);
 	}
 }

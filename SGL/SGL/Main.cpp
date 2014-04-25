@@ -71,19 +71,6 @@ int main() {
 	s.texture = &wiki_tex;
 	//s.fill = true;
 
-	/*
-	sgl::Vector2f vf(4, 2);
-	sgl::Vector2s vs(2, 3);
-
-	s.move(vf);
-	s.move(sgl::Vector2f(vs.x, vs.y));
-
-	sgl::Range<float> range = {vs.x, vs.y};
-
-	std::vector<float> vs = {1, 2, 3};
-	sgl::Range<float> range(&vs[0], vs.size());
-	*/
-
 	sgl::Shape test(sgl::Shape::Type::Quad);
 	test.addVertices({50, 150, 100, 150, 100, 200, 50, 200});
 
@@ -113,8 +100,12 @@ int main() {
 	box.addVertices(sgl::ShortRect(20, 200, 50, 50));
 	box.calculateCenter();
 
-	sgl::Color darkgreen("033b22");
-	std::cout << darkgreen << std::endl;
+	sgl::Font fnt2("samples/Font/arial.ttf", 16);
+	sgl::String str2(fnt2);
+	str2.bg = sgl::Color::Red;
+	str2.mode = sgl::Font::Mode::Shaded;
+	str2 = "Ein Test mit roten Background";
+	str2.position.set(200, 400);
 
 	sgl::Clock clock;
 
@@ -169,13 +160,14 @@ int main() {
 
 		wnd.clear();
 
+		wnd.draw(str2);
+
 		wnd.draw(icon_sprite);
 		wnd.draw(wiki_sprite);
 		wnd.draw(wiki_sprite2);
 		wnd.draw(box);
 		wnd.draw(s);
 		wnd.draw(str);
-		//wnd.draw(text_sprite);
 
 		animation.row = 1;
 		animation.slide(sgl::Spritesheet::Grid::Row);

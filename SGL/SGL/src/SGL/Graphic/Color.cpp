@@ -77,7 +77,7 @@ namespace sgl {
 		this->alpha = rgba.at(3) % 256;
 	}
 
-	Color Color::GL(float pr, float pg, float pb, float pa) {
+	Color Color::FromGLMode(float pr, float pg, float pb, float pa) {
 		Color result = Color::White;
 		result.red = static_cast<uint8>(pr > 1.f ? pr : pr * 255);
 		result.green = static_cast<uint8>(pg > 1.f ? pg : pg * 255);
@@ -87,12 +87,12 @@ namespace sgl {
 		return result;
 	}
 
-	std::array<float, 4> Color::AsGL(const Color& col) {
+	std::array<float, 4> Color::InGLMode(const Color& col) {
 		std::array<float, 4> arr;
-		arr[0] = col.red / 255;
-		arr[1] = col.green / 255;
-		arr[2] = col.blue / 255;
-		arr[3] = col.alpha / 255;
+		arr[0] = col.red / 255.f;
+		arr[1] = col.green / 255.f;
+		arr[2] = col.blue / 255.f;
+		arr[3] = col.alpha / 255.f;
 
 		return std::move(arr);
 	}
