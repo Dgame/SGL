@@ -126,4 +126,20 @@ namespace sgl {
 
 		return false;
 	}
+
+	bool operator ==(const Surface& lhs, const Surface& rhs) {
+		return lhs.ptr() == rhs.ptr();
+	}
+
+	bool operator !=(const Surface& lhs, const Surface& rhs) {
+		return !(lhs == rhs);
+	}
+
+	bool operator ==(const Surface& lhs, const SDL_Surface* rhs) {
+		return lhs.ptr() == rhs;
+	}
+
+	bool operator !=(const Surface& lhs, const SDL_Surface* rhs) {
+		return !(lhs == rhs);
+	}
 }

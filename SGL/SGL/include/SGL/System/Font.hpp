@@ -75,6 +75,7 @@ namespace sgl {
 
 		virtual ~Font() {
 			TTF_CloseFont(_ttf);
+			_ttf = nullptr;
 		}
 
 		void loadFromFile(const std::string& filename, uint8 fontSize = 0);

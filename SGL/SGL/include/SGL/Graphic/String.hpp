@@ -39,16 +39,18 @@ namespace sgl {
 			_update();
 		}
 
+		const std::string& getText() const {
+			return _text;
+		}
+
 		void operator =(const std::string& str);
 		void operator =(const String& txt);
 
 		void format(const char* fmt, ...);
-
-		void clear() {
-			_text.clear();
-			_update();
-		}
 	};
+
+	bool operator ==(const String& lhs, const String& rhs);
+	bool operator !=(const String& lhs, const String& rhs);
 }
 
 #endif

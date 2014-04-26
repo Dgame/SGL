@@ -33,22 +33,22 @@ namespace sgl {
 				break;
 		}
 
-		//if (srfc == nullptr) {
-		//	printf("NULL Surface: %s\n", SDL_GetError());
-		//	exit(1);
-		//}
+		if (srfc == nullptr) {
+			printf("NULL Surface: %s\n", SDL_GetError());
+			exit(1);
+		}
 
 		if (srfc->format->BitsPerPixel < 24) {
-			SDL_PixelFormat fmt = *srfc->format;
+			SDL_PixelFormat fmt = *(srfc->format);
 			fmt.BitsPerPixel = 24;
 
 			SDL_Surface* new_srfc = SDL_ConvertSurface(srfc, &fmt, 0);
 			SDL_FreeSurface(srfc);
 
-			//if (new_srfc == nullptr) {
-			//	printf("NULL Surface (convert): %s\n", SDL_GetError());
-			//	exit(1);
-			//}
+			if (new_srfc == nullptr) {
+				printf("NULL Surface (convert): %s\n", SDL_GetError());
+				exit(1);
+			}
 
 			return Surface(new_srfc);
 		}

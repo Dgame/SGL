@@ -102,6 +102,7 @@ int main() {
 
 	sgl::Font fnt2("samples/Font/arial.ttf", 16);
 	sgl::String str2(fnt2);
+	str2.fg = sgl::Color::White;
 	str2.bg = sgl::Color::Red;
 	str2.mode = sgl::Font::Mode::Shaded;
 	str2 = "Ein Test mit roten Background";

@@ -11,8 +11,6 @@
 #include <SGL/Math\Rect.hpp>
 #include <SGL/Graphic\Color.hpp>
 
-#define DEFAULT_DEPTH 32
-
 #define R_MASK 0 /** Default Red Mask. */
 #define G_MASK 0 /** Default Green Mask. */
 #define B_MASK 0 /** Default Blue Mask. */
@@ -29,6 +27,8 @@ namespace sgl {
 		SDL_Surface* _surface;
 
 	public:
+		static const uint8 DefaultDepth = 32;
+
 		enum class BlendMode {
 			/**
 			no blending
@@ -66,11 +66,12 @@ namespace sgl {
 		explicit Surface();
 		explicit Surface(SDL_Surface* srfc);
 		explicit Surface(const std::string& filename);
-		explicit Surface(uint16 width, uint16 height, uint8 depth = DEFAULT_DEPTH);
-		explicit Surface(void* pixels, uint16 width, uint16 height, uint8 depth = DEFAULT_DEPTH);
+		explicit Surface(uint16 width, uint16 height, uint8 depth = DefaultDepth);
+		explicit Surface(void* pixels, uint16 width, uint16 height, uint8 depth = DefaultDepth);
 
 		virtual ~Surface() {
 			SDL_FreeSurface(_surface);
+			_surface = nullptr;
 		}
 
 		SDL_Surface* ptr() const {
@@ -78,7 +79,7 @@ namespace sgl {
 		}
 
 		void loadFromFile(const std::string& filename);
-		void loadFromMemory(void* pixel, uint16 width, uint16 height, uint8 depth = DEFAULT_DEPTH);
+		void loadFromMemory(void* pixel, uint16 width, uint16 height, uint8 depth = DefaultDepth);
 		void saveToFile(const std::string& filename);
 		void blit(const Surface& srfc, const ShortRect* dst = nullptr, const ShortRect* src = nullptr);
 		Surface subSurface(const ShortRect& rect);
@@ -101,27 +102,42 @@ namespace sgl {
 		BlendMode getBlendMode() const;
 
 		uint16 width() const {
+			if (_surface == nullptr)
+				return 0;
 			return _surface->w;
 		}
 
 		uint16 height() const {
+			if (_surface == nullptr)
+				return 0;
 			return _surface->h;
 		}
 
 		uint8 bytes() const {
+			if (_surface == nullptr)
+				return 0;
 			return _surface->format->BytesPerPixel;
 		}
 
 		uint8 bits() const {
+			if (_surface == nullptr)
+				return 0;
 			return _surface->format->BitsPerPixel;
 		}
 
 		void* pixels() const {
+			if (_surface == nullptr)
+				return nullptr;
 			return _surface->pixels;
 		}
 
 		bool isMask(Mask mask, uint32 value) const;
 	};
+
+	bool operator ==(const Surface& lhs, const Surface& rhs);
+	bool operator !=(const Surface& lhs, const Surface& rhs);
+	bool operator ==(const Surface& lhs, const SDL_Surface* rhs);
+	bool operator !=(const Surface& lhs, const SDL_Surface* rhs);
 }
 
 #endif

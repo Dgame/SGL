@@ -56,6 +56,7 @@ namespace sgl {
 				fmt = Texture::Format::BGRA;
 
 			_texture->loadFrom(srfc, fmt);
+			srfc.saveToFile(_text + ".png");
 		}
 	}
 
@@ -83,5 +84,13 @@ namespace sgl {
 		};
 
 		wnd.draw(vertices, texCoords, *_texture);
+	}
+
+	bool operator ==(const String& lhs, const String& rhs) {
+		return lhs.getText() == rhs.getText();
+	}
+
+	bool operator !=(const String& lhs, const String& rhs) {
+		return !(lhs == rhs);
 	}
 }
