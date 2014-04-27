@@ -30,6 +30,12 @@ namespace sgl {
 		this->loadFrom(srfc, format);
 	}
 
+	Texture Texture::loadFromFile(const std::string& filename) {
+		Surface srfc(filename);
+
+		return Texture(srfc);
+	}
+
 	void Texture::loadFrom(const Surface& srfc, Format format) {
 		if (format == Format::None) {
 			if (srfc.isMask(Surface::Mask::Red, 0xff000000))
@@ -79,13 +85,8 @@ namespace sgl {
 	}
 
 	std::unique_ptr<uint32> Texture::pixels() const {
-		uint8 depth = 0;
-		if (_format == Format::RGBA || _format == Format::BGRA)
-			depth = 32;
-		else
-			depth = 24;
-
-		const uint32 msize = _width * _height * (depth / 8);
+		const uint8 bits = fmtToBytes(_format);
+		const uint32 msize = _width * _height * bits;
 		if (msize == 0)
 			return nullptr;
 

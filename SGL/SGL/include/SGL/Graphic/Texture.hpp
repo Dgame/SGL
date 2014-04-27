@@ -45,6 +45,8 @@ namespace sgl {
 			glDeleteTextures(1, &_texId);
 		}
 
+		static Texture loadFromFile(const std::string& filename);
+
 		void loadFrom(const Surface& srfc, Format format = Format::None);
 		void loadFromMemory(const void* pixels, uint16 width, uint16 height, Format format = Format::None);
 

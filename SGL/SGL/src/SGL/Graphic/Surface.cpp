@@ -14,7 +14,7 @@ namespace sgl {
 	}
 
 	Surface::Surface(uint16 width, uint16 height, uint8 depth) {
-		_surface = SDL_CreateRGBSurface(0, width, height, depth, R_MASK, G_MASK, B_MASK, A_MASK);;
+		_surface = SDL_CreateRGBSurface(0, width, height, depth, R_MASK, G_MASK, B_MASK, A_MASK);
 	}
 
 	Surface::Surface(void* pixels, uint16 width, uint16 height, uint8 depth) {
