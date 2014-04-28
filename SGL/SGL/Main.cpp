@@ -79,8 +79,9 @@ int main() {
 	str.position = sgl::Vector2f(100, 25);
 	str.mode = sgl::Font::Mode::Shaded;
 
-	sgl::Surface explo("samples/Images/test_3.png");
-	sgl::Texture explo_tex(explo);
+	//sgl::Surface explo("samples/Images/test_3.png");
+	//sgl::Texture explo_tex(explo);
+	sgl::Texture explo_tex = sgl::Texture::LoadFromFile("samples/Images/test_3.png");
 
 	sgl::Spritesheet animation(explo_tex);
 	animation.tickOffset = 150;

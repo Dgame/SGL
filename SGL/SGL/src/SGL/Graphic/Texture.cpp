@@ -30,7 +30,7 @@ namespace sgl {
 		this->loadFrom(srfc, format);
 	}
 
-	Texture Texture::loadFromFile(const std::string& filename) {
+	Texture Texture::LoadFromFile(const std::string& filename) {
 		Surface srfc(filename);
 
 		return Texture(srfc);

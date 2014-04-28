@@ -56,7 +56,6 @@ namespace sgl {
 				fmt = Texture::Format::BGRA;
 
 			_texture->loadFrom(srfc, fmt);
-			srfc.saveToFile(_text + ".png");
 		}
 	}
 
