@@ -1,16 +1,14 @@
 #include <SGL/Graphic\String.hpp>
 
 namespace sgl {
-	String::String(Font& fnt, const std::string& str) :
-		mode(Font::Mode::Solid), _text(str), font(fnt),
-		_texture(new Texture()), fg(Color::Black), bg(Color::White) {
-		_update();
+	String::String(Font& fnt) : mode(Font::Mode::Solid), font(fnt),_texture(new Texture()) {
+
 	}
 
 	void String::operator =(const std::string& str) {
 		if (str != _text) {
 			_text = str;
-			_update();
+			_changed = true;
 		}
 	}
 
@@ -19,7 +17,7 @@ namespace sgl {
 
 		if (str != _text) {
 			_text = str;
-			_update();
+			_changed = true;
 		}
 	}
 
@@ -43,23 +41,27 @@ namespace sgl {
 
 		if (retStr.length() != 0 && _text != retStr) {
 			_text = retStr;
-			_update();
+			_changed = true;
 		}
 	}
 
-	void String::_update() {
-		if (_text.length() != 0) {
-			Surface srfc = font.render(_text, &this->fg, &this->bg, mode);
+	void String::_update() const {
+		if (_changed && _text.length() != 0) {
+			Surface srfc = font.render(_text, _fg, _bg, mode);
 
 			Texture::Format fmt = Texture::Format::BGR;
 			if (srfc.bits() == 32)
 				fmt = Texture::Format::BGRA;
 
 			_texture->loadFrom(srfc, fmt);
+			_changed = false;
 		}
 	}
 
 	void String::draw(const Window& wnd) const {
+		if (_changed)
+			_update();
+
 		if (_texture->width() == 0 || _texture->height() == 0)
 			return;
 

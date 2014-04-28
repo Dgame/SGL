@@ -15,28 +15,26 @@
 namespace sgl {
 	class String : public Drawable {
 	private:
+		mutable bool _changed = false;
+		const Color* _fg = nullptr;
+		const Color* _bg = nullptr;
+
 		std::string _text;
 		std::unique_ptr<Texture> _texture;
 
 	protected:
-		void _update();
-		virtual void draw(const Window& wnd) const;
+		void _update() const;
+		virtual void draw(const Window& wnd) const override;
 
 	public:
 		Font::Mode mode;
-		Vector2f position;
 		Font& font;
-		Color fg;
-		Color bg;
+		Vector2f position;
 
-		explicit String(Font& fnt, const std::string& str = "");
+		explicit String(Font& fnt);
 
 		virtual ~String() {
 
-		}
-
-		void update() {
-			_update();
 		}
 
 		const std::string& getText() const {
@@ -47,6 +45,12 @@ namespace sgl {
 		void operator =(const String& txt);
 
 		void format(const char* fmt, ...);
+
+		void setColor(const Color* fg, const Color* bg = nullptr) {
+			_fg = fg;
+			_bg = bg;
+			_changed = true;
+		}
 	};
 
 	bool operator ==(const String& lhs, const String& rhs);

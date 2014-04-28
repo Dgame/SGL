@@ -75,7 +75,8 @@ int main() {
 	test.addVertices({50, 150, 100, 150, 100, 200, 50, 200});
 
 	sgl::Font fnt("samples/Font/arial.ttf", 32);
-	sgl::String str(fnt, "Ein Test");
+	sgl::String str(fnt);
+	str = "Ein Test";
 	str.position = sgl::Vector2f(100, 25);
 	str.mode = sgl::Font::Mode::Shaded;
 
@@ -103,8 +104,7 @@ int main() {
 
 	sgl::Font fnt2("samples/Font/arial.ttf", 16);
 	sgl::String str2(fnt2);
-	str2.fg = sgl::Color::White;
-	str2.bg = sgl::Color::Red;
+	str2.setColor(&sgl::Color::White, &sgl::Color::Red);
 	str2.mode = sgl::Font::Mode::Shaded;
 	str2 = "Ein Test mit roten Background";
 	str2.position.set(200, 400);

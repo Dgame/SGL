@@ -96,7 +96,7 @@ namespace sgl {
 			return static_cast<Hint>(TTF_GetFontHinting(_ttf));
 		}
 
-		Surface render(const std::string& text, Color* fg = nullptr, Color* bg = nullptr, Mode mode = Mode::Solid) const;
+		Surface render(const std::string& text, const Color* fg = nullptr, const Color* bg = nullptr, Mode mode = Mode::Solid) const;
 	};
 }
 

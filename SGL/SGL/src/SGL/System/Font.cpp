@@ -13,7 +13,7 @@ namespace sgl {
 		}
 	}
 
-	Surface Font::render(const std::string& text, Color* fg, Color* bg, Mode mode) const {
+	Surface Font::render(const std::string& text, const Color* fg, const Color* bg, Mode mode) const {
 		SDL_Color _fg;
 		SDL_Color _bg;
 

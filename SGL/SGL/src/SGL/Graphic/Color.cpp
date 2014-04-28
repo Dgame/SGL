@@ -10,10 +10,10 @@ namespace sgl {
 
 		const uint32 len = hex.size() - offset;
 
-		Array<int8, 3> rc;
-		Array<int8, 3> gc;
-		Array<int8, 3> bc;
-		Array<int8, 3> ac;
+		Array<char, 3> rc;
+		Array<char, 3> gc;
+		Array<char, 3> bc;
+		Array<char, 3> ac;
 
 		if (len == 3) {
 			rc = {hex[offset], hex[offset], '\0'};

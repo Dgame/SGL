@@ -10,7 +10,7 @@ namespace sgl {
 	class Range;
 
 	template <typename T>
-	class RangeIterator {
+	class RangeIterator final {
 	private:
 		uint32 _pos;
 		const Range<T>* _p_vec;
@@ -42,12 +42,13 @@ namespace sgl {
 	}
 
 	template <typename T>
-	class Range {
+	class Range final {
 	public:
-		std::shared_ptr<T> ptr;
+		T* ptr;
 		const uint32 length;
 
 		Range(std::initializer_list<T> liste);
+		~Range();
 
 		RangeIterator<T> begin() const {
 			return RangeIterator<T>(this, 0);
@@ -57,21 +58,24 @@ namespace sgl {
 			return RangeIterator<T>(this, this->length);
 		}
 
-		T& operator [](uint32 index) const {
-			return this->ptr.get()[index];
+		const T& operator [](uint32 index) const {
+			return this->ptr[index];
 		}
 	};
 
 	template <typename T>
 	Range<T>::Range(std::initializer_list<T> liste) : length(liste.size()) {
-		T* ptr = new T[this->length];
+		this->ptr = new T[this->length];
 
 		uint32 i = 0;
 		for (T val : liste) {
-			ptr[i++] = static_cast<T>(val);
+			this->ptr[i++] = static_cast<T>(val);
 		}
+	}
 
-		this->ptr = std::shared_ptr<T>(ptr);
+	template <typename T>
+	Range<T>::~Range() {
+		delete[] this->ptr;
 	}
 }
 
