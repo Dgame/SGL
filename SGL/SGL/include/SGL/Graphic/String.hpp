@@ -19,6 +19,8 @@ namespace sgl {
 		const Color* _fg = nullptr;
 		const Color* _bg = nullptr;
 
+		Font* _font = nullptr;
+
 		std::string _text;
 		std::unique_ptr<Texture> _texture;
 
@@ -28,13 +30,18 @@ namespace sgl {
 
 	public:
 		Font::Mode mode;
-		Font& font;
 		Vector2f position;
 
+		explicit String();
 		explicit String(Font& fnt);
 
-		virtual ~String() {
+		void setFont(Font& fnt) {
+			_font = &fnt;
+			_changed = true;
+		}
 
+		const Font* getFont() const {
+			return _font;
 		}
 
 		const std::string& getText() const {

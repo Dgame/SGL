@@ -10,21 +10,36 @@
 
 namespace sgl {
 	class Sprite : public Drawable, public Transform {
+	private:
+		Texture* _texture = nullptr;
+
 	protected:
 		virtual void draw(const Window& wnd) const override;
 
 	public:
-		Texture& texture;
 		Vector2f position;
 
+		explicit Sprite();
 		explicit Sprite(Texture& tex);
 
+		void setTexture(Texture& tex) {
+			_texture = &tex;
+		}
+
+		const Texture* getTexture() const {
+			return _texture;
+		}
+
 		virtual uint16 width() const {
-			return this->texture.width();
+			if (_texture != nullptr)
+				return _texture->width();
+			return 0;
 		}
 
 		virtual uint16 height() const {
-			return this->texture.height();
+			if (_texture != nullptr)
+				return _texture->height();
+			return 0;
 		}
 
 		ShortRect getClipRect() const {

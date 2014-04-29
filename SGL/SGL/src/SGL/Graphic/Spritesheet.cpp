@@ -1,7 +1,7 @@
 #include <SGL/Graphic\Spritesheet.hpp>
 
 namespace sgl {
-	Spritesheet::Spritesheet(Texture& tex, int16 loopCount) : Sprite(tex), _lastTick(0), tickOffset(0), row(0) {
+	Spritesheet::Spritesheet(Texture& tex, int16 loopCount) : Sprite(tex) {
 		setLoopCount(loopCount);
 	}
 
@@ -18,10 +18,14 @@ namespace sgl {
 			dx, dy + dh
 		};
 
-		const float tx = (0.f + this->view.x) / Sprite::texture.width();
-		const float ty = (0.f + this->view.y) / Sprite::texture.height();
-		const float tw = (0.f + this->view.width) / Sprite::texture.width();
-		const float th = (0.f + this->view.height) / Sprite::texture.height();
+		const Texture* tex = Sprite::getTexture();
+		if (tex == nullptr)
+			return;
+
+		const float tx = (0.f + this->view.x) / tex->width();
+		const float ty = (0.f + this->view.y) / tex->height();
+		const float tw = (0.f + this->view.width) / tex->width();
+		const float th = (0.f + this->view.height) / tex->height();
 
 		const float texCoords[] = {
 			tx, ty,
@@ -30,7 +34,7 @@ namespace sgl {
 			tx, ty + th
 		};
 
-		wnd.draw(vertices, texCoords, Sprite::texture);
+		wnd.draw(vertices, texCoords, tex);
 	}
 
 	bool Spritesheet::slide(Grid grid) {
@@ -38,6 +42,10 @@ namespace sgl {
 			return false;
 
 		if ((_lastTick + tickOffset) > Clock::GetTicks())
+			return false;
+
+		const Texture* tex = Sprite::getTexture();
+		if (tex == nullptr)
 			return false;
 
 		_lastTick = Clock::GetTicks();
@@ -49,7 +57,7 @@ namespace sgl {
 		}
 
 		if (grid & Grid::Row) {
-			if ((this->view.x + this->view.width) < Sprite::texture.width())
+			if ((this->view.x + this->view.width) < tex->width())
 				this->view.x += this->view.width;
 			else {
 				this->view.x = 0;
@@ -59,7 +67,7 @@ namespace sgl {
 		}
 
 		if (grid & Grid::Column && this->view.x == 0) {
-			if ((this->view.y + this->view.height) < Sprite::texture.height())
+			if ((this->view.y + this->view.height) < tex->height())
 				this->view.y += this->view.height;
 			else {
 				this->view.y = 0;

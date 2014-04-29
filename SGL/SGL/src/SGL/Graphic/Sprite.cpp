@@ -2,8 +2,12 @@
 #include <SGL/Graphic\Sprite.hpp>
 
 namespace sgl {
-	Sprite::Sprite(Texture& tex) : position(0, 0), texture(tex) {
+	Sprite::Sprite() : position(0, 0) {
 
+	}
+
+	Sprite::Sprite(Texture& tex) : Sprite() {
+		this->setTexture(tex);
 	}
 
 	void Sprite::draw(const Window& wnd) const {
@@ -29,6 +33,7 @@ namespace sgl {
 		glMatrixScope mat;
 
 		Transform::_applyTransformation(dx + (dw / 2), dy + (dh / 2));
-		wnd.draw(vertices, texCoords, this->texture);
+
+		wnd.draw(vertices, texCoords, _texture);
 	}
 }

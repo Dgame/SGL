@@ -1,8 +1,12 @@
 #include <SGL/Graphic\String.hpp>
 
 namespace sgl {
-	String::String(Font& fnt) : mode(Font::Mode::Solid), font(fnt),_texture(new Texture()) {
+	String::String() : mode(Font::Mode::Solid), _texture(new Texture()) {
 
+	}
+
+	String::String(Font& fnt) : String() {
+		this->setFont(fnt);
 	}
 
 	void String::operator =(const std::string& str) {
@@ -46,8 +50,8 @@ namespace sgl {
 	}
 
 	void String::_update() const {
-		if (_changed && _text.length() != 0) {
-			Surface srfc = font.render(_text, _fg, _bg, mode);
+		if (_font != nullptr && _changed && _text.length() != 0) {
+			Surface srfc = _font->render(_text, _fg, _bg, mode);
 
 			Texture::Format fmt = Texture::Format::BGR;
 			if (srfc.bits() == 32)
@@ -84,7 +88,7 @@ namespace sgl {
 			0, 1
 		};
 
-		wnd.draw(vertices, texCoords, *_texture);
+		wnd.draw(vertices, texCoords, _texture.get());
 	}
 
 	bool operator ==(const String& lhs, const String& rhs) {

@@ -195,7 +195,7 @@ namespace sgl {
 
 		bool setVerticalSync(Sync sync) const;
 		void draw(const Drawable& d) const;
-		void draw(const float* vertices, const float* texCoords, const Texture& texture) const;
+		void draw(const float* vertices, const float* texCoords, const Texture* texture) const;
 		void display() const;
 	};
 }

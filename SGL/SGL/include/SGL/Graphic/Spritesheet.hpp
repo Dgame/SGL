@@ -8,9 +8,9 @@
 namespace sgl {
 	class Spritesheet : public Sprite {
 	protected:
-		int16 _loopCount;
-		uint16 _passedLoops;
-		uint32 _lastTick;
+		int16 _loopCount = -1;
+		uint16 _passedLoops = 0;
+		uint32 _lastTick = 0;
 
 		virtual void draw(const Window& wnd) const override;
 
@@ -26,8 +26,8 @@ namespace sgl {
 		};
 
 		ShortRect view;
-		uint16 tickOffset;
-		uint8 row;
+		uint16 tickOffset = 0;
+		uint8 row = 0;
 
 		explicit Spritesheet(Texture& tex, int16 loopCount = -1);
 

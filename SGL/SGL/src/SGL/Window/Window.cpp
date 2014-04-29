@@ -166,13 +166,18 @@ namespace sgl {
 		}
 	}
 
-	void Window::draw(const float* vertices, const float* texCoords, const Texture& texture) const {
+	void Window::draw(const float* vertices, const float* texCoords, const Texture* texture) const {
+		if (texture == nullptr)
+			return;
+
 		glVertexPointer(2, GL_FLOAT, 0, vertices);
 		glTexCoordPointer(2, GL_FLOAT, 0, texCoords);
 
-		texture.bind();
+		texture->bind();
 
 		glDrawArrays(GL_QUADS, 0, 8);
+
+		texture->unbind();
 	}
 
 	void Window::draw(const Drawable& d) const {
