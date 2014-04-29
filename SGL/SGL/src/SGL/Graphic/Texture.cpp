@@ -30,10 +30,32 @@ namespace sgl {
 		this->loadFrom(srfc, format);
 	}
 
+	Texture::~Texture() {
+		glDeleteTextures(1, &_texId);
+	}
+
 	Texture Texture::LoadFromFile(const std::string& filename) {
 		Surface srfc(filename);
 
 		return Texture(srfc);
+	}
+
+	void Texture::setRepeat(bool repeat) {
+		if (repeat != _repeat) {
+			_repeat = repeat;
+
+			glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, _repeat ? GL_REPEAT : GL_CLAMP));
+			glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, _repeat ? GL_REPEAT : GL_CLAMP));
+		}
+	}
+
+	void Texture::setSmooth(bool smooth) {
+		if (smooth != _smooth) {
+			_smooth = smooth;
+
+			glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, _smooth ? GL_LINEAR : GL_NEAREST));
+			glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, _smooth ? GL_LINEAR : GL_NEAREST));
+		}
 	}
 
 	void Texture::loadFrom(const Surface& srfc, Format format) {
@@ -54,10 +76,10 @@ namespace sgl {
 
 		glCheck(glBindTexture(GL_TEXTURE_2D, _texId));
 		glCheck(glTexImage2D(GL_TEXTURE_2D, 0, fmtToBytes(_format), width, height, 0, static_cast<GLenum>(_format), GL_UNSIGNED_BYTE, pixels));
-		glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, this->repeat ? GL_REPEAT : GL_CLAMP));
-		glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, this->repeat ? GL_REPEAT : GL_CLAMP));
-		glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, this->smooth ? GL_LINEAR : GL_NEAREST));
-		glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, this->smooth ? GL_LINEAR : GL_NEAREST));
+		glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, _repeat ? GL_REPEAT : GL_CLAMP));
+		glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, _repeat ? GL_REPEAT : GL_CLAMP));
+		glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, _smooth ? GL_LINEAR : GL_NEAREST));
+		glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, _smooth ? GL_LINEAR : GL_NEAREST));
 
 		_width = width;
 		_height = height;

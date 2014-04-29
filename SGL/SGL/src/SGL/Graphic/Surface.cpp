@@ -21,6 +21,11 @@ namespace sgl {
 		this->loadFromMemory(pixels, width, height, depth);
 	}
 
+	Surface::~Surface() {
+		SDL_FreeSurface(_surface);
+		_surface = nullptr;
+	}
+
 	void Surface::loadFromFile(const std::string& filename) {
 		_surface = IMG_Load(filename.c_str());
 		if (_surface == nullptr) {

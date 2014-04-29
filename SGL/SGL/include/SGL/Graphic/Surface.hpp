@@ -69,10 +69,7 @@ namespace sgl {
 		explicit Surface(uint16 width, uint16 height, uint8 depth = DefaultDepth);
 		explicit Surface(void* pixels, uint16 width, uint16 height, uint8 depth = DefaultDepth);
 
-		virtual ~Surface() {
-			SDL_FreeSurface(_surface);
-			_surface = nullptr;
-		}
+		virtual ~Surface();
 
 		SDL_Surface* ptr() const {
 			return _surface;

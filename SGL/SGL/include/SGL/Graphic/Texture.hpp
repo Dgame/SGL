@@ -32,20 +32,29 @@ namespace sgl {
 		uint16 _width = 0;
 		uint16 _height = 0;
 
+		bool _repeat = true;
+		bool _smooth = false;
+
 		Format _format;
 
 	public:
-		bool repeat = true;
-		bool smooth = false;
-
 		explicit Texture();
 		explicit Texture(const Surface& srfc, Format format = Format::None);
 
-		virtual ~Texture() {
-			glDeleteTextures(1, &_texId);
-		}
+		virtual ~Texture();
 
 		static Texture LoadFromFile(const std::string& filename);
+
+		void setRepeat(bool repeat);
+		void setSmooth(bool smooth);
+
+		bool isRepeated() const {
+			return _repeat;
+		}
+
+		bool isSmooth() const {
+			return _smooth;
+		}
 
 		void loadFrom(const Surface& srfc, Format format = Format::None);
 		void loadFromMemory(const void* pixels, uint16 width, uint16 height, Format format = Format::None);
