@@ -2,7 +2,6 @@
 #define SHAPE_HPP
 
 #include <vector>
-#include <algorithm>
 #if _DEBUG
 #include <SGL/Core\Output.hpp>
 #endif
@@ -13,6 +12,7 @@
 #include <SGL/Graphic\Drawable.hpp>
 #include <SGL/Graphic\Transformable.hpp>
 #include <SGL/Graphic\Texture.hpp>
+#include <SGL\Graphic\Smooth.hpp>
 
 namespace sgl {
 	class Shape : public Drawable, public GraphTransform {
@@ -33,10 +33,11 @@ namespace sgl {
 		};
 
 		std::vector<Vertex> vertices;
-		Texture* texture;
+		Texture* texture = nullptr;
 		Type type;
-		uint8 lineWidth;
-		bool fill;
+		uint8 lineWidth = 1;
+		bool fill = false;
+		Smooth smooth;
 
 		explicit Shape(Type type);
 

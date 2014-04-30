@@ -101,6 +101,7 @@ int main() {
 	sgl::Shape box(sgl::Shape::Type::Quad);
 	box.addVertices(sgl::ShortRect(20, 200, 50, 50));
 	box.calculateCenter();
+	box.smooth.set(sgl::Smooth::Target::Line, sgl::Smooth::Mode::Nicest);
 
 	sgl::Font fnt2("samples/Font/arial.ttf", 16);
 	sgl::String str2(fnt2);

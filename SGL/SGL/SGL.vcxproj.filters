@@ -156,6 +156,9 @@
     <ClInclude Include="include\SGL\Core\Scope.hpp">
       <Filter>Headerdateien\SGL\Core</Filter>
     </ClInclude>
+    <ClInclude Include="include\SGL\Graphic\Smooth.hpp">
+      <Filter>Headerdateien\SGL\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\SGL\Audio\Sound.cpp">

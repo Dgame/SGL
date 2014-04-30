@@ -2,7 +2,7 @@
 #include <SGL/Graphic\Shape.hpp>
 
 namespace sgl {
-	Shape::Shape(Type _type) : type(_type), texture(nullptr), lineWidth(1), fill(false) {
+	Shape::Shape(Type _type) : type(_type) {
 
 	}
 
@@ -75,6 +75,22 @@ namespace sgl {
 		glAttribScope attr(GL_ENABLE_BIT);
 		if (this->texture == nullptr)
 			glDisable(GL_TEXTURE_2D);
+
+		if (this->smooth.target != Smooth::Target::None) {
+			switch (this->smooth.target) {
+				case Smooth::Target::Line:
+					glEnable(GL_LINE_SMOOTH);
+					break;
+				case Smooth::Target::Point:
+					glEnable(GL_POINT_SMOOTH);
+					break;
+				case Smooth::Target::Polygon:
+					glEnable(GL_POLYGON_SMOOTH);
+					break;
+			}
+
+			glHint(static_cast<GLenum>(this->smooth.target), static_cast<GLenum>(this->smooth.mode));
+		}
 
 		if (this->lineWidth > 1)
 			glLineWidth(this->lineWidth);
