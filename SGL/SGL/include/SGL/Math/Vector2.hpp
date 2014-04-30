@@ -13,6 +13,8 @@ namespace sgl {
 
 		explicit Vector2();
 		explicit Vector2(T px, T py);
+		template <typename U>
+		explicit Vector2(const Vector2<U>& vec);
 
 		bool isZero() const {
 			return this->x == 0 && this->y == 0;
@@ -55,6 +57,12 @@ namespace sgl {
 
 	template <typename T>
 	Vector2<T>::Vector2(T px, T py) : x(px), y(py) {
+
+	}
+
+	template <typename T>
+	template <typename U>
+	Vector2<T>::Vector2(const Vector2<U>& vec) : x(static_cast<T>(vec.x)), y(static_cast<T>(vec.y)) {
 
 	}
 
