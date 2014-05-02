@@ -50,17 +50,6 @@ namespace sgl {
 			Pressed /** */
 		};
 
-		/**
-		 * Supported mouse motion states
-		 */
-		enum class MotionStates : short {
-			LMask = 0x1, /** */
-			MMask = 0x2, /** */
-			RMask = 0x4, /** */
-			X1Mask = 0x8, /** */
-			X2Mask = 0x10 /** */
-		};
-
 		enum class Cursor {
 			Arrow = SDL_SYSTEM_CURSOR_ARROW,
 			IBeam = SDL_SYSTEM_CURSOR_IBEAM,
