@@ -117,6 +117,10 @@ namespace sgl {
 			SDL_SetWindowPosition(_window, x, y);
 		}
 
+		void setPosition(const Vector2s& position) const {
+			setPosition(position.x, position.y);
+		}
+
 		Vector2s getPosition() const;
 
 		void setSize(uint16 width, uint16 height) const {
@@ -170,14 +174,6 @@ namespace sgl {
 			const std::array<float, 4> gl_col = Color::InGLMode(col);
 
 			glClearColor(gl_col[0], gl_col[1], gl_col[2], gl_col[3]);
-		}
-
-		void setPosition(int16 x, int16 y) const {
-			SDL_WarpMouseInWindow(_window, x, y);
-		}
-
-		void setPosition(const Vector2s& position) const {
-			setPosition(position.x, position.y);
 		}
 
 		bool hasMouseFocus() const {

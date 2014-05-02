@@ -100,7 +100,7 @@ namespace sgl {
 		* The Keyboard Event structure.
 		*/
 		struct KeyboardEvent {
-			Keyboard::State state;	/** Keyboard State. See: Dgame.Input.Keyboard. */
+			Keyboard::State state;	/** Keyboard State. See: Keyboard::State */
 			Keyboard::Code key;	/** The Key which is released or pressed. */
 			Keyboard::Mod mod;	/** The Key modifier. */
 

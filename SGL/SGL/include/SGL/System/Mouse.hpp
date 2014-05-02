@@ -2,11 +2,12 @@
 #define MOUSE_HPP
 
 #include <SDL.h>
+#include <SGL\Window\Window.hpp>
 #include <SGL/Graphic\Surface.hpp>
 
 namespace sgl {
 	namespace internal {
-		class Cursor {
+		class Cursor final {
 		private:
 			SDL_Cursor* _cursor = nullptr;
 
@@ -79,6 +80,8 @@ namespace sgl {
 		static void SetCursor(const Surface& srfc);
 		static void ShowCursor(bool show);
 		static bool IsCursorShown();
+		static void SetPosition(const Window& wnd, int16 x, int16 y);
+		static void SetPosition(const Window& wnd, const Vector2s& position);
 		static Vector2s GetPosition();
 		static bool IsButtonPressed(Button btn);
 	};

@@ -19,6 +19,15 @@ namespace sgl {
 		return SDL_ShowCursor(-1) != 0;
 	}
 
+	void Mouse::SetPosition(const Window& wnd, int16 x, int16 y) {
+		SDL_Window* sdl_window = SDL_GetWindowFromID(wnd.id());
+		SDL_WarpMouseInWindow(sdl_window, x, y);
+	}
+
+	void Mouse::SetPosition(const Window& wnd, const Vector2s& position) {
+		Mouse::SetPosition(wnd, position.x, position.y);
+	}
+
 	Vector2s Mouse::GetPosition() {
 		int x, y;
 		SDL_GetMouseState(&x, &y);
