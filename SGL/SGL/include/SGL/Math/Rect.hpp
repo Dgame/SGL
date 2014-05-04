@@ -42,10 +42,6 @@ namespace sgl {
 			this->height = height;
 		}
 
-		Vector2us getSize() const {
-			return Vector2us(width, height);
-		}
-
 		/**
 		* Increase current size.
 		*/
