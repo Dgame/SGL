@@ -31,6 +31,10 @@ namespace sgl {
 				&& (y <= this->y + this->height);
 		}
 
+		bool contains(const Vector2<T>& vec) const {
+			return this->contains(vec.x, vec.y);
+		}
+
 		bool intersects(const Rect<T>& rect, Rect<T>* overlap = nullptr) const;
 
 		void setSize(T width, T height) {
