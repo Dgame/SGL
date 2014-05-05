@@ -5,7 +5,7 @@
 #include <SGL/Math\Vector2.hpp>
 
 namespace sgl {
-	template<typename T>
+	template <typename T>
 	struct Rect {
 		T x = 0;
 		T y = 0;
@@ -140,7 +140,7 @@ namespace sgl {
 		return intersects;
 	}
 
-	template<typename T>
+	template <typename T>
 	bool operator ==(const Rect<T>& lhs, const Rect<T>& rhs) {
 		SDL_Rect a;
 		SDL_Rect b;
@@ -151,32 +151,32 @@ namespace sgl {
 		return SDL_RectEquals(&a, &b);
 	}
 
-	template<typename T>
+	template <typename T>
 	bool operator !=(const Rect<T>& lhs, const Rect<T>& rhs) {
 		return !(lhs == rhs);
 	}
 
-	template<typename T>
+	template <typename T>
 	std::ostream& operator <<(std::ostream& strm, const Rect<T>& rect) {
 		return strm << "Rect<" << typeid(T).name() << ">(" << rect.x << ',' << rect.y << ',' << rect.width, ',' << rect.height << ")";
 	}
 
-	template<typename T>
+	template <typename T>
 	Rect<T> operator +(const Rect<T>& lhs, const Rect<T>& rhs) {
 		return Rect<T>(lhs.x + rhs.x, lhs.y + rhs.y, lhs.width + rhs.width, lhs.height + rhs.height);
 	}
 
-	template<typename T>
+	template <typename T>
 	Rect<T> operator -(const Rect<T>& lhs, const Rect<T>& rhs) {
 		return Rect<T>(lhs.x - rhs.x, lhs.y - rhs.y, lhs.width - rhs.width, lhs.height - rhs.height);
 	}
 
-	template<typename T>
+	template <typename T>
 	Rect<T> operator *(const Rect<T>& lhs, const Rect<T>& rhs) {
 		return Rect<T>(lhs.x * rhs.x, lhs.y * rhs.y, lhs.width * rhs.width, lhs.height * rhs.height);
 	}
 
-	template<typename T>
+	template <typename T>
 	Rect<T> operator /(const Rect<T>& lhs, const Rect<T>& rhs) {
 		return Rect<T>(lhs.x / rhs.x, lhs.y / rhs.y, lhs.width / rhs.width, lhs.height / rhs.height);
 	}
