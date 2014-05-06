@@ -3,10 +3,10 @@
 namespace sgl {
 	uint16 Sound::ChannelCount = 0;
 
-	Sound::Sound(const std::string& filename, int8 volume) : _chunk(nullptr), channel(Sound::ChannelCount++) {
-		loadFromFile(filename);
+	Sound::Sound(const std::string& filename, int8 volume) : channel(Sound::ChannelCount++) {
+		this->loadFromFile(filename);
 		if (volume > 0)
-			setVolume(volume);
+			this->setVolume(volume);
 	}
 
 	void Sound::loadFromFile(const std::string& filename) {

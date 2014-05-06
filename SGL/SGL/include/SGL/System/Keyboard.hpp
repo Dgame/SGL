@@ -5,8 +5,7 @@
 #include <SGL/Core\Types.hpp>
 
 namespace sgl {
-	class Keyboard {
-	public:
+	struct Keyboard {
 		enum class State {
 			Pressed = SDL_PRESSED, /** Key is pressed. */
 			Released = SDL_RELEASED /** Key is released. */

@@ -26,7 +26,7 @@ namespace sgl {
 		};
 
 	private:
-		Mix_Music* _music;
+		Mix_Music* _music = nullptr;
 
 	public:
 		explicit Music(const std::string& filename, int8 volume = -1);

@@ -25,6 +25,9 @@ namespace sgl {
 			this->mode = mode;
 		}
 	};
+
+	bool operator ==(const Smooth& lhs, const Smooth& rhs);
+	bool operator !=(const Smooth& lhs, const Smooth& rhs);
 }
 
 #endif

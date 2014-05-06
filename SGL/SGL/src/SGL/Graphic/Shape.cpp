@@ -72,7 +72,7 @@ namespace sgl {
 		if (this->vertices.size() == 0)
 			return;
 
-		glAttribScope attr(GL_ENABLE_BIT);
+		GLAttribScope attr(GL_ENABLE_BIT);
 		if (this->texture == nullptr)
 			glDisable(GL_TEXTURE_2D);
 
@@ -99,7 +99,7 @@ namespace sgl {
 
 		const Vertex* vptr = &this->vertices[0];
 
-		glMatrixScope mat;
+		GLMatrixScope mat;
 
 		GraphTransform::_applyTransformation();
 

@@ -30,7 +30,7 @@ namespace sgl {
 			0, 1
 		};
 
-		glMatrixScope mat;
+		GLMatrixScope mat;
 
 		Transform::_applyTransformation(dx + (dw / 2), dy + (dh / 2));
 

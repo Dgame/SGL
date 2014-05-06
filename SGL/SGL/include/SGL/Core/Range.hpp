@@ -7,7 +7,7 @@
 
 namespace sgl {
 	template <typename T>
-	class Range;
+	struct Range;
 
 	template <typename T>
 	class RangeIterator final {
@@ -42,8 +42,7 @@ namespace sgl {
 	}
 
 	template <typename T>
-	class Range final {
-	public:
+	struct Range {
 		T* ptr;
 		const uint32 length;
 

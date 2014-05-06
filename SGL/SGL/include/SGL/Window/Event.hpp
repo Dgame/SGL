@@ -31,10 +31,9 @@
 *******************************************************************************************
 */
 
-namespace sgl {
-
 #define TEXT_SIZE 32
 
+namespace sgl {
 	/**
 	* The Event structure.
 	* Event defines a system event and it's parameters

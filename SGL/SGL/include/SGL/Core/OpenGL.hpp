@@ -12,11 +12,11 @@
 
 #endif
 
-#include <GL/gl.h>
+#include <gl/gl.h>
 
 #elif defined(linux) || defined(__linux)
 
-#include <GL/gl.h>
+#include <gl/gl.h>
 
 #elif defined(__APPLE__) || defined(MACOSX) || defined(macintosh) || defined(Macintosh)
 
@@ -24,7 +24,7 @@
 
 #elif defined(__FreeBSD__) || defined(__FreeBSD_kernel__)
 
-#include <GL/gl.h>
+#include <gl/gl.h>
 
 #else
 

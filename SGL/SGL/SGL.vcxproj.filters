@@ -159,6 +159,9 @@
     <ClInclude Include="include\SGL\Graphic\Smooth.hpp">
       <Filter>Headerdateien\SGL\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="include\SGL\Graphic\Blend.hpp">
+      <Filter>Headerdateien\SGL\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\SGL\Audio\Sound.cpp">
@@ -222,6 +225,12 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\Graphic\Transformable.cpp">
+      <Filter>Quelldateien\SGL\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SGL\Graphic\Blend.cpp">
+      <Filter>Quelldateien\SGL\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SGL\Graphic\Smooth.cpp">
       <Filter>Quelldateien\SGL\Graphics</Filter>
     </ClCompile>
   </ItemGroup>

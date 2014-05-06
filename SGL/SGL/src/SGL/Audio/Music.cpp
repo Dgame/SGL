@@ -2,8 +2,8 @@
 
 namespace sgl {
 	Music::Music(const std::string& filename, int8 volume) {
-		loadFromFile(filename);
-		setVolume(volume);
+		this->loadFromFile(filename);
+		this->setVolume(volume);
 	}
 
 	void Music::loadFromFile(const std::string& filename) {

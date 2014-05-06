@@ -9,5 +9,6 @@
 #include <SGL/Graphic\String.hpp>
 #include <SGL/Graphic\Spritesheet.hpp>
 #include <SGL/Graphic\Smooth.hpp>
+#include <SGL/Graphic\Blend.hpp>
 
 #endif

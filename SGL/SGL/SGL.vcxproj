@@ -21,6 +21,7 @@
     <ClInclude Include="include\SGL\Core\Scope.hpp" />
     <ClInclude Include="include\SGL\Core\Types.hpp" />
     <ClInclude Include="include\SGL\Graphic.hpp" />
+    <ClInclude Include="include\SGL\Graphic\Blend.hpp" />
     <ClInclude Include="include\SGL\Graphic\Color.hpp" />
     <ClInclude Include="include\SGL\Graphic\Drawable.hpp" />
     <ClInclude Include="include\SGL\Graphic\Shape.hpp" />
@@ -51,8 +52,10 @@
     <ClCompile Include="src\SGL\Audio\Music.cpp" />
     <ClCompile Include="src\SGL\Audio\Sound.cpp" />
     <ClCompile Include="src\SGL\Core\OpenGL.cpp" />
+    <ClCompile Include="src\SGL\Graphic\Blend.cpp" />
     <ClCompile Include="src\SGL\Graphic\Color.cpp" />
     <ClCompile Include="src\SGL\Graphic\Shape.cpp" />
+    <ClCompile Include="src\SGL\Graphic\Smooth.cpp" />
     <ClCompile Include="src\SGL\Graphic\Sprite.cpp" />
     <ClCompile Include="src\SGL\Graphic\Spritesheet.cpp" />
     <ClCompile Include="src\SGL\Graphic\String.cpp" />

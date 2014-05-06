@@ -1,26 +1,43 @@
 #ifndef SCOPE_HPP
 #define SCOPE_HPP
 
+#include <functional>
 #include <SGL\Core\OpenGL.hpp>
 
+using std::function;
+
 namespace sgl {
-	struct glMatrixScope {
-		explicit glMatrixScope() {
+	struct GLMatrixScope {
+		explicit GLMatrixScope() {
 			glPushMatrix();
 		}
 
-		virtual ~glMatrixScope() {
+		~GLMatrixScope() {
 			glPopMatrix();
 		}
 	};
 
-	struct glAttribScope {
-		explicit glAttribScope(GLbitfield mask) {
+	struct GLAttribScope {
+		explicit GLAttribScope(GLbitfield mask) {
 			glPushAttrib(mask);
 		}
 
-		virtual ~glAttribScope() {
+		~GLAttribScope() {
 			glPopAttrib();
+		}
+	};
+
+	struct FunctionScope {
+		std::function<void(void)> func;
+		bool call = true;
+
+		explicit FunctionScope(std::function<void(void)> pfunc) : func(pfunc) {
+
+		}
+
+		~FunctionScope() {
+			if (this->call)
+				this->func();
 		}
 	};
 }

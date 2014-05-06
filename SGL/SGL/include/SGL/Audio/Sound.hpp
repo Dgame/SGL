@@ -8,7 +8,7 @@
 namespace sgl {
 	class Sound {
 	private:
-		Mix_Chunk* _chunk;
+		Mix_Chunk* _chunk = nullptr;
 
 		static uint16 ChannelCount;
 

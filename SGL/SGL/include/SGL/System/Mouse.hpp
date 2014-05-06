@@ -28,8 +28,7 @@ namespace sgl {
 	/**
 	 * Represent the Mouse
 	 */
-	class Mouse {
-	public:
+	struct Mouse {
 		/**
 		 * Supported mouse buttons
 		 */

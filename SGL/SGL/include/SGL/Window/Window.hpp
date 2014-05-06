@@ -1,9 +1,6 @@
 #ifndef WINDOW_HPP
 #define WINDOW_HPP
 
-#if _DEBUG
-#include <SGL/Core\Output.hpp>
-#endif
 #include <string>
 #include <SDL.h>
 #undef main
@@ -11,8 +8,9 @@
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
 
-#include <SGL/Core\OpenGL.hpp>
-#include <SGL/Core\Types.hpp>
+#include <SGL/Core/OpenGL.hpp>
+#include <SGL/Core/Types.hpp>
+#include <SGL/Core/Scope.hpp>
 #include <SGL/Graphic\Color.hpp>
 #include <SGL/Graphic\Surface.hpp>
 #include <SGL/Graphic\Drawable.hpp>
@@ -20,6 +18,8 @@
 #include <SGL/Math\Rect.hpp>
 #include <SGL/Math\Vector2.hpp>
 #include <SGL/System\Clock.hpp>
+
+using sgl::FunctionScope;
 
 static void _sdl_init();
 static void _sdl_quit();
@@ -162,7 +162,7 @@ namespace sgl {
 			SDL_SetWindowIcon(_window, icon.ptr());
 		}
 
-		void clear(uint32 flags = GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT) const {
+		void clear(uint32 flags = GL_COLOR_BUFFER_BIT) const {
 			glClear(flags);
 		}
 
@@ -190,7 +190,11 @@ namespace sgl {
 		}
 
 		bool setVerticalSync(Sync sync) const;
-		void draw(const Drawable& d) const;
+
+		void draw(const Drawable& d) const {
+			d.draw(*this);
+		}
+
 		void draw(const float* vertices, const float* texCoords, const Texture* texture) const;
 		void display() const;
 	};
