@@ -3,14 +3,14 @@
 
 #include <string>
 #include <SDL_ttf.h>
-#include <SGL/Core\Types.hpp>
-#include <SGL/Graphic\Surface.hpp>
+#include <SGL/Core/Types.hpp>
+#include <SGL/Graphic/Surface.hpp>
 
 namespace sgl {
 	class Font {
 	private:
-		TTF_Font* _ttf;
-		uint8 _fontSize;
+		TTF_Font* _ttf = nullptr;
+		uint8 _fontSize = 0;
 
 	public:
 		static const uint8 DefaultSize = 10;

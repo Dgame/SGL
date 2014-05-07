@@ -2,22 +2,19 @@
 #define SHAPE_HPP
 
 #include <vector>
-#if _DEBUG
-#include <SGL/Core\Output.hpp>
-#endif
-#include <SGL/Core\OpenGL.hpp>
-#include <SGL/Core\Types.hpp>
-#include <SGL/Core\Range.hpp>
-#include <SGL/Math\Vertex.hpp>
-#include <SGL/Graphic\Drawable.hpp>
-#include <SGL/Graphic\Transformable.hpp>
-#include <SGL/Graphic\Texture.hpp>
-#include <SGL\Graphic\Smooth.hpp>
+#include <SGL/Core/Range.hpp>
+#include <SGL/Math/Vertex.hpp>
+#include <SGL/Graphic/Drawable.hpp>
+#include <SGL/Graphic/Primitive.hpp>
+#include <SGL/Graphic/Transformable.hpp>
+#include <SGL/Graphic/Texture.hpp>
+#include <SGL/Graphic/Smooth.hpp>
+#include <SGL/Core/Scope.hpp>
 
 namespace sgl {
 	class Shape : public Drawable, public GraphTransform {
 	protected:
-		virtual void draw(const Window&) const override;
+		virtual void draw(const Window& wnd) const override;
 
 	public:
 		enum class Type {
@@ -57,7 +54,7 @@ namespace sgl {
 	};
 
 	template <typename T>
-	void Shape::move(const Vector2<T>& vec) {
+	void Shape::move(const Vector2<T>& vec) { // TODO
 		this->move(vec.x, vec.y);
 	}
 }

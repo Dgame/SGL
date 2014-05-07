@@ -3,7 +3,7 @@
 
 #include <string>
 #include <SDL_mixer.h>
-#include <SGL/Core\Types.hpp>
+#include <SGL/Core/Types.hpp>
 
 namespace sgl {
 	class Sound {

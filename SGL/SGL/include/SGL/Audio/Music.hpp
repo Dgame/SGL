@@ -3,8 +3,8 @@
 
 #include <string>
 #include <SDL_mixer.h>
-#include <SGL/Core\Types.hpp>
-#include <SGL/Math\Vector2.hpp>
+#include <SGL/Core/Types.hpp>
+#include <SGL/Math/Vector2.hpp>
 
 namespace sgl {
 	class Music {

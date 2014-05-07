@@ -1,4 +1,4 @@
-#include <SGL/System\System.hpp>
+#include <SGL/System/System.hpp>
 
 namespace sgl {
 	/**

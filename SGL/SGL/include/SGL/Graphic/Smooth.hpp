@@ -1,7 +1,7 @@
 #ifndef SMOOTH_HPP
 #define SMOOTH_HPP
 
-#include <SGL/Core\OpenGL.hpp>
+#include <SGL/Core/OpenGL.hpp>
 
 namespace sgl {
 	struct Smooth {

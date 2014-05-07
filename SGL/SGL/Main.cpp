@@ -67,7 +67,7 @@ int main() {
 	sgl::Shape s(sgl::Shape::Type::Quad);
 	s.addVertices({275, 15, 475, 15, 475, 215, 275, 215});
 	s.updateTextureCoordinates({0, 0, 1, 0, 1, 1, 0, 1});
-	s.setColor(sgl::Color::Blue);
+	s.setColor(sgl::Color::White);
 	s.texture = &wiki_tex;
 	//s.fill = true;
 
@@ -109,6 +109,8 @@ int main() {
 	str2.mode = sgl::Font::Mode::Shaded;
 	str2 = "Ein Test mit roten Background";
 	str2.position.set(200, 400);
+
+	sgl::Blend b1(sgl::Blend::Factor::DstColor, sgl::Blend::Factor::Zero);
 
 	sgl::Clock clock;
 
@@ -167,14 +169,14 @@ int main() {
 
 		wnd.draw(icon_sprite);
 		wnd.draw(wiki_sprite);
-		wnd.draw(wiki_sprite2);
+		wnd.draw(wiki_sprite2, sgl::DrawOptions(&b1));
 		wnd.draw(box);
 		wnd.draw(s);
 		wnd.draw(str);
 
-		animation.row = 1;
-		animation.slide(sgl::Spritesheet::Grid::Row);
-		wnd.draw(animation);
+		//animation.row = 1;
+		//animation.slide(sgl::Spritesheet::Grid::Row);
+		//wnd.draw(animation);
 
 		//icon_sprite.position.y += 1;
 		//icon_sprite.position.x += 1;

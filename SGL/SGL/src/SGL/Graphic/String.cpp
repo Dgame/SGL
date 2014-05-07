@@ -1,4 +1,5 @@
-#include <SGL/Graphic\String.hpp>
+#include <SGL/Graphic/String.hpp>
+#include <SGL/Window/Window.hpp>
 
 namespace sgl {
 	String::String() : mode(Font::Mode::Solid), _texture(new Texture()) {
@@ -88,7 +89,7 @@ namespace sgl {
 			0, 1
 		};
 
-		wnd.draw(vertices, texCoords, _texture.get());
+		wnd.draw(Primitive(vertices), texCoords, _texture.get());
 	}
 
 	bool operator ==(const String& lhs, const String& rhs) {

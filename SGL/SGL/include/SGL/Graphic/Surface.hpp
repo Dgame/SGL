@@ -7,9 +7,9 @@
 
 #include <string>
 #include <SDL_image.h>
-#include <SGL/Core\Types.hpp>
-#include <SGL/Math\Rect.hpp>
-#include <SGL/Graphic\Color.hpp>
+#include <SGL/Core/Types.hpp>
+#include <SGL/Math/Rect.hpp>
+#include <SGL/Graphic/Color.hpp>
 
 #define R_MASK 0 /** Default Red Mask. */
 #define G_MASK 0 /** Default Green Mask. */

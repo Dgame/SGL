@@ -1,4 +1,5 @@
-#include <SGL/Graphic\Spritesheet.hpp>
+#include <SGL/Graphic/Spritesheet.hpp>
+#include <SGL/Window/Window.hpp>
 
 namespace sgl {
 	Spritesheet::Spritesheet(Texture& tex, int16 loopCount) : Sprite(tex) {
@@ -34,7 +35,7 @@ namespace sgl {
 			tx, ty + th
 		};
 
-		wnd.draw(vertices, texCoords, tex);
+		wnd.draw(Primitive(vertices), texCoords, tex);
 	}
 
 	bool Spritesheet::slide(Grid grid) {

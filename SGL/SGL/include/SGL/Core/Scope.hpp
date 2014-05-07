@@ -2,7 +2,7 @@
 #define SCOPE_HPP
 
 #include <functional>
-#include <SGL\Core\OpenGL.hpp>
+#include <SGL/Core/OpenGL.hpp>
 
 using std::function;
 

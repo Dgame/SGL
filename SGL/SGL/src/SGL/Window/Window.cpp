@@ -23,7 +23,7 @@ void _sdl_init() {
 
 	if (TTF_Init() == -1) {
 		printf("TTF_Init failed: %s\n", TTF_GetError());
-		
+
 		return;
 	}
 
@@ -38,7 +38,7 @@ void _sdl_init() {
 
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024) == -1) {
 		printf("Mix_OpenAudio: %s\n", Mix_GetError());
-		
+
 		return;
 	}
 
@@ -117,7 +117,6 @@ namespace sgl {
 
 			glEnableClientState(GL_VERTEX_ARRAY);
 			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 			// Hints
 			glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST);
@@ -131,19 +130,15 @@ namespace sgl {
 	}
 
 	Window::~Window() {
-		this->close();
-
-		_winCount--;
-		if (_winCount <= 0)
-			_sdl_quit();
-	}
-
-	void Window::close() {
 		SDL_GL_DeleteContext(_glContext);
 		SDL_DestroyWindow(_window);
 
 		_glContext = nullptr;
 		_window = nullptr;
+
+		_winCount--;
+		if (_winCount <= 0)
+			_sdl_quit();
 	}
 
 	Vector2s Window::getPosition() const {
@@ -170,18 +165,43 @@ namespace sgl {
 		}
 	}
 
-	void Window::draw(const float* vertices, const float* texCoords, const Texture* texture) const {
-		if (texture == nullptr)
+	void Window::draw(const Drawable& d, const DrawOptions options) const {
+		GLAttribScope attr(GL_COLOR_BUFFER_BIT | GL_CURRENT_BIT);
+
+		if (options.blend != nullptr)
+			options.blend->apply();
+
+		d.draw(*this);
+	}
+
+	void Window::draw(const Primitive& p, const float* texCoords, const Texture* texture) const {
+		if (p.vcount == 0)
 			return;
 
-		glVertexPointer(2, GL_FLOAT, 0, vertices);
-		glTexCoordPointer(2, GL_FLOAT, 0, texCoords);
+		GLAttribScope attr(GL_ENABLE_BIT);
 
-		texture->bind();
+		glVertexPointer(2, GL_FLOAT, p.offset, p.vertices);
 
-		glDrawArrays(GL_QUADS, 0, 8);
+		if (texture == nullptr)
+			glDisable(GL_TEXTURE_2D);
+		else if (texCoords != nullptr) {
+			glTexCoordPointer(2, GL_FLOAT, p.offset, texCoords);
 
-		texture->unbind();
+			texture->bind();
+		}
+
+		if (p.color != nullptr) {
+			glEnableClientState(GL_COLOR_ARRAY);
+			glColorPointer(4, GL_FLOAT, p.offset, p.color);
+		}
+
+		glDrawArrays(p.type, p.vfirst, p.vcount);
+
+		if (texture != nullptr)
+			texture->unbind();
+
+		if (p.color != nullptr)
+			glDisableClientState(GL_COLOR_ARRAY);
 	}
 
 	/**
@@ -189,14 +209,12 @@ namespace sgl {
 	* If the framerate limit is not 0, it waits for (1000 / framerate limit) milliseconds.
 	*/
 	void Window::display() const {
-		const Style style = this->getStyle();
-
-		if ((style & Style::OpenGL) == Style::OpenGL)
+		if ((this->getStyle() & Style::OpenGL) == Style::OpenGL)
 			SDL_GL_SwapWindow(_window);
 		else
 			SDL_UpdateWindowSurface(_window);
 
-		if (framerateLimit > 0)
+		if (this->getVerticalSync() != Sync::Enable && framerateLimit > 0)
 			Clock::Wait(1000 / framerateLimit);
 	}
 }

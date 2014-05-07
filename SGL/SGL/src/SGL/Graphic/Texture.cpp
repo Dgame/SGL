@@ -1,5 +1,5 @@
-#include <SGL/Graphic\Texture.hpp>
-#include <SGL/Core\OpenGL.hpp>
+#include <SGL/Graphic/Texture.hpp>
+#include <SGL/Core/OpenGL.hpp>
 
 namespace sgl {
 	uint8 fmtToBytes(Texture::Format fmt) {
@@ -60,7 +60,7 @@ namespace sgl {
 
 	void Texture::loadFrom(const Surface& srfc, Format format) {
 		if (format == Format::None) {
-			if (srfc.isMask(Surface::Mask::Red, 0xff000000))
+			if (!srfc.isMask(Surface::Mask::Red, 255))
 				format = srfc.bits() == 32 ? Format::BGRA : Format::BGR;
 			else
 				format = srfc.bits() == 32 ? Format::RGBA : Format::RGB;

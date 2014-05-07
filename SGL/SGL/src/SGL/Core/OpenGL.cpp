@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include <SGL/Core\OpenGL.hpp>
+#include <SGL/Core/OpenGL.hpp>
 
 void glCheckError(const char* file, unsigned int line) {
 	// Get the last error
@@ -41,8 +41,7 @@ void glCheckError(const char* file, unsigned int line) {
 		}
 
 		// Log the error
-		printf("An internal OpenGL call failed in %s on line %d: %s, %s\n",
-			fileString.substr(fileString.find_last_of("\\/") + 1), line, error, description);
-		exit(1);
+		std::cout << "An internal OpenGL call failed in " << fileString << " on line " << line << ": " << error << " -> " << description << std::endl;
+		//exit(1);
 	}
 }

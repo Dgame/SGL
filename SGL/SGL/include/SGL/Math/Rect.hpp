@@ -2,7 +2,7 @@
 #define RECT_HPP
 
 #include <SDL.h>
-#include <SGL/Math\Vector2.hpp>
+#include <SGL/Math/Vector2.hpp>
 
 namespace sgl {
 	template <typename T>

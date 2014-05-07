@@ -1,14 +1,10 @@
 #ifndef TEXTURE_HPP
 #define TEXTURE_HPP
 
-#ifdef _DEBUG
-#include <SGL/Core\Output.hpp>
-#endif
 #include <memory>
-#include <SGL/Core\OpenGL.hpp>
-#include <SGL/Core\Types.hpp>
-#include <SGL/Math\Rect.hpp>
-#include <SGL/Graphic\Surface.hpp>
+#include <SGL/Core/OpenGL.hpp>
+#include <SGL/Core/Types.hpp>
+#include <SGL/Graphic/Surface.hpp>
 
 namespace sgl {
 	class Texture {

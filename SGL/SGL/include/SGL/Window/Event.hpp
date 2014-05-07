@@ -4,8 +4,8 @@
 #include <string>
 #include <SDL.h>
 #include <SGL/Core/Types.hpp>
-#include <SGL/System\Mouse.hpp>
-#include <SGL/System\Keyboard.hpp>
+#include <SGL/System/Mouse.hpp>
+#include <SGL/System/Keyboard.hpp>
 
 /*
 *******************************************************************************************
@@ -30,8 +30,6 @@
 * 3. This notice may not be removed or altered from any source distribution.
 *******************************************************************************************
 */
-
-#define TEXT_SIZE 32
 
 namespace sgl {
 	/**
@@ -170,7 +168,7 @@ namespace sgl {
 			MouseMotionEvent mouseMotion; /** Mouse motion Event. */
 			MouseWheelEvent  mouseWheel;  /** Mouse wheel Event. */
 			//TextEditEvent	 textEdit;	  /** Text edit Event. */
-			//TextInputEvent	 textInput;	  /** Text input Event. */
+			//TextInputEvent textInput;	  /** Text input Event. */
 		};
 
 	private:
@@ -195,8 +193,8 @@ namespace sgl {
 			SDL_FlushEvent(static_cast<int>(type));
 		}
 		/**
-		* Set a state for a Event::Type::
-		* Returns: the previous Type::
+		* Set a state for a Event::Type
+		* Returns: the previous Type
 		* See: State enum
 		*/
 		Event::State Event::SetState(Event::Type type, Event::State state) {

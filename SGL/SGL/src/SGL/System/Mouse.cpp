@@ -1,4 +1,4 @@
-#include <SGL/System\Mouse.hpp>
+#include <SGL/System/Mouse.hpp>
 
 namespace sgl {
 	void Mouse::SetCursor(Cursor cursor) {

@@ -2,7 +2,7 @@
 #define ARRAY_HPP
 
 #include <initializer_list>
-#include <SGL/Core\Types.hpp>
+#include <SGL/Core/Types.hpp>
 
 namespace sgl {
 	template <typename T, uint32 N>
@@ -17,11 +17,9 @@ namespace sgl {
 	public:
 		ArrayIterator(const Array<T, N>* parr, uint32 pos);
 
-		bool operator !=(const ArrayIterator<T, N>& other) const {
-			return _pos != other._pos;
+		const T& operator *() const {
+			return _parr->data[_pos];
 		}
-
-		const T& operator *() const;
 
 		const ArrayIterator<T, N>& operator ++() {
 			++_pos;
@@ -36,18 +34,20 @@ namespace sgl {
 	}
 
 	template <typename T, uint32 N>
-	const T& ArrayIterator<T, N>::operator *() const {
-		return _parr->data[_pos];
+	bool operator ==(const ArrayIterator<T, N>& lhs, const ArrayIterator<T, N>& rhs) {
+		return lhs._parr == rhs._parr && lhs._pos == rhs._pos;
 	}
 
 	template <typename T, uint32 N>
-	struct Array final {
+	bool operator !=(const ArrayIterator<T, N>& lhs, const ArrayIterator<T, N>& rhs) {
+		return !(lhs == rhs);
+	}
+
+	template <typename T, uint32 N>
+	struct Array {
 		T data[N];
 
-		explicit Array() {
-
-		}
-
+		explicit Array();
 		explicit Array(std::initializer_list<T> range);
 
 		uint32 length() const {
@@ -72,6 +72,11 @@ namespace sgl {
 			return this->data[index];
 		}
 	};
+
+	template <typename T, uint32 N>
+	Array<T, N>::Array() {
+
+	}
 
 	template <typename T, uint32 N>
 	Array<T, N>::Array(std::initializer_list<T> range) {
