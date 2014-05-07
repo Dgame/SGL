@@ -181,17 +181,20 @@ namespace sgl {
 		* Returns: true, if there was a valid event and false if not.
 		*/
 		static bool Poll(Event& event);
+
 		/**
 		* Push an event of the given type inside the Event queue.
 		* Returns: if the push was successfull or not.
 		*/
 		static bool Push(Event::Type type);
+
 		/**
 		* Clear the Event queue.
 		*/
 		static void Event::Clear(Event::Type type) {
 			SDL_FlushEvent(static_cast<int>(type));
 		}
+
 		/**
 		* Set a state for a Event::Type
 		* Returns: the previous Type
@@ -200,18 +203,21 @@ namespace sgl {
 		Event::State Event::SetState(Event::Type type, Event::State state) {
 			return static_cast<Event::State>(SDL_EventState(static_cast<int>(type), static_cast<int>(state)));
 		}
+
 		/**
 		* Returns: if inside of the Event Queue is an Event of the given Type::
 		*/
 		bool Event::HasEvent(Event::Type type) {
 			return SDL_HasEvent(static_cast<int>(type)) == SDL_TRUE;
 		}
+
 		/**
 		* Returns: if the current Event queue has the Quit Event.
 		*/
 		bool Event::HasQuitEvent() {
 			return SDL_QuitRequested();
 		}
+
 		/**
 		* Waits for the given Event.
 		* If the seconds parameter is greater then -1, it waits maximal timeout seconds.

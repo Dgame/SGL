@@ -68,11 +68,7 @@ namespace sgl {
 	template <typename T>
 	Range<T>::Range(std::initializer_list<T> liste) : length(liste.size()) {
 		this->ptr = new T[this->length];
-
-		uint32 i = 0;
-		for (T val : liste) {
-			this->ptr[i++] = static_cast<T>(val);
-		}
+		std::memcpy(this->ptr, liste.begin(), sizeof(T) * liste.size());
 	}
 
 	template <typename T>

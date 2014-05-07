@@ -81,25 +81,13 @@ namespace sgl {
 	template <typename T, uint32 N>
 	Array<T, N>::Array(std::initializer_list<T> range) {
 		const uint32 until = std::min(range.size(), N);
-
-		uint32 i = 0;
-		for (const T& val : range) {
-			this->data[i++] = val;
-			if (i >= until)
-				break;
-		}
+		std::memcpy(this->data, range.begin(), sizeof(T) * until);
 	}
 
 	template <typename T, uint32 N>
 	void Array<T, N>::operator =(std::initializer_list<T> range) {
 		const uint32 until = std::min(range.size(), N);
-
-		uint32 i = 0;
-		for (const T& val : range) {
-			this->data[i++] = val;
-			if (i >= until)
-				break;
-		}
+		std::memcpy(this->data, range.begin(), sizeof(T) * until);
 	}
 }
 
