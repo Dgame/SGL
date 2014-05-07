@@ -162,6 +162,12 @@
     <ClInclude Include="include\SGL\Graphic\Blend.hpp">
       <Filter>Headerdateien\SGL\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="include\SGL\Graphic\Primitive.hpp">
+      <Filter>Headerdateien\SGL\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SGL\Window\DrawOptions.hpp">
+      <Filter>Headerdateien\SGL\Window</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\SGL\Audio\Sound.cpp">
@@ -231,6 +237,12 @@
       <Filter>Quelldateien\SGL\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\Graphic\Smooth.cpp">
+      <Filter>Quelldateien\SGL\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SGL\Window\DrawOptions.cpp">
+      <Filter>Quelldateien\SGL\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SGL\Graphic\Primitive.cpp">
       <Filter>Quelldateien\SGL\Graphics</Filter>
     </ClCompile>
   </ItemGroup>

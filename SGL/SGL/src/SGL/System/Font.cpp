@@ -1,4 +1,4 @@
-#include <SGL/System\Font.hpp>
+#include <SGL/System/Font.hpp>
 
 namespace sgl {
 	void Font::loadFromFile(const std::string& filename, uint8 fontSize) {

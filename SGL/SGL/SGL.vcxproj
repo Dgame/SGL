@@ -24,6 +24,7 @@
     <ClInclude Include="include\SGL\Graphic\Blend.hpp" />
     <ClInclude Include="include\SGL\Graphic\Color.hpp" />
     <ClInclude Include="include\SGL\Graphic\Drawable.hpp" />
+    <ClInclude Include="include\SGL\Graphic\Primitive.hpp" />
     <ClInclude Include="include\SGL\Graphic\Shape.hpp" />
     <ClInclude Include="include\SGL\Graphic\Smooth.hpp" />
     <ClInclude Include="include\SGL\Graphic\Sprite.hpp" />
@@ -44,6 +45,7 @@
     <ClInclude Include="include\SGL\System\Power.hpp" />
     <ClInclude Include="include\SGL\System\System.hpp" />
     <ClInclude Include="include\SGL\Window.hpp" />
+    <ClInclude Include="include\SGL\Window\DrawOptions.hpp" />
     <ClInclude Include="include\SGL\Window\Event.hpp" />
     <ClInclude Include="include\SGL\Window\Window.hpp" />
   </ItemGroup>
@@ -54,6 +56,7 @@
     <ClCompile Include="src\SGL\Core\OpenGL.cpp" />
     <ClCompile Include="src\SGL\Graphic\Blend.cpp" />
     <ClCompile Include="src\SGL\Graphic\Color.cpp" />
+    <ClCompile Include="src\SGL\Graphic\Primitive.cpp" />
     <ClCompile Include="src\SGL\Graphic\Shape.cpp" />
     <ClCompile Include="src\SGL\Graphic\Smooth.cpp" />
     <ClCompile Include="src\SGL\Graphic\Sprite.cpp" />
@@ -69,6 +72,7 @@
     <ClCompile Include="src\SGL\System\Mouse.cpp" />
     <ClCompile Include="src\SGL\System\Power.cpp" />
     <ClCompile Include="src\SGL\System\System.cpp" />
+    <ClCompile Include="src\SGL\Window\DrawOptions.cpp" />
     <ClCompile Include="src\SGL\Window\Event.cpp" />
     <ClCompile Include="src\SGL\Window\Window.cpp" />
   </ItemGroup>

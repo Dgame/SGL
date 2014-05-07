@@ -3,7 +3,7 @@
 
 #include <memory>
 #include <initializer_list>
-#include <SGL/Core\Types.hpp>
+#include <SGL/Core/Types.hpp>
 
 namespace sgl {
 	template <typename T>
@@ -18,16 +18,14 @@ namespace sgl {
 	public:
 		RangeIterator(const Range<T>* p_vec, uint32 pos);
 
-		bool operator !=(const RangeIterator<T>& other) const {
-			return _pos != other._pos;
-		}
-
-		T& operator *() const;
-
 		const RangeIterator<T>& operator ++() {
 			++_pos;
 
 			return *this;
+		}
+
+		T& operator *() const {
+			return _p_vec->ptr[_pos];
 		}
 	};
 
@@ -37,8 +35,13 @@ namespace sgl {
 	}
 
 	template <typename T>
-	T& RangeIterator<T>::operator *() const {
-		return _p_vec->ptr[_pos];
+	bool operator ==(const RangeIterator<T>& lhs, const RangeIterator<T>& rhs ) {
+		return lhs._p_vec == rhs._p_vec && lhs._pos == rhs._pos;
+	}
+
+	template <typename T>
+	bool operator !=(const RangeIterator<T>& lhs, const RangeIterator<T>& rhs) {
+		return !(lhs == rhs);
 	}
 
 	template <typename T>

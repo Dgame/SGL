@@ -5,7 +5,7 @@
 #include <sstream>
 #include <SDL.h>
 #include <SGL/Core/Types.hpp>
-#include <SGL\Core\Array.hpp>
+#include <SGL/Core/Array.hpp>
 
 namespace sgl {
 	static Array<uint16, 4> convertFromHex(const std::string& hex);

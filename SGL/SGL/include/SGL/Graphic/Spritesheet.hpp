@@ -1,9 +1,9 @@
 #ifndef SPRITESHEET_HPP
 #define SPRITESHEET_HPP
 
-#include <SGL/Graphic\Sprite.hpp>
-#include <SGL/Math\Rect.hpp>
-#include <SGL/System\Clock.hpp>
+#include <SGL/Graphic/Sprite.hpp>
+#include <SGL/Math/Rect.hpp>
+#include <SGL/System/Clock.hpp>
 
 namespace sgl {
 	class Spritesheet : public Sprite {

@@ -8,16 +8,21 @@
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
 
-#include <SGL/Core/OpenGL.hpp>
-#include <SGL/Core/Types.hpp>
+#if _DEBUG
+#include <SGL/Core/Output.hpp>
+#endif
+
 #include <SGL/Core/Scope.hpp>
-#include <SGL/Graphic\Color.hpp>
-#include <SGL/Graphic\Surface.hpp>
-#include <SGL/Graphic\Drawable.hpp>
-#include <SGL/Graphic\Texture.hpp>
-#include <SGL/Math\Rect.hpp>
-#include <SGL/Math\Vector2.hpp>
-#include <SGL/System\Clock.hpp>
+#include <SGL/Graphic/Color.hpp>
+#include <SGL/Graphic/Surface.hpp>
+#include <SGL/Graphic/Drawable.hpp>
+#include <SGL/Graphic/Primitive.hpp>
+#include <SGL/Graphic/Texture.hpp>
+#include <SGL/Graphic/Blend.hpp>
+#include <SGL/Math/Rect.hpp>
+#include <SGL/Math/Vector2.hpp>
+#include <SGL/System/Clock.hpp>
+#include <SGL/Window/DrawOptions.hpp>
 
 using sgl::FunctionScope;
 
@@ -63,6 +68,8 @@ namespace sgl {
 		SDL_Window* _window = nullptr;
 		SDL_GLContext _glContext = nullptr;
 
+		bool _shutdown = false;
+
 		static int _winCount;
 
 	public:
@@ -84,10 +91,12 @@ namespace sgl {
 		}
 
 		bool isOpen() const {
-			return _window != nullptr;
+			return !_shutdown;
 		}
 
-		void close();
+		void close() {
+			_shutdown = true;
+		}
 
 		void maximize() const {
 			SDL_MaximizeWindow(_window);
@@ -194,8 +203,8 @@ namespace sgl {
 		void draw(const Drawable& d) const {
 			d.draw(*this);
 		}
-
-		void draw(const float* vertices, const float* texCoords, const Texture* texture) const;
+		void Window::draw(const Drawable& d, const DrawOptions options) const;
+		void Window::draw(const Primitive& p, const float* texCoords, const Texture* texture) const;
 		void display() const;
 	};
 }

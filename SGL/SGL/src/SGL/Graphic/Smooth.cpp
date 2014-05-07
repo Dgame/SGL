@@ -1,4 +1,4 @@
-#include <SGL\Graphic\Smooth.hpp>
+#include <SGL/Graphic/Smooth.hpp>
 
 namespace sgl {
 	bool operator ==(const Smooth& lhs, const Smooth& rhs) {

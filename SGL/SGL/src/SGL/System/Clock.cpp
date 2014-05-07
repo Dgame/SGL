@@ -1,4 +1,4 @@
-#include <SGL/System\Clock.hpp>
+#include <SGL/System/Clock.hpp>
 
 namespace sgl {
 	/**

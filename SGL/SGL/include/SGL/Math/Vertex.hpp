@@ -1,8 +1,8 @@
 #ifndef VERTEX_HPP
 #define VERTEX_HPP
 
-#include <SGL/Graphic\Color.hpp>
-#include <SGL/Math\Vector2.hpp>
+#include <SGL/Graphic/Color.hpp>
+#include <SGL/Math/Vector2.hpp>
 
 namespace sgl {
 	struct Vertex {

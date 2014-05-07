@@ -1,4 +1,4 @@
-#include <SGL/Graphic\Surface.hpp>
+#include <SGL/Graphic/Surface.hpp>
 
 namespace sgl {
 	Surface::Surface() : _surface(nullptr) {

@@ -1,5 +1,5 @@
-#include <SGL\Core\Scope.hpp>
-#include <SGL/Graphic\Shape.hpp>
+#include <SGL/Graphic/Shape.hpp>
+#include <SGL/Window/Window.hpp>
 
 namespace sgl {
 	Shape::Shape(Type _type) : type(_type) {
@@ -68,13 +68,11 @@ namespace sgl {
 		}
 	}
 
-	void Shape::draw(const Window&) const {
+	void Shape::draw(const Window& wnd) const {
 		if (this->vertices.size() == 0)
 			return;
 
 		GLAttribScope attr(GL_ENABLE_BIT);
-		if (this->texture == nullptr)
-			glDisable(GL_TEXTURE_2D);
 
 		if (this->smooth.target != Smooth::Target::None) {
 			switch (this->smooth.target) {
@@ -95,28 +93,17 @@ namespace sgl {
 		if (this->lineWidth > 1)
 			glLineWidth(this->lineWidth);
 
-		glEnableClientState(GL_COLOR_ARRAY);
-
-		const Vertex* vptr = &this->vertices[0];
-
 		GLMatrixScope mat;
-
 		GraphTransform::_applyTransformation();
-
-		glVertexPointer(2, GL_FLOAT, sizeof(Vertex), &vptr->x);
-		glColorPointer(4, GL_FLOAT, sizeof(Vertex), &vptr->r);
-		glTexCoordPointer(2, GL_FLOAT, sizeof(Vertex), &vptr->tx);
 
 		const Type shape_type = this->texture == nullptr && !this->fill ? Type::LineLoop : this->type;
 
-		if (this->texture != nullptr)
-			this->texture->bind();
+		const Vertex* vptr = &this->vertices[0];
 
-		glDrawArrays(static_cast<GLenum>(shape_type), 0, this->vertices.size());
-		glDisableClientState(GL_COLOR_ARRAY);
+		Primitive p(&vptr->x, &vptr->r, static_cast<GLenum>(shape_type), this->vertices.size());
+		p.offset = sizeof(Vertex);
 
-		if (this->texture != nullptr)
-			this->texture->unbind();
+		wnd.draw(p, &vptr->tx, this->texture);
 	}
 
 	void Shape::calculateCenter() {

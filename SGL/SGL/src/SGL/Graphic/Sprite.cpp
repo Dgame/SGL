@@ -1,5 +1,5 @@
-#include <SGL\Core\Scope.hpp>
-#include <SGL/Graphic\Sprite.hpp>
+#include <SGL/Graphic/Sprite.hpp>
+#include <SGL/Window/Window.hpp>
 
 namespace sgl {
 	Sprite::Sprite() : position(0, 0) {
@@ -31,9 +31,8 @@ namespace sgl {
 		};
 
 		GLMatrixScope mat;
-
 		Transform::_applyTransformation(dx + (dw / 2), dy + (dh / 2));
 
-		wnd.draw(vertices, texCoords, _texture);
+		wnd.draw(Primitive(vertices), texCoords, _texture);
 	}
 }

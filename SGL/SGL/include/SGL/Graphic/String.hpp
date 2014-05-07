@@ -5,12 +5,12 @@
 #include <stdarg.h>
 #include <memory>
 #include <vector>
-#include <SGL/Graphic\Drawable.hpp>
-#include <SGL/Graphic\Color.hpp>
-#include <SGL/Graphic\Texture.hpp>
-#include <SGL/System\Font.hpp>
-#include <SGL/Math\Vector2.hpp>
-#include <SGL/Window\Window.hpp>
+#include <SGL/Graphic/Drawable.hpp>
+#include <SGL/Graphic/Primitive.hpp>
+#include <SGL/Graphic/Color.hpp>
+#include <SGL/Graphic/Texture.hpp>
+#include <SGL/System/Font.hpp>
+#include <SGL/Math/Vector2.hpp>
 
 namespace sgl {
 	class String : public Drawable {

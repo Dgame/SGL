@@ -1,4 +1,4 @@
-#include <SGL\Graphic\Transformable.hpp>
+#include <SGL/Graphic/Transformable.hpp>
 
 namespace sgl {
 	float Transformable::EnsureRotationRange(float rotation) {

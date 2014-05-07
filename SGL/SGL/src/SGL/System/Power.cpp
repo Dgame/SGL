@@ -1,4 +1,4 @@
-#include <SGL/System\Power.hpp>
+#include <SGL/System/Power.hpp>
 
 namespace sgl {
 	Power::Power(uint32 sec, uint8 perc, State _state) : seconds(sec), percent(perc), state(_state) {

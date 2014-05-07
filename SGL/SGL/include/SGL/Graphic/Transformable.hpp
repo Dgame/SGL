@@ -1,8 +1,8 @@
 #ifndef TRANSFORMABLE_HPP
 #define TRANSFORMABLE_HPP
 
-#include <SGL\Core\OpenGL.hpp>
-#include <SGL\Math\Vector2.hpp>
+#include <SGL/Core/OpenGL.hpp>
+#include <SGL/Math/Vector2.hpp>
 
 namespace sgl {
 	class Transformable {

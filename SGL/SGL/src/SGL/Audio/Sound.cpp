@@ -1,4 +1,4 @@
-#include <SGL/Audio\Sound.hpp>
+#include <SGL/Audio/Sound.hpp>
 
 namespace sgl {
 	uint16 Sound::ChannelCount = 0;

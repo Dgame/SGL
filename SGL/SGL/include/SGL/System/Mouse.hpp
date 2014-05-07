@@ -2,8 +2,8 @@
 #define MOUSE_HPP
 
 #include <SDL.h>
-#include <SGL\Window\Window.hpp>
-#include <SGL/Graphic\Surface.hpp>
+#include <SGL/Window/Window.hpp>
+#include <SGL/Graphic/Surface.hpp>
 
 namespace sgl {
 	namespace internal {

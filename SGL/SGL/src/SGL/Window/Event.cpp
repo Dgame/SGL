@@ -1,4 +1,4 @@
-#include <SGL/Window\Event.hpp>
+#include <SGL/Window/Event.hpp>
 
 namespace sgl {
 	bool Event::_Process(Event& event, const SDL_Event& sdl_event) {

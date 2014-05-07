@@ -1,8 +1,8 @@
 #ifndef BLEND_HPP
 #define BLEND_HPP
 
-#include <SGL\Core\OpenGL.hpp>
-#include <SGL\Graphic\Color.hpp>
+#include <SGL/Core/OpenGL.hpp>
+#include <SGL/Graphic/Color.hpp>
 
 namespace sgl {
 	struct Blend {
@@ -24,10 +24,7 @@ namespace sgl {
 		Factor src;
 		Factor dst;
 
-		Color color = Color::White.withTransparency(0);
-
 		explicit Blend(Factor src, Factor dst);
-		explicit Blend(Factor src, Factor dst, const Color& col);
 
 		void apply() const;
 

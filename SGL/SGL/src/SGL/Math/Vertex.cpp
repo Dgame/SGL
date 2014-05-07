@@ -1,4 +1,4 @@
-#include <SGL/Math\Vertex.hpp>
+#include <SGL/Math/Vertex.hpp>
 
 namespace sgl {
 	Vertex::Vertex(float _x, float _y) : Vertex(_x, _y, 0, 0) {

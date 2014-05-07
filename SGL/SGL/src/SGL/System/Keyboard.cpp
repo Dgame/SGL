@@ -1,4 +1,4 @@
-#include <SGL/System\Keyboard.hpp>
+#include <SGL/System/Keyboard.hpp>
 
 namespace sgl {
 	const uint8* Keyboard::GetState() {

@@ -3,7 +3,7 @@
 
 #include <math.h>
 #include <SDL.h>
-#include <SGL/Core\Types.hpp>
+#include <SGL/Core/Types.hpp>
 
 namespace sgl {
 	/**
