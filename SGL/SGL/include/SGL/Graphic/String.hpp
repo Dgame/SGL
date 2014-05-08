@@ -2,9 +2,9 @@
 #define STRING_HPP
 
 #include <string>
-#include <stdarg.h>
 #include <memory>
 #include <vector>
+#include <stdio.h>
 #include <SGL/Graphic/Drawable.hpp>
 #include <SGL/Graphic/Primitive.hpp>
 #include <SGL/Graphic/Color.hpp>
@@ -32,7 +32,7 @@ namespace sgl {
 		Font::Mode mode;
 		Vector2f position;
 
-		explicit String();
+		String();
 		explicit String(Font& fnt);
 
 		void setFont(Font& fnt) {

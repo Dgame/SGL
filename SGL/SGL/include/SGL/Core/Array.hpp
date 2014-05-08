@@ -2,6 +2,8 @@
 #define ARRAY_HPP
 
 #include <initializer_list>
+#include <algorithm>
+#include <cstring>
 #include <SGL/Core/Types.hpp>
 
 namespace sgl {
@@ -47,7 +49,7 @@ namespace sgl {
 	struct Array {
 		T data[N];
 
-		explicit Array();
+		Array();
 		explicit Array(std::initializer_list<T> range);
 
 		uint32 length() const {

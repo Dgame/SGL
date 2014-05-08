@@ -2,6 +2,7 @@
 #define RECT_HPP
 
 #include <SDL.h>
+#include <typeinfo>
 #include <SGL/Math/Vector2.hpp>
 
 namespace sgl {
@@ -12,11 +13,11 @@ namespace sgl {
 		T width = 0;
 		T height = 0;
 
-		explicit Rect();
+		Rect();
 		explicit Rect(T px, T py, T pw, T ph);
 		explicit Rect(const Vector2s vec, T pw, T ph);
 
-		static SDL_Rect* Rect<T>::Copy(const Rect<T>* from, SDL_Rect& too);
+		static SDL_Rect* Copy(const Rect<T>* from, SDL_Rect& too);
 
 		bool isEmpty() const;
 		Rect<T> getUnion(const Rect<T>& rect) const;
@@ -121,7 +122,7 @@ namespace sgl {
 	}
 
 	template <typename T>
-	bool Rect<T>::intersects(const Rect<T>& rect, Rect<T>* overlap = nullptr) const {
+	bool Rect<T>::intersects(const Rect<T>& rect, Rect<T>* overlap) const {
 		SDL_Rect a;
 		SDL_Rect b;
 

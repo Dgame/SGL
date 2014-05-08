@@ -75,8 +75,8 @@ namespace sgl {
 	public:
 		uint16 framerateLimit;
 
-		Window(uint16 width, uint16 height, const std::string& title, Style style = Style::Default);
-		Window(const ShortRect& rect, const std::string& title, Style style = Style::Default);
+		explicit Window(uint16 width, uint16 height, const std::string& title, Style style = Style::Default);
+		explicit Window(const ShortRect& rect, const std::string& title, Style style = Style::Default);
 
 		Window(const Window& wnd) = delete;
 
@@ -203,8 +203,9 @@ namespace sgl {
 		void draw(const Drawable& d) const {
 			d.draw(*this);
 		}
-		void Window::draw(const Drawable& d, const DrawOptions options) const;
-		void Window::draw(const Primitive& p, const float* texCoords, const Texture* texture) const;
+
+		void draw(const Drawable& d, const DrawOptions options) const;
+		void draw(const Primitive& p, const float* texCoords, const Texture* texture) const;
 		void display() const;
 	};
 }

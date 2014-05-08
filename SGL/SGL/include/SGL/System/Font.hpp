@@ -80,19 +80,19 @@ namespace sgl {
 
 		void loadFromFile(const std::string& filename, uint8 fontSize = 0);
 
-		void Font::setStyle(Font::Style style) {
+		void setStyle(Font::Style style) {
 			TTF_SetFontStyle(_ttf, static_cast<int>(style));
 		}
 
-		Font::Style Font::getStyle() const {
+		Font::Style getStyle() const {
 			return static_cast<Style>(TTF_GetFontStyle(_ttf));
 		}
 
-		void Font::setHint(Font::Hint hint) {
+		void setHint(Font::Hint hint) {
 			TTF_SetFontHinting(_ttf, static_cast<int>(hint));
 		}
 
-		Font::Hint Font::getHint() const {
+		Font::Hint getHint() const {
 			return static_cast<Hint>(TTF_GetFontHinting(_ttf));
 		}
 

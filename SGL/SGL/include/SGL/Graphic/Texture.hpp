@@ -34,7 +34,7 @@ namespace sgl {
 		Format _format;
 
 	public:
-		explicit Texture();
+		Texture();
 		explicit Texture(const Surface& srfc, Format format = Format::None);
 
 		virtual ~Texture();

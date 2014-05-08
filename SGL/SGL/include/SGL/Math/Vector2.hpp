@@ -2,8 +2,13 @@
 #define VECTOR2_HPP
 
 #include <iostream>
-#include <math.h>
+#include <typeinfo>
+#include <cmath>
 #include <SGL/Core/Types.hpp>
+
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 
 namespace sgl {
 	template <typename T>
@@ -11,7 +16,7 @@ namespace sgl {
 		T x = 0;
 		T y = 0;
 
-		explicit Vector2();
+		Vector2();
 		explicit Vector2(T px, T py);
 		template <typename U>
 		explicit Vector2(const Vector2<U>& vec);
@@ -38,7 +43,7 @@ namespace sgl {
 		* Calculate the diff between two vectors.
 		*/
 		float diff(const Vector2<T>& vec) const {
-			return std::sqrtf(std::powf(this->x - vec.x, 2) + std:::powf(this->y - vec.y, 2));
+			return sqrtf(powf(this->x - vec.x, 2) + powf(this->y - vec.y, 2));
 		}
 
 		float scalar(const Vector2<T>& lhs, const Vector2<T>& rhs) const {
@@ -46,7 +51,7 @@ namespace sgl {
 		}
 
 		float length() const {
-			return std::sqrtf(std::powf(this->x, 2) * std::pow(this->y, 2));
+			return sqrtf(powf(this->x, 2) * pow(this->y, 2));
 		}
 	};
 
@@ -67,10 +72,10 @@ namespace sgl {
 	}
 
 	template <typename T>
-	float Vector2<T>::angleBetween(const Vector2<T>& vec, bool inDegrees = true) const {
-		const float angle = std::acosf(this->scalar(vec) / (this->length() * vec.length()));
+	float Vector2<T>::angleBetween(const Vector2<T>& vec, bool inDegrees) const {
+		const float angle = acosf(this->scalar(vec) / (this->length() * vec.length()));
 		if (inDegrees)
-			return angle * 180 / PI;
+			return angle * 180 / M_PI;
 
 		return angle;
 	}

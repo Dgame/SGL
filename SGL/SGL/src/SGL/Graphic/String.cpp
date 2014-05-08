@@ -1,6 +1,8 @@
 #include <SGL/Graphic/String.hpp>
 #include <SGL/Window/Window.hpp>
 
+#pragma warning (disable: 4996) /* vsprintf */
+
 namespace sgl {
 	String::String() : mode(Font::Mode::Solid), _texture(new Texture()) {
 
@@ -37,7 +39,7 @@ namespace sgl {
 			const int len = _vscprintf(fmt, marker) + 1;
 			// Create a char vector to hold the formatted string.
 			std::vector<char> buffer(len, '\0');
-			const int nWritten = _vsnprintf_s(&buffer[0], buffer.size(), len, fmt, marker);
+			const int nWritten = vsprintf(&buffer[0], fmt, marker);
 			if (nWritten > 0)
 				retStr = &buffer[0];
 			// Reset variable arguments

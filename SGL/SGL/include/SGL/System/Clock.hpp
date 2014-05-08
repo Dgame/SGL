@@ -53,7 +53,7 @@ namespace sgl {
 		float _fpsTime;
 
 	public:
-		explicit Clock();
+		Clock();
 
 		/**
 		* Reset the clock time

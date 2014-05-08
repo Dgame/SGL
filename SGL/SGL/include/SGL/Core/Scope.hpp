@@ -8,7 +8,7 @@ using std::function;
 
 namespace sgl {
 	struct GLMatrixScope {
-		explicit GLMatrixScope() {
+		GLMatrixScope() {
 			glPushMatrix();
 		}
 

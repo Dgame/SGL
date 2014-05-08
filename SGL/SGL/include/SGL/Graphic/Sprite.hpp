@@ -20,7 +20,7 @@ namespace sgl {
 	public:
 		Vector2f position;
 
-		explicit Sprite();
+		Sprite();
 		explicit Sprite(Texture& tex);
 
 		void setTexture(Texture& tex) {
