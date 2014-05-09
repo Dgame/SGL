@@ -4,7 +4,6 @@
 #include <string>
 #include <memory>
 #include <vector>
-#include <stdio.h>
 #include <SGL/Graphic/Drawable.hpp>
 #include <SGL/Graphic/Primitive.hpp>
 #include <SGL/Graphic/Color.hpp>

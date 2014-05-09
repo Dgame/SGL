@@ -2,7 +2,6 @@
 #define BLEND_HPP
 
 #include <SGL/Core/OpenGL.hpp>
-#include <SGL/Graphic/Color.hpp>
 
 namespace sgl {
 	struct Blend {

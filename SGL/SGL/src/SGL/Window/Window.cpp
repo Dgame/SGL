@@ -214,7 +214,7 @@ namespace sgl {
 		else
 			SDL_UpdateWindowSurface(_window);
 
-		if (this->getVerticalSync() != Sync::Enable && framerateLimit > 0)
-			Clock::Wait(1000 / framerateLimit);
+		if (this->getVerticalSync() != Sync::Enable && this->framerateLimit > 0)
+			Clock::Wait(1000 / this->framerateLimit);
 	}
 }

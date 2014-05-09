@@ -1,7 +1,6 @@
 #ifndef RANGE_HPP
 #define RANGE_HPP
 
-#include <memory>
 #include <cstring>
 #include <initializer_list>
 #include <SGL/Core/Types.hpp>
