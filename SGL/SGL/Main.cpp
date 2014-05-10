@@ -92,8 +92,8 @@ int main() {
 	sgl::Sound sound1("samples/Audio/expl.wav");
 	sgl::Sound sound2("samples/Audio/orchestral.ogg");
 
-	//sgl::Mouse::SetCursor(sgl::Mouse::Cursor::SizeNS);
-	sgl::Mouse::SetCursor(icon);
+	sgl::Mouse::SetCursor(sgl::Mouse::Cursor::Size_All);
+	//sgl::Mouse::SetCursor(icon);
 	std::cout << "Maus = " << sgl::Mouse::IsCursorShown() << std::endl;
 
 	std::cout << (sgl::System::Platform() == sgl::System::OS::Windows ? "Du bist auf Windows" : "Unbekanntes OS")
