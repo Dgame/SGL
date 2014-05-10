@@ -103,6 +103,9 @@ int main() {
 	box.calculateCenter();
 	box.smooth.set(sgl::Smooth::Target::Line, sgl::Smooth::Mode::Nicest);
 
+	//sgl::Vector2s vs(42, 23);
+	//box.move(vs);
+
 	sgl::Font fnt2("samples/Font/arial.ttf", 16);
 	sgl::String str2(fnt2);
 	str2.setColor(&sgl::Color::White, &sgl::Color::Red);

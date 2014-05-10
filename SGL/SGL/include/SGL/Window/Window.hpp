@@ -2,17 +2,11 @@
 #define WINDOW_HPP
 
 #include <string>
-#include <SDL.h>
-#undef main
-#include <SDL_image.h>
-#include <SDL_ttf.h>
-#include <SDL_mixer.h>
 
 #if _DEBUG
 #include <SGL/Core/Output.hpp>
 #endif
 
-#include <SGL/Core/Scope.hpp>
 #include <SGL/Graphic/Color.hpp>
 #include <SGL/Graphic/Surface.hpp>
 #include <SGL/Graphic/Drawable.hpp>
@@ -23,11 +17,7 @@
 #include <SGL/Math/Vector2.hpp>
 #include <SGL/System/Clock.hpp>
 #include <SGL/Window/DrawOptions.hpp>
-
-using sgl::FunctionScope;
-
-static void _sdl_init();
-static void _sdl_quit();
+#include <SGL/Window/Config.hpp>
 
 namespace sgl {
 	class Window {

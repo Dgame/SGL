@@ -45,11 +45,13 @@
     <ClInclude Include="include\SGL\System\Power.hpp" />
     <ClInclude Include="include\SGL\System\System.hpp" />
     <ClInclude Include="include\SGL\Window.hpp" />
+    <ClInclude Include="include\SGL\Window\Config.hpp" />
     <ClInclude Include="include\SGL\Window\DrawOptions.hpp" />
     <ClInclude Include="include\SGL\Window\Event.hpp" />
     <ClInclude Include="include\SGL\Window\Window.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Config.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="src\SGL\Audio\Music.cpp" />
     <ClCompile Include="src\SGL\Audio\Sound.cpp" />
@@ -83,7 +85,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
