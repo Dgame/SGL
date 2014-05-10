@@ -16,7 +16,7 @@ namespace sgl {
 		T x = 0;
 		T y = 0;
 
-		Vector2();
+		Vector2() = default;
 		explicit Vector2(T px, T py);
 		template <typename U>
 		explicit Vector2(const Vector2<U>& vec);
@@ -54,11 +54,6 @@ namespace sgl {
 			return sqrtf(powf(this->x, 2) * pow(this->y, 2));
 		}
 	};
-
-	template <typename T>
-	Vector2<T>::Vector2() : x(0), y(0) {
-
-	}
 
 	template <typename T>
 	Vector2<T>::Vector2(T px, T py) : x(px), y(py) {

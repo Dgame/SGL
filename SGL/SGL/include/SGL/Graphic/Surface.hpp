@@ -24,7 +24,7 @@
 namespace sgl {
 	class Surface {
 	private:
-		SDL_Surface* _surface;
+		SDL_Surface* _surface = nullptr;
 
 	public:
 		static const uint8 DefaultDepth = 32;
@@ -63,7 +63,7 @@ namespace sgl {
 		};
 
 	public:
-		Surface();
+		Surface() = default;
 		explicit Surface(SDL_Surface* srfc);
 		explicit Surface(const std::string& filename);
 		explicit Surface(uint16 width, uint16 height, uint8 depth = DefaultDepth);

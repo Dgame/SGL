@@ -13,7 +13,7 @@ namespace sgl {
 		T width = 0;
 		T height = 0;
 
-		Rect();
+		Rect() = default;
 		explicit Rect(T px, T py, T pw, T ph);
 		explicit Rect(const Vector2s vec, T pw, T ph);
 
@@ -68,12 +68,6 @@ namespace sgl {
 			return Vector2s(x, y);
 		}
 	};
-
-
-	template <typename T>
-	Rect<T>::Rect() : x(0), y(0), width(0), height(0) {
-
-	}
 
 	template <typename T>
 	Rect<T>::Rect(T px, T py, T pw, T ph) : x(px), y(py), width(pw), height(ph) {

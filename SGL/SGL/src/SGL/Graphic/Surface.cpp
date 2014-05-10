@@ -1,10 +1,6 @@
 #include <SGL/Graphic/Surface.hpp>
 
 namespace sgl {
-	Surface::Surface() : _surface(nullptr) {
-
-	}
-
 	Surface::Surface(SDL_Surface* srfc) : _surface(srfc) {
 
 	}

@@ -50,7 +50,7 @@ namespace sgl {
 		return time;
 	}
 
-	Clock::Clock() : _startTime(0), _numFrames(0), _currentFps(0), _fpsTime(0) {
+	Clock::Clock() {
 		reset();
 	}
 

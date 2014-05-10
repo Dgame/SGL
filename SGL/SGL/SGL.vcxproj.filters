@@ -248,7 +248,7 @@
     <ClCompile Include="src\SGL\Graphic\Primitive.cpp">
       <Filter>Quelldateien\SGL\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Config.cpp">
+    <ClCompile Include="src\SGL\Window\Config.cpp">
       <Filter>Quelldateien\SGL\Window</Filter>
     </ClCompile>
   </ItemGroup>

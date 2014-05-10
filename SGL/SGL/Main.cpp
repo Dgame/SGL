@@ -94,6 +94,7 @@ int main() {
 
 	//sgl::Mouse::SetCursor(sgl::Mouse::Cursor::SizeNS);
 	sgl::Mouse::SetCursor(icon);
+	std::cout << "Maus = " << sgl::Mouse::IsCursorShown() << std::endl;
 
 	std::cout << (sgl::System::Platform() == sgl::System::OS::Windows ? "Du bist auf Windows" : "Unbekanntes OS")
 		<< ". RAM = " << sgl::System::RAM() << " Cores = " << sgl::System::CountGPU() << std::endl;

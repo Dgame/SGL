@@ -1,14 +1,29 @@
 #include <SGL/System/Mouse.hpp>
 
 namespace sgl {
+	namespace internal {
+		void Cursor::setCursor(SDL_Cursor* ptr) {
+			printf("Reset Cursor\n");
+
+			_freeCursor();
+
+			_cursor = ptr;
+			SDL_SetCursor(ptr);
+		}
+
+		Cursor::~Cursor() {
+			_freeCursor();
+		}
+	}
+
 	void Mouse::SetCursor(Cursor cursor) {
 		SDL_Cursor* cursor_ptr = SDL_CreateSystemCursor(static_cast<SDL_SystemCursor>(cursor));
-		internal::CurrentCursor = internal::Cursor(cursor_ptr);
+		internal::CurrentCursor.setCursor(cursor_ptr);
 	}
 
 	void Mouse::SetCursor(const Surface& srfc) {
 		SDL_Cursor* cursor_ptr = SDL_CreateColorCursor(srfc.ptr(), 0, 0);
-		internal::CurrentCursor = internal::Cursor(cursor_ptr);
+		internal::CurrentCursor.setCursor(cursor_ptr);
 	}
 
 	void Mouse::ShowCursor(bool show) {

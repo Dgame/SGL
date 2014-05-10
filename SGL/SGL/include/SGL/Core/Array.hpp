@@ -49,7 +49,7 @@ namespace sgl {
 	struct Array {
 		T data[N];
 
-		Array();
+		Array() = default;
 		explicit Array(std::initializer_list<T> range);
 
 		uint32 length() const {
@@ -74,11 +74,6 @@ namespace sgl {
 			return this->data[index];
 		}
 	};
-
-	template <typename T, uint32 N>
-	Array<T, N>::Array() {
-
-	}
 
 	template <typename T, uint32 N>
 	Array<T, N>::Array(std::initializer_list<T> range) {

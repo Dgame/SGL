@@ -47,10 +47,10 @@ namespace sgl {
 
 	class Clock {
 	private:
-		uint32 _startTime;
-		uint32 _numFrames;
-		uint32 _currentFps;
-		float _fpsTime;
+		uint32 _startTime = 0;
+		uint32 _numFrames = 0;
+		uint32 _currentFps = 0;
+		float _fpsTime = 0;
 
 	public:
 		Clock();

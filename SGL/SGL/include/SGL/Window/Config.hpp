@@ -12,9 +12,11 @@
 
 using sgl::FunctionScope;
 
-namespace internal {
-	void sdl_init();
-	void sdl_quit();
+namespace sgl {
+	namespace internal {
+		void sdl_init();
+		void sdl_quit();
+	}
 }
 
 #endif
