@@ -33,4 +33,8 @@ using uint64 = std::uint64_t;
 
 #endif
 
+using float32 = float;
+using float64 = double;
+using float80 = long double;
+
 #endif

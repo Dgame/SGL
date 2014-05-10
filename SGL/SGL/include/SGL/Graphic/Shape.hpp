@@ -49,14 +49,11 @@ namespace sgl {
 		void calculateCenter() override;
 		void setColor(const Color& col);
 		void move(float x, float y);
-		template <typename T>
-		void move(const Vector2<T>& vec);
-	};
 
-	template <typename T>
-	void Shape::move(const Vector2<T>& vec) { // TODO
-		this->move(vec.x, vec.y);
-	}
+		void move(const Vector2f& vec) {
+			this->move(vec.x, vec.y);
+		}
+	};
 }
 
 #endif

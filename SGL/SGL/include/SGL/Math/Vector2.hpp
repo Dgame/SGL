@@ -67,7 +67,7 @@ namespace sgl {
 
 	template <typename T>
 	template <typename U>
-	Vector2<T>::Vector2(const Vector2<U>& vec) : x(static_cast<T>(vec.x)), y(static_cast<T>(vec.y)) {
+	Vector2<T>::Vector2(const Vector2<U>& vec) : Vector2(static_cast<T>(vec.x), static_cast<T>(vec.y)) {
 
 	}
 
@@ -192,28 +192,6 @@ namespace sgl {
 	template <typename T>
 	Vector2<T> operator /(const Vector2<T>& lhs, const Vector2<T>& rhs) {
 		return Vector2<T>(lhs.x / rhs.x, lhs.y / rhs.y);
-	}
-
-	// #4
-
-	template <typename T>
-	Vector2<T> operator +(const Vector2<T>& vec, T value) {
-		return Vector2f(vec.x + value, vec.y + value);
-	}
-
-	template <typename T>
-	Vector2<T> operator -(const Vector2<T>& vec, T value) {
-		return Vector2f(vec.x - value, vec.y - value);
-	}
-
-	template <typename T>
-	Vector2<T> operator *(const Vector2<T>& vec, T value) {
-		return Vector2f(vec.x * value, vec.y * value);
-	}
-
-	template <typename T>
-	Vector2<T> operator /(const Vector2<T>& vec, T value) {
-		return Vector2f(vec.x / value, vec.y / value);
 	}
 
 	using Vector2f = Vector2<float>;
