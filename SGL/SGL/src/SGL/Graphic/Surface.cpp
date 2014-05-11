@@ -25,14 +25,14 @@ namespace sgl {
 	void Surface::loadFromFile(const std::string& filename) {
 		_surface = IMG_Load(filename.c_str());
 		if (_surface == nullptr) {
-			printf("Cannot load image %s: %s.\n", filename.c_str(), SDL_GetError());
+			println("Cannot load image: ", filename, ':', SDL_GetError());
 			exit(1);
 		}
 	}
 
 	void Surface::loadFromMemory(void* pixels, uint16 width, uint16 height, uint8 depth) {
 		if (pixels == nullptr) {
-			printf("No memory\n");
+			println("No memory");
 			exit(1);
 		}
 

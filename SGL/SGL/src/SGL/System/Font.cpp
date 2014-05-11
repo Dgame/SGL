@@ -8,7 +8,7 @@ namespace sgl {
 
 		_ttf = TTF_OpenFont(filename.c_str(), _fontSize);
 		if (_ttf == nullptr) {
-			printf("Could not load font %s. TTF Error: %s.", filename.c_str(), TTF_GetError());
+			println("Could not load font: ", filename, " TTF Error: ", TTF_GetError());
 			exit(1);
 		}
 	}
@@ -34,7 +34,7 @@ namespace sgl {
 		}
 
 		if (srfc == nullptr) {
-			printf("NULL Surface: %s\n", SDL_GetError());
+			println("NULL Surface: ", SDL_GetError());
 			exit(1);
 		}
 
@@ -46,7 +46,7 @@ namespace sgl {
 			SDL_FreeSurface(srfc);
 
 			if (new_srfc == nullptr) {
-				printf("NULL Surface (convert): %s\n", SDL_GetError());
+				println("NULL Surface (convert): ", SDL_GetError());
 				exit(1);
 			}
 

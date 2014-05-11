@@ -3,8 +3,9 @@
 
 #include <string>
 #include <SDL_ttf.h>
-#include <SGL/Core/Types.hpp>
 #include <SGL/Graphic/Surface.hpp>
+#include <SGL/Core/Types.hpp>
+#include <SGL/Core/Output.hpp>
 
 namespace sgl {
 	class Font {

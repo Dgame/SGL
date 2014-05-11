@@ -3,8 +3,6 @@
 namespace sgl {
 	namespace internal {
 		void Cursor::setCursor(SDL_Cursor* ptr) {
-			printf("Reset Cursor\n");
-
 			_freeCursor();
 
 			_cursor = ptr;

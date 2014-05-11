@@ -13,7 +13,7 @@ namespace sgl {
 		_chunk = Mix_LoadWAV(filename.c_str());
 
 		if (!_chunk) {
-			printf("Copuld not load Wave File %s: %s\n", filename.c_str(), Mix_GetError());
+			println("Could not load Wave File ", filename.c_str(), ':', Mix_GetError());
 			exit(1);
 		}
 	}
@@ -22,7 +22,7 @@ namespace sgl {
 		loops = loops > 0 ? loops - 1 : loops;
 
 		if (Mix_PlayChannelTimed(this->channel, _chunk, loops, delay) == -1) {
-			printf("Could not play Sound: %s\n", Mix_GetError());
+			println("Could not play Sound: ", Mix_GetError());
 			exit(1);
 		}
 	}
