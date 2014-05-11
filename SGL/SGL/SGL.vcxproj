@@ -109,8 +109,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>E:\C\SDL2_mixer-2.0.0\include;E:\C\SDL2_ttf-2.0.12\include;C:\Users\Besitzer\Documents\GitHub\sgl\SGL\SGL\include;E:\C\SDL2_image-2.0.0\include;E:\C\SDL2-2.0.3\include;$(IncludePath)</IncludePath>
-    <LibraryPath>E:\C\SDL2_mixer-2.0.0\lib\x86;E:\C\SDL2_ttf-2.0.12\lib\x86;E:\C\SDL2_image-2.0.0\lib\x86;E:\C\SDL2-2.0.3\lib\x86;$(LibraryPath)</LibraryPath>
+    <LibraryPath>E:\C\SDL2_mixer-2.0.0\lib\x86;E:\C\SDL2_ttf-2.0.12\lib\x86;E:\C\SDL2_image-2.0.0\lib\x86;E:\C\SDL2-2.0.3\lib\x86;E:\C\GLEW\lib\Release\Win32;$(LibraryPath)</LibraryPath>
+    <IncludePath>E:\C\SDL2_mixer-2.0.0\include;E:\C\SDL2_ttf-2.0.12\include;C:\Users\Besitzer\Documents\GitHub\sgl\SGL\SGL\include;E:\C\SDL2_image-2.0.0\include;E:\C\SDL2-2.0.3\include;E:\C\GLEW\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -135,7 +135,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;opengl32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

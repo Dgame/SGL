@@ -1,7 +1,6 @@
 #ifndef COLOR_HPP
 #define COLOR_HPP
 
-#include <array>
 #include <sstream>
 #include <SDL.h>
 #include <SGL/Core/Types.hpp>
@@ -9,6 +8,12 @@
 
 namespace sgl {
 	static Array<uint16, 4> convertFromHex(const std::string& hex);
+
+	struct GLColor {
+		float red, green, blue, alpha;
+
+		explicit GLColor(float r, float g, float b, float a = 1.f);
+	};
 
 	struct Color {
 		static const Color Black;
@@ -28,9 +33,18 @@ namespace sgl {
 		}
 
 		static Color FromGLMode(float pr, float pg, float pb, float pa = 1.f);
-		static std::array<float, 4> InGLMode(const Color& col);
+		static Color FromGLMode(const GLColor& glcol);
+		static GLColor InGLMode(const Color& col);
 		static void Copy(const Color* from, SDL_Color& too, const Color& def);
 	};
+
+	void operator +=(Color& lhs, uint8 value);
+	void operator -=(Color& lhs, uint8 value);
+	void operator *=(Color& lhs, uint8 value);
+
+	Color operator +(const Color& lhs, const Color& rhs);
+	Color operator -(const Color& lhs, const Color& rhs);
+	Color operator *(const Color& lhs, const Color& rhs);
 
 	bool operator ==(const Color& lhs, const Color& rhs);
 	bool operator !=(const Color& lhs, const Color& rhs);

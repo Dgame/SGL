@@ -57,6 +57,10 @@ namespace sgl {
 		return std::move(rgba);
 	}
 
+	GLColor::GLColor(float r, float g, float b, float a) : red(r), green(g), blue(b), alpha(a) {
+
+	}
+
 	const Color Color::Black(0, 0, 0);
 	const Color Color::White(255, 255, 255);
 	const Color Color::Red(255, 0, 0);
@@ -77,24 +81,26 @@ namespace sgl {
 		this->alpha = rgba.at(3) % 256;
 	}
 
-	Color Color::FromGLMode(float pr, float pg, float pb, float pa) {
-		Color result = Color::White;
-		result.red = static_cast<uint8>(pr > 1.f ? pr : pr * 255);
-		result.green = static_cast<uint8>(pg > 1.f ? pg : pg * 255);
-		result.blue = static_cast<uint8>(pb > 1.f ? pb : pb * 255);
-		result.alpha = static_cast<uint8>(pa > 1.f ? pa : pa * 255);
-
-		return result;
+	Color Color::FromGLMode(const GLColor& gl_col) {
+		return Color::FromGLMode(gl_col.red, gl_col.green, gl_col.blue, gl_col.alpha);
 	}
 
-	std::array<float, 4> Color::InGLMode(const Color& col) {
-		std::array<float, 4> arr;
-		arr[0] = col.red / 255.f;
-		arr[1] = col.green / 255.f;
-		arr[2] = col.blue / 255.f;
-		arr[3] = col.alpha / 255.f;
+	Color Color::FromGLMode(float pr, float pg, float pb, float pa) {
+		const float r = static_cast<uint8>(pr > 1.f ? pr : pr * 255);
+		const float g = static_cast<uint8>(pg > 1.f ? pg : pg * 255);
+		const float b = static_cast<uint8>(pb > 1.f ? pb : pb * 255);
+		const float a = static_cast<uint8>(pa > 1.f ? pa : pa * 255);
 
-		return std::move(arr);
+		return Color(r, g, b, a);
+	}
+
+	GLColor Color::InGLMode(const Color& col) {
+		const float r = col.red / 255.f;
+		const float g = col.green / 255.f;
+		const float b = col.blue / 255.;
+		const float a = col.alpha / 255.f;
+
+		return GLColor(r, g, b, a);
 	}
 
 	void Color::Copy(const Color* from, SDL_Color& too, const Color& def) {
@@ -111,6 +117,48 @@ namespace sgl {
 		}
 	}
 
+	void operator +=(Color& lhs, uint8 value) {
+		lhs.red += value;
+		lhs.green += value;
+		lhs.blue += value;
+		lhs.alpha += value;
+	}
+
+	void operator -=(Color& lhs, uint8 value) {
+		lhs.red -= value;
+		lhs.green -= value;
+		lhs.blue -= value;
+		lhs.alpha -= value;
+	}
+
+	void operator *=(Color& lhs, uint8 value) {
+		lhs.red *= value;
+		lhs.green *= value;
+		lhs.blue *= value;
+		lhs.alpha *= value;
+	}
+
+	Color operator +(const Color& lhs, const Color& rhs) {
+		return Color(std::min(lhs.red + rhs.red, 255),
+					 std::min(lhs.green + rhs.green, 255),
+					 std::min(lhs.blue + rhs.blue, 255),
+					 std::min(lhs.alpha + rhs.alpha, 255));
+	}
+
+	Color operator -(const Color& lhs, const Color& rhs) {
+		return Color(std::min(lhs.red - rhs.red, 0),
+					 std::min(lhs.green - rhs.green, 0),
+					 std::min(lhs.blue - rhs.blue, 0),
+					 std::min(lhs.alpha - rhs.alpha, 0));
+	}
+
+	Color operator *(const Color& lhs, const Color& rhs) {
+		return Color((lhs.red * rhs.red) / 255,
+					 (lhs.green * rhs.green) / 255,
+					 (lhs.blue * rhs.blue) / 255,
+					 (lhs.alpha * rhs.alpha) / 255);
+	}
+
 	bool operator ==(const Color& lhs, const Color& rhs) {
 		return lhs.red == rhs.red && lhs.green == rhs.green && lhs.blue == rhs.blue && lhs.alpha == rhs.alpha;
 	}
@@ -121,7 +169,7 @@ namespace sgl {
 
 	std::ostream& operator <<(std::ostream& strm, const Color& col) {
 		return strm << "Color("
-			<< static_cast<int16>(col.red) 
+			<< static_cast<int16>(col.red)
 			<< ',' << static_cast<int16>(col.green)
 			<< ',' << static_cast<int16>(col.blue)
 			<< ',' << static_cast<int16>(col.alpha) << ")";

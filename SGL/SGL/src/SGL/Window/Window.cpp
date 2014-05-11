@@ -8,28 +8,31 @@ namespace sgl {
 	}
 
 	Window::Window(const ShortRect& rect, const std::string& title, Style style) {
-		if (_winCount == 0)
-			internal::sdl_init();
+		if (_winCount == 0) {
+			if (!internal::sdl_init())
+				exit(1);
+		}
+
 		_winCount++;
 
 		_window = SDL_CreateWindow(title.c_str(), rect.x, rect.y, rect.width, rect.height, static_cast<int>(style));
 		if (_window == nullptr) {
-			printf("Error by creating a SDL2 window: %s.\n", SDL_GetError());
+			println("Error by creating a SDL2 window: ", SDL_GetError());
 			exit(1);
 		}
 
 		if (style & Style::OpenGL) {
 			_glContext = SDL_GL_CreateContext(_window);
 			if (_glContext == nullptr) {
-				printf("Error while creating gl context: %s\n", SDL_GetError());
+				println("Error while creating gl context: ", SDL_GetError());
 				exit(1);
 			}
 #if _DEBUG
-			char* GL_version = (char*) glGetString(GL_VERSION);
-			char* GL_vendor = (char*) glGetString(GL_VENDOR);
-			char* GL_renderer = (char*) glGetString(GL_RENDERER);
+			const uint8* GL_version = glGetString(GL_VERSION);
+			const uint8* GL_vendor = glGetString(GL_VENDOR);
+			const uint8* GL_renderer = glGetString(GL_RENDERER);
 
-			println(GL_version, " - ", GL_vendor, " - ", GL_renderer);
+			println("Version: ", GL_version, " - ", GL_vendor, " - ", GL_renderer);
 #endif
 			glMatrixMode(GL_PROJECTION);
 			glLoadIdentity();
@@ -58,6 +61,12 @@ namespace sgl {
 			this->setClearColor(Color::White);
 
 			SDL_GL_MakeCurrent(_window, _glContext);
+
+			const GLenum err = glewInit();
+			if (err != GLEW_OK) {
+				println("Couldn't initialize GLEW");
+				exit(1);
+			}
 		}
 	}
 
@@ -92,7 +101,7 @@ namespace sgl {
 		if (sync == Sync::Enable || sync == Sync::Disable)
 			return SDL_GL_SetSwapInterval(static_cast<int>(sync)) == 0;
 		else {
-			printf("Unknown sync mode. Sync mode must be one of Sync.Enable, Sync.Disable.\n");
+			println("Unknown sync mode. Sync mode must be one of Sync.Enable, Sync.Disable.");
 			exit(1);
 		}
 	}

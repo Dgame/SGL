@@ -3,10 +3,7 @@
 
 #include <string>
 
-#if _DEBUG
 #include <SGL/Core/Output.hpp>
-#endif
-
 #include <SGL/Graphic/Color.hpp>
 #include <SGL/Graphic/Surface.hpp>
 #include <SGL/Graphic/Drawable.hpp>
@@ -170,9 +167,8 @@ namespace sgl {
 		* This is also the background color of the window.
 		*/
 		void setClearColor(const Color& col) const {
-			const std::array<float, 4> gl_col = Color::InGLMode(col);
-
-			glClearColor(gl_col[0], gl_col[1], gl_col[2], gl_col[3]);
+			const GLColor gl_col = Color::InGLMode(col);
+			glClearColor(gl_col.red, gl_col.green, gl_col.blue, gl_col.alpha);
 		}
 
 		bool hasMouseFocus() const {

@@ -92,7 +92,7 @@ int main() {
 	sgl::Sound sound1("samples/Audio/expl.wav");
 	sgl::Sound sound2("samples/Audio/orchestral.ogg");
 
-	sgl::Mouse::SetCursor(sgl::Mouse::Cursor::Size_All);
+	sgl::Mouse::SetCursor(sgl::Mouse::Cursor::SizeAll);
 	//sgl::Mouse::SetCursor(icon);
 	std::cout << "Maus = " << sgl::Mouse::IsCursorShown() << std::endl;
 
@@ -114,7 +114,7 @@ int main() {
 	str2 = "Ein Test mit roten Background";
 	str2.position.set(200, 400);
 
-	sgl::Blend b1(sgl::Blend::Factor::DstColor, sgl::Blend::Factor::Zero);
+	sgl::Blend b1(sgl::Blend::Factor::One, sgl::Blend::Factor::OneMinusSrcAlpha);
 
 	sgl::Clock clock;
 
@@ -151,6 +151,8 @@ int main() {
 							case sgl::Keyboard::Code::Space:
 								box.rotate(15);
 								box.move(8, 0);
+
+								b1.color.alpha -= 25;
 								break;
 							default:
 								str = "You pressed a Key";
@@ -159,12 +161,8 @@ int main() {
 					break;
 				default: break;
 			}
-
-			//printf("Event Loop\n");
 		}
 
-		//printf("Frame\n");
-		//printf("Frames: %d\n", clock.getCurrentFps());
 		str.format("Framerate is %d", clock.getCurrentFps());
 
 		wnd.clear();

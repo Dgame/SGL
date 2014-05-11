@@ -12,7 +12,7 @@
 
 #endif
 
-#include <SDL_opengl.h> // TODO: bei allen anderen ebenso?
+#include <GL/glew.h>
 
 #elif defined(linux) || defined(__linux)
 

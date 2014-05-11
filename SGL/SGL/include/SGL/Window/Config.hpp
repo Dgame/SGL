@@ -9,12 +9,11 @@
 
 #include <SGL/Core/Scope.hpp>
 #include <SGL/Core/Types.hpp>
-
-using sgl::FunctionScope;
+#include <SGL/Core/Output.hpp>
 
 namespace sgl {
 	namespace internal {
-		void sdl_init();
+		bool sdl_init();
 		void sdl_quit();
 	}
 }
