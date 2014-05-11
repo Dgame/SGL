@@ -191,32 +191,24 @@ namespace sgl {
 		/**
 		* Clear the Event queue.
 		*/
-		static void Clear(Event::Type type) {
-			SDL_FlushEvent(static_cast<int>(type));
-		}
+		static void Clear(Event::Type type);
 
 		/**
 		* Set a state for a Event::Type
 		* Returns: the previous Type
 		* See: State enum
 		*/
-		Event::State SetState(Event::Type type, Event::State state) {
-			return static_cast<Event::State>(SDL_EventState(static_cast<int>(type), static_cast<int>(state)));
-		}
+		static Event::State SetState(Event::Type type, Event::State state);
 
 		/**
 		* Returns: if inside of the Event Queue is an Event of the given Type::
 		*/
-		bool HasEvent(Event::Type type) {
-			return SDL_HasEvent(static_cast<int>(type)) == SDL_TRUE;
-		}
+		static bool HasEvent(Event::Type type);
 
 		/**
 		* Returns: if the current Event queue has the Quit Event.
 		*/
-		bool HasQuitEvent() {
-			return SDL_QuitRequested();
-		}
+		static bool HasQuitEvent();
 
 		/**
 		* Waits for the given Event.

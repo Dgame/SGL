@@ -35,11 +35,11 @@ namespace sgl {
 
 	public:
 		Texture();
+		explicit Texture(const void* pixels, uint16 width, uint16 height, Format format = Format::None);
 		explicit Texture(const Surface& srfc, Format format = Format::None);
+		Texture(const Texture& tex);
 
 		virtual ~Texture();
-
-		static Texture LoadFromFile(const std::string& filename);
 
 		void setRepeat(bool repeat);
 		void setSmooth(bool smooth);

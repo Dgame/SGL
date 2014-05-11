@@ -65,6 +65,7 @@ namespace sgl {
 		explicit Surface(const std::string& filename);
 		explicit Surface(uint16 width, uint16 height, uint8 depth = DefaultDepth);
 		explicit Surface(void* pixel, uint16 width, uint16 height, uint8 depth = DefaultDepth);
+		Surface(const Surface& srfc);
 
 		virtual ~Surface();
 

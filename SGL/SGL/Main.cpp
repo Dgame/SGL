@@ -8,7 +8,7 @@ int main() {
 	sgl::Window wnd(640, 480, "Test");
 	//wnd.setClearColor(sgl::Color::Blue);
 	wnd.setVerticalSync(sgl::Window::Sync::Disable);
-	//wnd.framerateLimit = 30;
+	wnd.framerateLimit = 30;
 
 	uint32 pixels[256] = {
 		0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff,
@@ -82,8 +82,7 @@ int main() {
 
 	//sgl::Surface explo("samples/Images/test_3.png");
 	//sgl::Texture explo_tex(explo);
-	sgl::Texture explo_tex = sgl::Texture::LoadFromFile("samples/Images/test_3.png");
-
+	sgl::Texture explo_tex(sgl::Surface("samples/Images/test_3.png"));
 	sgl::Spritesheet animation(explo_tex);
 	animation.tickOffset = 150;
 	animation.view = sgl::ShortRect(0, 0, 43, 59);
@@ -114,7 +113,10 @@ int main() {
 	str2 = "Ein Test mit roten Background";
 	str2.position.set(200, 400);
 
+	std::cout << "sizeof(sgl::Texture) = " << sizeof(sgl::Texture) << std::endl;
+
 	sgl::Blend b1(sgl::Blend::Factor::One, sgl::Blend::Factor::OneMinusSrcAlpha);
+	b1.color.alpha = 0;
 
 	sgl::Clock clock;
 
@@ -149,10 +151,11 @@ int main() {
 								sound2.play();
 								break;
 							case sgl::Keyboard::Code::Space:
+								b1.color.alpha += 25;
+
 								box.rotate(15);
 								box.move(8, 0);
 
-								b1.color.alpha -= 25;
 								break;
 							default:
 								str = "You pressed a Key";
@@ -176,9 +179,9 @@ int main() {
 		wnd.draw(s);
 		wnd.draw(str);
 
-		//animation.row = 1;
-		//animation.slide(sgl::Spritesheet::Grid::Row);
-		//wnd.draw(animation);
+		animation.row = 1;
+		animation.slide(sgl::Spritesheet::Grid::Row);
+		wnd.draw(animation);
 
 		//icon_sprite.position.y += 1;
 		//icon_sprite.position.x += 1;

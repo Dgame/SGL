@@ -2,7 +2,9 @@
 
 namespace sgl {
 	Surface::Surface(SDL_Surface* srfc) : _surface(srfc) {
-
+#if _DEBUG
+		printf("SDL_Surface* CTOR\n");
+#endif
 	}
 
 	Surface::Surface(const std::string& filename) {
@@ -15,6 +17,12 @@ namespace sgl {
 
 	Surface::Surface(void* pixels, uint16 width, uint16 height, uint8 depth) {
 		this->loadFromMemory(pixels, width, height, depth);
+	}
+
+	Surface::Surface(const Surface& srfc) : Surface(srfc.pixels(), srfc.width(), srfc.height(), srfc.bits()) {
+#if _DEBUG
+		printf("Copy CTOR\n");
+#endif
 	}
 
 	Surface::~Surface() {

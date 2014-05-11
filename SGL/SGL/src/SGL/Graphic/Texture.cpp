@@ -26,18 +26,22 @@ namespace sgl {
 		glGenTextures(1, &_texId);
 	}
 
+	Texture::Texture(const void* pixels, uint16 width, uint16 height, Format format) {
+		this->loadFromMemory(pixels, width, height, format);
+	}
+
 	Texture::Texture(const Surface& srfc, Format format) : Texture() {
 		this->loadFrom(srfc, format);
 	}
 
-	Texture::~Texture() {
-		glDeleteTextures(1, &_texId);
+	Texture::Texture(const Texture& tex) {
+		const std::unique_ptr<uint32> pixels = tex.pixels();
+
+		this->loadFromMemory(pixels.get(), tex.width(), tex.height(), tex.format());
 	}
 
-	Texture Texture::LoadFromFile(const std::string& filename) {
-		Surface srfc(filename);
-
-		return Texture(srfc);
+	Texture::~Texture() {
+		glDeleteTextures(1, &_texId);
 	}
 
 	void Texture::setRepeat(bool repeat) {
