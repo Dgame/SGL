@@ -60,7 +60,7 @@ namespace sgl {
 			if (srfc.bits() == 32)
 				fmt = Texture::Format::BGRA;
 
-			_texture->loadFrom(srfc, fmt);
+			_texture->loadFromMemory(srfc.pixels(), srfc.width(), srfc.height(), fmt);
 			_changed = false;
 		}
 	}

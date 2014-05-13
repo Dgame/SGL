@@ -1,5 +1,4 @@
 #include <SGL/Graphic/Texture.hpp>
-#include <SGL/Core/OpenGL.hpp>
 
 namespace sgl {
 	uint8 fmtToBytes(Texture::Format fmt) {
@@ -23,15 +22,11 @@ namespace sgl {
 	}
 
 	Texture::Texture() {
-		glGenTextures(1, &_texId);
+		glGenTextures(1, &_glTexId);
 	}
 
 	Texture::Texture(const void* pixels, uint16 width, uint16 height, Format format) {
 		this->loadFromMemory(pixels, width, height, format);
-	}
-
-	Texture::Texture(const Surface& srfc, Format format) : Texture() {
-		this->loadFrom(srfc, format);
 	}
 
 	Texture::Texture(const Texture& tex) {
@@ -41,7 +36,7 @@ namespace sgl {
 	}
 
 	Texture::~Texture() {
-		glDeleteTextures(1, &_texId);
+		glDeleteTextures(1, &_glTexId);
 	}
 
 	void Texture::setRepeat(bool repeat) {
@@ -62,23 +57,12 @@ namespace sgl {
 		}
 	}
 
-	void Texture::loadFrom(const Surface& srfc, Format format) {
-		if (format == Format::None) {
-			if (!srfc.isMask(Surface::Mask::Red, 255))
-				format = srfc.bits() == 32 ? Format::BGRA : Format::BGR;
-			else
-				format = srfc.bits() == 32 ? Format::RGBA : Format::RGB;
-		}
-		
-		this->loadFromMemory(srfc.pixels(), srfc.width(), srfc.height(), format);
-	}
-
 	void Texture::loadFromMemory(const void* pixels, uint16 width, uint16 height, Format fmt) {
 		_format = fmt == Format::None ? Format::RGB : fmt;
 
 		this->bind();
 
-		glCheck(glBindTexture(GL_TEXTURE_2D, _texId));
+		glCheck(glBindTexture(GL_TEXTURE_2D, _glTexId));
 		glCheck(glTexImage2D(GL_TEXTURE_2D, 0, fmtToBytes(_format), width, height, 0, static_cast<GLenum>(_format), GL_UNSIGNED_BYTE, pixels));
 		glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, _repeat ? GL_REPEAT : GL_CLAMP));
 		glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, _repeat ? GL_REPEAT : GL_CLAMP));
@@ -104,8 +88,16 @@ namespace sgl {
 
 		this->bind();
 
-		glTexSubImage2D(GL_TEXTURE_2D, 0, x, y, width, height,
-						static_cast<GLenum>(_format), GL_UNSIGNED_BYTE, pixels);
+		glCheck(glTexSubImage2D(GL_TEXTURE_2D, 0, x, y, width, height,
+			static_cast<GLenum>(_format), GL_UNSIGNED_BYTE, pixels));
+
+		this->unbind();
+	}
+
+	void Texture::update(const void* pixels) const {
+		this->bind();
+
+		glCheck(glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, _width, _height, static_cast<GLenum>(_format), GL_UNSIGNED_BYTE, pixels));
 
 		this->unbind();
 	}

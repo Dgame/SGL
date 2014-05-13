@@ -4,7 +4,7 @@
 #include <memory>
 #include <SGL/Core/OpenGL.hpp>
 #include <SGL/Core/Types.hpp>
-#include <SGL/Graphic/Surface.hpp>
+#include <SGL/Math/Rect.hpp>
 
 namespace sgl {
 	class Texture {
@@ -24,7 +24,7 @@ namespace sgl {
 		};
 
 	private:
-		uint32 _texId = 0;
+		uint32 _glTexId = 0;
 		uint16 _width = 0;
 		uint16 _height = 0;
 
@@ -36,10 +36,13 @@ namespace sgl {
 	public:
 		Texture();
 		explicit Texture(const void* pixels, uint16 width, uint16 height, Format format = Format::None);
-		explicit Texture(const Surface& srfc, Format format = Format::None);
 		Texture(const Texture& tex);
 
 		virtual ~Texture();
+
+		void create(uint16 width, uint16 height, Format format = Format::None) {
+			this->loadFromMemory(nullptr, width, height, format);
+		}
 
 		void setRepeat(bool repeat);
 		void setSmooth(bool smooth);
@@ -52,7 +55,6 @@ namespace sgl {
 			return _smooth;
 		}
 
-		void loadFrom(const Surface& srfc, Format format = Format::None);
 		void loadFromMemory(const void* pixels, uint16 width, uint16 height, Format format = Format::None);
 
 		uint16 width() const {
@@ -68,7 +70,7 @@ namespace sgl {
 		}
 
 		uint32 id() const {
-			return _texId;
+			return _glTexId;
 		}
 
 		/**
@@ -76,7 +78,7 @@ namespace sgl {
 		* Means this Texture is now activated.
 		*/
 		void bind() const {
-			glBindTexture(GL_TEXTURE_2D, _texId);
+			glBindTexture(GL_TEXTURE_2D, _glTexId);
 		}
 
 		/**
@@ -89,11 +91,11 @@ namespace sgl {
 
 		void copy(const Texture& tex, const ShortRect& rect) const;
 		void update(const ShortRect& rect, const void* pixels) const;
-
+		void update(const void* pixels) const;
 		std::unique_ptr<uint32> pixels() const;
 	};
 
-	static uint8 fmtToBytes(Texture::Format fmt);
+	uint8 fmtToBytes(Texture::Format fmt);
 }
 
 #endif

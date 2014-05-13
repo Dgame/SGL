@@ -45,6 +45,8 @@ namespace sgl {
 		}
 
 		_surface = SDL_CreateRGBSurfaceFrom(pixels, width, height, depth, width * (depth / 8), R_MASK, G_MASK, B_MASK, A_MASK);
+		if (_surface == nullptr)
+			println("Could not load Surface: ", SDL_GetError());
 	}
 
 	void Surface::saveToFile(const std::string& filename) {

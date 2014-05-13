@@ -24,6 +24,7 @@
     <ClInclude Include="include\SGL\Graphic\Blend.hpp" />
     <ClInclude Include="include\SGL\Graphic\Color.hpp" />
     <ClInclude Include="include\SGL\Graphic\Drawable.hpp" />
+    <ClInclude Include="include\SGL\Graphic\Image.hpp" />
     <ClInclude Include="include\SGL\Graphic\Primitive.hpp" />
     <ClInclude Include="include\SGL\Graphic\Shape.hpp" />
     <ClInclude Include="include\SGL\Graphic\Smooth.hpp" />
@@ -57,6 +58,7 @@
     <ClCompile Include="src\SGL\Core\OpenGL.cpp" />
     <ClCompile Include="src\SGL\Graphic\Blend.cpp" />
     <ClCompile Include="src\SGL\Graphic\Color.cpp" />
+    <ClCompile Include="src\SGL\Graphic\Image.cpp" />
     <ClCompile Include="src\SGL\Graphic\Primitive.cpp" />
     <ClCompile Include="src\SGL\Graphic\Shape.cpp" />
     <ClCompile Include="src\SGL\Graphic\Smooth.cpp" />

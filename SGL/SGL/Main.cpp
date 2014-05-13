@@ -8,7 +8,7 @@ int main() {
 	sgl::Window wnd(640, 480, "Test");
 	//wnd.setClearColor(sgl::Color::Blue);
 	wnd.setVerticalSync(sgl::Window::Sync::Disable);
-	wnd.framerateLimit = 30;
+	//wnd.framerateLimit = 30;
 
 	uint32 pixels[256] = {
 		0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff,
@@ -49,26 +49,24 @@ int main() {
 
 	wnd.setIcon(icon);
 
-	sgl::Surface wiki("samples/Images/wiki.png");
-	sgl::Texture wiki_tex(wiki);
-	sgl::Sprite wiki_sprite(wiki_tex);
+	sgl::Image wiki_img("samples/Images/wiki.png");
+	sgl::Sprite wiki_sprite(wiki_img);
 	wiki_sprite.position.set(200, 200);
 	wiki_sprite.rotate(25);
 
-	sgl::Surface wiki2(wiki.pixels(), wiki.width(), wiki.height(), 24);
-	wiki2.saveToFile("samples/Images/Wiki2.png");
-	sgl::Texture wiki2_tex(wiki2);
-	sgl::Sprite wiki_sprite2(wiki2_tex);
+	wiki_img.saveToFile("samples/Images/Wiki2.png");
+
+	sgl::Sprite wiki_sprite2(wiki_img);
 	wiki_sprite2.position.set(100, 100);
 
-	sgl::Texture icon_tex(icon);
-	sgl::Sprite icon_sprite(icon_tex);
+	sgl::Image icon_img(icon);
+	sgl::Sprite icon_sprite(icon_img);
 
 	sgl::Shape s(sgl::Shape::Type::Quad);
 	s.addVertices({275, 15, 475, 15, 475, 215, 275, 215});
 	s.updateTextureCoordinates({0, 0, 1, 0, 1, 1, 0, 1});
 	s.setColor(sgl::Color::White);
-	s.texture = &wiki_tex;
+	s.texture = &wiki_img;
 	//s.fill = true;
 
 	sgl::Shape test(sgl::Shape::Type::Quad);
@@ -82,7 +80,7 @@ int main() {
 
 	//sgl::Surface explo("samples/Images/test_3.png");
 	//sgl::Texture explo_tex(explo);
-	sgl::Texture explo_tex(sgl::Surface("samples/Images/test_3.png"));
+	sgl::Image explo_tex("samples/Images/test_3.png");
 	sgl::Spritesheet animation(explo_tex);
 	animation.tickOffset = 150;
 	animation.view = sgl::ShortRect(0, 0, 43, 59);
