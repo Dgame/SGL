@@ -87,7 +87,7 @@ namespace sgl {
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 
-		void copy(Texture& tex, const ShortRect& rect) const;
+		void copy(const Texture& tex, const ShortRect& rect) const;
 		void update(const ShortRect& rect, const void* pixels) const;
 
 		std::unique_ptr<uint32> pixels() const;

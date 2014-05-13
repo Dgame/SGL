@@ -91,8 +91,8 @@ namespace sgl {
 		this->unbind();
 	}
 
-	void Texture::copy(Texture& tex, const ShortRect& rect) const {
-		std::unique_ptr<uint32> pixel = tex.pixels();
+	void Texture::copy(const Texture& tex, const ShortRect& rect) const {
+		const std::unique_ptr<uint32> pixel = tex.pixels();
 		update(rect, pixel.get());
 	}
 

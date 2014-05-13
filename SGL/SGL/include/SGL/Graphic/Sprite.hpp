@@ -12,7 +12,7 @@
 namespace sgl {
 	class Sprite : public Drawable, public Transform {
 	private:
-		Texture* _texture = nullptr;
+		const Texture* _texture = nullptr;
 
 	protected:
 		virtual void draw(const Window& wnd) const override;
@@ -21,9 +21,9 @@ namespace sgl {
 		Vector2f position;
 
 		Sprite();
-		explicit Sprite(Texture& tex);
+		explicit Sprite(const Texture& tex);
 
-		void setTexture(Texture& tex) {
+		void setTexture(const Texture& tex) {
 			_texture = &tex;
 		}
 

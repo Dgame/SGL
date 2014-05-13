@@ -2,7 +2,7 @@
 #include <SGL/Window/Window.hpp>
 
 namespace sgl {
-	Spritesheet::Spritesheet(Texture& tex, int16 loopCount) : Sprite(tex) {
+	Spritesheet::Spritesheet(const Texture& tex, int16 loopCount) : Sprite(tex) {
 		setLoopCount(loopCount);
 	}
 

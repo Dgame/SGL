@@ -6,7 +6,7 @@ namespace sgl {
 
 	}
 
-	Sprite::Sprite(Texture& tex) : Sprite() {
+	Sprite::Sprite(const Texture& tex) : Sprite() {
 		this->setTexture(tex);
 	}
 

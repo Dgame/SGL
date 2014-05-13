@@ -29,7 +29,7 @@ namespace sgl {
 		uint16 tickOffset = 0;
 		uint8 row = 0;
 
-		explicit Spritesheet(Texture& tex, int16 loopCount = -1);
+		explicit Spritesheet(const Texture& tex, int16 loopCount = -1);
 
 		void setLoopCount(int16 loopCount) {
 			_loopCount = loopCount;
