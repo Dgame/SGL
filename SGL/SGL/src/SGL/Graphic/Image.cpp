@@ -17,6 +17,10 @@ namespace sgl {
 
 	}
 
+	Image::Image(const Image& img) : Texture(img) {
+
+	}
+
 	void Image::loadFromSurface(const Surface& srfc, Texture::Format format) {
 		if (format == Texture::Format::None) {
 			if (!srfc.isMask(Surface::Mask::Red, 255))

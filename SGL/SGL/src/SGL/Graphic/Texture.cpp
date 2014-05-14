@@ -22,7 +22,7 @@ namespace sgl {
 	}
 
 	Texture::Texture() {
-		glGenTextures(1, &_glTexId);
+		
 	}
 
 	Texture::Texture(const void* pixels, uint16 width, uint16 height, Format format) {
@@ -31,12 +31,24 @@ namespace sgl {
 
 	Texture::Texture(const Texture& tex) {
 		const std::unique_ptr<uint32> pixels = tex.pixels();
-
 		this->loadFromMemory(pixels.get(), tex.width(), tex.height(), tex.format());
 	}
 
 	Texture::~Texture() {
-		glDeleteTextures(1, &_glTexId);
+		if (_glTexId != 0)
+			glCheck(glDeleteTextures(1, &_glTexId));
+	}
+
+	Texture& Texture::operator =(const Texture& tex) {
+		Texture temp(tex);
+
+		std::swap(_width, temp._width);
+		std::swap(_height, temp._height);
+		std::swap(_glTexId, temp._glTexId);
+		std::swap(_smooth, temp._smooth);
+		std::swap(_repeat, temp._repeat);
+
+		return *this;
 	}
 
 	void Texture::setRepeat(bool repeat) {
@@ -58,6 +70,9 @@ namespace sgl {
 	}
 
 	void Texture::loadFromMemory(const void* pixels, uint16 width, uint16 height, Format fmt) {
+		if (_glTexId == 0)
+			glCheck(glGenTextures(1, &_glTexId));
+
 		_format = fmt == Format::None ? Format::RGB : fmt;
 
 		this->bind();
@@ -76,8 +91,8 @@ namespace sgl {
 	}
 
 	void Texture::copy(const Texture& tex, const ShortRect& rect) const {
-		const std::unique_ptr<uint32> pixel = tex.pixels();
-		update(rect, pixel.get());
+		const std::unique_ptr<uint32> pixels = tex.pixels();
+		this->update(rect, pixels.get());
 	}
 
 	void Texture::update(const ShortRect& rect, const void* pixels) const {

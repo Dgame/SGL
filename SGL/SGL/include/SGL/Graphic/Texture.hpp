@@ -40,6 +40,8 @@ namespace sgl {
 
 		virtual ~Texture();
 
+		Texture& operator =(const Texture& tex);
+
 		void create(uint16 width, uint16 height, Format format = Format::None) {
 			this->loadFromMemory(nullptr, width, height, format);
 		}
