@@ -2,18 +2,32 @@
 #define TRANSFORMABLE_HPP
 
 #include <SGL/Core/OpenGL.hpp>
+#include <SGL/Core/Scope.hpp>
 #include <SGL/Math/Vector2.hpp>
 
 namespace sgl {
 	class Transformable {
 	protected:
 		float _rotation = 0;
+		float _scale = 1;
 
 		static float EnsureRotationRange(float rotation);
 
 	public:
 		virtual ~Transformable() {
 
+		}
+
+		virtual void setScale(float scale) {
+			_scale = scale;
+		}
+
+		virtual void scale(float scale) {
+			_scale += scale;
+		}
+
+		float getScale() const {
+			return _scale;
 		}
 
 		virtual void setRotation(float rotation) {

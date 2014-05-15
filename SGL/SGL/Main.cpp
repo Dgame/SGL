@@ -104,6 +104,8 @@ int main() {
 	//sgl::Vector2s vs(42, 23);
 	//box.move(vs);
 
+	//wiki_sprite.setScale(2);
+
 	sgl::Font fnt2("samples/Font/arial.ttf", 16);
 	sgl::String str2(fnt2);
 	str2.setColor(&sgl::Color::White, &sgl::Color::Red);
@@ -152,6 +154,7 @@ int main() {
 								b1.color.alpha += 25;
 
 								box.rotate(15);
+								//box.scale(0.3);
 								box.move(8, 0);
 
 								break;
