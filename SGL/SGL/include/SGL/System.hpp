@@ -7,5 +7,6 @@
 #include <SGL/System/Keyboard.hpp>
 #include <SGL/System/System.hpp>
 #include <SGL/System/System.hpp>
+#include <SGL/System/VertexBuffer.hpp>
 
 #endif

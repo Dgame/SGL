@@ -45,6 +45,7 @@
     <ClInclude Include="include\SGL\System\Mouse.hpp" />
     <ClInclude Include="include\SGL\System\Power.hpp" />
     <ClInclude Include="include\SGL\System\System.hpp" />
+    <ClInclude Include="include\SGL\System\VertexBuffer.hpp" />
     <ClInclude Include="include\SGL\Window.hpp" />
     <ClInclude Include="include\SGL\Window\Config.hpp" />
     <ClInclude Include="include\SGL\Window\DrawOptions.hpp" />

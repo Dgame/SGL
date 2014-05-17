@@ -154,7 +154,7 @@ int main() {
 								b1.color.alpha += 25;
 
 								box.rotate(15);
-								//box.scale(0.3);
+								box.scale(0.3);
 								box.move(8, 0);
 
 								break;
