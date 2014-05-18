@@ -51,6 +51,7 @@
     <ClInclude Include="include\SGL\Window\DrawOptions.hpp" />
     <ClInclude Include="include\SGL\Window\Event.hpp" />
     <ClInclude Include="include\SGL\Window\Window.hpp" />
+    <ClInclude Include="VertexBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />

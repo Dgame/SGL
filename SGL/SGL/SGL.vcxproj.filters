@@ -177,6 +177,9 @@
     <ClInclude Include="include\SGL\System\VertexBuffer.hpp">
       <Filter>Headerdateien\SGL\System</Filter>
     </ClInclude>
+    <ClInclude Include="VertexBuffer.cpp">
+      <Filter>Quelldateien\SGL\System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\SGL\Audio\Sound.cpp">

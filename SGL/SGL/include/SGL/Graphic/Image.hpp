@@ -16,6 +16,10 @@ namespace sgl {
 		void loadFromSurface(const Surface& srfc, Texture::Format format = Texture::Format::None);
 		void loadFromFile(const std::string& filename);
 		void saveToFile(const std::string& filename) const;
+
+		uint8 depth() const {
+			return fmtToBytes(Texture::format()) * 8;
+		}
 	};
 }
 

@@ -28,10 +28,7 @@ namespace sgl {
 			ReadWrite = GL_READ_WRITE
 		};
 
-		~VertexBuffer() {
-			if (_glBufId != 0)
-				glDeleteBuffers(1, &_glBufId);
-		}
+		~VertexBuffer();
 
 		void bind() const {
 			glBindBuffer(GL_ARRAY_BUFFER, _glBufId);
@@ -41,14 +38,7 @@ namespace sgl {
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
 
-		void buffer(const void* data, uint32 size, Usage usage) {
-			if (_glBufId == 0)
-				glGenBuffers(1, &_glBufId);
-
-			this->bind();
-
-			glBufferData(GL_ARRAY_BUFFER, size, data, static_cast<GLenum>(usage));
-		}
+		void buffer(const void* data, uint32 size, Usage usage);
 
 		const void* map(Access access) const {
 			return glMapBuffer(GL_ARRAY_BUFFER, static_cast<GLenum>(access));
