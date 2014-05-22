@@ -23,4 +23,16 @@ namespace sgl {
 	bool Keyboard::HasScreenSupport() {
 		return SDL_HasScreenKeyboardSupport() == SDL_TRUE;
 	}
+
+	bool Keyboard::IsTextInputActive() {
+		return SDL_IsTextInputActive() == SDL_TRUE;
+	}
+
+	void Keyboard::StartTextInput() {
+		SDL_StartTextInput();
+	}
+
+	void Keyboard::StopTextInput() {
+		SDL_StopTextInput();
+	}
 }

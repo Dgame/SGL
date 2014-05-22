@@ -2,12 +2,12 @@
 
 namespace sgl {
 	bool Event::_Process(Event& event, const SDL_Event& sdl_event) {
-		const Event::Type sdl_type = static_cast<Event::Type>(sdl_event.type);
+		const Type sdl_type = static_cast<Type>(sdl_event.type);
 
 		switch (sdl_type) {
-			case Event::Type::KeyDown:
-			case Event::Type::KeyUp:
-				event.type = sdl_type == Event::Type::KeyDown ? Event::Type::KeyDown : Event::Type::KeyUp;
+			case Type::KeyDown:
+			case Type::KeyUp:
+				event.type = sdl_type == Type::KeyDown ? Type::KeyDown : Type::KeyUp;
 
 				event.timestamp = sdl_event.key.timestamp;
 				event.windowId = sdl_event.key.windowID;
@@ -19,25 +19,46 @@ namespace sgl {
 				event.keyboard.mod = Keyboard::GetModifier();
 
 				return true;
-			case Event::Type::Window:
-				event.type = Event::Type::Window;
+			case Type::Window:
+				event.type = Type::Window;
 
 				event.windowId = sdl_event.window.windowID;
 				event.timestamp = sdl_event.window.timestamp;
 
-				event.window.event = static_cast<Event::Window>(sdl_event.window.event);
+				{
+					const Window we = static_cast<Window>(sdl_event.window.event);
+					switch (we) {
+						case Window::Resized:
+						case Window::SizeChanged:
+							event.size.event = we;
+
+							event.size.width = sdl_event.window.data1;
+							event.size.height = sdl_event.window.data2;
+							break;
+						case Window::Moved:
+							event.move.event = we;
+
+							event.move.x = sdl_event.window.data1;
+							event.move.y = sdl_event.window.data2;
+							break;
+						default:
+							event.window.event = we;
+					}
+				}
 
 				return true;
-			case Event::Type::Quit:
-				event.type = Event::Type::Quit;
+			case Type::Quit:
+				event.type = Type::Quit;
+				event.timestamp = sdl_event.quit.timestamp;
+				event.windowId = 0;
 
 				return true;
-			case Event::Type::MouseButtonDown:
-			case Event::Type::MouseButtonUp:
-				if (sdl_type == Event::Type::MouseButtonUp)
-					event.type = Event::Type::MouseButtonUp;
+			case Type::MouseButtonDown:
+			case Type::MouseButtonUp:
+				if (sdl_type == Type::MouseButtonUp)
+					event.type = Type::MouseButtonUp;
 				else
-					event.type = Event::Type::MouseButtonDown;
+					event.type = Type::MouseButtonDown;
 
 				event.timestamp = sdl_event.button.timestamp;
 				event.windowId = sdl_event.button.windowID;
@@ -48,8 +69,8 @@ namespace sgl {
 				event.mouseButton.y = sdl_event.button.y;
 
 				return true;
-			case Event::Type::MouseMotion:
-				event.type = Event::Type::MouseMotion;
+			case Type::MouseMotion:
+				event.type = Type::MouseMotion;
 
 				event.timestamp = sdl_event.motion.timestamp;
 				event.windowId = sdl_event.motion.windowID;
@@ -66,8 +87,8 @@ namespace sgl {
 				event.mouseMotion.rel_y = sdl_event.motion.yrel;
 
 				return true;
-			case Event::Type::MouseWheel:
-				event.type = Event::Type::MouseWheel;
+			case Type::MouseWheel:
+				event.type = Type::MouseWheel;
 
 				event.timestamp = sdl_event.wheel.timestamp;
 				event.windowId = sdl_event.wheel.windowID;
@@ -77,6 +98,27 @@ namespace sgl {
 
 				event.mouseWheel.delta_x = sdl_event.wheel.x;
 				event.mouseWheel.delta_y = sdl_event.wheel.y;
+
+				return true;
+			case Type::TextInput:
+				event.type = Type::TextInput;
+
+				event.timestamp = sdl_event.text.timestamp;
+				event.windowId = sdl_event.text.windowID;
+
+				memcpy(&event.input.text, &sdl_event.text.text, sizeof(char) * 32);
+
+				return true;
+			case Type::TextEdit:
+				event.type = Type::TextEdit;
+
+				event.timestamp = sdl_event.edit.timestamp;
+				event.windowId = sdl_event.edit.windowID;
+
+				memcpy(&event.edit.text, &sdl_event.edit.text, sizeof(char) * 32);
+
+				event.edit.start = sdl_event.edit.start;
+				event.edit.length = sdl_event.edit.length;
 
 				return true;
 		}
@@ -102,7 +144,7 @@ namespace sgl {
 	*
 	* Returns: if the push was successfull or not.
 	*/
-	bool Event::Push(Event::Type type) {
+	bool Event::Push(Type type) {
 		SDL_Event sdl_event;
 		sdl_event.type = static_cast<int>(type);
 
@@ -113,23 +155,23 @@ namespace sgl {
 	/**
 	* Clear the Event queue.
 	*/
-	void Event::Clear(Event::Type type) {
+	void Event::Clear(Type type) {
 		SDL_FlushEvent(static_cast<int>(type));
 	}
 
 	/**
-	* Set a state for a Event::Type
+	* Set a state for a Type
 	* Returns: the previous Type
 	* See: State enum
 	*/
-	Event::State Event::SetState(Event::Type type, Event::State state) {
+	Event::State Event::SetState(Type type, Event::State state) {
 		return static_cast<Event::State>(SDL_EventState(static_cast<int>(type), static_cast<int>(state)));
 	}
 
 	/**
 	* Returns: if inside of the Event Queue is an Event of the given Type::
 	*/
-	bool Event::HasEvent(Event::Type type) {
+	bool Event::HasEvent(Type type) {
 		return SDL_HasEvent(static_cast<int>(type)) == SDL_TRUE;
 	}
 

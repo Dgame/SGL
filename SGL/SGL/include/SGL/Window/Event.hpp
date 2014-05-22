@@ -1,7 +1,6 @@
 #ifndef EVENT_HPP
 #define EVENT_HPP
 
-#include <string>
 #include <SDL.h>
 #include <SGL/Core/Types.hpp>
 #include <SGL/System/Mouse.hpp>
@@ -9,7 +8,7 @@
 
 /*
 *******************************************************************************************
-* Dgame (a D game framework) - Copyright (c) Randy Schütt
+* SGL - Copyright (c) Randy Schütt
 *
 * This software is provided 'as-is', without any express or implied warranty.
 * In no event will the authors be held liable for any damages arising from
@@ -38,11 +37,12 @@ namespace sgl {
 	*
 	* Author: rschuett
 	*/
-	struct Event {
+	class Event final {
+	public:
 		/**
 		* Specific Window Events.
 		*/
-		enum class Window : short {
+		enum class Window : int16 {
 			None,           /** Nothing happens */
 			Shown,          /** Window has been shown */
 			Hidden,         /** Window has been hidden */
@@ -108,8 +108,9 @@ namespace sgl {
 		* Keyboard text editing event structure
 		*/
 		struct TextEditEvent {
-			std::string text; /**< The editing text */
-			short start; /**< The start cursor of selected editing text */
+			char text[32]; /**< The editing text */
+
+			uint16 start; /**< The start cursor of selected editing text */
 			uint16 length; /**< The length of selected editing text */
 		};
 
@@ -117,7 +118,7 @@ namespace sgl {
 		* Keyboard text input event structure
 		*/
 		struct TextInputEvent {
-			std::string text; /**< The input text */
+			char text[32]; /**< The input text */
 		};
 
 		/**
@@ -127,14 +128,24 @@ namespace sgl {
 			Window event; /** < The Window Event id. */
 		};
 
+		struct WindowMoveEvent : public WindowEvent {
+			int16 x;
+			int16 y;
+		};
+
+		struct WindowSizeEvent : public WindowEvent {
+			int16 width;
+			int16 height;
+		};
+
 		/**
 		* The Mouse button Event structure.
 		*/
 		struct MouseButtonEvent {
 			Mouse::Button button; /** The mouse button which is pressed or released. */
 
-			short x; /** Current x position. */
-			short y; /** Current y position. */
+			int16 x; /** Current x position. */
+			int16 y; /** Current y position. */
 		};
 
 		/**
@@ -143,38 +154,36 @@ namespace sgl {
 		struct MouseMotionEvent {
 			Mouse::State state; /** Mouse State. See: Dgame.Input.Mouse. */
 
-			short x; /** Current x position. */
-			short y; /** Current y position. */
+			int16 x; /** Current x position. */
+			int16 y; /** Current y position. */
 
-			short rel_x; /** Relative motion in the x direction. */
-			short rel_y; /** Relative motion in the y direction. */
+			int16 rel_x; /** Relative motion in the x direction. */
+			int16 rel_y; /** Relative motion in the y direction. */
 		};
 
 		/**
 		* The Mouse wheel Event structure.
 		*/
 		struct MouseWheelEvent {
-			short x; /** Current x position. */
-			short y; /** Current y position. */
+			int16 x; /** Current x position. */
+			int16 y; /** Current y position. */
 
-			short delta_x; /** The amount scrolled horizontally. */
-			short delta_y; /** The amount scrolled vertically. */
+			int16 delta_x; /** The amount scrolled horizontally. */
+			int16 delta_y; /** The amount scrolled vertically. */
 		};
 
 		union {
-			KeyboardEvent keyboard; /** Keyboard Event. */
-			WindowEvent	  window;	/** Window Event. */
+			KeyboardEvent    keyboard; /** Keyboard Event. */
+			WindowEvent      window;	/** Window Event. */
+			WindowMoveEvent  move;
+			WindowSizeEvent  size;
 			MouseButtonEvent mouseButton; /** Mouse button Event. */
 			MouseMotionEvent mouseMotion; /** Mouse motion Event. */
 			MouseWheelEvent  mouseWheel;  /** Mouse wheel Event. */
-			//TextEditEvent	 textEdit;	  /** Text edit Event. */
-			//TextInputEvent textInput;	  /** Text input Event. */
+			TextEditEvent    edit;	  /** Text edit Event. */
+			TextInputEvent   input;	  /** Text input Event. */
 		};
 
-	private:
-		static bool _Process(Event& event, const SDL_Event& sdl_event);
-
-	public:
 		/**
 		* Update the parameter event and set the data of the current event in it.
 		*
@@ -186,24 +195,24 @@ namespace sgl {
 		* Push an event of the given type inside the Event queue.
 		* Returns: if the push was successfull or not.
 		*/
-		static bool Push(Event::Type type);
+		static bool Push(Type type);
 
 		/**
 		* Clear the Event queue.
 		*/
-		static void Clear(Event::Type type);
+		static void Clear(Type type);
 
 		/**
 		* Set a state for a Event::Type
 		* Returns: the previous Type
 		* See: State enum
 		*/
-		static Event::State SetState(Event::Type type, Event::State state);
+		static State SetState(Type type, State state);
 
 		/**
 		* Returns: if inside of the Event Queue is an Event of the given Type::
 		*/
-		static bool HasEvent(Event::Type type);
+		static bool HasEvent(Type type);
 
 		/**
 		* Returns: if the current Event queue has the Quit Event.
@@ -215,6 +224,9 @@ namespace sgl {
 		* If the seconds parameter is greater then -1, it waits maximal timeout seconds.
 		*/
 		static bool Wait(Event& event, int timeout = -1);
+
+	private:
+		static bool _Process(Event& event, const SDL_Event& sdl_event);
 	};
 }
 

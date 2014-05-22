@@ -224,6 +224,10 @@ namespace sgl {
 		* Returns if screen keyboard is supported.
 		*/
 		static bool HasScreenSupport();
+
+		static bool IsTextInputActive();
+		static void StartTextInput();
+		static void StopTextInput();
 	};
 }
 

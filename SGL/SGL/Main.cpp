@@ -114,11 +114,18 @@ int main() {
 	str2.position.set(200, 400);
 
 	std::cout << "sizeof(sgl::Texture) = " << sizeof(sgl::Texture) << std::endl;
+	std::cout << "sizeof(sgl::Event) = " << sizeof(sgl::Event) << std::endl;
 
 	sgl::Blend b1(sgl::Blend::Factor::One, sgl::Blend::Factor::OneMinusSrcAlpha);
 	b1.color.alpha = 0;
 
 	sgl::Clock clock;
+
+	std::string txt_input;
+
+	//sgl::Keyboard::StartTextInput();
+	//if (sgl::Keyboard::IsTextInputActive())
+	//	std::cout << "Keyboard input active" << std::endl;
 
 	sgl::Event event;
 	while (wnd.isOpen()) {
@@ -126,6 +133,13 @@ int main() {
 			switch (event.type) {
 				case sgl::Event::Type::Quit:
 					wnd.close();
+					break;
+				case sgl::Event::Type::TextInput:
+					txt_input += event.input.text;
+					break;
+				case sgl::Event::Type::MouseButtonDown:
+					str = txt_input;
+					txt_input.clear();
 					break;
 				case sgl::Event::Type::KeyDown:
 					if (event.keyboard.key == sgl::Keyboard::Code::Escape)
@@ -154,12 +168,12 @@ int main() {
 								b1.color.alpha += 25;
 
 								box.rotate(15);
-								box.scale(0.3);
+								box.scale(0.3f);
 								box.move(8, 0);
 
 								break;
-							default:
-								str = "You pressed a Key";
+							//default:
+								//str = "You pressed a Key";
 						}
 					}
 					break;
@@ -167,7 +181,7 @@ int main() {
 			}
 		}
 
-		str.format("Framerate is %d", clock.getCurrentFps());
+		//str.format("Framerate is %d", clock.getCurrentFps());
 
 		wnd.clear();
 
