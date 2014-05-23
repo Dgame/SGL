@@ -86,10 +86,10 @@ namespace sgl {
 	}
 
 	Color Color::FromGLMode(float pr, float pg, float pb, float pa) {
-		const float r = static_cast<uint8>(pr > 1.f ? pr : pr * 255);
-		const float g = static_cast<uint8>(pg > 1.f ? pg : pg * 255);
-		const float b = static_cast<uint8>(pb > 1.f ? pb : pb * 255);
-		const float a = static_cast<uint8>(pa > 1.f ? pa : pa * 255);
+		const uint8 r = static_cast<uint8>(pr > 1.f ? pr : pr * 255);
+		const uint8 g = static_cast<uint8>(pg > 1.f ? pg : pg * 255);
+		const uint8 b = static_cast<uint8>(pb > 1.f ? pb : pb * 255);
+		const uint8 a = static_cast<uint8>(pa > 1.f ? pa : pa * 255);
 
 		return Color(r, g, b, a);
 	}
@@ -97,7 +97,7 @@ namespace sgl {
 	GLColor Color::InGLMode(const Color& col) {
 		const float r = col.red / 255.f;
 		const float g = col.green / 255.f;
-		const float b = col.blue / 255.;
+		const float b = col.blue / 255.f;
 		const float a = col.alpha / 255.f;
 
 		return GLColor(r, g, b, a);

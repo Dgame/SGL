@@ -15,6 +15,7 @@
     <ClInclude Include="include\SGL\Audio\Music.hpp" />
     <ClInclude Include="include\SGL\Audio\Sound.hpp" />
     <ClInclude Include="include\SGL\Core\Array.hpp" />
+    <ClInclude Include="include\SGL\Core\Config.hpp" />
     <ClInclude Include="include\SGL\Core\OpenGL.hpp" />
     <ClInclude Include="include\SGL\Core\Output.hpp" />
     <ClInclude Include="include\SGL\Core\Range.hpp" />
@@ -47,7 +48,6 @@
     <ClInclude Include="include\SGL\System\System.hpp" />
     <ClInclude Include="include\SGL\System\VertexBuffer.hpp" />
     <ClInclude Include="include\SGL\Window.hpp" />
-    <ClInclude Include="include\SGL\Window\Config.hpp" />
     <ClInclude Include="include\SGL\Window\DrawOptions.hpp" />
     <ClInclude Include="include\SGL\Window\Event.hpp" />
     <ClInclude Include="include\SGL\Window\Window.hpp" />
@@ -57,6 +57,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="src\SGL\Audio\Music.cpp" />
     <ClCompile Include="src\SGL\Audio\Sound.cpp" />
+    <ClCompile Include="src\SGL\Core\Config.cpp" />
     <ClCompile Include="src\SGL\Core\OpenGL.cpp" />
     <ClCompile Include="src\SGL\Graphic\Blend.cpp" />
     <ClCompile Include="src\SGL\Graphic\Color.cpp" />
@@ -77,7 +78,6 @@
     <ClCompile Include="src\SGL\System\Mouse.cpp" />
     <ClCompile Include="src\SGL\System\Power.cpp" />
     <ClCompile Include="src\SGL\System\System.cpp" />
-    <ClCompile Include="src\SGL\Window\Config.cpp" />
     <ClCompile Include="src\SGL\Window\DrawOptions.cpp" />
     <ClCompile Include="src\SGL\Window\Event.cpp" />
     <ClCompile Include="src\SGL\Window\Window.cpp" />
@@ -129,7 +129,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <DisableSpecificWarnings>4244;4512</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4244</DisableSpecificWarnings>
       <AdditionalOptions>
       </AdditionalOptions>
       <TreatSpecificWarningsAsErrors>

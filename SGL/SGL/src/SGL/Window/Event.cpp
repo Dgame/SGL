@@ -25,25 +25,16 @@ namespace sgl {
 				event.windowId = sdl_event.window.windowID;
 				event.timestamp = sdl_event.window.timestamp;
 
-				{
-					const Window we = static_cast<Window>(sdl_event.window.event);
-					switch (we) {
-						case Window::Resized:
-						case Window::SizeChanged:
-							event.size.event = we;
-
-							event.size.width = sdl_event.window.data1;
-							event.size.height = sdl_event.window.data2;
-							break;
-						case Window::Moved:
-							event.move.event = we;
-
-							event.move.x = sdl_event.window.data1;
-							event.move.y = sdl_event.window.data2;
-							break;
-						default:
-							event.window.event = we;
-					}
+				event.window.event = static_cast<Window>(sdl_event.window.event);
+				switch (event.window.event) {
+					case Window::Resized:
+						event.window.size.width = sdl_event.window.data1;
+						event.window.size.height = sdl_event.window.data2;
+						break;
+					case Window::Moved:
+						event.window.move.x = sdl_event.window.data1;
+						event.window.move.y = sdl_event.window.data2;
+						break;
 				}
 
 				return true;
@@ -106,7 +97,7 @@ namespace sgl {
 				event.timestamp = sdl_event.text.timestamp;
 				event.windowId = sdl_event.text.windowID;
 
-				memcpy(&event.input.text, &sdl_event.text.text, sizeof(char) * 32);
+				std::memcpy(&event.input.text, &sdl_event.text.text, sizeof(char) * 32);
 
 				return true;
 			case Type::TextEdit:
@@ -115,7 +106,7 @@ namespace sgl {
 				event.timestamp = sdl_event.edit.timestamp;
 				event.windowId = sdl_event.edit.windowID;
 
-				memcpy(&event.edit.text, &sdl_event.edit.text, sizeof(char) * 32);
+				std::memcpy(&event.edit.text, &sdl_event.edit.text, sizeof(char) * 32);
 
 				event.edit.start = sdl_event.edit.start;
 				event.edit.length = sdl_event.edit.length;

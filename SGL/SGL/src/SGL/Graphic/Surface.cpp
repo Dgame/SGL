@@ -29,13 +29,13 @@ namespace sgl {
 	void Surface::loadFromFile(const std::string& filename) {
 		_surface = IMG_Load(filename.c_str());
 		if (_surface == nullptr)
-			println("Cannot load image: ", filename, ':', SDL_GetError());
+			error("Cannot load image: ", filename, ':', SDL_GetError());
 	}
 
 	void Surface::loadFromMemory(void* pixels, uint16 width, uint16 height, uint8 depth) {
 		_surface = SDL_CreateRGBSurfaceFrom(pixels, width, height, depth, width * (depth / 8), R_MASK, G_MASK, B_MASK, A_MASK);
 		if (_surface == nullptr)
-			println("Could not load Surface: ", SDL_GetError());
+			error("Could not load Surface: ", SDL_GetError());
 	}
 
 	void Surface::saveToFile(const std::string& filename) {

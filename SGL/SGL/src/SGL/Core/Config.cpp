@@ -1,4 +1,4 @@
-#include <SGL/Window/Config.hpp>
+#include <SGL/Core/Config.hpp>
 
 namespace sgl {
 	namespace internal {

@@ -7,10 +7,8 @@ namespace sgl {
 			_fontSize = DefaultSize;
 
 		_ttf = TTF_OpenFont(filename.c_str(), _fontSize);
-		if (_ttf == nullptr) {
-			println("Could not load font: ", filename, " TTF Error: ", TTF_GetError());
-			exit(1);
-		}
+		if (_ttf == nullptr)
+			error("Could not load font: ", filename, " TTF Error: ", TTF_GetError());
 	}
 
 	Surface Font::render(const std::string& text, const Color* fg, const Color* bg, Mode mode) const {
@@ -33,10 +31,8 @@ namespace sgl {
 				break;
 		}
 
-		if (srfc == nullptr) {
-			println("NULL Surface: ", SDL_GetError());
-			exit(1);
-		}
+		if (srfc == nullptr)
+			error("NULL Surface: ", SDL_GetError());
 
 		if (srfc->format->BitsPerPixel < 24) {
 			SDL_PixelFormat fmt = *(srfc->format);
@@ -45,10 +41,8 @@ namespace sgl {
 			SDL_Surface* new_srfc = SDL_ConvertSurface(srfc, &fmt, 0);
 			SDL_FreeSurface(srfc);
 
-			if (new_srfc == nullptr) {
-				println("NULL Surface (convert): ", SDL_GetError());
-				exit(1);
-			}
+			if (new_srfc == nullptr)
+				error("NULL Surface (convert): ", SDL_GetError());
 
 			return Surface(new_srfc);
 		}

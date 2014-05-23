@@ -7,7 +7,7 @@
 
 namespace sgl {
 	template <typename T>
-	struct Range;
+	class Range;
 
 	template <typename T>
 	class RangeIterator final {
@@ -45,35 +45,45 @@ namespace sgl {
 	}
 
 	template <typename T>
-	struct Range {
-		T* ptr;
-		const uint32 length;
+	class Range {
+	private:
+		uint32 _length = 0;
+		T* _ptr = nullptr;
 
+	public:
 		Range(std::initializer_list<T> liste);
 		~Range();
+
+		uint32 length() const {
+			return _length;
+		}
+
+		const T* get() const {
+			return _ptr;
+		}
 
 		RangeIterator<T> begin() const {
 			return RangeIterator<T>(this, 0);
 		}
 
 		RangeIterator<T> end() const {
-			return RangeIterator<T>(this, this->length);
+			return RangeIterator<T>(this, _length);
 		}
 
 		const T& operator [](uint32 index) const {
-			return this->ptr[index];
+			return _ptr[index];
 		}
 	};
 
 	template <typename T>
-	Range<T>::Range(std::initializer_list<T> liste) : length(liste.size()) {
-		this->ptr = new T[this->length];
-		std::memcpy(this->ptr, liste.begin(), sizeof(T) * liste.size());
+	Range<T>::Range(std::initializer_list<T> liste) : _length(liste.size()) {
+		_ptr = new T[_length];
+		std::memcpy(_ptr, liste.begin(), sizeof(T) * liste.size());
 	}
 
 	template <typename T>
 	Range<T>::~Range() {
-		delete[] this->ptr;
+		delete[] _ptr;
 	}
 }
 

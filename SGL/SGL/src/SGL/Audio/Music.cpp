@@ -8,11 +8,8 @@ namespace sgl {
 
 	void Music::loadFromFile(const std::string& filename) {
 		_music = Mix_LoadMUS(filename.c_str());
-
-		if (!_music) {
-			println("Unable to load Music: ", filename, ':', Mix_GetError());
-			exit(1);
-		}
+		if (_music == nullptr)
+			error("Unable to load Music: ", filename, ':', Mix_GetError());
 	}
 
 	void Music::play(int8 loops, int16 delay) const {

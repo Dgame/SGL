@@ -16,16 +16,16 @@ namespace sgl {
 	}
 
 	void Shape::addVertices(const Range<float> range) {
-		if (range.length == 0)
+		if (range.length() == 0)
 			return;
 
-		for (uint16 i = 0, j = 0; i < range.length / 2; i++, j += 2) {
+		for (uint16 i = 0, j = 0; i < range.length() / 2; i++, j += 2) {
 			this->vertices.emplace_back(Vertex(range[j], range[j + 1]));
 		}
 	}
 
 	void Shape::updateVertices(const Range<float> range, uint16 offset) {
-		uint32 count = std::min(range.length, this->vertices.size());
+		uint32 count = std::min(range.length(), this->vertices.size());
 		if (count == 0)
 			return this->addVertices(std::move(range));
 
@@ -38,7 +38,8 @@ namespace sgl {
 	}
 
 	void Shape::updateVertices(const ShortRect& rect, uint16 offset) {
-		uint32 count = std::min(static_cast<std::size_t>(4), this->vertices.size());
+		const std::size_t min = 4;
+		const uint32 count = std::min(min, this->vertices.size());
 		if (count == 0)
 			return this->addVertices(rect);
 
@@ -56,7 +57,7 @@ namespace sgl {
 	}
 
 	void Shape::updateTextureCoordinates(const Range<float> range, uint16 offset) {
-		uint32 count = std::min(range.length, this->vertices.size());
+		uint32 count = std::min(range.length(), this->vertices.size());
 		if (count == 0)
 			return;
 

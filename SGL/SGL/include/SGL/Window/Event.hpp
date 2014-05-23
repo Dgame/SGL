@@ -47,14 +47,8 @@ namespace sgl {
 			Shown,          /** Window has been shown */
 			Hidden,         /** Window has been hidden */
 			Exposed,        /** Window has been exposed and should be redrawn */
-			Moved,          /** Window has been moved to data1, data2  */
-			Resized,        /** Window has been resized to data1Xdata2 */
-			/**
-			* The window size has changed,
-			* either as a result of an API call or through
-			* the system or user changing the window size.
-			*/
-			SizeChanged,
+			Moved,          /** Window has been moved to data1 x data2  */
+			Resized,        /** Window has been resized to data1 x data2 */
 			Minimized,      /** Window has been minimized. */
 			Maximized,      /** Window has been maximized. */
 			Restored,       /** Window has been restored to normal size and position. */
@@ -76,7 +70,7 @@ namespace sgl {
 			MouseMotion = SDL_MOUSEMOTION,	/** The mouse has moved. */
 			MouseButtonDown = SDL_MOUSEBUTTONDOWN,	/** A mouse button is pressed. */
 			MouseButtonUp = SDL_MOUSEBUTTONUP,	/** A mouse button is released. */
-			MouseWheel = SDL_MOUSEWHEEL,		/** The mouse wheel has scolled. */
+			MouseWheel = SDL_MOUSEWHEEL,		/** The mouse wheel has scrolled. */
 			TextEdit = SDL_TEXTEDITING,            /**< Keyboard text editing (composition) */
 			TextInput = SDL_TEXTINPUT              /**< Keyboard text input */
 		};
@@ -110,8 +104,8 @@ namespace sgl {
 		struct TextEditEvent {
 			char text[32]; /**< The editing text */
 
-			uint16 start; /**< The start cursor of selected editing text */
-			uint16 length; /**< The length of selected editing text */
+			int16 start; /**< The start cursor of selected editing text */
+			int16 length; /**< The length of selected editing text */
 		};
 
 		/**
@@ -126,16 +120,21 @@ namespace sgl {
 		*/
 		struct WindowEvent {
 			Window event; /** < The Window Event id. */
-		};
 
-		struct WindowMoveEvent : public WindowEvent {
-			int16 x;
-			int16 y;
-		};
+			struct MoveEvent {
+				uint16 x;
+				uint16 y;
+			};
 
-		struct WindowSizeEvent : public WindowEvent {
-			int16 width;
-			int16 height;
+			struct SizeEvent {
+				uint16 width;
+				uint16 height;
+			};
+
+			union {
+				MoveEvent move;
+				SizeEvent size;
+			};
 		};
 
 		/**
@@ -144,8 +143,8 @@ namespace sgl {
 		struct MouseButtonEvent {
 			Mouse::Button button; /** The mouse button which is pressed or released. */
 
-			int16 x; /** Current x position. */
-			int16 y; /** Current y position. */
+			uint16 x; /** Current x position. */
+			uint16 y; /** Current y position. */
 		};
 
 		/**
@@ -154,8 +153,8 @@ namespace sgl {
 		struct MouseMotionEvent {
 			Mouse::State state; /** Mouse State. See: Dgame.Input.Mouse. */
 
-			int16 x; /** Current x position. */
-			int16 y; /** Current y position. */
+			uint16 x; /** Current x position. */
+			uint16 y; /** Current y position. */
 
 			int16 rel_x; /** Relative motion in the x direction. */
 			int16 rel_y; /** Relative motion in the y direction. */
@@ -165,8 +164,8 @@ namespace sgl {
 		* The Mouse wheel Event structure.
 		*/
 		struct MouseWheelEvent {
-			int16 x; /** Current x position. */
-			int16 y; /** Current y position. */
+			uint16 x; /** Current x position. */
+			uint16 y; /** Current y position. */
 
 			int16 delta_x; /** The amount scrolled horizontally. */
 			int16 delta_y; /** The amount scrolled vertically. */
@@ -175,8 +174,6 @@ namespace sgl {
 		union {
 			KeyboardEvent    keyboard; /** Keyboard Event. */
 			WindowEvent      window;	/** Window Event. */
-			WindowMoveEvent  move;
-			WindowSizeEvent  size;
 			MouseButtonEvent mouseButton; /** Mouse button Event. */
 			MouseMotionEvent mouseMotion; /** Mouse motion Event. */
 			MouseWheelEvent  mouseWheel;  /** Mouse wheel Event. */

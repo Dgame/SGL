@@ -10,16 +10,19 @@ namespace sgl {
 	class Sound {
 	private:
 		Mix_Chunk* _chunk = nullptr;
+		uint16 _channel = 0;
 
 		static uint16 ChannelCount;
 
 	public:
-		const uint16 channel;
-
 		explicit Sound(const std::string& filename, int8 volume = -1);
 
 		virtual ~Sound() {
 			Mix_FreeChunk(_chunk);
+		}
+
+		uint16 channel() const {
+			return _channel;
 		}
 
 		virtual void loadFromFile(const std::string& filename);
@@ -35,23 +38,23 @@ namespace sgl {
 		void play(int8 loops = 1, int16 delay = -1) const;
 
 		void resume() const {
-			Mix_Resume(this->channel);
+			Mix_Resume(_channel);
 		}
 
 		void stop() const {
-			Mix_HaltChannel(this->channel);
+			Mix_HaltChannel(_channel);
 		}
 
 		void pause() const {
-			Mix_Pause(this->channel);
+			Mix_Pause(_channel);
 		}
 
 		bool isPlaying() const {
-			return Mix_Playing(this->channel) != 0;
+			return Mix_Playing(_channel) != 0;
 		}
 
 		bool isPaused() const {
-			return Mix_Paused(this->channel) == 0;
+			return Mix_Paused(_channel) == 0;
 		}
 
 		static uint16 CountPlaying();

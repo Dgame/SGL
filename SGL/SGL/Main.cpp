@@ -5,7 +5,7 @@
 #include <SGL/Window.hpp>
 
 int main() {
-	sgl::Window wnd(640, 480, "Test");
+	sgl::Window wnd(640, 480, "Test", sgl::Window::Style::Default | sgl::Window::Style::Resizeable);
 	//wnd.setClearColor(sgl::Color::Blue);
 	wnd.setVerticalSync(sgl::Window::Sync::Disable);
 	//wnd.framerateLimit = 30;
@@ -134,6 +134,17 @@ int main() {
 				case sgl::Event::Type::Quit:
 					wnd.close();
 					break;
+				case sgl::Event::Type::Window:
+					switch (event.window.event) {
+						case sgl::Event::Window::Resized:
+							std::cout << "Resized Window to " << event.window.size.width << "::" << event.window.size.height << std::endl;
+							break;
+						case sgl::Event::Window::Moved:
+							std::cout << "Move Window to " << event.window.move.x << "::" << event.window.move.y << std::endl;
+							break;
+					}
+
+					break;
 				case sgl::Event::Type::TextInput:
 					txt_input += event.input.text;
 					break;
@@ -181,7 +192,7 @@ int main() {
 			}
 		}
 
-		//str.format("Framerate is %d", clock.getCurrentFps());
+		str.format("Framerate is %d", clock.getCurrentFps());
 
 		wnd.clear();
 

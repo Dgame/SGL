@@ -3,11 +3,11 @@
 namespace sgl {
 	int Window::_winCount = 0;
 
-	Window::Window(uint16 width, uint16 height, const std::string& title, Style style) : Window(ShortRect(100, 100, width, height), title, style) {
+	Window::Window(uint16 width, uint16 height, const std::string& title, uint32 style) : Window(ShortRect(100, 100, width, height), title, style) {
 
 	}
 
-	Window::Window(const ShortRect& rect, const std::string& title, Style style) {
+	Window::Window(const ShortRect& rect, const std::string& title, uint32 style) {
 		if (_winCount == 0) {
 			if (!internal::sdl_init())
 				exit(1);
@@ -16,17 +16,13 @@ namespace sgl {
 		_winCount++;
 
 		_window = SDL_CreateWindow(title.c_str(), rect.x, rect.y, rect.width, rect.height, static_cast<int>(style));
-		if (_window == nullptr) {
-			println("Error by creating a SDL2 window: ", SDL_GetError());
-			exit(1);
-		}
+		if (_window == nullptr)
+			error("Error by creating a SDL2 window: ", SDL_GetError());
 
 		if (style & Style::OpenGL) {
 			_glContext = SDL_GL_CreateContext(_window);
-			if (_glContext == nullptr) {
-				println("Error while creating gl context: ", SDL_GetError());
-				exit(1);
-			}
+			if (_glContext == nullptr)
+				error("Error while creating gl context: ", SDL_GetError());
 #if _DEBUG
 			const uint8* GL_version = glGetString(GL_VERSION);
 			const uint8* GL_vendor = glGetString(GL_VENDOR);
@@ -63,10 +59,8 @@ namespace sgl {
 			SDL_GL_MakeCurrent(_window, _glContext);
 
 			const GLenum err = glewInit();
-			if (err != GLEW_OK) {
-				println("Couldn't initialize GLEW");
-				exit(1);
-			}
+			if (err != GLEW_OK)
+				error("Couldn't initialize GLEW");
 		}
 	}
 
@@ -100,10 +94,10 @@ namespace sgl {
 	bool Window::setVerticalSync(Sync sync) const {
 		if (sync == Sync::Enable || sync == Sync::Disable)
 			return SDL_GL_SetSwapInterval(static_cast<int>(sync)) == 0;
-		else {
+		else
 			println("Unknown sync mode. Sync mode must be one of Sync.Enable, Sync.Disable.");
-			exit(1);
-		}
+
+		return false;
 	}
 
 	void Window::draw(const Drawable& d, const DrawOptions options) const {

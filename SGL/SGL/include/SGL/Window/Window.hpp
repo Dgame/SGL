@@ -4,6 +4,7 @@
 #include <string>
 
 #include <SGL/Core/Output.hpp>
+#include <SGL/Core/Config.hpp>
 #include <SGL/Graphic/Color.hpp>
 #include <SGL/Graphic/Surface.hpp>
 #include <SGL/Graphic/Drawable.hpp>
@@ -14,7 +15,6 @@
 #include <SGL/Math/Vector2.hpp>
 #include <SGL/System/Clock.hpp>
 #include <SGL/Window/DrawOptions.hpp>
-#include <SGL/Window/Config.hpp>
 
 namespace sgl {
 	class Window {
@@ -32,7 +32,7 @@ namespace sgl {
 		/**
 		* The specific window styles
 		*/
-		enum Style : short {
+		enum Style {
 			Fullscreen = SDL_WINDOW_FULLSCREEN, /** Window is fullscreened */
 			Desktop = SDL_WINDOW_FULLSCREEN_DESKTOP, /** Window has Desktop Fullscreen */
 			OpenGL = SDL_WINDOW_OPENGL,	 /** OpenGL support */
@@ -62,8 +62,8 @@ namespace sgl {
 	public:
 		uint16 framerateLimit;
 
-		explicit Window(uint16 width, uint16 height, const std::string& title, Style style = Style::Default);
-		explicit Window(const ShortRect& rect, const std::string& title, Style style = Style::Default);
+		explicit Window(uint16 width, uint16 height, const std::string& title, uint32 style = Style::Default);
+		explicit Window(const ShortRect& rect, const std::string& title, uint32 style = Style::Default);
 
 		Window(const Window& wnd) = delete;
 
