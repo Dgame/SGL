@@ -3,8 +3,8 @@
 
 #include <string>
 
+#include <SGL/Core/SDL.hpp>
 #include <SGL/Core/Output.hpp>
-#include <SGL/Core/Config.hpp>
 #include <SGL/Graphic/Color.hpp>
 #include <SGL/Graphic/Surface.hpp>
 #include <SGL/Graphic/Drawable.hpp>

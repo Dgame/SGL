@@ -174,8 +174,8 @@
     <ClInclude Include="include\SGL\System\VertexBuffer.hpp">
       <Filter>Headerdateien\SGL\System</Filter>
     </ClInclude>
-    <ClInclude Include="VertexBuffer.cpp">
-      <Filter>Quelldateien\SGL\System</Filter>
+    <ClInclude Include="include\SGL\Core\SDL.hpp">
+      <Filter>Headerdateien\SGL\Core</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Core\Config.hpp">
       <Filter>Headerdateien\SGL\Core</Filter>
@@ -260,8 +260,11 @@
     <ClCompile Include="src\SGL\Graphic\Image.cpp">
       <Filter>Quelldateien\SGL\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="src\SGL\Core\Config.cpp">
+    <ClCompile Include="src\SGL\Core\SDL.cpp">
       <Filter>Quelldateien\SGL\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SGL\System\VertexBuffer.cpp">
+      <Filter>Quelldateien\SGL\System</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

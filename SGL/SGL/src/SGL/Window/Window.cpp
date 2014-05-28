@@ -23,7 +23,7 @@ namespace sgl {
 			_glContext = SDL_GL_CreateContext(_window);
 			if (_glContext == nullptr)
 				error("Error while creating gl context: ", SDL_GetError());
-#if _DEBUG
+#if SGL_DEBUG
 			const uint8* GL_version = glGetString(GL_VERSION);
 			const uint8* GL_vendor = glGetString(GL_VENDOR);
 			const uint8* GL_renderer = glGetString(GL_RENDERER);
