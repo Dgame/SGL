@@ -3,6 +3,9 @@
 namespace sgl {
 	namespace internal {
 		void initSDL() {
+			if (sdl_vid_ptr != nullptr)
+				return;
+
 			sdl_vid_ptr = std::make_unique<const SDL>(SDL_INIT_VIDEO);
 			sdl_img_ptr = std::make_unique<const SDL_Image>(IMG_INIT_JPG | IMG_INIT_PNG);
 			sdl_ttf_ptr = std::make_unique<const SDL_TTF>();
