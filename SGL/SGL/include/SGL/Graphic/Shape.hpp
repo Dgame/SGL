@@ -2,16 +2,18 @@
 #define SHAPE_HPP
 
 #include <vector>
+#include <SGL/Core/Scope.hpp>
 #include <SGL/Core/Range.hpp>
 #include <SGL/Math/Vertex.hpp>
+#include <SGL/Math/Rect.hpp>
 #include <SGL/Graphic/Drawable.hpp>
 #include <SGL/Graphic/Primitive.hpp>
 #include <SGL/Graphic/Transformable.hpp>
-#include <SGL/Graphic/Texture.hpp>
 #include <SGL/Graphic/Smooth.hpp>
-#include <SGL/Core/Scope.hpp>
 
 namespace sgl {
+	class Texture;
+
 	class Shape : public Drawable, public GraphTransform {
 	protected:
 		virtual void draw(const Window& wnd) const override;

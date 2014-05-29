@@ -1,6 +1,7 @@
 #ifndef EVENT_HPP
 #define EVENT_HPP
 
+#include <cstring>
 #include <SDL.h>
 #include <SGL/Core/Types.hpp>
 #include <SGL/System/Mouse.hpp>

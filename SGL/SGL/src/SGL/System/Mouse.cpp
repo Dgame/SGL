@@ -1,4 +1,6 @@
 #include <SGL/System/Mouse.hpp>
+#include <SGL/Graphic/Surface.hpp>
+#include <SGL/Window/Window.hpp>
 
 namespace sgl {
 	namespace internal {

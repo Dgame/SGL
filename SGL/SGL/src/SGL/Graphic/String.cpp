@@ -1,5 +1,6 @@
 #include <SGL/Graphic/String.hpp>
 #include <SGL/Window/Window.hpp>
+#include <SGL/Graphic/Texture.hpp>
 
 #pragma warning (disable: 4996) /* vsprintf */
 

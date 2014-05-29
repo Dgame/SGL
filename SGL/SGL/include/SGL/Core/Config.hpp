@@ -33,4 +33,7 @@
 #define SGL_DEBUG 1
 #endif
 
+#define SGL_MAYOR 0
+#define SGL_MINOR 1
+
 #endif

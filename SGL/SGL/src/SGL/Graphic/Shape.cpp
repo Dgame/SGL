@@ -1,5 +1,6 @@
 #include <SGL/Graphic/Shape.hpp>
 #include <SGL/Window/Window.hpp>
+#include <SGL/Graphic/Texture.hpp>
 
 namespace sgl {
 	Shape::Shape(Type _type) : type(_type) {

@@ -2,10 +2,12 @@
 #define MOUSE_HPP
 
 #include <SDL.h>
-#include <SGL/Window/Window.hpp>
-#include <SGL/Graphic/Surface.hpp>
+#include <SGL/Math/Vector2.hpp>
 
 namespace sgl {
+	class Window;
+	class Surface;
+
 	namespace internal {
 		class Cursor final {
 		private:

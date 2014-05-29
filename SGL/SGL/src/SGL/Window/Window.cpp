@@ -8,10 +8,8 @@ namespace sgl {
 	}
 
 	Window::Window(const ShortRect& rect, const std::string& title, uint32 style) {
-		if (_winCount == 0) {
-			if (!internal::sdl_init())
-				exit(1);
-		}
+		if (_winCount == 0)
+			internal::initSDL();
 
 		_winCount++;
 
@@ -58,6 +56,9 @@ namespace sgl {
 
 			SDL_GL_MakeCurrent(_window, _glContext);
 
+			SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+			SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+
 			const GLenum err = glewInit();
 			if (err != GLEW_OK)
 				error("Couldn't initialize GLEW");
@@ -72,8 +73,6 @@ namespace sgl {
 		_window = nullptr;
 
 		_winCount--;
-		if (_winCount <= 0)
-			internal::sdl_quit();
 	}
 
 	Vector2s Window::getPosition() const {

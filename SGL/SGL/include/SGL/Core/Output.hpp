@@ -2,7 +2,6 @@
 #define OUTPUT_HPP
 
 #include <iostream>
-#include <cstdlib>
 
 template <typename T>
 void print(const T& value) {

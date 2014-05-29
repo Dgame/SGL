@@ -2,9 +2,9 @@
 #define WINDOW_HPP
 
 #include <string>
-
 #include <SGL/Core/SDL.hpp>
 #include <SGL/Core/Output.hpp>
+#include <SGL/Core/Scope.hpp>
 #include <SGL/Graphic/Color.hpp>
 #include <SGL/Graphic/Surface.hpp>
 #include <SGL/Graphic/Drawable.hpp>
