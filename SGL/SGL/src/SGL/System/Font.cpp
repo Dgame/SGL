@@ -33,8 +33,7 @@ namespace sgl {
 
 		if (srfc == nullptr)
 			error("NULL Surface: ", SDL_GetError());
-
-		if (srfc->format->BitsPerPixel < 24) {
+		else if (srfc->format->BitsPerPixel < 24) {
 			SDL_PixelFormat fmt = *(srfc->format);
 			fmt.BitsPerPixel = 24;
 

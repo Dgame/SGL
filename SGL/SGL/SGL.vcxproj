@@ -119,8 +119,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>E:\C\SDL2_mixer-2.0.0\include;E:\C\SDL2_ttf-2.0.12\include;C:\Users\Besitzer\Documents\GitHub\sgl\SGL\SGL\include;E:\C\SDL2_image-2.0.0\include;E:\C\SDL2-2.0.3\include;$(IncludePath)</IncludePath>
-    <LibraryPath>E:\C\SDL2_mixer-2.0.0\lib\x86;E:\C\SDL2_ttf-2.0.12\lib\x86;E:\C\SDL2_image-2.0.0\lib\x86;E:\C\SDL2-2.0.3\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\C\SDL2_mixer-2.0.0\include;D:\C\SDL2_ttf-2.0.12\include;C:\Users\Besitzer\Documents\GitHub\sgl\SGL\SGL\include;D:\C\SDL2_image-2.0.0\include;D:\C\SDL2-2.0.3\include;D:\C\Glew\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\C\SDL2_mixer-2.0.0\lib\x86;D:\C\SDL2_ttf-2.0.12\lib\x86;D:\C\SDL2_image-2.0.0\lib\x86;D:\C\SDL2-2.0.3\lib\x86;D:\C\Glew\lib\Release\Win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -156,13 +156,14 @@
       <SDLCheck>true</SDLCheck>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <DisableSpecificWarnings>4244;4512;</DisableSpecificWarnings>
+      <ShowIncludes>true</ShowIncludes>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;opengl32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
