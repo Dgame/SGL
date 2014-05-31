@@ -1,4 +1,8 @@
 #include <SGL/Window/Window.hpp>
+#include <SGL/Graphic/Blend.hpp>
+#include <SGL/Graphic/Shader.hpp>
+#include <SGL/Graphic/Primitive.hpp>
+#include <SGL/Graphic/Texture.hpp>
 
 namespace sgl {
 	int Window::_winCount = 0;
@@ -14,13 +18,20 @@ namespace sgl {
 		_winCount++;
 
 		_window = SDL_CreateWindow(title.c_str(), rect.x, rect.y, rect.width, rect.height, static_cast<int>(style));
-		if (_window == nullptr)
+		if (_window == nullptr) {
 			error("Error by creating a SDL2 window: ", SDL_GetError());
+
+			return;
+		}
 
 		if (style & Style::OpenGL) {
 			_glContext = SDL_GL_CreateContext(_window);
-			if (_glContext == nullptr)
+			if (_glContext == nullptr) {
 				error("Error while creating gl context: ", SDL_GetError());
+
+				return;
+			}
+
 #if SGL_DEBUG
 			const uint8* GL_version = glGetString(GL_VERSION);
 			const uint8* GL_vendor = glGetString(GL_VENDOR);
@@ -104,6 +115,8 @@ namespace sgl {
 
 		if (options.blend != nullptr)
 			options.blend->apply();
+		if (options.shader != nullptr)
+			options.shader->use(true);
 
 		d.draw(*this);
 	}
@@ -120,7 +133,6 @@ namespace sgl {
 			glDisable(GL_TEXTURE_2D);
 		else if (texCoords != nullptr) {
 			glTexCoordPointer(2, GL_FLOAT, p.offset, texCoords);
-
 			texture->bind();
 		}
 

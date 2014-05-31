@@ -8,15 +8,15 @@
 #include <SGL/Graphic/Color.hpp>
 #include <SGL/Graphic/Surface.hpp>
 #include <SGL/Graphic/Drawable.hpp>
-#include <SGL/Graphic/Primitive.hpp>
-#include <SGL/Graphic/Texture.hpp>
-#include <SGL/Graphic/Blend.hpp>
 #include <SGL/Math/Rect.hpp>
 #include <SGL/Math/Vector2.hpp>
 #include <SGL/System/Clock.hpp>
 #include <SGL/Window/DrawOptions.hpp>
 
 namespace sgl {
+	class Texture;
+	struct Primitive;
+
 	class Window {
 	public:
 		/**

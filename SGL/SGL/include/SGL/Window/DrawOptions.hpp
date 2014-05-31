@@ -3,15 +3,15 @@
 
 namespace sgl {
 	struct Blend;
-	//class Shader;
+	class ShaderProgram;
 
 	struct DrawOptions {
-		const Blend* blend;
-		//const Shader* shader;
+		const Blend* blend = nullptr;
+		const ShaderProgram* shader = nullptr;
 
-		explicit DrawOptions(Blend* bp);
-		//explicit DrawOptions(Shader* sp);
-		//explicit DrawOptions(Blend* bp, Shader* sp);
+		explicit DrawOptions(const Blend* bp);
+		explicit DrawOptions(const ShaderProgram* sp);
+		explicit DrawOptions(const Blend* bp, const ShaderProgram* sp);
 	};
 }
 

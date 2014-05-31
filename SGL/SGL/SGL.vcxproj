@@ -28,7 +28,7 @@
     <ClInclude Include="include\SGL\Graphic\Drawable.hpp" />
     <ClInclude Include="include\SGL\Graphic\Image.hpp" />
     <ClInclude Include="include\SGL\Graphic\Primitive.hpp" />
-    <ClInclude Include="include\SGL\Graphic\Shape.hpp" />
+    <ClInclude Include="include\SGL\Graphic\Shader.hpp" />
     <ClInclude Include="include\SGL\Graphic\Smooth.hpp" />
     <ClInclude Include="include\SGL\Graphic\Sprite.hpp" />
     <ClInclude Include="include\SGL\Graphic\Spritesheet.hpp" />
@@ -63,6 +63,7 @@
     <ClCompile Include="src\SGL\Graphic\Color.cpp" />
     <ClCompile Include="src\SGL\Graphic\Image.cpp" />
     <ClCompile Include="src\SGL\Graphic\Primitive.cpp" />
+    <ClCompile Include="src\SGL\Graphic\Shader.cpp" />
     <ClCompile Include="src\SGL\Graphic\Shape.cpp" />
     <ClCompile Include="src\SGL\Graphic\Smooth.cpp" />
     <ClCompile Include="src\SGL\Graphic\Sprite.cpp" />

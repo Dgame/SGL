@@ -90,9 +90,6 @@
     <ClInclude Include="include\SGL\Graphic\Drawable.hpp">
       <Filter>Headerdateien\SGL\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="include\SGL\Graphic\Shape.hpp">
-      <Filter>Headerdateien\SGL\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="include\SGL\Graphic\Sprite.hpp">
       <Filter>Headerdateien\SGL\Graphics</Filter>
     </ClInclude>
@@ -180,6 +177,9 @@
     <ClInclude Include="include\SGL\Core\Config.hpp">
       <Filter>Headerdateien\SGL\Core</Filter>
     </ClInclude>
+    <ClInclude Include="include\SGL\Graphic\Shader.hpp">
+      <Filter>Headerdateien\SGL\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\SGL\Audio\Sound.cpp">
@@ -265,6 +265,9 @@
     </ClCompile>
     <ClCompile Include="src\SGL\System\VertexBuffer.cpp">
       <Filter>Quelldateien\SGL\System</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SGL\Graphic\Shader.cpp">
+      <Filter>Quelldateien\SGL\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
