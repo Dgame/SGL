@@ -180,6 +180,9 @@
     <ClInclude Include="include\SGL\Graphic\Shader.hpp">
       <Filter>Headerdateien\SGL\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="include\SGL\Graphic\Shape.hpp">
+      <Filter>Headerdateien\SGL\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\SGL\Audio\Sound.cpp">

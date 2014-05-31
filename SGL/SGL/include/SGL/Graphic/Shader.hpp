@@ -56,6 +56,8 @@ namespace sgl {
 		std::map<std::string, ShaderTex> _textures;
 
 	public:
+		ShaderProgram() = default;
+		explicit ShaderProgram(const Shader& s1, const Shader& s2, bool link = false);
 		virtual ~ShaderProgram();
 
 		uint32 id() const {

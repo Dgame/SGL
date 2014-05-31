@@ -31,17 +31,15 @@ namespace sgl {
 				is.seekg(0, is.beg); // Back to beginning
 
 				buffer = new char[length];
-
 				// read data as a block:
 				is.read(buffer, length);
-
 				is.close();
 
 				if (buffer != nullptr) {
 					if (_glShaderId == 0)
 						_glShaderId = glCreateShader(static_cast<GLenum>(_type));
 
-					const char* buf = static_cast<const char*>(buffer);
+					const char* buf = buffer;
 					glShaderSource(_glShaderId, 1, &buf, &length);
 
 					delete[] buffer;
@@ -56,6 +54,14 @@ namespace sgl {
 
 	ShaderTex::ShaderTex(int loc, const Texture* tex) : location(loc), texture(tex) {
 
+	}
+
+	ShaderProgram::ShaderProgram(const Shader& s1, const Shader& s2, bool link) {
+		this->attach(s1);
+		this->attach(s2);
+
+		if (link)
+			this->link();
 	}
 
 	ShaderProgram::~ShaderProgram() {
