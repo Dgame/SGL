@@ -85,6 +85,8 @@ namespace sgl {
 			_shutdown = true;
 		}
 
+		void applyViewport() const;
+
 		void maximize() const {
 			SDL_MaximizeWindow(_window);
 		}
@@ -124,14 +126,14 @@ namespace sgl {
 		}
 
 		uint16 width() const {
-			int w;
+			int w = 0;
 			SDL_GetWindowSize(_window, &w, nullptr);
 
 			return w;
 		}
 
 		uint16 height() const {
-			int h;
+			int h = 0;
 			SDL_GetWindowSize(_window, nullptr, &h);
 
 			return h;

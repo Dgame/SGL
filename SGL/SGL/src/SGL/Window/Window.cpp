@@ -31,7 +31,6 @@ namespace sgl {
 
 				return;
 			}
-
 #if SGL_DEBUG
 			const uint8* GL_version = glGetString(GL_VERSION);
 			const uint8* GL_vendor = glGetString(GL_VENDOR);
@@ -41,6 +40,7 @@ namespace sgl {
 #endif
 			glMatrixMode(GL_PROJECTION);
 			glLoadIdentity();
+			glOrtho(0, rect.width, rect.height, 0, 1, -1);
 
 			glEnable(GL_CULL_FACE);
 			glCullFace(GL_FRONT);
@@ -60,7 +60,6 @@ namespace sgl {
 
 			// Hints
 			glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST);
-			glOrtho(0, rect.width, rect.height, 0, 1, -1);
 
 			this->setVerticalSync(Sync::Enable);
 			this->setClearColor(Color::White);
@@ -86,8 +85,16 @@ namespace sgl {
 		_winCount--;
 	}
 
+	void Window::applyViewport() const {
+		int w = 0, h = 0;
+		SDL_GetWindowSize(_window, &w, &h);
+
+		glMatrixMode(GL_MODELVIEW);
+		glViewport(0, 0, w, h);
+	}
+
 	Vector2s Window::getPosition() const {
-		int x, y;
+		int x = 0, y = 0;
 		SDL_GetWindowPosition(_window, &x, &y);
 
 		return Vector2s(x, y);
@@ -119,6 +126,9 @@ namespace sgl {
 			options.shader->use(true);
 
 		d.draw(*this);
+
+		if (options.shader != nullptr)
+			options.shader->use(false);
 	}
 
 	void Window::draw(const Primitive& p, const float* texCoords, const Texture* texture) const {

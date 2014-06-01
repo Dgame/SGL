@@ -8,7 +8,7 @@ int main() {
 	sgl::Window wnd(640, 480, "Test", sgl::Window::Style::Default | sgl::Window::Style::Resizeable);
 	//wnd.setClearColor(sgl::Color::Blue);
 	wnd.setVerticalSync(sgl::Window::Sync::Disable);
-	//wnd.framerateLimit = 30;
+	wnd.framerateLimit = 30;
 
 	uint32 pixels[256] = {
 		0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff,
@@ -69,6 +69,12 @@ int main() {
 	s.texture = &wiki_img;
 	//s.fill = true;
 
+	sgl::Shape s2 = s;
+	s2.texture = nullptr;
+	s2.move(150, 225);
+	s2.fill = true;
+	s2.setColor(sgl::Color::Red);
+
 	sgl::Shape test(sgl::Shape::Type::Quad);
 	test.addVertices({50, 150, 100, 150, 100, 200, 50, 200});
 
@@ -123,12 +129,32 @@ int main() {
 
 	std::string txt_input;
 
-	//sgl::Keyboard::StartTextInput();
-	//if (sgl::Keyboard::IsTextInputActive())
-	//	std::cout << "Keyboard input active" << std::endl;
+	float time = 0;
+
+	sgl::Shader vert_shader(sgl::Shader::Type::Vertex, "samples/Shader/flatten.vert");
+	sgl::Shader frag_shader(sgl::Shader::Type::Fragment, "samples/Shader/flatten.frag");
+	sgl::ShaderProgram sp;
+	sp.attach(vert_shader);
+	sp.attach(frag_shader);
+	sp.link();
+
+	std::string shader_error;
+
+	if (vert_shader.hasError(&shader_error))
+		println("VertexShader Error: ", shader_error);
+	if (frag_shader.hasError(&shader_error))
+		println("FragmentShader Error: ", shader_error);
+	if (sp.hasError(&shader_error))
+		println("ShaderProgramm Error: ", shader_error);
+
+	sgl::Keyboard::StartTextInput();
+	if (sgl::Keyboard::IsTextInputActive())
+		std::cout << "Keyboard input active" << std::endl;
 
 	sgl::Event event;
 	while (wnd.isOpen()) {
+		time += 1;
+
 		while (sgl::Event::Poll(event)) {
 			switch (event.type) {
 				case sgl::Event::Type::Quit:
@@ -138,6 +164,7 @@ int main() {
 					switch (event.window.event) {
 						case sgl::Event::Window::Resized:
 							std::cout << "Resized Window to " << event.window.size.width << "::" << event.window.size.height << std::endl;
+							wnd.applyViewport();
 							break;
 						case sgl::Event::Window::Moved:
 							std::cout << "Move Window to " << event.window.move.x << "::" << event.window.move.y << std::endl;
@@ -151,6 +178,8 @@ int main() {
 				case sgl::Event::Type::MouseButtonDown:
 					str = txt_input;
 					txt_input.clear();
+
+					//wnd.maximize();
 					break;
 				case sgl::Event::Type::KeyDown:
 					if (event.keyboard.key == sgl::Keyboard::Code::Escape)
@@ -183,7 +212,7 @@ int main() {
 								box.move(8, 0);
 
 								break;
-							//default:
+								//default:
 								//str = "You pressed a Key";
 						}
 					}
@@ -203,11 +232,12 @@ int main() {
 		wnd.draw(wiki_sprite2, sgl::DrawOptions(&b1));
 		wnd.draw(box);
 		wnd.draw(s);
+		wnd.draw(s2, sgl::DrawOptions(&sp));
 		wnd.draw(str);
 
-		animation.row = 1;
-		animation.slide(sgl::Spritesheet::Grid::Row);
-		wnd.draw(animation);
+		//animation.row = 1;
+		//animation.slide(sgl::Spritesheet::Grid::Row);
+		//wnd.draw(animation);
 
 		//icon_sprite.position.y += 1;
 		//icon_sprite.position.x += 1;

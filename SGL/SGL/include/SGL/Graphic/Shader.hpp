@@ -39,6 +39,8 @@ namespace sgl {
 		}
 
 		void loadFromFile(const std::string& filename);
+
+		bool hasError(std::string* str = nullptr) const;
 	};
 
 	struct ShaderTex {
@@ -64,8 +66,12 @@ namespace sgl {
 			return _glProgId;
 		}
 
-		int locationOf(const std::string& name) const {
+		int locationOfUniform(const std::string& name) const {
 			return glGetUniformLocation(_glProgId, name.c_str());
+		}
+
+		int locationOfAttrib(const std::string& name) const {
+			return glGetAttribLocation(_glProgId, name.c_str());
 		}
 
 		void use(bool enable = true) const;
@@ -73,26 +79,39 @@ namespace sgl {
 		void attach(const Shader& shader) {
 			if (_glProgId == 0)
 				_glProgId = glCreateProgram();
-			glAttachShader(_glProgId, shader.id());
+			glCheck(glAttachShader(_glProgId, shader.id()));
 		}
 
 		void detach(const Shader& shader) const {
-			glDetachShader(_glProgId, shader.id());
+			glCheck(glDetachShader(_glProgId, shader.id()));
 		}
 
 		void link() const {
-			glLinkProgram(_glProgId);
+			glCheck(glLinkProgram(_glProgId));
 		}
 
-		void bind(const std::string& name, float value) const;
-		void bind(const std::string& name, float x, float y) const;
-		void bind(const std::string& name, const Vector2f& vec) const;
-		void bind(const std::string& name, float x, float y, float z) const;
-		void bind(const std::string& name, float r, float g, float b, float a) const;
-		void bind(const std::string& name, const Color& col) const;
-		void bind(const std::string& name, const Texture* tex);
+		bool bind(const std::string& name, float value) const;
+		bool bind(const std::string& name, float x, float y) const;
+		bool bind(const std::string& name, const Vector2f& vec) const;
+		bool bind(const std::string& name, float x, float y, float z) const;
+		bool bind(const std::string& name, float r, float g, float b, float a) const;
+		bool bind(const std::string& name, const Color& col) const;
+		bool bind(const std::string& name, const Texture* tex);
 
-		void unbindTexture(const std::string& name);
+		bool bind(int loc, float value) const;
+		bool bind(int loc, float x, float y) const;
+		bool bind(int loc, const Vector2f& vec) const;
+		bool bind(int loc, float x, float y, float z) const;
+		bool bind(int loc, float r, float g, float b, float a) const;
+		bool bind(int loc, const Color& col) const;
+
+		void bindAttribute(const std::string& name, uint32 colorNumber) const {
+			glCheck(glBindFragDataLocation(_glProgId, colorNumber, name.c_str()));
+		}
+
+		bool unbindTexture(const std::string& name);
+
+		bool hasError(std::string* str = nullptr) const;
 	};
 }
 

@@ -13,7 +13,7 @@ namespace sgl {
 
 	Shader::~Shader() {
 		if (_glShaderId != 0)
-			glDeleteShader(_glShaderId);
+			glCheck(glDeleteShader(_glShaderId));
 	}
 
 	void Shader::loadFromFile(const std::string& filename) {
@@ -40,16 +40,36 @@ namespace sgl {
 						_glShaderId = glCreateShader(static_cast<GLenum>(_type));
 
 					const char* buf = buffer;
-					glShaderSource(_glShaderId, 1, &buf, &length);
+					glCheck(glShaderSource(_glShaderId, 1, &buf, &length));
 
 					delete[] buffer;
 					buffer = nullptr;
 					buf = nullptr;
 
-					glCompileShader(_glShaderId);
+					glCheck(glCompileShader(_glShaderId));
 				}
 			}
 		}
+	}
+
+	bool Shader::hasError(std::string* str) const {
+		int infologLength = 0;
+		int charsWritten = 0;
+
+		glGetShaderiv(_glShaderId, GL_INFO_LOG_LENGTH, &infologLength);
+
+		if (infologLength > 1) {
+			std::unique_ptr<char> infoLog = std::unique_ptr<char>(new char[infologLength]);
+
+			glGetShaderInfoLog(_glShaderId, infologLength, &charsWritten, infoLog.get());
+
+			if (str != nullptr)
+				str->append(infoLog.get(), charsWritten);
+
+			return true;
+		}
+
+		return false;
 	}
 
 	ShaderTex::ShaderTex(int loc, const Texture* tex) : location(loc), texture(tex) {
@@ -66,81 +86,143 @@ namespace sgl {
 
 	ShaderProgram::~ShaderProgram() {
 		if (_glProgId != 0)
-			glDeleteProgram(_glProgId);
+			glCheck(glDeleteProgram(_glProgId));
 	}
 
 	void ShaderProgram::use(bool enable) const {
 		if (enable) {
-			glUseProgram(_glProgId);
+			glCheck(glUseProgram(_glProgId));
 
 			auto it = _textures.begin();
-			for (std::size_t i = 0; i < _textures.size(); ++i) {
-				GLint index = static_cast<GLsizei>(i + 1);
-				glUniform1i(it->second.location, index);
-				glActiveTexture(GL_TEXTURE0 + index);
+			if (it != _textures.end()) {
+				for (std::size_t i = 0; i < _textures.size(); ++i) {
+					GLint index = static_cast<GLsizei>(i + 1);
+					glUniform1i(it->second.location, index);
+					glActiveTexture(GL_TEXTURE0 + index);
 
-				it->second.texture->bind();
-				++it;
+					it->second.texture->bind();
+					++it;
+				}
+
+				glCheck(glActiveTexture(GL_TEXTURE0));
 			}
-
-			glActiveTexture(GL_TEXTURE0);
 		} else
-			glUseProgram(0);
+			glCheck(glUseProgram(0));
 
 		//glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
-	void ShaderProgram::bind(const std::string& name, float value) const {
-		this->use(true);
-
-		const int loc = this->locationOf(name);
-		if (loc > 0)
-			glUniform1f(loc, value);
+	bool ShaderProgram::bind(const std::string& name, float value) const {
+		const int loc = this->locationOfUniform(name);
+		
+		return this->bind(loc, value);
 	}
 
-	void ShaderProgram::bind(const std::string& name, float x, float y) const {
-		this->use(true);
-
-		const int loc = this->locationOf(name);
-		if (loc > 0)
-			glUniform2f(loc, x, y);
+	bool ShaderProgram::bind(const std::string& name, float x, float y) const {
+		const int loc = this->locationOfUniform(name);
+		
+		return this->bind(loc, x, y);
 	}
 
-	void ShaderProgram::bind(const std::string& name, const Vector2f& vec) const {
-		this->bind(name, vec.x, vec.y);
+	bool ShaderProgram::bind(const std::string& name, const Vector2f& vec) const {
+		return this->bind(name, vec.x, vec.y);
 	}
 
-	void ShaderProgram::bind(const std::string& name, float x, float y, float z) const {
-		this->use(true);
-
-		const int loc = this->locationOf(name);
-		if (loc > 0)
-			glUniform3f(loc, x, y, z);
+	bool ShaderProgram::bind(const std::string& name, float x, float y, float z) const {
+		const int loc = this->locationOfUniform(name);
+		
+		return this->bind(loc, x, y, z);
 	}
 
-	void ShaderProgram::bind(const std::string& name, float r, float g, float b, float a) const {
-		this->use(true);
-
-		const int loc = this->locationOf(name);
-		if (loc > 0)
-			glUniform4f(loc, r, g, b, a);
+	bool ShaderProgram::bind(const std::string& name, float r, float g, float b, float a) const {
+		const int loc = this->locationOfUniform(name);
+		
+		return this->bind(loc, r, g, b, a);
 	}
 
-	void ShaderProgram::bind(const std::string& name, const Color& col) const {
+	bool ShaderProgram::bind(const std::string& name, const Color& col) const {
 		const GLColor glcol = Color::InGLMode(col);
-		this->bind(name, glcol.red, glcol.green, glcol.blue, glcol.alpha);
+		
+		return this->bind(name, glcol.red, glcol.green, glcol.blue, glcol.alpha);
 	}
 
-	void ShaderProgram::bind(const std::string& name, const Texture* tex) {
-		const int loc = this->locationOf(name);
-		if (loc > 0)
+	bool ShaderProgram::bind(const std::string& name, const Texture* tex) {
+		const int loc = this->locationOfUniform(name);
+		const bool valid = loc >= 0;
+		if (valid)
 			_textures[name] = ShaderTex(loc, tex);
+
+		return valid;
 	}
 
-	void ShaderProgram::unbindTexture(const std::string& name) {
+	bool ShaderProgram::unbindTexture(const std::string& name) {
 		auto it = _textures.find(name);
 		if (it != _textures.end() && typeid(it->second).name() == typeid(ShaderTex).name()) {
 			_textures.erase(it);
+
+			return true;
 		}
+
+		return false;
+	}
+
+	bool ShaderProgram::bind(int loc, float value) const {
+		const bool valid = loc >= 0;
+		if (valid)
+			glCheck(glUniform1f(loc, value));
+
+		return valid;
+	}
+
+	bool ShaderProgram::bind(int loc, float x, float y) const {
+		const bool valid = loc >= 0;
+		if (valid)
+			glCheck(glUniform2f(loc, x, y));
+
+		return valid;
+	}
+
+	bool ShaderProgram::bind(int loc, const Vector2f& vec) const {
+		return this->bind(loc, vec.x, vec.y);
+	}
+
+	bool ShaderProgram::bind(int loc, float x, float y, float z) const {
+		const bool valid = loc >= 0;
+		if (valid)
+			glCheck(glUniform3f(loc, x, y, z));
+
+		return valid;
+	}
+
+	bool ShaderProgram::bind(int loc, float r, float g, float b, float a) const {
+		const bool valid = loc >= 0;
+		if (valid)
+			glCheck(glUniform4f(loc, r, g, b, a));
+
+		return valid;
+	}
+
+	bool ShaderProgram::bind(int loc, const Color& col) const {
+		return this->bind(loc, col.red, col.green, col.blue, col.alpha);
+	}
+
+	bool ShaderProgram::hasError(std::string* str) const {
+		int infologLength = 0;
+		int charsWritten = 0;
+
+		glCheck(glGetProgramiv(_glProgId, GL_INFO_LOG_LENGTH, &infologLength));
+
+		if (infologLength > 1) {
+			std::unique_ptr<char> infoLog = std::unique_ptr<char>(new char[infologLength]);
+
+			glCheck(glGetProgramInfoLog(_glProgId, infologLength, &charsWritten, infoLog.get()));
+
+			if (str != nullptr)
+				str->append(infoLog.get(), charsWritten);
+
+			return true;
+		}
+
+		return false;
 	}
 }
