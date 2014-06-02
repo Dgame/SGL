@@ -1,8 +1,8 @@
 #include <SGL/Window/Window.hpp>
-#include <SGL/Graphic/Blend.hpp>
-#include <SGL/Graphic/Shader.hpp>
 #include <SGL/Graphic/Primitive.hpp>
 #include <SGL/Graphic/Texture.hpp>
+#include <SGL/Graphic/Blend.hpp>
+#include <SGL/Graphic/Shader.hpp>
 
 namespace sgl {
 	int Window::_winCount = 0;
@@ -41,6 +41,8 @@ namespace sgl {
 			glMatrixMode(GL_PROJECTION);
 			glLoadIdentity();
 			glOrtho(0, rect.width, rect.height, 0, 1, -1);
+
+			this->applyViewport();
 
 			glEnable(GL_CULL_FACE);
 			glCullFace(GL_FRONT);
@@ -112,7 +114,7 @@ namespace sgl {
 		if (sync == Sync::Enable || sync == Sync::Disable)
 			return SDL_GL_SetSwapInterval(static_cast<int>(sync)) == 0;
 		else
-			println("Unknown sync mode. Sync mode must be one of Sync.Enable, Sync.Disable.");
+			error("Unknown sync mode. Sync mode must be one of Sync.Enable, Sync.Disable.");
 
 		return false;
 	}
@@ -123,7 +125,7 @@ namespace sgl {
 		if (options.blend != nullptr)
 			options.blend->apply();
 		if (options.shader != nullptr)
-			options.shader->use(true);
+			options.shader->execute();
 
 		d.draw(*this);
 

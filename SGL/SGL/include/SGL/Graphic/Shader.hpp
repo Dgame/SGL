@@ -40,7 +40,7 @@ namespace sgl {
 
 		void loadFromFile(const std::string& filename);
 
-		bool hasError(std::string* str = nullptr) const;
+		bool hasErrors(std::string* str = nullptr) const;
 	};
 
 	struct ShaderTex {
@@ -66,15 +66,26 @@ namespace sgl {
 			return _glProgId;
 		}
 
-		int locationOfUniform(const std::string& name) const {
+		int uniformLocationOf(const std::string& name) const {
+			this->use(true);
+
 			return glGetUniformLocation(_glProgId, name.c_str());
 		}
 
-		int locationOfAttrib(const std::string& name) const {
+		int attributeLocationOf(const std::string& name) const {
+			this->use(true);
+
 			return glGetAttribLocation(_glProgId, name.c_str());
 		}
 
-		void use(bool enable = true) const;
+		void use(bool enable = true) const {
+			if (enable)
+				glCheck(glUseProgram(_glProgId));
+			else
+				glCheck(glUseProgram(0));
+		}
+
+		void execute() const;
 
 		void attach(const Shader& shader) {
 			if (_glProgId == 0)
@@ -106,12 +117,14 @@ namespace sgl {
 		bool bind(int loc, const Color& col) const;
 
 		void bindAttribute(const std::string& name, uint32 colorNumber) const {
+			this->use(true);
+
 			glCheck(glBindFragDataLocation(_glProgId, colorNumber, name.c_str()));
 		}
 
 		bool unbindTexture(const std::string& name);
 
-		bool hasError(std::string* str = nullptr) const;
+		bool hasErrors(std::string* str = nullptr) const;
 	};
 }
 

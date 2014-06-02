@@ -140,20 +140,24 @@ int main() {
 
 	std::string shader_error;
 
-	if (vert_shader.hasError(&shader_error))
+	if (vert_shader.hasErrors(&shader_error))
 		println("VertexShader Error: ", shader_error);
-	if (frag_shader.hasError(&shader_error))
+	if (frag_shader.hasErrors(&shader_error))
 		println("FragmentShader Error: ", shader_error);
-	if (sp.hasError(&shader_error))
+	if (sp.hasErrors(&shader_error))
 		println("ShaderProgramm Error: ", shader_error);
 
 	sgl::Keyboard::StartTextInput();
 	if (sgl::Keyboard::IsTextInputActive())
 		std::cout << "Keyboard input active" << std::endl;
 
+	int tloc = sp.uniformLocationOf("time");
+
 	sgl::Event event;
 	while (wnd.isOpen()) {
 		time += 1;
+
+		sp.bind(tloc, time);
 
 		while (sgl::Event::Poll(event)) {
 			switch (event.type) {

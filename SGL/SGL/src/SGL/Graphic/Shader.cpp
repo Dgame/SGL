@@ -52,7 +52,7 @@ namespace sgl {
 		}
 	}
 
-	bool Shader::hasError(std::string* str) const {
+	bool Shader::hasErrors(std::string* str) const {
 		int infologLength = 0;
 		int charsWritten = 0;
 
@@ -89,37 +89,32 @@ namespace sgl {
 			glCheck(glDeleteProgram(_glProgId));
 	}
 
-	void ShaderProgram::use(bool enable) const {
-		if (enable) {
-			glCheck(glUseProgram(_glProgId));
+	void ShaderProgram::execute() const {
+		this->use(true);
 
-			auto it = _textures.begin();
-			if (it != _textures.end()) {
-				for (std::size_t i = 0; i < _textures.size(); ++i) {
-					GLint index = static_cast<GLsizei>(i + 1);
-					glUniform1i(it->second.location, index);
-					glActiveTexture(GL_TEXTURE0 + index);
+		auto it = _textures.begin();
+		if (it != _textures.end()) {
+			for (std::size_t i = 0; i < _textures.size(); ++i) {
+				GLint index = static_cast<GLsizei>(i + 1);
+				glUniform1i(it->second.location, index);
+				glActiveTexture(GL_TEXTURE0 + index);
 
-					it->second.texture->bind();
-					++it;
-				}
-
-				glCheck(glActiveTexture(GL_TEXTURE0));
+				it->second.texture->bind();
+				++it;
 			}
-		} else
-			glCheck(glUseProgram(0));
 
-		//glBindTexture(GL_TEXTURE_2D, 0);
+			glCheck(glActiveTexture(GL_TEXTURE0));
+		}
 	}
 
 	bool ShaderProgram::bind(const std::string& name, float value) const {
-		const int loc = this->locationOfUniform(name);
+		const int loc = this->uniformLocationOf(name);
 		
 		return this->bind(loc, value);
 	}
 
 	bool ShaderProgram::bind(const std::string& name, float x, float y) const {
-		const int loc = this->locationOfUniform(name);
+		const int loc = this->uniformLocationOf(name);
 		
 		return this->bind(loc, x, y);
 	}
@@ -129,13 +124,13 @@ namespace sgl {
 	}
 
 	bool ShaderProgram::bind(const std::string& name, float x, float y, float z) const {
-		const int loc = this->locationOfUniform(name);
+		const int loc = this->uniformLocationOf(name);
 		
 		return this->bind(loc, x, y, z);
 	}
 
 	bool ShaderProgram::bind(const std::string& name, float r, float g, float b, float a) const {
-		const int loc = this->locationOfUniform(name);
+		const int loc = this->uniformLocationOf(name);
 		
 		return this->bind(loc, r, g, b, a);
 	}
@@ -147,10 +142,12 @@ namespace sgl {
 	}
 
 	bool ShaderProgram::bind(const std::string& name, const Texture* tex) {
-		const int loc = this->locationOfUniform(name);
+		const int loc = this->uniformLocationOf(name);
 		const bool valid = loc >= 0;
 		if (valid)
 			_textures[name] = ShaderTex(loc, tex);
+
+		this->use(false);
 
 		return valid;
 	}
@@ -168,16 +165,24 @@ namespace sgl {
 
 	bool ShaderProgram::bind(int loc, float value) const {
 		const bool valid = loc >= 0;
-		if (valid)
+		if (valid) {
+			this->use(true);
 			glCheck(glUniform1f(loc, value));
+			this->use(false);
+		}
+
+		this->use(false);
 
 		return valid;
 	}
 
 	bool ShaderProgram::bind(int loc, float x, float y) const {
 		const bool valid = loc >= 0;
-		if (valid)
+		if (valid) {
+			this->use(false);
 			glCheck(glUniform2f(loc, x, y));
+			this->use(false);
+		}
 
 		return valid;
 	}
@@ -188,16 +193,22 @@ namespace sgl {
 
 	bool ShaderProgram::bind(int loc, float x, float y, float z) const {
 		const bool valid = loc >= 0;
-		if (valid)
+		if (valid) {
+			this->use(true);
 			glCheck(glUniform3f(loc, x, y, z));
+			this->use(false);
+		}
 
 		return valid;
 	}
 
 	bool ShaderProgram::bind(int loc, float r, float g, float b, float a) const {
 		const bool valid = loc >= 0;
-		if (valid)
+		if (valid) {
+			this->use(true);
 			glCheck(glUniform4f(loc, r, g, b, a));
+			this->use(false);
+		}
 
 		return valid;
 	}
@@ -206,7 +217,7 @@ namespace sgl {
 		return this->bind(loc, col.red, col.green, col.blue, col.alpha);
 	}
 
-	bool ShaderProgram::hasError(std::string* str) const {
+	bool ShaderProgram::hasErrors(std::string* str) const {
 		int infologLength = 0;
 		int charsWritten = 0;
 
