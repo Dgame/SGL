@@ -85,7 +85,7 @@ namespace sgl {
 				glCheck(glUseProgram(0));
 		}
 
-		void execute() const;
+		void apply() const;
 
 		void attach(const Shader& shader) {
 			if (_glProgId == 0)

@@ -89,7 +89,7 @@ namespace sgl {
 			glCheck(glDeleteProgram(_glProgId));
 	}
 
-	void ShaderProgram::execute() const {
+	void ShaderProgram::apply() const {
 		this->use(true);
 
 		auto it = _textures.begin();

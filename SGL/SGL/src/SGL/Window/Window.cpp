@@ -125,7 +125,7 @@ namespace sgl {
 		if (options.blend != nullptr)
 			options.blend->apply();
 		if (options.shader != nullptr)
-			options.shader->execute();
+			options.shader->apply();
 
 		d.draw(*this);
 
