@@ -171,8 +171,6 @@ namespace sgl {
 			this->use(false);
 		}
 
-		this->use(false);
-
 		return valid;
 	}
 
