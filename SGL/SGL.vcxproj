@@ -117,7 +117,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <LibraryPath>D:\C\SDL2_mixer-2.0.0\lib\x86;D:\C\SDL2_ttf-2.0.12\lib\x86;D:\C\SDL2_image-2.0.0\lib\x86;D:\C\SDL2-2.0.3\lib\x86;D:\C\Glew\lib\Release\Win32;$(LibraryPath)</LibraryPath>
-    <IncludePath>D:\C\SDL2_mixer-2.0.0\include;D:\C\SDL2_ttf-2.0.12\include;C:\Users\Besitzer\Documents\GitHub\sgl\SGL\SGL\include;D:\C\SDL2_image-2.0.0\include;D:\C\SDL2-2.0.3\include;D:\C\Glew\include;$(IncludePath)</IncludePath>
+    <IncludePath>D:\C\SDL2_mixer-2.0.0\include;D:\C\SDL2_ttf-2.0.12\include;C:\Users\Besitzer\Documents\GitHub\sgl\SGL\include;D:\C\SDL2_image-2.0.0\include;D:\C\SDL2-2.0.3\include;D:\C\Glew\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>

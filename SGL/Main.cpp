@@ -7,7 +7,7 @@
 int main() {
 	sgl::Window wnd(640, 480, "Test", sgl::Window::Style::Default | sgl::Window::Style::Resizeable);
 	//wnd.setClearColor(sgl::Color::Blue);
-	//wnd.setVerticalSync(sgl::Window::Sync::Disable);
+	wnd.setVerticalSync(sgl::Window::Sync::Disable);
 	//wnd.framerateLimit = 30;
 
 	uint32 pixels[256] = {
@@ -227,6 +227,7 @@ int main() {
 		}
 
 		str.format("Framerate is %d", clock.getCurrentFps());
+		printf("Framerate is %d", clock.getCurrentFps());
 
 		wnd.clear();
 

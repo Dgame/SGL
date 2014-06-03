@@ -129,8 +129,8 @@ namespace sgl {
 
 		d.draw(*this);
 
-		if (options.shader != nullptr)
-			options.shader->use(false);
+		//if (options.shader != nullptr)
+		//	options.shader->use(false);
 	}
 
 	void Window::draw(const Primitive& p, const float* texCoords, const Texture* texture) const {
