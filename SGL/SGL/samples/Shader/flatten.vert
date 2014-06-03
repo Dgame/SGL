@@ -1,10 +1,12 @@
 uniform float time;
+uniform float wnd_height;
 
 void main() {
 	vec4 v = vec4(gl_Vertex);
-	//v.z = sin(5.0 * v.x + time) * 0.5;
-	v.y = v.y * time * 0.005;
-	//v.x = v.x * time * 0.5;
-	
-	gl_Position = gl_ModelViewProjectionMatrix * v;
+	v.y = v.y + 0.91 * time;
+
+	if (v.y < wnd_height)
+		gl_Position = gl_ModelViewProjectionMatrix * v;
+	else
+		gl_Position = ftransform();
 }

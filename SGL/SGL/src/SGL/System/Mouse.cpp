@@ -4,26 +4,23 @@
 
 namespace sgl {
 	namespace internal {
-		void Cursor::setCursor(SDL_Cursor* ptr) {
-			_freeCursor();
-
-			_cursor = ptr;
-			SDL_SetCursor(ptr);
+		void Cursor::operator =(SDL_Cursor* cursor) {
+			SDL_FreeCursor(_cursor);
+			_cursor = cursor;
+			SDL_SetCursor(cursor);
 		}
 
 		Cursor::~Cursor() {
-			_freeCursor();
+			SDL_FreeCursor(_cursor);
 		}
 	}
 
 	void Mouse::SetCursor(Cursor cursor) {
-		SDL_Cursor* cursor_ptr = SDL_CreateSystemCursor(static_cast<SDL_SystemCursor>(cursor));
-		internal::CurrentCursor.setCursor(cursor_ptr);
+		internal::CurrentCursor = SDL_CreateSystemCursor(static_cast<SDL_SystemCursor>(cursor));
 	}
 
 	void Mouse::SetCursor(const Surface& srfc) {
-		SDL_Cursor* cursor_ptr = SDL_CreateColorCursor(srfc.ptr(), 0, 0);
-		internal::CurrentCursor.setCursor(cursor_ptr);
+		internal::CurrentCursor = SDL_CreateColorCursor(srfc.ptr(), 0, 0);
 	}
 
 	void Mouse::ShowCursor(bool show) {

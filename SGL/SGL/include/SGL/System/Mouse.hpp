@@ -13,14 +13,9 @@ namespace sgl {
 		private:
 			SDL_Cursor* _cursor = nullptr;
 
-			void _freeCursor() const {
-				if (_cursor != nullptr)
-					SDL_FreeCursor(_cursor);
-			}
-
 		public:
-			void setCursor(SDL_Cursor* ptr);
 			~Cursor();
+			void operator =(SDL_Cursor* cursor);
 		};
 
 		static Cursor CurrentCursor;

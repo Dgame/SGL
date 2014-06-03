@@ -7,8 +7,8 @@
 int main() {
 	sgl::Window wnd(640, 480, "Test", sgl::Window::Style::Default | sgl::Window::Style::Resizeable);
 	//wnd.setClearColor(sgl::Color::Blue);
-	wnd.setVerticalSync(sgl::Window::Sync::Disable);
-	wnd.framerateLimit = 30;
+	//wnd.setVerticalSync(sgl::Window::Sync::Disable);
+	//wnd.framerateLimit = 30;
 
 	uint32 pixels[256] = {
 		0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff,
@@ -147,11 +147,12 @@ int main() {
 	if (sp.hasErrors(&shader_error))
 		println("ShaderProgramm Error: ", shader_error);
 
-	sgl::Keyboard::StartTextInput();
-	if (sgl::Keyboard::IsTextInputActive())
-		std::cout << "Keyboard input active" << std::endl;
-
 	int tloc = sp.uniformLocationOf("time");
+	sp.bind("wnd_height", wnd.height());
+
+	//sgl::Keyboard::StartTextInput();
+	//if (sgl::Keyboard::IsTextInputActive())
+	//	std::cout << "Keyboard input active" << std::endl;
 
 	sgl::Event event;
 	while (wnd.isOpen()) {

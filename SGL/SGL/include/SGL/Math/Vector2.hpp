@@ -18,6 +18,7 @@ namespace sgl {
 
 		Vector2() = default;
 		explicit Vector2(T px, T py);
+
 		template <typename U>
 		explicit Vector2(const Vector2<U>& vec);
 
@@ -191,7 +192,6 @@ namespace sgl {
 
 	using Vector2f = Vector2<float>;
 	using Vector2s = Vector2<int16>;
-	using Vector2us = Vector2<uint16>;
 }
 
 #endif
