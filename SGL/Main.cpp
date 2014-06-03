@@ -227,7 +227,7 @@ int main() {
 		}
 
 		str.format("Framerate is %d", clock.getCurrentFps());
-		printf("Framerate is %d", clock.getCurrentFps());
+		//printf("Framerate is %d\n", clock.getCurrentFps());
 
 		wnd.clear();
 
