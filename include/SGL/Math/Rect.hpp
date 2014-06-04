@@ -15,7 +15,7 @@ namespace sgl {
 
 		Rect() = default;
 		explicit Rect(T px, T py, T pw, T ph);
-		explicit Rect(const Vector2s vec, T pw, T ph);
+		explicit Rect(const Vector2s& vec, T pw, T ph);
 
 		static SDL_Rect* Copy(const Rect<T>* from, SDL_Rect& too);
 
@@ -75,7 +75,7 @@ namespace sgl {
 	}
 
 	template <typename T>
-	Rect<T>::Rect(const Vector2s vec, T pw, T ph) : Rect(vec.x, vec.y, pw, ph) {
+	Rect<T>::Rect(const Vector2s& vec, T pw, T ph) : Rect(vec.x, vec.y, pw, ph) {
 
 	}
 
@@ -156,28 +156,9 @@ namespace sgl {
 		return strm << "Rect<" << typeid(T).name() << ">(" << rect.x << ',' << rect.y << ',' << rect.width, ',' << rect.height << ")";
 	}
 
-	template <typename T>
-	Rect<T> operator +(const Rect<T>& lhs, const Rect<T>& rhs) {
-		return Rect<T>(lhs.x + rhs.x, lhs.y + rhs.y, lhs.width + rhs.width, lhs.height + rhs.height);
-	}
-
-	template <typename T>
-	Rect<T> operator -(const Rect<T>& lhs, const Rect<T>& rhs) {
-		return Rect<T>(lhs.x - rhs.x, lhs.y - rhs.y, lhs.width - rhs.width, lhs.height - rhs.height);
-	}
-
-	template <typename T>
-	Rect<T> operator *(const Rect<T>& lhs, const Rect<T>& rhs) {
-		return Rect<T>(lhs.x * rhs.x, lhs.y * rhs.y, lhs.width * rhs.width, lhs.height * rhs.height);
-	}
-
-	template <typename T>
-	Rect<T> operator /(const Rect<T>& lhs, const Rect<T>& rhs) {
-		return Rect<T>(lhs.x / rhs.x, lhs.y / rhs.y, lhs.width / rhs.width, lhs.height / rhs.height);
-	}
-
 	using FloatRect = Rect<float>;
 	using ShortRect = Rect<int16>;
+	using IntRect = Rect<int>;
 }
 
 #endif

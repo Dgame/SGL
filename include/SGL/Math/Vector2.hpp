@@ -22,8 +22,18 @@ namespace sgl {
 		template <typename U>
 		explicit Vector2(const Vector2<U>& vec);
 
-		bool isZero() const {
-			return this->x == 0 && this->y == 0;
+		Vector2<T>& operator ++() {
+			this->x++:
+			this->y++;
+
+			return *this;
+		}
+
+		Vector2<T>& operator --() {
+			this->x--;
+			this->y--;
+
+			return *this;
 		}
 
 		void set(T x, T y) {
@@ -36,23 +46,30 @@ namespace sgl {
 			this->y += y;
 		}
 
-		float angleBetween(const Vector2<T>& vec, bool inDegrees = true) const;
+		float angle(const Vector2<T>& vec) const {
+			return acosf(this->dot(vec) / (this->length() * vec.length()));
+		}
+
 		Vector2<T> rotate(float angle) const;
 		Vector2<T> normalize() const;
+
+		Vector2<T> abs() const {
+			return Vector2<T>(std::abs(this->x), std::abs(this->y));
+		}
 
 		/**
 		* Calculate the diff between two vectors.
 		*/
 		float diff(const Vector2<T>& vec) const {
-			return sqrtf(powf(this->x - vec.x, 2) + powf(this->y - vec.y, 2));
+			return sqrtf(std::pow(this->x - vec.x, 2) + std::pow(this->y - vec.y, 2));
 		}
 
-		float scalar(const Vector2<T>& lhs, const Vector2<T>& rhs) const {
-			return lhs.x * rhs.x + lhs.y * rhs.y;
+		float dot(const Vector2<T>& vec) const {
+			return this->x * vec.x + this->y * vec.y;
 		}
 
 		float length() const {
-			return sqrtf(powf(this->x, 2) * pow(this->y, 2));
+			return sqrtf(std::pow(this->x, 2) * std::pow(this->y, 2));
 		}
 	};
 
@@ -65,15 +82,6 @@ namespace sgl {
 	template <typename U>
 	Vector2<T>::Vector2(const Vector2<U>& vec) : Vector2(static_cast<T>(vec.x), static_cast<T>(vec.y)) {
 
-	}
-
-	template <typename T>
-	float Vector2<T>::angleBetween(const Vector2<T>& vec, bool inDegrees) const {
-		const float angle = acosf(this->scalar(vec) / (this->length() * vec.length()));
-		if (inDegrees)
-			return angle * 180 / M_PI;
-
-		return angle;
 	}
 
 	template <typename T>
@@ -90,15 +98,16 @@ namespace sgl {
 	*/
 	template <typename T>
 	Vector2<T> Vector2<T>::normalize() const {
-		Vector2<T> result = *this;
-
 		const float len = this->length();
 		if (len > 0) {
+			Vector2<T> result = *this;
 			result.x /= len;
 			result.y /= len;
+
+			return result;
 		}
 
-		return result;
+		return *this;
 	}
 
 	template <typename T>
@@ -109,6 +118,16 @@ namespace sgl {
 	template <typename T>
 	bool operator !=(const Vector2<T>& lhs, const Vector2<T>& rhs) {
 		return !(lhs == rhs);
+	}
+
+	template <typename T>
+	bool operator <(const Vector2<T>& lhs, const Vector2<T>& rhs) {
+		return lhs.x < rhs.x && lhs.y < rhs.y;
+	}
+
+	template <typename T>
+	bool operator >(const Vector2<T>& lhs, const Vector2<T>& rhs) {
+		return lhs.x > rhs.x && lhs.y > rhs.y;
 	}
 
 	template <typename T>
@@ -192,6 +211,7 @@ namespace sgl {
 
 	using Vector2f = Vector2<float>;
 	using Vector2s = Vector2<int16>;
+	using Vector2i = Vector2<int>;
 }
 
 #endif

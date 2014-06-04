@@ -9,16 +9,17 @@ namespace sgl {
 		/**
 		* The coordinates
 		*/
-		float x, y;
+		float x = 0, y = 0;
 		/**
 		* The color components
 		*/
-		float r, g, b, a;
+		float r = 0, g = 0, b = 0, a = 0;
 		/**
 		* The texcoords
 		*/
-		float tx, ty;
+		float tx = 0, ty = 0;
 
+		Vertex() = default;
 		explicit Vertex(float _x, float _y);
 		explicit Vertex(float _x, float _y, float _tx, float _ty);
 
