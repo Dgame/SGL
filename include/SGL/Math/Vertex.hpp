@@ -20,8 +20,9 @@ namespace sgl {
 		float tx = 0, ty = 0;
 
 		Vertex() = default;
-		explicit Vertex(float _x, float _y);
-		explicit Vertex(float _x, float _y, float _tx, float _ty);
+		explicit Vertex(float px, float py);
+		explicit Vertex(float px, float py, float ptx, float pty);
+		explicit Vertex(const Vector2f& coord, const Vector2f& texcoord);
 
 		void setColor(const Color& col);
 

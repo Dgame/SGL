@@ -22,20 +22,6 @@ namespace sgl {
 		template <typename U>
 		explicit Vector2(const Vector2<U>& vec);
 
-		Vector2<T>& operator ++() {
-			this->x++:
-			this->y++;
-
-			return *this;
-		}
-
-		Vector2<T>& operator --() {
-			this->x--;
-			this->y--;
-
-			return *this;
-		}
-
 		void set(T x, T y) {
 			this->x = x;
 			this->y = y;
@@ -60,16 +46,14 @@ namespace sgl {
 		/**
 		* Calculate the diff between two vectors.
 		*/
-		float diff(const Vector2<T>& vec) const {
-			return sqrtf(std::pow(this->x - vec.x, 2) + std::pow(this->y - vec.y, 2));
-		}
+		float diff(const Vector2<T>& vec) const;
 
 		float dot(const Vector2<T>& vec) const {
 			return this->x * vec.x + this->y * vec.y;
 		}
 
 		float length() const {
-			return sqrtf(std::pow(this->x, 2) * std::pow(this->y, 2));
+			return std::sqrt(std::pow(this->x, 2) * std::pow(this->y, 2));
 		}
 	};
 
@@ -108,6 +92,33 @@ namespace sgl {
 		}
 
 		return *this;
+	}
+
+	/**
+	* Calculate the diff between two vectors.
+	*/
+	template <typename T>
+	float Vector2<T>::diff(const Vector2<T>& vec) const {
+		const float vx = std::pow(this->x - vec.x, 2);
+		const float vy = std::pow(this->y - vec.y, 2);
+
+		return std::sqrt(vx + vy);
+	}
+
+	template <typename T>
+	Vector2<T>& operator ++(Vector2<T>& vec) {
+		vec.x++;
+		vec.y++;
+
+		return vec;
+	}
+
+	template <typename T>
+	Vector2<T>& operator --(Vector2<T>& vec) {
+		vec.x--;
+		vec.y--;
+
+		return vec;
 	}
 
 	template <typename T>

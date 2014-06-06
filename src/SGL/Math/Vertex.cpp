@@ -1,12 +1,16 @@
 #include <SGL/Math/Vertex.hpp>
 
 namespace sgl {
-	Vertex::Vertex(float _x, float _y) : Vertex(_x, _y, 0, 0) {
+	Vertex::Vertex(float px, float py) : Vertex(px, py, 0, 0) {
 
 	}
 
-	Vertex::Vertex(float _x, float _y, float _tx, float _ty) : x(_x), y(_y), tx(_tx), ty(_ty) {
+	Vertex::Vertex(float px, float py, float ptx, float pty) : x(px), y(py), tx(ptx), ty(pty) {
 		setColor(Color::Black);
+	}
+
+	Vertex::Vertex(const Vector2f& coord, const Vector2f& texcoord) : Vertex(coord.x, coord.y, texcoord.x, texcoord.y) {
+
 	}
 
 	void Vertex::setColor(const Color& col) {

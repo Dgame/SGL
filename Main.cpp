@@ -3,6 +3,7 @@
 #include <SGL/System.hpp>
 #include <SGL/Audio.hpp>
 #include <SGL/Window.hpp>
+#include <SGL/Math.hpp>
 
 int main() {
 	sgl::Window wnd(640, 480, "Test", sgl::Window::Style::Default | sgl::Window::Style::Resizeable);
@@ -153,6 +154,12 @@ int main() {
 	//sgl::Keyboard::StartTextInput();
 	//if (sgl::Keyboard::IsTextInputActive())
 	//	std::cout << "Keyboard input active" << std::endl;
+
+	sgl::Vector3f v31(4, 2, 3);
+	std::cout << v31.rotate(90, 0, 0, 1) << std::endl;
+	std::cout << v31.rotate(90, 0, 1, 0) << std::endl;
+	std::cout << v31.rotate(90, 1, 0, 0) << std::endl;
+	std::cout << v31.rotate(90, 0, 1, 1) << std::endl;
 
 	sgl::Event event;
 	while (wnd.isOpen()) {

@@ -40,6 +40,7 @@
     <ClInclude Include="include\SGL\Math.hpp" />
     <ClInclude Include="include\SGL\Math\Rect.hpp" />
     <ClInclude Include="include\SGL\Math\Vector2.hpp" />
+    <ClInclude Include="include\SGL\Math\Vector3.hpp" />
     <ClInclude Include="include\SGL\Math\Vertex.hpp" />
     <ClInclude Include="include\SGL\System.hpp" />
     <ClInclude Include="include\SGL\System\Clock.hpp" />

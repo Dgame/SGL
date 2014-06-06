@@ -25,9 +25,6 @@
     <Filter Include="Headerdateien\SGL\Core">
       <UniqueIdentifier>{df6001b0-4306-43c6-b6d6-8b2afd6d1745}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headerdateien\SGL\Graphics">
-      <UniqueIdentifier>{fe83d3c8-efe1-42c5-befb-8c9d275abef9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Headerdateien\SGL\Window">
       <UniqueIdentifier>{0d066fe1-4aff-490e-8608-6f7679443e56}</UniqueIdentifier>
     </Filter>
@@ -43,9 +40,6 @@
     <Filter Include="Quelldateien\SGL\Core">
       <UniqueIdentifier>{a4f0e9d5-f240-4bb4-ae72-07097b20f5d7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Quelldateien\SGL\Graphics">
-      <UniqueIdentifier>{7cef9b98-7c91-40bc-982b-70c305955863}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Quelldateien\SGL\Math">
       <UniqueIdentifier>{09c95faf-bf8a-41e2-b935-833ec8c683dd}</UniqueIdentifier>
     </Filter>
@@ -54,6 +48,12 @@
     </Filter>
     <Filter Include="Quelldateien\SGL\System">
       <UniqueIdentifier>{edf35fb2-a96d-4377-8d71-305d1214db74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\SGL\Graphic">
+      <UniqueIdentifier>{fe83d3c8-efe1-42c5-befb-8c9d275abef9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\SGL\Graphic">
+      <UniqueIdentifier>{7cef9b98-7c91-40bc-982b-70c305955863}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -76,25 +76,25 @@
       <Filter>Headerdateien\SGL\Core</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Graphic\String.hpp">
-      <Filter>Headerdateien\SGL\Graphics</Filter>
+      <Filter>Headerdateien\SGL\Graphic</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Graphic\Surface.hpp">
-      <Filter>Headerdateien\SGL\Graphics</Filter>
+      <Filter>Headerdateien\SGL\Graphic</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Graphic\Texture.hpp">
-      <Filter>Headerdateien\SGL\Graphics</Filter>
+      <Filter>Headerdateien\SGL\Graphic</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Graphic\Color.hpp">
-      <Filter>Headerdateien\SGL\Graphics</Filter>
+      <Filter>Headerdateien\SGL\Graphic</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Graphic\Drawable.hpp">
-      <Filter>Headerdateien\SGL\Graphics</Filter>
+      <Filter>Headerdateien\SGL\Graphic</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Graphic\Sprite.hpp">
-      <Filter>Headerdateien\SGL\Graphics</Filter>
+      <Filter>Headerdateien\SGL\Graphic</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Graphic\Spritesheet.hpp">
-      <Filter>Headerdateien\SGL\Graphics</Filter>
+      <Filter>Headerdateien\SGL\Graphic</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Math\Vertex.hpp">
       <Filter>Headerdateien\SGL\Math</Filter>
@@ -148,25 +148,25 @@
       <Filter>Headerdateien\SGL\Core</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Graphic\Transformable.hpp">
-      <Filter>Headerdateien\SGL\Graphics</Filter>
+      <Filter>Headerdateien\SGL\Graphic</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Core\Scope.hpp">
       <Filter>Headerdateien\SGL\Core</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Graphic\Smooth.hpp">
-      <Filter>Headerdateien\SGL\Graphics</Filter>
+      <Filter>Headerdateien\SGL\Graphic</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Graphic\Blend.hpp">
-      <Filter>Headerdateien\SGL\Graphics</Filter>
+      <Filter>Headerdateien\SGL\Graphic</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Graphic\Primitive.hpp">
-      <Filter>Headerdateien\SGL\Graphics</Filter>
+      <Filter>Headerdateien\SGL\Graphic</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Window\DrawOptions.hpp">
       <Filter>Headerdateien\SGL\Window</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Graphic\Image.hpp">
-      <Filter>Headerdateien\SGL\Graphics</Filter>
+      <Filter>Headerdateien\SGL\Graphic</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\System\VertexBuffer.hpp">
       <Filter>Headerdateien\SGL\System</Filter>
@@ -178,10 +178,13 @@
       <Filter>Headerdateien\SGL\Core</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Graphic\Shader.hpp">
-      <Filter>Headerdateien\SGL\Graphics</Filter>
+      <Filter>Headerdateien\SGL\Graphic</Filter>
     </ClInclude>
     <ClInclude Include="include\SGL\Graphic\Shape.hpp">
-      <Filter>Headerdateien\SGL\Graphics</Filter>
+      <Filter>Headerdateien\SGL\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SGL\Math\Vector3.hpp">
+      <Filter>Headerdateien\SGL\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -195,25 +198,25 @@
       <Filter>Quelldateien\SGL\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\Graphic\Surface.cpp">
-      <Filter>Quelldateien\SGL\Graphics</Filter>
+      <Filter>Quelldateien\SGL\Graphic</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\Graphic\Texture.cpp">
-      <Filter>Quelldateien\SGL\Graphics</Filter>
+      <Filter>Quelldateien\SGL\Graphic</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\Graphic\Color.cpp">
-      <Filter>Quelldateien\SGL\Graphics</Filter>
+      <Filter>Quelldateien\SGL\Graphic</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\Graphic\Shape.cpp">
-      <Filter>Quelldateien\SGL\Graphics</Filter>
+      <Filter>Quelldateien\SGL\Graphic</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\Graphic\Sprite.cpp">
-      <Filter>Quelldateien\SGL\Graphics</Filter>
+      <Filter>Quelldateien\SGL\Graphic</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\Graphic\Spritesheet.cpp">
-      <Filter>Quelldateien\SGL\Graphics</Filter>
+      <Filter>Quelldateien\SGL\Graphic</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\Graphic\String.cpp">
-      <Filter>Quelldateien\SGL\Graphics</Filter>
+      <Filter>Quelldateien\SGL\Graphic</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\Math\Vertex.cpp">
       <Filter>Quelldateien\SGL\Math</Filter>
@@ -246,22 +249,22 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\Graphic\Transformable.cpp">
-      <Filter>Quelldateien\SGL\Graphics</Filter>
+      <Filter>Quelldateien\SGL\Graphic</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\Graphic\Blend.cpp">
-      <Filter>Quelldateien\SGL\Graphics</Filter>
+      <Filter>Quelldateien\SGL\Graphic</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\Graphic\Smooth.cpp">
-      <Filter>Quelldateien\SGL\Graphics</Filter>
+      <Filter>Quelldateien\SGL\Graphic</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\Window\DrawOptions.cpp">
       <Filter>Quelldateien\SGL\Window</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\Graphic\Primitive.cpp">
-      <Filter>Quelldateien\SGL\Graphics</Filter>
+      <Filter>Quelldateien\SGL\Graphic</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\Graphic\Image.cpp">
-      <Filter>Quelldateien\SGL\Graphics</Filter>
+      <Filter>Quelldateien\SGL\Graphic</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\Core\SDL.cpp">
       <Filter>Quelldateien\SGL\Core</Filter>
@@ -270,7 +273,7 @@
       <Filter>Quelldateien\SGL\System</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\Graphic\Shader.cpp">
-      <Filter>Quelldateien\SGL\Graphics</Filter>
+      <Filter>Quelldateien\SGL\Graphic</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
