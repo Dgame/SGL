@@ -5,5 +5,6 @@
 #include <SGL/Math/Vector2.hpp>
 #include <SGL/Math/Vector3.hpp>
 #include <SGL/Math/Vertex.hpp>
+#include <SGL/Math/Matrix4x4.hpp>
 
 #endif

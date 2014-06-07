@@ -60,7 +60,7 @@ namespace sgl {
 			return this->x * vec.x + this->y * vec.y + this->z * vec.z;
 		}
 
-		Vector3<T> cross(const Vector3<T>& lhs, const Vector3<T>& rhs) const;
+		Vector3<T> cross(const Vector3<T>& vec) const;
 
 		float length() const {
 			return std::sqrt(std::pow(this->x, 2) * std::pow(this->y, 2) * std::pow(this->z, 2));
@@ -82,21 +82,20 @@ namespace sgl {
 	template <typename T>
 	Vector3<T> Vector3<T>::rotate(float angle, int8 rx, int8 ry, int8 rz) const {
 		const float size1 = std::sqrt(std::pow(this->x, 2) + std::pow(this->y, 2) + std::pow(this->z, 2));
-		const float size2 = std::sqrt(std::pow(rx, 2) + std::pow(ry, 2) + std::pow(rz, 2));		const Vector3f norm(this->x / size1, this->y / size1, this->z / size1);
+		const float size2 = std::sqrt(std::pow(rx, 2) + std::pow(ry, 2) + std::pow(rz, 2));		Vector3f norm(this->x, this->y, this->z);		norm /= size1;
 		const float rho_rad = angle / 180 * M_PI;
-
 		const float c = std::cos(rho_rad);
 		const float s = std::sin(rho_rad);
 		const float t = 1 - c;
 
-		const float tx = rx / size2;
-		const float ty = ry / size2;
-		const float tz = rz / size2;
-		const float norm_final_x = norm.x * (t * tx * tx + c) + norm.y * (t * tx * ty - s * tz) + norm.z * (t * tx * tz + s * ty);
-		const float norm_final_y = norm.x * (t * tx * ty + s * tz) + norm.y * (t * ty * ty + c) + norm.z * (t * ty * tz - s * tx);
-		const float norm_final_z = norm.x * (t * tx * tz - s * ty) + norm.y * (t * ty * tz + s * tx) + norm.z * (t * tz * tz + c);
+		Vector3f rot(rx, ry, rz);
+		rot /= size2;
+		const float norm_final_x = norm.x * (t * rot.x * rot.x + c) + norm.y * (t * rot.x * rot.y - s * rot.z) + norm.z * (t * rot.x * rot.z + s * rot.y);
+		const float norm_final_y = norm.x * (t * rot.x * rot.y + s * rot.z) + norm.y * (t * rot.y * rot.y + c) + norm.z * (t * rot.y * rot.z - s * rot.x);
+		const float norm_final_z = norm.x * (t * rot.x * rot.z - s * rot.y) + norm.y * (t * rot.y * rot.z + s * rot.x) + norm.z * (t * rot.z * rot.z + c);
 
-		Vector3f final_norm(norm_final_x * size1, norm_final_y * size1, norm_final_z * size1);
+		Vector3f final_norm(norm_final_x, norm_final_y, norm_final_z);
+		final_norm *= size1;
 		//final_norm.x = std::round(final_norm.x * 1000000) / 1000000;
 		//final_norm.y = std::round(final_norm.y * 1000000) / 1000000;
 		//final_norm.z = std::round(final_norm.z * 1000000) / 1000000;
@@ -110,14 +109,8 @@ namespace sgl {
 	template <typename T>
 	Vector3<T> Vector3<T>::normalize() const {
 		const float len = this->length();
-		if (len > 0) {
-			Vector3<T> result = *this;
-			result.x /= len;
-			result.y /= len;
-			result.z /= len;
-
-			return result;
-		}
+		if (len > 0)
+			return *this / len;
 
 		return *this;
 	}
@@ -135,10 +128,10 @@ namespace sgl {
 	}
 
 	template <typename T>
-	Vector3<T> Vector3<T>::cross(const Vector3<T>& lhs, const Vector3<T>& rhs) const {
-		const float cx = (lhs.y * rhs.z) - (lhs.z * rhs.y);
-		const float cy = (lhs.z * rhs.x) - (lhs.x * rhs.z);
-		const float cz = (lhs.x * rhs.y) - (lhs.y * rhs.x);
+	Vector3<T> Vector3<T>::cross(const Vector3<T>& vec) const {
+		const float cx = (this->y * vec.z) - (this->z * vec.y);
+		const float cy = (this->z * vec.x) - (this->x * vec.z);
+		const float cz = (this->x * vec.y) - (this->y * vec.x);
 
 		return Vector3<T>(cx, cy, cz);
 	}
@@ -183,70 +176,108 @@ namespace sgl {
 
 	template <typename T>
 	std::ostream& operator <<(std::ostream& strm, const Vector3<T>& vec) {
-		return strm << "Vector3<" << typeid(T).name() << ">(" << vec.x << ';' << vec.y << ';' << vec.z << ")";
+		return strm << "Vector3<" << typeid(T).name() << ">(" << vec.x << ';' << vec.y << ';' << vec.z << ')';
 	}
 
 	// #1
 
 	template <typename T>
-	void operator +=(Vector3<T>& vec, T value) {
+	Vector3<T>& operator += (Vector3<T>& vec, T value) {
 		vec.x += value;
 		vec.y += value;
 		vec.z += value;
+
+		return vec;
 	}
 
 	template <typename T>
-	void operator -=(Vector3<T>& vec, T value) {
+	Vector3<T>& operator -=(Vector3<T>& vec, T value) {
 		vec.x -= value;
 		vec.y -= value;
 		vec.z -= value;
+
+		return vec;
 	}
 
 	template <typename T>
-	void operator *=(Vector3<T>& vec, T value) {
+	Vector3<T>& operator *=(Vector3<T>& vec, T value) {
 		vec.x *= value;
 		vec.y *= value;
 		vec.z *= value;
+
+		return vec;
 	}
 
 	template <typename T>
-	void operator /=(Vector3<T>& vec, T value) {
+	Vector3<T>& operator /=(Vector3<T>& vec, T value) {
 		vec.x /= value;
 		vec.y /= value;
 		vec.z /= value;
+
+		return vec;
 	}
 
 	// #2
 
 	template <typename T>
-	void operator +=(Vector3<T>& lhs, const Vector3<T>& rhs) {
+	Vector3<T>& operator +=(Vector3<T>& lhs, const Vector3<T>& rhs) {
 		lhs.x += rhs.x;
 		lhs.y += rhs.y;
 		lhs.z += rhs.z;
+
+		return lhs;
 	}
 
 	template <typename T>
-	void operator -=(Vector3<T>& lhs, const Vector3<T>& rhs) {
+	Vector3<T>& operator -=(Vector3<T>& lhs, const Vector3<T>& rhs) {
 		lhs.x -= rhs.x;
 		lhs.y -= rhs.y;
 		lhs.z -= rhs.z;
+
+		return lhs;
 	}
 
 	template <typename T>
-	void operator *=(Vector3<T>& lhs, const Vector3<T>& rhs) {
+	Vector3<T>& operator *=(Vector3<T>& lhs, const Vector3<T>& rhs) {
 		lhs.x *= rhs.x;
 		lhs.y *= rhs.y;
 		lhs.z *= rhs.z;
+
+		return lhs;
 	}
 
 	template <typename T>
-	void operator /=(Vector3<T>& lhs, const Vector3<T>& rhs) {
+	Vector3<T>& operator /=(Vector3<T>& lhs, const Vector3<T>& rhs) {
 		lhs.x /= rhs.x;
 		lhs.y /= rhs.y;
 		lhs.z /= rhs.z;
+
+		return lhs;
 	}
 
 	// #3
+
+	template <typename T>
+	Vector3<T> operator +(const Vector3<T>& vec, T value) {
+		return Vector3<T>(vec.x + value, vec.y + value, vec.z + value);
+	}
+
+	template <typename T>
+	Vector3<T> operator -(const Vector3<T>& vec, T value) {
+		return Vector3<T>(vec.x - value, vec.y - value, vec.z - value);
+	}
+
+	template <typename T>
+	Vector3<T> operator *(const Vector3<T>& vec, T value) {
+		return Vector3<T>(vec.x * value, vec.y * value, vec.z * value);
+	}
+
+	template <typename T>
+	Vector3<T> operator /(const Vector3<T>& vec, T value) {
+		return Vector3<T>(vec.x / value, vec.y / value, vec.z / value);
+	}
+
+	// #4
 
 	template <typename T>
 	Vector3<T> operator +(const Vector3<T>& lhs, const Vector3<T>& rhs) {

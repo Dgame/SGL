@@ -161,6 +161,47 @@ int main() {
 	std::cout << v31.rotate(90, 1, 0, 0) << std::endl;
 	std::cout << v31.rotate(90, 0, 1, 1) << std::endl;
 
+	sgl::Matrix4x4 mat;
+	mat.ortho(0, wnd.width(), wnd.height(), 0, 1, -1);
+	std::cout << mat << std::endl;
+	mat.loadIdentity();
+	std::cout << mat << std::endl;
+	mat.perspective(45, 1.0 * wnd.width() / wnd.height(), 1, 100);
+	std::cout << mat << std::endl;
+	mat.scale(2, 2);
+	std::cout << mat << std::endl;
+	mat.rotate(45);
+	std::cout << mat << std::endl;
+
+	std::cout << "sizeof(sgl::Matrix4x4) = " << sizeof(sgl::Matrix4x4) << std::endl;
+
+	/// ----
+	sgl::Vector2f mcenter(wnd.width() / 2, wnd.height() / 2);
+
+	float angle = 0 * 3.141592654f / 180.f;
+	float cosine = static_cast<float>(std::cos(angle));
+	float sine = static_cast<float>(std::sin(angle));
+	float tx = -mcenter.x * cosine - mcenter.y * sine + mcenter.x;
+	float ty = mcenter.x * sine - mcenter.y * cosine + mcenter.y;
+
+	// Projection components
+	float a = 2.f / wnd.width();
+	float b = -2.f / wnd.height();
+	float c = -a * mcenter.x;
+	float d = -b * mcenter.y;
+
+	sgl::Matrix4x4 proj(a * cosine, a * sine, a * tx + c,
+						-b * sine, b * cosine, b * ty + d,
+						0.f, 0.f, 1.f);
+	std::cout << proj << std::endl;
+
+	/// ----
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadMatrixf(proj.values);
+
+	glMatrixMode(GL_MODELVIEW);
+
 	sgl::Event event;
 	while (wnd.isOpen()) {
 		time += 1;
@@ -245,7 +286,7 @@ int main() {
 		wnd.draw(wiki_sprite2, sgl::DrawOptions(&b1));
 		wnd.draw(box);
 		wnd.draw(s);
-		wnd.draw(s2, sgl::DrawOptions(&sp));
+		wnd.draw(s2/*, sgl::DrawOptions(&sp)*/);
 		wnd.draw(str);
 
 		//animation.row = 1;
@@ -254,6 +295,7 @@ int main() {
 
 		//icon_sprite.position.y += 1;
 		//icon_sprite.position.x += 1;
+		//icon_sprite.position.move(0.1, 0.1);
 
 		wnd.display();
 	}

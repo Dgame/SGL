@@ -92,6 +92,7 @@ namespace sgl {
 		SDL_GetWindowSize(_window, &w, &h);
 
 		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
 		glViewport(0, 0, w, h);
 	}
 

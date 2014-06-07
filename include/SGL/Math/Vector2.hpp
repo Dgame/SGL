@@ -83,13 +83,8 @@ namespace sgl {
 	template <typename T>
 	Vector2<T> Vector2<T>::normalize() const {
 		const float len = this->length();
-		if (len > 0) {
-			Vector2<T> result = *this;
-			result.x /= len;
-			result.y /= len;
-
-			return result;
-		}
+		if (len > 0)
+			return *this / len;
 
 		return *this;
 	}
@@ -143,62 +138,100 @@ namespace sgl {
 
 	template <typename T>
 	std::ostream& operator <<(std::ostream& strm, const Vector2<T>& vec) {
-		return strm << "Vector2<" << typeid(T).name() << ">(" << vec.x << ';' << vec.y << ")";
+		return strm << "Vector2<" << typeid(T).name() << ">(" << vec.x << ';' << vec.y << ')';
 	}
 
 	// #1
 
 	template <typename T>
-	void operator +=(Vector2<T>& vec, T value) {
+	Vector2<T>& operator +=(Vector2<T>& vec, T value) {
 		vec.x += value;
 		vec.y += value;
+
+		return vec;
 	}
 
 	template <typename T>
-	void operator -=(Vector2<T>& vec, T value) {
+	Vector2<T>& operator -=(Vector2<T>& vec, T value) {
 		vec.x -= value;
 		vec.y -= value;
+
+		return vec;
 	}
 
 	template <typename T>
-	void operator *=(Vector2<T>& vec, T value) {
+	Vector2<T>& operator *=(Vector2<T>& vec, T value) {
 		vec.x *= value;
 		vec.y *= value;
+
+		return vec;
 	}
 
 	template <typename T>
-	void operator /=(Vector2<T>& vec, T value) {
+	Vector2<T>& operator /=(Vector2<T>& vec, T value) {
 		vec.x /= value;
 		vec.y /= value;
+
+		return vec;
 	}
 
 	// #2
 
 	template <typename T>
-	void operator +=(Vector2<T>& lhs, const Vector2<T>& rhs) {
+	Vector2<T>& operator +=(Vector2<T>& lhs, const Vector2<T>& rhs) {
 		lhs.x += rhs.x;
 		lhs.y += rhs.y;
+
+		return lhs;
 	}
 
 	template <typename T>
-	void operator -=(Vector2<T>& lhs, const Vector2<T>& rhs) {
+	Vector2<T>& operator -=(Vector2<T>& lhs, const Vector2<T>& rhs) {
 		lhs.x -= rhs.x;
 		lhs.y -= rhs.y;
+
+		return lhs;
 	}
 
 	template <typename T>
-	void operator *=(Vector2<T>& lhs, const Vector2<T>& rhs) {
+	Vector2<T>& operator *=(Vector2<T>& lhs, const Vector2<T>& rhs) {
 		lhs.x *= rhs.x;
 		lhs.y *= rhs.y;
+
+		return lhs;
 	}
 
 	template <typename T>
-	void operator /=(Vector2<T>& lhs, const Vector2<T>& rhs) {
+	Vector2<T>& operator /=(Vector2<T>& lhs, const Vector2<T>& rhs) {
 		lhs.x /= rhs.x;
 		lhs.y /= rhs.y;
+
+		return lhs;
 	}
 
 	// #3
+
+	template <typename T>
+	Vector2<T> operator +(const Vector2<T>& vec, T value) {
+		return Vector2<T>(vec.x + value, vec.y + value);
+	}
+
+	template <typename T>
+	Vector2<T> operator -(const Vector2<T>& vec, T value) {
+		return Vector2<T>(vec.x - value, vec.y - value);
+	}
+
+	template <typename T>
+	Vector2<T> operator *(const Vector2<T>& vec, T value) {
+		return Vector2<T>(vec.x * value, vec.y * value);
+	}
+
+	template <typename T>
+	Vector2<T> operator /(const Vector2<T>& vec, T value) {
+		return Vector2<T>(vec.x / value, vec.y / value);
+	}
+
+	// #4
 
 	template <typename T>
 	Vector2<T> operator +(const Vector2<T>& lhs, const Vector2<T>& rhs) {

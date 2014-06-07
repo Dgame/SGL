@@ -38,6 +38,7 @@
     <ClInclude Include="include\SGL\Graphic\Texture.hpp" />
     <ClInclude Include="include\SGL\Graphic\Transformable.hpp" />
     <ClInclude Include="include\SGL\Math.hpp" />
+    <ClInclude Include="include\SGL\Math\Matrix4x4.hpp" />
     <ClInclude Include="include\SGL\Math\Rect.hpp" />
     <ClInclude Include="include\SGL\Math\Vector2.hpp" />
     <ClInclude Include="include\SGL\Math\Vector3.hpp" />
@@ -74,6 +75,7 @@
     <ClCompile Include="src\SGL\Graphic\Surface.cpp" />
     <ClCompile Include="src\SGL\Graphic\Texture.cpp" />
     <ClCompile Include="src\SGL\Graphic\Transformable.cpp" />
+    <ClCompile Include="src\SGL\Math\Matrix4x4.cpp" />
     <ClCompile Include="src\SGL\Math\Vertex.cpp" />
     <ClCompile Include="src\SGL\System\Clock.cpp" />
     <ClCompile Include="src\SGL\System\Font.cpp" />
