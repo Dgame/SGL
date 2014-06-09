@@ -1,35 +1,36 @@
 #include <SGL/Graphic/Transformable.hpp>
 
 namespace sgl {
-	float Transformable::EnsureRotationRange(float rotation) {
-		if (rotation > 360) {
-			while (rotation > 360) {
-				rotation -= 360;
-			}
-		} else if (rotation < 0) {
-			while (rotation < 0) {
-				rotation += 360;
-			}
+	void Transformable::applyTransformation() const {
+		if (_update) {
+			const Vector2f center = _viewport.getCenterPoint();
+
+			_transform.loadIdentity();
+			_transform.rotate(_rotation, center);
+
+			if (_scale > 1.0f || _scale < 1.0f)
+				_transform.scale(_scale, _scale, center.x, center.y);
+
+			_update = false;
+#if SGL_DEBUG
+			printf("Update Transform\n");
+#endif
 		}
 
-		return rotation;
+		glCheck(glLoadMatrixf(_transform.values));
 	}
 
-	void Transform::_applyTransformation(float cx, float cy, float z) const {
-		const bool doRotate = _rotation > 0 && _rotation < 360;
-		const bool doScale = _scale > 1.f || _scale < 1.f;
+	void Transformable::setViewport(float x, float y, float w, float h) {
+		_viewport.setPosition(x, y);
+		_viewport.setSize(w, h);
 
-		if (doRotate || doScale)
-			glTranslatef(cx, cy, 0);
+		_syncronizePosition();
+	}
 
-		FunctionScope fs([=]() {
-			if (doRotate || doScale)
-				glTranslatef(-cx, -cy, 0);
-		});
-		
-		if (doRotate)
-			glRotatef(_rotation, 0, 0, z);
-		if (doScale)
-			glScalef(_scale, _scale, 0);
+	void Transformable::setRotation(float angle) {
+		_rotation = static_cast<float>(std::fmod(angle, 360));
+		if (_rotation < 0)
+			_rotation += 360;
+		_update = true;
 	}
 }

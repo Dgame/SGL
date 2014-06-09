@@ -10,12 +10,21 @@ namespace sgl {
 
 	Matrix4x4::Matrix4x4(float a00, float a01, float a02,
 						 float a10, float a11, float a12,
-						 float a20, float a21, float a22)
-	{
+						 float a20, float a21, float a22) {
 		this->values[0] = a00; this->values[4] = a01; this->values[8] = 0.f; this->values[12] = a02;
 		this->values[1] = a10; this->values[5] = a11; this->values[9] = 0.f; this->values[13] = a12;
 		this->values[2] = 0.f; this->values[6] = 0.f; this->values[10] = 1.f; this->values[14] = 0.f;
 		this->values[3] = a20; this->values[7] = a21; this->values[11] = 0.f; this->values[15] = a22;
+	}
+
+	Matrix4x4::Matrix4x4(const float values[]) {
+		if (values != nullptr) {
+			for (uint8 i = 0; i < 16; i++) {
+				this->values[i] = values[i];
+			}
+		} else {
+			this->loadIdentity();
+		}
 	}
 
 	Matrix4x4 Matrix4x4::getInverse() const {
@@ -33,19 +42,6 @@ namespace sgl {
 							 (this->values[5] * this->values[0] - this->values[1] * this->values[4]) / det);
 		} else
 			return Identity;
-	}
-
-	void Matrix4x4::loadIdentity() {
-		this->values[0] = 1.f; this->values[4] = 0.f; this->values[8] = 0.f; this->values[12] = 0.f;
-		this->values[1] = 0.f; this->values[5] = 1.f; this->values[9] = 0.f; this->values[13] = 0.f;
-		this->values[2] = 0.f; this->values[6] = 0.f; this->values[10] = 1.f; this->values[14] = 0.f;
-		this->values[3] = 0.f; this->values[7] = 0.f; this->values[11] = 0.f; this->values[15] = 1.f;
-	}
-
-	float Matrix4x4::det() const {
-		return this->values[0] * (this->values[15] * this->values[5] - this->values[7] * this->values[13]) -
-			this->values[1] * (this->values[15] * this->values[4] - this->values[7] * this->values[12]) +
-			this->values[3] * (this->values[13] * this->values[4] - this->values[5] * this->values[12]);
 	}
 
 	Matrix4x4& Matrix4x4::merge(const Matrix4x4& mat) {
@@ -74,7 +70,7 @@ namespace sgl {
 	}
 
 	Matrix4x4& Matrix4x4::rotate(float angle) {
-		const float rad = angle * 3.141592654f / 180.f;
+		const float rad = angle * M_PI / 180.f;
 		const float cos = std::cos(rad);
 		const float sin = std::sin(rad);
 
@@ -86,14 +82,12 @@ namespace sgl {
 	}
 
 	Matrix4x4& Matrix4x4::rotate(float angle, float centerX, float centerY) {
-		const float rad = angle * 3.141592654f / 180.f;
+		const float rad = angle * M_PI / 180.f;
 		const float cos = std::cos(rad);
 		const float sin = std::sin(rad);
 
-		Matrix4x4 rotation(cos, -sin,
-						   centerX * (1 - cos) + centerY * sin,
-						   sin, cos,
-						   centerY * (1 - cos) - centerX * sin,
+		Matrix4x4 rotation(cos, -sin, centerX * (1 - cos) + centerY * sin,
+						   sin, cos, centerY * (1 - cos) - centerX * sin,
 						   0, 0, 1);
 
 		return this->merge(rotation);
@@ -108,17 +102,14 @@ namespace sgl {
 	}
 
 	Matrix4x4& Matrix4x4::scale(float scaleX, float scaleY, float centerX, float centerY) {
-		Matrix4x4 scaling(scaleX, 0,
-						  centerX * (1 - scaleX),
-						  0, scaleY,
-						  centerY * (1 - scaleY),
+		Matrix4x4 scaling(scaleX, 0, centerX * (1 - scaleX),
+						  0, scaleY, centerY * (1 - scaleY),
 						  0, 0, 1);
 
 		return this->merge(scaling);
 	}
 
-	void Matrix4x4::lookAt(float x, float y, float z, float xlook, float ylook, float zlook, float xup, float yup, float zup)
-	{
+	void Matrix4x4::lookAt(float x, float y, float z, float xlook, float ylook, float zlook, float xup, float yup, float zup) {
 		Vector3f eye(x, y, z);
 		Vector3f up(xup, yup, zup);
 

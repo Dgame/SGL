@@ -7,8 +7,8 @@ namespace sgl {
 	}
 
 	void Spritesheet::draw(const Window& wnd) const {
-		const float dx = this->position.x;
-		const float dy = this->position.y;
+		const float dx = _position.x;
+		const float dy = _position.y;
 		const float dw = this->width();
 		const float dh = this->height();
 
@@ -23,10 +23,10 @@ namespace sgl {
 		if (tex == nullptr)
 			return;
 
-		const float tx = (0.f + this->view.x) / tex->width();
-		const float ty = (0.f + this->view.y) / tex->height();
-		const float tw = (0.f + this->view.width) / tex->width();
-		const float th = (0.f + this->view.height) / tex->height();
+		const float tx = this->view.x / tex->width();
+		const float ty = this->view.y / tex->height();
+		const float tw = this->view.width / tex->width();
+		const float th = this->view.height / tex->height();
 
 		const float texCoords[] = {
 			tx, ty,

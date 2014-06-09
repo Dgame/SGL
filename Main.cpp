@@ -52,13 +52,13 @@ int main() {
 
 	sgl::Image wiki_img("samples/Images/wiki.png");
 	sgl::Sprite wiki_sprite(wiki_img);
-	wiki_sprite.position.set(200, 200);
+	wiki_sprite.setPosition(200, 200);
 	wiki_sprite.rotate(25);
 
 	wiki_img.saveToFile("samples/Images/Wiki2.png");
 
 	sgl::Sprite wiki_sprite2(wiki_img);
-	wiki_sprite2.position.set(100, 100);
+	wiki_sprite2.setPosition(100, 100);
 
 	sgl::Image icon_img(icon);
 	sgl::Sprite icon_sprite(icon_img);
@@ -90,8 +90,8 @@ int main() {
 	sgl::Image explo_tex("samples/Images/test_3.png");
 	sgl::Spritesheet animation(explo_tex);
 	animation.tickOffset = 150;
-	animation.view = sgl::ShortRect(0, 0, 43, 59);
-	animation.position = sgl::Vector2f(360, 300);
+	animation.view = sgl::FloatRect(0, 0, 43, 59);
+	animation.setPosition(360, 300);
 
 	sgl::Sound sound1("samples/Audio/expl.wav");
 	sgl::Sound sound2("samples/Audio/orchestral.ogg");
@@ -105,7 +105,6 @@ int main() {
 
 	sgl::Shape box(sgl::Shape::Type::Quad);
 	box.addVertices(sgl::ShortRect(20, 200, 50, 50));
-	box.calculateCenter();
 	box.smooth.set(sgl::Smooth::Target::Line, sgl::Smooth::Mode::Nicest);
 
 	//sgl::Vector2s vs(42, 23);
@@ -260,9 +259,9 @@ int main() {
 							case sgl::Keyboard::Code::Space:
 								b1.color.alpha += 25;
 
-								box.rotate(15);
-								box.scale(0.3f);
 								box.move(8, 0);
+								box.rotate(15);
+								//box.scale(0.3f);
 
 								break;
 								//default:

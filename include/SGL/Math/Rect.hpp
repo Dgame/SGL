@@ -15,7 +15,7 @@ namespace sgl {
 
 		Rect() = default;
 		explicit Rect(T px, T py, T pw, T ph);
-		explicit Rect(const Vector2s& vec, T pw, T ph);
+		explicit Rect(const Vector2<T>& vec, T pw, T ph);
 
 		static SDL_Rect* Copy(const Rect<T>* from, SDL_Rect& too);
 
@@ -59,13 +59,25 @@ namespace sgl {
 			this->y += y;
 		}
 
+		void move(const Vector2<T>& vec) {
+			this->move(vec.x vec.y);
+		}
+
 		void setPosition(T x, T y) {
 			this->x = x;
 			this->y = y;
 		}
 
-		Vector2s getPosition() const {
-			return Vector2s(x, y);
+		void setPosition(const Vector2<T>& vec) {
+			this->setPosition(vec.x, vec.y);
+		}
+
+		Vector2<T> getPosition() const {
+			return Vector2<T>(x, y);
+		}
+
+		Vector2<T> getCenterPoint() const {
+			return Vector2<T>(this->x + this->width / 2, this->y + this->height / 2);
 		}
 	};
 
@@ -75,7 +87,7 @@ namespace sgl {
 	}
 
 	template <typename T>
-	Rect<T>::Rect(const Vector2s& vec, T pw, T ph) : Rect(vec.x, vec.y, pw, ph) {
+	Rect<T>::Rect(const Vector2<T>& vec, T pw, T ph) : Rect(vec.x, vec.y, pw, ph) {
 
 	}
 
@@ -153,7 +165,7 @@ namespace sgl {
 
 	template <typename T>
 	std::ostream& operator <<(std::ostream& strm, const Rect<T>& rect) {
-		return strm << "Rect<" << typeid(T).name() << ">(" << rect.x << ',' << rect.y << ',' << rect.width, ',' << rect.height << ")";
+		return strm << "Rect<" << typeid(T).name() << ">(" << rect.x << ',' << rect.y << ',' << rect.width << ',' << rect.height << ")";
 	}
 
 	using FloatRect = Rect<float>;

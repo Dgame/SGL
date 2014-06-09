@@ -2,17 +2,13 @@
 #include <SGL/Window/Window.hpp>
 
 namespace sgl {
-	Sprite::Sprite() : position(0, 0) {
-
-	}
-
-	Sprite::Sprite(const Texture& tex) : Sprite() {
+	Sprite::Sprite(const Texture& tex) {
 		this->setTexture(tex);
 	}
 
 	void Sprite::draw(const Window& wnd) const {
-		const float dx = this->position.x;
-		const float dy = this->position.y;
+		const float dx = _position.x;
+		const float dy = _position.y;
 		const float dw = this->width();
 		const float dh = this->height();
 
@@ -30,8 +26,7 @@ namespace sgl {
 			0, 1
 		};
 
-		GLMatrixScope mat;
-		Transform::_applyTransformation(dx + (dw / 2), dy + (dh / 2));
+		Transformable::applyTransformation();
 
 		wnd.draw(Primitive(vertices), texCoords, _texture);
 	}

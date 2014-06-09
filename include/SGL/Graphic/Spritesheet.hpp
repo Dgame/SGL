@@ -25,7 +25,7 @@ namespace sgl {
 			Both = Row | Column /// Both, Columns <b>and</b> Rows are used
 		};
 
-		ShortRect view;
+		FloatRect view;
 		uint16 tickOffset = 0;
 		uint8 row = 0;
 
@@ -46,12 +46,8 @@ namespace sgl {
 
 		virtual bool slide(Grid grid = Grid::Both);
 
-		virtual bool collideWith(const ShortRect& rect) const override {
+		virtual bool collideWith(const FloatRect& rect) const override {
 			return view.intersects(rect);
-		}
-
-		virtual bool collideWith(const Sprite& other) const override {
-			return collideWith(other.getClipRect());
 		}
 
 		virtual bool collideWith(const Spritesheet& other) const {

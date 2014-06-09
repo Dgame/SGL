@@ -2,73 +2,106 @@
 #define TRANSFORMABLE_HPP
 
 #include <SGL/Core/OpenGL.hpp>
-#include <SGL/Core/Scope.hpp>
 #include <SGL/Math/Vector2.hpp>
+#include <SGL/Math/Matrix4x4.hpp>
 
 namespace sgl {
 	class Transformable {
 	protected:
+		mutable Matrix4x4 _transform;
+		mutable bool _update = false;
+
+		FloatRect _viewport;
+		Vector2f _position;
+
 		float _rotation = 0;
 		float _scale = 1;
 
-		static float EnsureRotationRange(float rotation);
+	private:
+		void _syncronizeViewport() {
+			_viewport.setPosition(_position);
+			_update = true;
+		}
+
+		void _syncronizePosition() {
+			_position.set(_viewport.x, _viewport.y);
+			_update = true;
+		}
 
 	public:
 		virtual ~Transformable() {
 
 		}
 
-		virtual void setScale(float scale) {
-			_scale = scale;
+		void applyTransformation() const;
+
+		const Matrix4x4& getMatrix() const {
+			return _transform;
 		}
 
-		virtual void scale(float scale) {
+		void move(float x, float y) {
+			_position.move(x, y);
+			
+			_syncronizeViewport();
+		}
+
+		void move(const Vector2f& vec) {
+			_position += vec;
+			
+			_syncronizeViewport();
+		}
+
+		void setPosition(float x, float y) {
+			_position.set(x, y);
+			
+			_syncronizeViewport();
+		}
+
+		void setPosition(const Vector2f& vec) {
+			_position = vec;
+
+			_syncronizeViewport();
+		}
+
+		const Vector2f& getPosition() const {
+			return _position;
+		}
+
+		void setViewport(const FloatRect& viewport) {
+			_viewport = viewport;
+
+			_syncronizePosition();
+		}
+
+		void setViewport(float x, float y, float w, float h);
+
+		const FloatRect& getViewport() const {
+			return _viewport;
+		}
+
+		void setScale(float scale) {
+			_scale = scale;
+			_update = true;
+		}
+
+		void scale(float scale) {
 			_scale += scale;
+			_update = true;
 		}
 
 		float getScale() const {
 			return _scale;
 		}
 
-		virtual void setRotation(float rotation) {
-			_rotation = EnsureRotationRange(rotation);
-		}
+		void setRotation(float angle);
 
-		virtual void rotate(float angle) {
-			_rotation += angle;
-			_rotation = EnsureRotationRange(_rotation);
+		void rotate(float angle) {
+			this->setRotation(_rotation + angle);
+			_update = true;
 		}
 
 		float getRotation() const {
 			return _rotation;
-		}
-	};
-
-	class Transform : public Transformable {
-	protected:
-		void _applyTransformation(float cx, float cy, float z = 1) const;
-
-	public:
-		virtual ~Transform() {
-
-		}
-	};
-
-	class GraphTransform : public Transform {
-	protected:
-		void _applyTransformation() const {
-			Transform::_applyTransformation(this->center.x, this->center.y);
-		}
-
-	public:
-		Vector2f center;
-
-		virtual ~GraphTransform() {
-
-		}
-
-		virtual void calculateCenter() {
-
 		}
 	};
 }

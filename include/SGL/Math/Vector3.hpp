@@ -82,14 +82,19 @@ namespace sgl {
 	template <typename T>
 	Vector3<T> Vector3<T>::rotate(float angle, int8 rx, int8 ry, int8 rz) const {
 		const float size1 = std::sqrt(std::pow(this->x, 2) + std::pow(this->y, 2) + std::pow(this->z, 2));
-		const float size2 = std::sqrt(std::pow(rx, 2) + std::pow(ry, 2) + std::pow(rz, 2));		Vector3f norm(this->x, this->y, this->z);		norm /= size1;
+		const float size2 = std::sqrt(std::pow(rx, 2) + std::pow(ry, 2) + std::pow(rz, 2));
+
+		Vector3f norm(this->x, this->y, this->z);
+		norm /= size1;
+
 		const float rho_rad = angle / 180 * M_PI;
 		const float c = std::cos(rho_rad);
 		const float s = std::sin(rho_rad);
 		const float t = 1 - c;
 
 		Vector3f rot(rx, ry, rz);
-		rot /= size2;
+		rot /= size2;
+
 		const float norm_final_x = norm.x * (t * rot.x * rot.x + c) + norm.y * (t * rot.x * rot.y - s * rot.z) + norm.z * (t * rot.x * rot.z + s * rot.y);
 		const float norm_final_y = norm.x * (t * rot.x * rot.y + s * rot.z) + norm.y * (t * rot.y * rot.y + c) + norm.z * (t * rot.y * rot.z - s * rot.x);
 		const float norm_final_z = norm.x * (t * rot.x * rot.z - s * rot.y) + norm.y * (t * rot.y * rot.z + s * rot.x) + norm.z * (t * rot.z * rot.z + c);

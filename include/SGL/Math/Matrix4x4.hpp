@@ -5,6 +5,10 @@
 #include <SGL/Math/Vector2.hpp>
 #include <SGL/Math/Vector3.hpp>
 
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
+
 namespace sgl {
 	struct Matrix4x4 {
 		static const Matrix4x4 Identity;
@@ -15,16 +19,24 @@ namespace sgl {
 		Matrix4x4(float a00, float a01, float a02,
 				  float a10, float a11, float a12,
 				  float a20, float a21, float a22);
-		Matrix4x4(const float values[16]);
+		Matrix4x4(const float values[]);
 
 		Matrix4x4 getInverse() const;
 
-		void loadIdentity();
+		void loadIdentity() {
+			this->values[0] = 1.f; this->values[4] = 0.f; this->values[8] = 0.f; this->values[12] = 0.f;
+			this->values[1] = 0.f; this->values[5] = 1.f; this->values[9] = 0.f; this->values[13] = 0.f;
+			this->values[2] = 0.f; this->values[6] = 0.f; this->values[10] = 1.f; this->values[14] = 0.f;
+			this->values[3] = 0.f; this->values[7] = 0.f; this->values[11] = 0.f; this->values[15] = 1.f;
+		}
 
-		float det() const;
+		float det() const {
+			return this->values[0] * (this->values[15] * this->values[5] - this->values[7] * this->values[13]) -
+				this->values[1] * (this->values[15] * this->values[4] - this->values[7] * this->values[12]) +
+				this->values[3] * (this->values[13] * this->values[4] - this->values[5] * this->values[12]);
+		}
 
 		Matrix4x4& merge(const Matrix4x4& mat);
-
 		Matrix4x4& translate(float x, float y);
 
 		Matrix4x4& translate(const Vector2f& offset) {

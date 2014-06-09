@@ -14,7 +14,10 @@
 namespace sgl {
 	class Texture;
 
-	class Shape : public Drawable, public GraphTransform {
+	class Shape : public Drawable, public Transformable {
+	private:
+		void _update();
+
 	protected:
 		virtual void draw(const Window& wnd) const override;
 
@@ -48,7 +51,6 @@ namespace sgl {
 
 		void updateTextureCoordinates(const Range<float> range, uint16 offset = 0);
 
-		void calculateCenter() override;
 		void setColor(const Color& col);
 		void move(float x, float y);
 
