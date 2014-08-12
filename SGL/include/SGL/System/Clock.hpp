@@ -1,0 +1,104 @@
+#ifndef SGL_CLOCK_HPP
+#define SGL_CLOCK_HPP
+
+#include <math.h>
+#include <SDL.h>
+#include <SGL/Core/Types.hpp>
+
+namespace {
+	/**
+	* To convert the Clock milliseconds to seconds
+	*/
+	float asSeconds(sgl::uint32 n);
+
+	/**
+	* To convert the Clock milliseconds to minutes
+	*/
+	float asMinutes(sgl::uint32 n);
+
+	/**
+	* To convert the Clock milliseconds to hours
+	*/
+	sgl::uint16 asHours(sgl::uint32 n);
+}
+
+namespace sgl {
+	/**
+	* The Time struct converts ticks to msecs, seconds, minutes and hours.
+	*/
+	struct Time {
+		/// Milliseconds = Ticks
+		uint32 msecs;
+		/// Seconds = Milliseconds / 1000
+		float seconds;
+		//// Minutes = Seconds / 60
+		float minutes;
+		/// Hours = Minutes / 60
+		uint16 hours;
+
+		/**
+		* CTor
+		*/
+		explicit Time(uint32 ms);
+
+		/**
+		* Calculate the <b>remaining</b> time.
+		*/
+		static Time Remain(Time time);
+	};
+
+	class Clock {
+	private:
+		uint32 _startTime = 0;
+		uint32 _numFrames = 0;
+		uint32 _currentFps = 0;
+		float _fpsTime = 0;
+
+	public:
+		Clock();
+
+		/**
+		* Reset the clock time
+		*/
+		Time reset();
+
+		/**
+		* Returns the elapsed Time since the last reset.
+		*/
+		Time getElapsedTime() const;
+
+		/**
+		* Returns only the milliseconds since the last reset.
+		*/
+		uint32 getElapsedMsecs() const;
+
+		/**
+		* Returns the current framerate per seconds.
+		*/
+		uint32 getCurrentFps();
+
+		/**
+		* Returns the Time since the last Frame.
+		*/
+		float getFpsTime() const {
+			return _fpsTime;
+		}
+
+		/**
+		* Returns the milliseconds since the application was started.
+		*/
+		static uint32 GetTotalMsecs();
+
+		/**
+		* Returns the Time since the application was started.
+		*/
+		static Time GetTotalTime();
+
+		/**
+		* Wait for msecs milliseconds, which means that the application freeze for this time.
+		*/
+		static void Wait(uint32 msecs);
+	};
+}
+
+#endif
