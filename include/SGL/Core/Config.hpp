@@ -1,5 +1,5 @@
-#ifndef CONFIG_HPP
-#define CONFIG_HPP
+#ifndef SGL_CONFIG_HPP
+#define SGL_CONFIG_HPP
 
 #if defined(_WIN32) || defined(__WIN32__)
 #define SGL_OS_WIN32

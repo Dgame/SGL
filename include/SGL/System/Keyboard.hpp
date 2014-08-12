@@ -1,36 +1,10 @@
-#ifndef KEYBOARD_HPP
-#define KEYBOARD_HPP
+#ifndef SGL_KEYBOARD_HPP
+#define SGL_KEYBOARD_HPP
 
-#include <SDL.h>
-#include <SGL/Core/Types.hpp>
+#include <SGL/Core/SDL.hpp>
 
 namespace sgl {
 	struct Keyboard {
-		enum class State {
-			Pressed = SDL_PRESSED, /** Key is pressed. */
-			Released = SDL_RELEASED /** Key is released. */
-		};
-
-		enum class Mod {
-			None = KMOD_NONE,	/** 0 (no modifier is applicable) */
-			LShift = KMOD_LSHIFT,	/** the left Shift key is down */
-			RShift = KMOD_RSHIFT,	/** the right Shift key is down */
-			LCtrl = KMOD_LCTRL,	/** the left Ctrl (Control) key is down */
-			RCtrl = KMOD_RCTRL,	/** the right Ctrl (Control) key is down */
-			LAlt = KMOD_LALT,	/** the left Alt key is down */
-			RAlt = KMOD_RALT,	/** the right Alt key is down */
-			LGui = KMOD_LGUI,	/** the left GUI key (often the Windows key) is down */
-			RGui = KMOD_RGUI,	/** the right GUI key (often the Windows key) is down */
-			Num = KMOD_NUM,		/** the Num Lock key (may be located on an extended keypad) is down */
-			Caps = KMOD_CAPS,	/** the Caps Lock key is down */
-			Mode = KMOD_MODE,	/** the AltGr key is down */
-
-			Ctrl = KMOD_CTRL, 	/** (Mod.LCtrl|Mod.RCtrl) */
-			Shift = KMOD_SHIFT, 	/** (Mod.LShift|Mod.RShift) */
-			Alt = KMOD_ALT, 	/** (Mod.LAlt|Mod.RAlt) */
-			Gui = KMOD_GUI, 	/** (Mod.LGui|Mod.RGui) */
-		};
-
 		enum class Code {
 			Unknown = SDLK_UNKNOWN, /** */
 
@@ -178,56 +152,6 @@ namespace sgl {
 			RAlt = SDLK_RALT, /** */
 			RGui = SDLK_RGUI /** */
 		};
-
-		/**
-		* Returns the pointer to the Keyboard state.
-		* With that you can check if some key is pressed without using a event queue.
-		* A value of 1 means that the key is pressed and a value of 0 means that it is not.
-		* The pointer will be valid for the whole lifetime of the application and should not be freed by the caller.
-		*
-		* Note: This function gives you the current state after all events have been processed,
-		* so if a key or button has been pressed and released before you process events,
-		* then the pressed state will never show up in the update calls.
-		* Note: This function doesn't take into account whether shift has been pressed or not.
-		*
-		* Examples:
-		* ---
-		* ubyte* keyStates = Keyboard::getState();
-		* if (keyStates[Keyboard::Code::Escape])
-		*     std::cout << "escape is pressed." << std::endl;
-		* ---
-		*/
-		static const uint8* GetState();
-		/**
-		* Returns if the given Keyboard.Code is pressed.
-		*
-		* Examples:
-		* ---
-		* if (Keyboard.isPressed(Keyboard.Code.Escape))
-		*     writeln("escape is pressed.");
-		* ---
-		*/
-		static bool IsPressed(Code code);
-		/**
-		* Returns the current Keyboard modifier.
-		*
-		* See: Mod enum
-		*/
-		static Mod GetModifier();
-		/**
-		* Set the current Keyboard modifier.
-		*
-		* See: Mod enum
-		*/
-		static void SetModifier(Mod mod);
-		/**
-		* Returns if screen keyboard is supported.
-		*/
-		static bool HasScreenSupport();
-
-		static bool IsTextInputActive();
-		static void StartTextInput();
-		static void StopTextInput();
 	};
 }
 

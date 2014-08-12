@@ -1,45 +1,20 @@
-#ifndef VERTEX_HPP
-#define VERTEX_HPP
+#ifndef SGL_VERTEX_HPP
+#define SGL_VERTEX_HPP
 
+#include <SGL/Math/vec3.hpp>
 #include <SGL/Graphic/Color.hpp>
-#include <SGL/Math/Vector2.hpp>
 
 namespace sgl {
 	struct Vertex {
-		/**
-		* The coordinates
-		*/
-		float x = 0, y = 0;
-		/**
-		* The color components
-		*/
-		float r = 0, g = 0, b = 0, a = 0;
-		/**
-		* The texcoords
-		*/
-		float tx = 0, ty = 0;
+		vec3f position;
+		vec3f texcoord;
+		Color4f color = Color4f::Black;
 
-		Vertex() = default;
-		explicit Vertex(float px, float py);
-		explicit Vertex(float px, float py, float ptx, float pty);
-		explicit Vertex(const Vector2f& coord, const Vector2f& texcoord);
+		explicit Vertex(float x, float y, float z = 0);
+		explicit Vertex(const vec3f&, const vec3f&, const Color4b&);
 
-		void setColor(const Color& col);
-
-		Vector2f getPosition() const {
-			return Vector2f(this->x, this->y);
-		}
-
-		Vector2f getTextureCoordinates() const {
-			return Vector2f(this->tx, this->ty);
-		}
-
-		Color getColor() const {
-			return Color(
-				static_cast<uint8>(this->r * 255),
-				static_cast<uint8>(this->g * 255),
-				static_cast<uint8>(this->b * 255),
-				static_cast<uint8>(this->a * 255));
+		void setColor(const Color4b& col) {
+			this->color = Color4f(col);
 		}
 	};
 }

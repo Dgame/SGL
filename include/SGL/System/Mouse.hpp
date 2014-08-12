@@ -1,26 +1,9 @@
-#ifndef MOUSE_HPP
-#define MOUSE_HPP
+#ifndef SGL_MOUSE_HPP
+#define SGL_MOUSE_HPP
 
-#include <SDL.h>
-#include <SGL/Math/Vector2.hpp>
+#include <SGL/Core/SDL.hpp>
 
 namespace sgl {
-	class Window;
-	class Surface;
-
-	namespace internal {
-		class Cursor final {
-		private:
-			SDL_Cursor* _cursor = nullptr;
-
-		public:
-			~Cursor();
-			void operator =(SDL_Cursor* cursor);
-		};
-
-		static Cursor CurrentCursor;
-	}
-
 	/**
 	 * Represent the Mouse
 	 */
@@ -28,21 +11,13 @@ namespace sgl {
 		/**
 		 * Supported mouse buttons
 		 */
-		enum class Button : short {
+		enum class Button {
 			Left = 1, /** */
 			Middle = 2, /** */
-			Right = 3, /** */
-			X1 = 4, /** */
-			X2 = 5, /** */
-			Other /** */
-		};
-
-		/**
-		 * Supported mouse states
-		 */
-		enum class State : short {
-			Released, /** */
-			Pressed /** */
+			Right = 4, /** */
+			X1 = 8, /** */
+			X2 = 16, /** */
+			Other = 32 /** */
 		};
 
 		enum class Cursor {
@@ -59,15 +34,6 @@ namespace sgl {
 			No = SDL_SYSTEM_CURSOR_NO,
 			Hand = SDL_SYSTEM_CURSOR_HAND
 		};
-
-		static void SetCursor(Cursor cursor);
-		static void SetCursor(const Surface& srfc);
-		static void ShowCursor(bool show);
-		static bool IsCursorShown();
-		static void SetPosition(const Window& wnd, int16 x, int16 y);
-		static void SetPosition(const Window& wnd, const Vector2s& position);
-		static Vector2s GetPosition();
-		static bool IsButtonPressed(Button btn);
 	};
 }
 

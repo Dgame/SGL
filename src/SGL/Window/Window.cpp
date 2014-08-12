@@ -1,179 +1,281 @@
 #include <SGL/Window/Window.hpp>
-#include <SGL/Graphic/Primitive.hpp>
+#include <SGL/Graphic/Drawable.hpp>
 #include <SGL/Graphic/Texture.hpp>
-#include <SGL/Graphic/Blend.hpp>
-#include <SGL/Graphic/Shader.hpp>
+#include <SGL/Graphic/Surface.hpp>
+#include <SGL/Graphic/Geometry.hpp>
+
+namespace {
+	void initSDL() {
+		if (SDL_WasInit(SDL_INIT_VIDEO) == 0) {
+			SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_EVENTS);
+		}
+	}
+
+	void quitSDL(sgl::uint8 count) {
+		if (count == 0)
+			SDL_Quit();
+	}
+
+	void initGL() {
+		glDisable(GL_DITHER);
+		glDisable(GL_CULL_FACE);
+		glDisable(GL_LIGHTING);
+		glDisable(GL_DEPTH_TEST);
+		glDisable(GL_ALPHA_TEST),
+
+		glEnable(GL_CULL_FACE);
+		glEnable(GL_TEXTURE_2D);
+		glEnable(GL_BLEND);
+
+		glCullFace(GL_FRONT);
+		glShadeModel(GL_FLAT);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+		// Hints
+		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST);
+
+		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+		SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+
+		const GLenum err = glewInit();
+		if (err != GLEW_OK) {
+			std::cerr << "Couldn't initialize GLEW" << std::endl;
+
+			exit(1);
+		}
+	}
+}
 
 namespace sgl {
-	int Window::_winCount = 0;
+	uint8 Window::_count = 0;
 
-	Window::Window(uint16 width, uint16 height, const std::string& title, uint32 style) : Window(ShortRect(100, 100, width, height), title, style) {
-
+	Window::Window(uint16 width, uint16 height, const std::string& title, Flags flags)
+		: Window(ShortRect(0, 0, width, height), title, flags)
+	{
+		
 	}
 
-	Window::Window(const ShortRect& rect, const std::string& title, uint32 style) {
-		if (_winCount == 0)
-			internal::initSDL();
+	Window::Window(const ShortRect& rect, const std::string& title, Flags flags) {
+		initSDL();
 
-		_winCount++;
+		// Create an application window with the following settings:
+		_window = SDL_CreateWindow(
+			title.c_str(),
+			rect.x,
+			rect.y,
+			rect.width,
+			rect.height,
+			flags | SDL_WINDOW_OPENGL
+		);
 
-		_window = SDL_CreateWindow(title.c_str(), rect.x, rect.y, rect.width, rect.height, static_cast<int>(style));
-		if (_window == nullptr) {
-			error("Error by creating a SDL2 window: ", SDL_GetError());
-
-			return;
+		if (!_window) {
+			std::cerr << "Could not create window: " << SDL_GetError() << std::endl;
+			exit(1);
 		}
 
-		if (style & Style::OpenGL) {
-			_glContext = SDL_GL_CreateContext(_window);
-			if (_glContext == nullptr) {
-				error("Error while creating gl context: ", SDL_GetError());
+		_context = SDL_GL_CreateContext(_window);
+		if (!_context) {
+			std::cerr << "Could not create GL Context: " << SDL_GetError() << std::endl;
+			exit(1);
+		}
+#if 1
+		const uint8* GL_version = glGetString(GL_VERSION);
+		const uint8* GL_vendor = glGetString(GL_VENDOR);
+		const uint8* GL_renderer = glGetString(GL_RENDERER);
 
-				return;
-			}
-#if SGL_DEBUG
-			const uint8* GL_version = glGetString(GL_VERSION);
-			const uint8* GL_vendor = glGetString(GL_VENDOR);
-			const uint8* GL_renderer = glGetString(GL_RENDERER);
-
-			println("Version: ", GL_version, " - ", GL_vendor, " - ", GL_renderer);
+		printf("Version: %s - %s - %s\n", GL_version, GL_vendor, GL_renderer);
 #endif
-			glMatrixMode(GL_PROJECTION);
-			glLoadIdentity();
-			glOrtho(0, rect.width, rect.height, 0, 1, -1);
+		initGL();
 
-			this->applyViewport();
+		// _projection.ortho(rect, 1, -1);
+		// this->loadProjection();
 
-			glEnable(GL_CULL_FACE);
-			glCullFace(GL_FRONT);
+		// this->setSwapInterval(Interval::Synchronize);
+		// this->setClearColor(Color4b::White);
 
-			glShadeModel(GL_FLAT);
-			glDisable(GL_DITHER);
-			glDisable(GL_CULL_FACE);
-			glDisable(GL_LIGHTING);
-			glDisable(GL_DEPTH_TEST);
-			glDisable(GL_ALPHA_TEST);
-			glEnable(GL_TEXTURE_2D);
-			glEnable(GL_BLEND);
-			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		_count++;
+	}
 
-			glEnableClientState(GL_VERTEX_ARRAY);
-			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	// Window::~Window() {
+	// 	// this->close();
+	// }
+/*
+	void Window::close() {
+		SDL_DestroyWindow(_window);
+		SDL_GL_DeleteContext(_context);
 
-			// Hints
-			glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST);
+		_window = nullptr;
+		_count--;
 
-			this->setVerticalSync(Sync::Enable);
-			this->setClearColor(Color::White);
+		quitSDL(_count);
+	}
 
-			SDL_GL_MakeCurrent(_window, _glContext);
+	// void Window::loadProjection() const {
+	// 	glMatrixMode(GL_PROJECTION);
+	// 	glLoadMatrixf(_projection.values);
+	// }
 
-			SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-			SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+	void Window::setClearColor(const Color4b& col) const {
+		const Color4f gl_col = col;
+		glClearColor(gl_col.red, gl_col.green, gl_col.blue, gl_col.alpha);
+	}
 
-			const GLenum err = glewInit();
-			if (err != GLEW_OK)
-				error("Couldn't initialize GLEW");
+	void Window::clear() const {
+		glClear(GL_COLOR_BUFFER_BIT);
+	}
+
+	void Window::setVisible(bool visible) const {
+		if (visible)
+			SDL_HideWindow(_window);
+		else
+			SDL_ShowWindow(_window);
+	}
+
+	void Window::setScreenSaver(bool enable) const {
+		if (enable)
+			SDL_EnableScreenSaver();
+		else
+			SDL_DisableScreenSaver();
+	}
+
+	// void Window::setIcon(const Surface&) const {
+
+	// }
+
+	// void Window::setBorder(bool enable) const {
+
+	// }
+
+	// void Window::setSwapInterval(Interval interval) const {
+
+	// }
+
+	// Window::Interval Window::getSwapInterval() const {
+	// 	return Interval::Immediate;
+	// }
+
+	// bool Window::hasScreenSaver() const {
+	// 	return SDL_IsScreenSaverEnabled();
+	// }
+
+	void Window::maximize() const {
+		SDL_MaximizeWindow(_window);
+	}
+
+	void Window::minimize() const {
+		SDL_MinimizeWindow(_window);
+	}
+
+	void Window::restore() const {
+		SDL_RestoreWindow(_window);
+	}
+
+	void Window::raise() const {
+		SDL_RaiseWindow(_window);
+	}
+
+	void Window::toggle(Flags flags) const {
+		if (flags == Flags::Fullscreen || 
+			flags == Flags::Desktop || 
+			flags == Flags::Windowed)
+		{
+			SDL_SetWindowFullscreen(_window, flags);
 		}
 	}
 
-	Window::~Window() {
-		SDL_GL_DeleteContext(_glContext);
-		SDL_DestroyWindow(_window);
-
-		_glContext = nullptr;
-		_window = nullptr;
-
-		_winCount--;
+	void Window::setPosition(const vec2s& pos) const {
+		SDL_SetWindowPosition(_window, pos.x, pos.y);
 	}
 
-	void Window::applyViewport() const {
-		int w = 0, h = 0;
-		SDL_GetWindowSize(_window, &w, &h);
-
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-		glViewport(0, 0, w, h);
+	void Window::setSize(uint16 width, uint16 height) const {
+		SDL_SetWindowSize(_window, width, height);
 	}
 
-	Vector2s Window::getPosition() const {
-		int x = 0, y = 0;
+	void Window::setRect(const ShortRect& rect) const {
+		SDL_SetWindowPosition(_window, rect.x, rect.y);
+		SDL_SetWindowSize(_window, rect.width, rect.height);
+	}
+
+	vec2s Window::getPosition() const {
+		int x, y;
 		SDL_GetWindowPosition(_window, &x, &y);
 
-		return Vector2s(x, y);
+		return vec2s(x, y);
 	}
 
-	/**
-	* Set the Syncronisation mode of this window.
-	* Default Syncronisation is <code>Sync.Enable</code>.
-	*
-	* See: Sync enum
-	*
-	* Returns if the sync mode is supported.
-	*/
-	bool Window::setVerticalSync(Sync sync) const {
-		if (sync == Sync::Enable || sync == Sync::Disable)
-			return SDL_GL_SetSwapInterval(static_cast<int>(sync)) == 0;
-		else
-			error("Unknown sync mode. Sync mode must be one of Sync.Enable, Sync.Disable.");
+	ShortRect Window::getRect() const {
+		int x, y;
+		SDL_GetWindowPosition(_window, &x, &y);
+		int w, h;
+		SDL_GetWindowSize(_window, &w, &h);
 
-		return false;
+		return ShortRect(x, y, w, h);
 	}
 
-	void Window::draw(const Drawable& d, const DrawOptions options) const {
-		GLAttribScope attr(GL_COLOR_BUFFER_BIT | GL_CURRENT_BIT);
-
-		if (options.blend != nullptr)
-			options.blend->apply();
-		if (options.shader != nullptr)
-			options.shader->apply();
-
-		d.draw(*this);
-
-		if (options.shader != nullptr)
-			options.shader->use(false);
+	void Window::setTitle(const std::string& title) const {
+		SDL_SetWindowTitle(_window, title.c_str());
 	}
 
-	void Window::draw(const Primitive& p, const float* texCoords, const Texture* texture) const {
-		if (p.vcount == 0)
-			return;
+	std::string Window::getTitle() const {
+		const char* str = SDL_GetWindowTitle(_window);
 
-		GLAttribScope attr(GL_ENABLE_BIT);
+		return std::string(str);
+	}
 
-		glVertexPointer(2, GL_FLOAT, p.offset, p.vertices);
+	void Window::draw(const Drawable& d) const {
+		d.draw(this);
+	}
 
-		if (texture == nullptr)
-			glDisable(GL_TEXTURE_2D);
-		else if (texCoords != nullptr) {
-			glTexCoordPointer(2, GL_FLOAT, p.offset, texCoords);
+	void Window::draw(Geometry geo, const mat4x4& mat, const std::vector<Vertex>& vertices, const Texture* texture) const {
+		if (texture) {
+			glTexCoordPointer(3, GL_FLOAT, sizeof(Vertex), &vertices[0].texcoord.x);
 			texture->bind();
+		} else {
+			glDisable(GL_TEXTURE_2D);
 		}
 
-		if (p.color != nullptr) {
-			glEnableClientState(GL_COLOR_ARRAY);
-			glColorPointer(4, GL_FLOAT, p.offset, p.color);
-		}
+		glColorPointer(4, GL_FLOAT, sizeof(Vertex), &vertices[0].color.red);
+		glVertexPointer(2, GL_FLOAT, sizeof(Vertex), &vertices[0].position.x);
 
-		glDrawArrays(p.type, p.vfirst, p.vcount);
+		glDrawArrays(static_cast<GLenum>(geo), 0, 8);
+		// glMatrixMode(GL_MODELVIEW);
+		glLoadMatrixf(mat.values);
 
-		if (texture != nullptr)
+		if (texture)
 			texture->unbind();
-
-		if (p.color != nullptr)
-			glDisableClientState(GL_COLOR_ARRAY);
 	}
 
-	/**
-	* Make all changes visible on screen.
-	* If the framerate limit is not 0, it waits for (1000 / framerate limit) milliseconds.
-	*/
+	void Window::draw(Geometry geo, const mat4x4& mat, const Texture& texture, const FloatRect& rect) const {
+		const float texCoords[8] = {
+			rect.x / texture.width(),
+			rect.y / texture.height(),
+			rect.width / texture.width(),
+			rect.height / texture.height()
+		};
+
+		static const float vertices[8] = {
+			0, 0,
+			1, 0,
+			1, 1,
+			0, 1
+		};
+
+		glTexCoordPointer(2, GL_FLOAT, 0, texCoords);
+		texture.bind();
+		glVertexPointer(2, GL_FLOAT, 0, vertices);
+
+		glDrawArrays(static_cast<GLenum>(geo), 0, 8);
+		// glMatrixMode(GL_MODELVIEW);
+		glLoadMatrixf(mat.values);
+
+		texture.unbind();
+	}
+
 	void Window::display() const {
-		if ((this->getStyle() & Style::OpenGL) == Style::OpenGL)
-			SDL_GL_SwapWindow(_window);
-		else
-			SDL_UpdateWindowSurface(_window);
-
-		if (this->getVerticalSync() != Sync::Enable && this->framerateLimit > 0)
-			Clock::Wait(1000 / this->framerateLimit);
+		SDL_GL_SwapWindow(_window);
 	}
+	*/
 }

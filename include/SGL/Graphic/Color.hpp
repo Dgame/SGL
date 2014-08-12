@@ -1,55 +1,60 @@
-#ifndef COLOR_HPP
-#define COLOR_HPP
+#ifndef SGL_COLOR_HPP
+#define SGL_COLOR_HPP
 
-#include <sstream>
-#include <SDL.h>
+#include <algorithm>
+#include <SGL/Core/SDL.hpp>
 #include <SGL/Core/Types.hpp>
-#include <SGL/Core/Array.hpp>
 
 namespace sgl {
-	static Array<uint16, 4> convertFromHex(const std::string& hex);
+	template <typename T>
+	struct Color4;
 
-	struct GLColor {
-		float red, green, blue, alpha;
-
-		explicit GLColor(float r, float g, float b, float a = 1.f);
-	};
-
-	struct Color {
-		static const Color Black;
-		static const Color White;
-		static const Color Red;
-		static const Color Green;
-		static const Color Blue;
-		static const Color Yellow;
+	template <>
+	struct Color4<uint8> {
+		static const Color4<uint8> Red;
+		static const Color4<uint8> Green;
+		static const Color4<uint8> Blue;
+		static const Color4<uint8> Yellow;
+		static const Color4<uint8> Black;
+		static const Color4<uint8> White;
 
 		uint8 red, green, blue, alpha;
 
-		explicit Color(uint8 pr, uint8 pg, uint8 pb, uint8 pa = 255);
-		explicit Color(const std::string& hex);
+		explicit Color4(uint8 r, uint8 g, uint8 b, uint8 a = 255);
+		Color4(const Color4<float>& col);
 
-		Color withTransparency(uint8 pa) const {
-			return Color(red, green, blue, pa);
-		}
-
-		static Color FromGLMode(float pr, float pg, float pb, float pa = 1.f);
-		static Color FromGLMode(const GLColor& glcol);
-		static GLColor InGLMode(const Color& col);
-		static void Copy(const Color* from, SDL_Color& too, const Color& def);
+		SDL_Color* copyTo(SDL_Color*) const;
 	};
 
-	void operator +=(Color& lhs, uint8 value);
-	void operator -=(Color& lhs, uint8 value);
-	void operator *=(Color& lhs, uint8 value);
+	template <>
+	struct Color4<float> {
+		static const Color4<float> Red;
+		static const Color4<float> Green;
+		static const Color4<float> Blue;
+		static const Color4<float> Yellow;
+		static const Color4<float> Black;
+		static const Color4<float> White;
 
-	Color operator +(const Color& lhs, const Color& rhs);
-	Color operator -(const Color& lhs, const Color& rhs);
-	Color operator *(const Color& lhs, const Color& rhs);
+		float red, green, blue, alpha;
 
-	bool operator ==(const Color& lhs, const Color& rhs);
-	bool operator !=(const Color& lhs, const Color& rhs);
+		explicit Color4(uint8 r, uint8 g, uint8 b, uint8 a = 255);
+		explicit Color4(float r, float g, float b, float a = 1.0f);
+		Color4(const Color4<uint8>& col);
+	};
 
-	std::ostream& operator <<(std::ostream& strm, const Color& col);
+	using Color4b = Color4<uint8>;
+	using Color4f = Color4<float>;
+
+	Color4b& operator +=(Color4b&, uint8 value);
+	Color4b& operator -=(Color4b&, uint8 value);
+	Color4b& operator *=(Color4b&, uint8 value);
+
+	Color4b operator +(const Color4b&, const Color4b&);
+	Color4b operator -(const Color4b&, const Color4b&);
+	Color4b operator *(const Color4b&, const Color4b&);
+
+	bool operator ==(const Color4b&, const Color4b&);
+	bool operator !=(const Color4b&, const Color4b&);
 }
 
 #endif
