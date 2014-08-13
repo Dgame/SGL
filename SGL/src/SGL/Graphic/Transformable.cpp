@@ -14,7 +14,7 @@ namespace sgl {
 
 	const mat4x4& Transformable::getMatrix() const {
 		if (_needUpdate) {
-			_matrix = Construct(_rotation, _scale, _position, _center);
+			_matrix.loadIdentity().rotate(_rotation, _center).scale(_scale, _center).translate(_position);
 			_needUpdate = false;
 #if SGL_DEBUG
 			printf("Update Transform Matrix\n");

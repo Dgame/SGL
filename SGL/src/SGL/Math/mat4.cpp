@@ -188,20 +188,6 @@ namespace sgl {
 		return lhs;
 	}
 
-	mat4x4 Construct(float rotation, float scale, const vec2f& position, const vec2f& center) {
-		const float angle = -rotation * M_PI / 180.f;
-		const float cos = std::cos(angle);
-		const float sin = std::sin(angle);
-		const float sc = scale * cos;
-		const float ss = scale * sin;
-		const float tx = -center.x * sc - center.y * ss + position.x;
-		const float ty = center.x * ss - center.y * sc + position.y;
-
-		return mat4x4(sc, ss, tx,
-					   -ss, sc, ty,
-					   0, 0, 1);
-	}
-
 	mat4x4 operator *(const mat4x4& left, const mat4x4& right) {
 		mat4x4 cpy(left);
 		Merge(cpy, right);

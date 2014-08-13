@@ -19,11 +19,13 @@ namespace sgl {
 
 		mat4x4 getInverse() const;
 
-		void loadIdentity() {
+		mat4x4& loadIdentity() {
 			this->values[0] = 1.f; this->values[4] = 0.f; this->values[8] = 0.f; this->values[12] = 0.f;
 			this->values[1] = 0.f; this->values[5] = 1.f; this->values[9] = 0.f; this->values[13] = 0.f;
 			this->values[2] = 0.f; this->values[6] = 0.f; this->values[10] = 1.f; this->values[14] = 0.f;
 			this->values[3] = 0.f; this->values[7] = 0.f; this->values[11] = 0.f; this->values[15] = 1.f;
+
+			return *this;
 		}
 
 		float det() const {
@@ -56,7 +58,6 @@ namespace sgl {
 	bool operator !=(const mat4x4& lhs, const mat4x4&);
 
 	mat4x4& Merge(mat4x4&, const mat4x4&);
-	mat4x4 Construct(float rotation, float scale, const vec2f&, const vec2f&);
 
 	mat4x4 operator *(const mat4x4&, const mat4x4& right);
 	mat4x4& operator *=(mat4x4&, const mat4x4& right);
