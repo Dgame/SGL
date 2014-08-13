@@ -41,8 +41,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\Besitzer\Documents\Visual Studio 2013\Projects\SGL\SGL\libs\SDL2_ttf\include;C:\Users\Besitzer\Documents\Visual Studio 2013\Projects\SGL\SGL\libs\SDL2_mixer\include;C:\Users\Besitzer\Documents\Visual Studio 2013\Projects\SGL\SGL\libs\SDL2_image\include;C:\Users\Besitzer\Documents\Visual Studio 2013\Projects\SGL\SGL\libs\SDL2\include;C:\Users\Besitzer\Documents\Visual Studio 2013\Projects\SGL\SGL\libs\Glew\include;C:\Users\Besitzer\Documents\Visual Studio 2013\Projects\SGL\SGL\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Besitzer\Documents\Visual Studio 2013\Projects\SGL\SGL\libs\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Besitzer\Documents\GitHub\sgl\SGL\libs\SDL2_ttf\include;C:\Users\Besitzer\Documents\GitHub\sgl\SGL\libs\SDL2_mixer\include;C:\Users\Besitzer\Documents\GitHub\sgl\SGL\libs\SDL2_image\include;C:\Users\Besitzer\Documents\GitHub\sgl\SGL\libs\SDL2\include;C:\Users\Besitzer\Documents\GitHub\sgl\SGL\libs\Glew\include;C:\Users\Besitzer\Documents\GitHub\sgl\SGL\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Besitzer\Documents\GitHub\sgl\SGL\libs\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
