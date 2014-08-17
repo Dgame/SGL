@@ -17,6 +17,13 @@ namespace sgl {
 		bool _repeat = false;
 
 	public:
+		enum Format {
+			RGB = GL_RGB,
+			RGBA = GL_RGBA,
+			BGR = GL_BGR,
+			BGRA = GL_BGRA
+		};
+
 		Texture() = default;
 		explicit Texture(const Surface&);
 
@@ -43,7 +50,7 @@ namespace sgl {
 
 		void create(uint16 width, uint16 height);
 		void load(const Surface&);
-		void loadFromMemory(void*, uint16 width, uint16 height);
+		void loadFromMemory(void*, uint16 width, uint16 height, Format fmt);
 
 		/**
 		* Binds this Texture.

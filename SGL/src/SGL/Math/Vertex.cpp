@@ -7,7 +7,7 @@ namespace sgl {
 		this->position.z = z;
 	}
 
-	Vertex::Vertex(const vec3f& pos, const vec3f& texc, const Color4b& col) : position(pos), texcoord(texc) {
+	Vertex::Vertex(const vec3f& pos, const vec3f& texcoord, const Color4b& col) : position(pos), texCoord(texcoord) {
 		this->setColor(col);
 	}
 }

@@ -9,13 +9,20 @@ namespace sgl {
 				_rotation += 360;
 		}
 
-		_needUpdate = true;
+		_updateMode = which;
 	}
 
 	const mat4x4& Transformable::getMatrix() const {
-		if (_needUpdate) {
-			_matrix.loadIdentity().rotate(_rotation, _center).scale(_scale, _center).translate(_position);
-			_needUpdate = false;
+		if (_updateMode != Update::None) {
+			_matrix.loadIdentity();
+			if (_updateMode & Update::Rotation)
+				_matrix.rotate(_rotation, _center);
+			if (_updateMode & Update::Scale)
+				_matrix.scale(_scale, _center);
+			if (_updateMode & Update::Position)
+				_matrix.translate(_position);
+
+			_updateMode = Update::None;
 #if SGL_DEBUG
 			printf("Update Transform Matrix\n");
 #endif
@@ -24,25 +31,16 @@ namespace sgl {
 		return _matrix;
 	}
 
-	void Transformable::setPosition(const vec2f& pos) {
-		_position = pos;
-		_update(Update::Position);
-	}
-
 	void Transformable::setPosition(float x, float y) {
 		_position.x = x;
 		_position.y = y;
+
 		_update(Update::Position);
 	}
 
-	void Transformable::move(float x, float y) {
-		_position.x += x;
-		_position.y += y;
-		_update(Update::Position);
-	}
+	void Transformable::setPosition(const vec2f& pos) {
+		_position = pos;
 
-	void Transformable::move(const vec2f& offset) {
-		_position += offset;
 		_update(Update::Position);
 	}
 

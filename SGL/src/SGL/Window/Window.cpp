@@ -191,7 +191,7 @@ namespace sgl {
 
 	void Window::draw(Geometry geo, const mat4x4& mat, const std::vector<Vertex>& vertices, const Texture* texture) const {
 		if (texture) {
-			glCheck(glTexCoordPointer(3, GL_FLOAT, sizeof(Vertex), &vertices[0].texcoord.x));
+			glCheck(glTexCoordPointer(3, GL_FLOAT, sizeof(Vertex), &vertices[0].texCoord.x));
 			texture->bind();
 		} else {
 			glCheck(glDisable(GL_TEXTURE_2D));

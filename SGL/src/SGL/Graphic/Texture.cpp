@@ -30,20 +30,20 @@ namespace sgl {
 	}
 
 	void Texture::create(uint16 width, uint16 height) {
-		this->loadFromMemory(nullptr, width, height);
+		this->loadFromMemory(nullptr, width, height, Format::RGB);
 	}
 
 	void Texture::load(const Surface& srfc) {
-		this->loadFromMemory(srfc.pixels(), srfc.width(), srfc.height());
+		this->loadFromMemory(srfc.pixels(), srfc.width(), srfc.height(), srfc.bits() == 32 ? Format::RGBA : Format::RGB);
 	}
 
-	void Texture::loadFromMemory(void* pixels, uint16 width, uint16 height) {
+	void Texture::loadFromMemory(void* pixels, uint16 width, uint16 height, Format fmt) {
 		if (_texId == 0)
 			glCheck(glGenTextures(1, &_texId));
 
 		this->bind();
 		
-		glCheck(glTexImage2D(GL_TEXTURE_2D, 0, 4, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels));
+		glCheck(glTexImage2D(GL_TEXTURE_2D, 0, fmt, width, height, 0, fmt, GL_UNSIGNED_BYTE, pixels));
 		glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, _repeat ? GL_REPEAT : GL_CLAMP));
 		glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, _repeat ? GL_REPEAT : GL_CLAMP));
 		glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, _smooth ? GL_LINEAR : GL_NEAREST));

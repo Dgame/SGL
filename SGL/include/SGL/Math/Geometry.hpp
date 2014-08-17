@@ -8,7 +8,7 @@ namespace sgl {
 		Quad = GL_QUADS,
 		QuadStrip = GL_QUAD_STRIP,
 		Line = GL_LINE,
-		LineLoop = GL_LINE_LOOP,
+		LineLoop = GL_LINE_STRIP,
 		Triangle = GL_TRIANGLES,
 		TriangleFan = GL_TRIANGLE_FAN,
 		TriangleStrip = GL_TRIANGLE_STRIP,

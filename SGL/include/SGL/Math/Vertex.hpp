@@ -7,7 +7,7 @@
 namespace sgl {
 	struct Vertex {
 		vec3f position;
-		vec3f texcoord;
+		vec3f texCoord;
 		Color4f color = Color4f::Black;
 
 		explicit Vertex(float x, float y, float z = 0);

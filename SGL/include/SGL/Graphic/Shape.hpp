@@ -11,16 +11,34 @@
 
 namespace sgl {
 	class Shape : public Drawable, public Transformable {
+	private:
+		Texture* _texture = nullptr;
+		mutable FloatRect _bounds;
+		mutable bool _moved = false;
+
+		std::vector<Vertex> _vertices;
+
 	protected:
-		virtual void _update(Update which) override;
 		virtual void draw(const Window*) const override;
 
 	public:
 		Geometry geometry;
-		std::vector<Vertex> vertices;
-		Texture* texture = nullptr;
 
 		explicit Shape(Geometry geo);
+
+		void append(const Vertex&);
+		void setTexture(Texture*, const FloatRect* texRect = nullptr);
+
+		const Texture* getTexture() const {
+			return _texture;
+		}
+
+		void setTextureRect(const FloatRect&);
+		const FloatRect& getBoundingRect() const;
+
+		const std::vector<Vertex>& getVertices() const {
+			return _vertices;
+		}
 
 		void setColor(const Color4b&);
 
