@@ -126,6 +126,9 @@
     <ClInclude Include="include\SGL\Graphic\Shape.hpp">
       <Filter>Headerdateien\Graphic</Filter>
     </ClInclude>
+    <ClInclude Include="include\SGL\Graphic\Sprite.hpp">
+      <Filter>Headerdateien\Graphic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\SGL\Graphic\Color.cpp">
@@ -165,6 +168,9 @@
       <Filter>Quelldateien\Graphic</Filter>
     </ClCompile>
     <ClCompile Include="src\SGL\Graphic\Shape.cpp">
+      <Filter>Quelldateien\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SGL\Graphic\Sprite.cpp">
       <Filter>Quelldateien\Graphic</Filter>
     </ClCompile>
   </ItemGroup>

@@ -85,7 +85,7 @@ namespace sgl {
 		SDL_Rect a;
 		SDL_Point point;
 
-		return SDL_PointInRect(vec->copyTo(&point), this->copyTo(&a));
+		return SDL_PointInRect(vec.copyTo(&point), this->copyTo(&a));
 	}
 
 	template <typename T>
@@ -95,13 +95,13 @@ namespace sgl {
 		if (intersection != nullptr) {
 			SDL_Rect c;
 
-			const bool result = SDL_IntersectRect(this->copyTo(&a), other->copyTo(&b), &c);
+			const bool result = SDL_IntersectRect(this->copyTo(&a), other.copyTo(&b), &c) == SDL_TRUE;
 			intersection->copyFrom(&c);
 
 			return result;
 		}
 
-		return SDL_HasIntersection(this->copyTo(&a), other->copyTo(&b));
+		return SDL_HasIntersection(this->copyTo(&a), other.copyTo(&b)) == SDL_TRUE;
 	}
 
 	template <typename T>

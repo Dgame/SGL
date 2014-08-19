@@ -94,6 +94,7 @@
     <ClInclude Include="include\SGL\Graphic\Color.hpp" />
     <ClInclude Include="include\SGL\Graphic\Drawable.hpp" />
     <ClInclude Include="include\SGL\Graphic\Shape.hpp" />
+    <ClInclude Include="include\SGL\Graphic\Sprite.hpp" />
     <ClInclude Include="include\SGL\Graphic\Surface.hpp" />
     <ClInclude Include="include\SGL\Graphic\Texture.hpp" />
     <ClInclude Include="include\SGL\Graphic\Transformable.hpp" />
@@ -117,6 +118,7 @@
     <ClCompile Include="src\SGL\Core\Init.cpp" />
     <ClCompile Include="src\SGL\Graphic\Color.cpp" />
     <ClCompile Include="src\SGL\Graphic\Shape.cpp" />
+    <ClCompile Include="src\SGL\Graphic\Sprite.cpp" />
     <ClCompile Include="src\SGL\Graphic\Surface.cpp" />
     <ClCompile Include="src\SGL\Graphic\Texture.cpp" />
     <ClCompile Include="src\SGL\Graphic\Transformable.cpp" />
