@@ -18,6 +18,9 @@ int main() {
 	shape.setTexture(&wood_tex);
 	shape.setTextureRect(sgl::FloatRect(50, 50, 80, 80));
 
+	sgl::Sprite sprite(wood_tex);
+	sprite.setPosition(10, 200);
+
 	sgl::Event event;
 	while (wnd.isOpen()) {
 		wnd.clear();
@@ -54,6 +57,8 @@ int main() {
 			}
 
 			wnd.draw(shape);
+			wnd.draw(sprite);
+
 			wnd.display();
 		}
 	}

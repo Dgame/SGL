@@ -201,6 +201,7 @@ namespace sgl {
 		glCheck(glVertexPointer(2, GL_FLOAT, sizeof(Vertex), &vertices[0].position.x));
 
 		glCheck(glDrawArrays(static_cast<GLenum>(geo), 0, 8));
+		glCheck(glMatrixMode(GL_MODELVIEW));
 		glCheck(glLoadMatrixf(mat.values));
 
 		if (texture)
@@ -209,11 +210,18 @@ namespace sgl {
 
 	void Window::draw(Geometry geo, const mat4x4& mat, const Texture& texture, const FloatRect& rect) const {
 		const float texCoords[8] = {
-			rect.x / texture.width(),
+			0, 0,
+			1, 0,
+			1, 1,
+			0, 1
+		};
+
+		/*
+		rect.x / texture.width(),
 			rect.y / texture.height(),
 			rect.width / texture.width(),
 			rect.height / texture.height()
-		};
+		*/
 
 		static const float vertices[8] = {
 			0, 0,
@@ -227,7 +235,7 @@ namespace sgl {
 		glCheck(glVertexPointer(2, GL_FLOAT, 0, vertices));
 
 		glCheck(glDrawArrays(static_cast<GLenum>(geo), 0, 8));
-		// glMatrixMode(GL_MODELVIEW);
+		glCheck(glMatrixMode(GL_MODELVIEW));
 		glCheck(glLoadMatrixf(mat.values));
 
 		texture.unbind();

@@ -29,8 +29,8 @@ namespace sgl {
 	public:
 		const mat4x4& getMatrix() const;
 		
-		void setPosition(float x, float y);
-		void setPosition(const vec2f&);
+		virtual void setPosition(float x, float y);
+		virtual void setPosition(const vec2f&);
 
 		const vec2f& getPosition() const {
 			return _position;

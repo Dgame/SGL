@@ -5,11 +5,12 @@
 #include <vector>
 #include <SGL/Graphic/Drawable.hpp>
 #include <SGL/Graphic/Transformable.hpp>
-#include <SGL/Graphic/Texture.hpp>
-#include <SGL/Math/Geometry.hpp>
 #include <SGL/Math/Vertex.hpp>
 
 namespace sgl {
+	class Texture;
+	enum class Geometry;
+
 	class Shape : public Drawable, public Transformable {
 	private:
 		Texture* _texture = nullptr;
