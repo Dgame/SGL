@@ -39,9 +39,6 @@ namespace sgl {
 		bool contains(T x, T y) const;
 		bool contains(const vec2<T>&) const;
 		bool intersects(const Rect<T>&, Rect<T>* intersection = nullptr) const;
-
-		SDL_Rect* copyTo(SDL_Rect*) const;
-		void copyFrom(const SDL_Rect*);
 	};
 
 	template <typename T>
@@ -69,7 +66,7 @@ namespace sgl {
 	bool Rect<T>::isEmpty() const {
 		SDL_Rect a;
 
-		return SDL_RectEmpty(this->copyTo(&a)) == SDL_TRUE;
+		return SDL_RectEmpty(Copy(*this, &a)) == SDL_TRUE;
 	}
 
 	template <typename T>
@@ -95,34 +92,34 @@ namespace sgl {
 		if (intersection != nullptr) {
 			SDL_Rect c;
 
-			const bool result = SDL_IntersectRect(this->copyTo(&a), other.copyTo(&b), &c) == SDL_TRUE;
-			intersection->copyFrom(&c);
+			const bool result = SDL_IntersectRect(Copy(*this, &a), Copy(other, &b), &c) == SDL_TRUE;
+			Copy(&c, *intersection);
 
 			return result;
 		}
 
-		return SDL_HasIntersection(this->copyTo(&a), other.copyTo(&b)) == SDL_TRUE;
+		return SDL_HasIntersection(Copy(*this, &a), Copy(*this, &b)) == SDL_TRUE;
 	}
 
 	template <typename T>
-	SDL_Rect* Rect<T>::copyTo(SDL_Rect* dst) const {
+	SDL_Rect* Copy(const Rect<T>& rect, SDL_Rect* dst) {
 		if (dst != nullptr) {
-			dst->x = static_cast<int>(this->x);
-			dst->y = static_cast<int>(this->y);
-			dst->w = static_cast<int>(this->width);
-			dst->h = static_cast<int>(this->height);
+			dst->x = static_cast<int>(rect.x);
+			dst->y = static_cast<int>(rect.y);
+			dst->w = static_cast<int>(rect.width);
+			dst->h = static_cast<int>(rect.height);
 		}
 		
 		return dst;
 	}
 
 	template <typename T>
-	void Rect<T>::copyFrom(const SDL_Rect* src) {
+	void Copy(const SDL_Rect* src, Rect<T>& rect) {
 		if (src != nullptr) {
-			this->x = static_cast<T>(src->x);
-			this->y = static_cast<T>(src->y);
-			this->width  = static_cast<T>(src->w);
-			this->height = static_cast<T>(src->h);
+			rect.x = static_cast<T>(src->x);
+			rect.y = static_cast<T>(src->y);
+			rect.width  = static_cast<T>(src->w);
+			rect.height = static_cast<T>(src->h);
 		}
 	}
 

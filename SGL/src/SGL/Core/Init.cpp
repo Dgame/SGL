@@ -36,8 +36,6 @@ namespace Intern {
 
 		glCheck(glEnableClientState(GL_VERTEX_ARRAY));
 		glCheck(glEnableClientState(GL_TEXTURE_COORD_ARRAY));
-		glCheck(glEnableClientState(GL_COLOR_ARRAY));
-
 		// Hints
 		glCheck(glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST));
 
@@ -47,7 +45,6 @@ namespace Intern {
 		const GLenum err = glewInit();
 		if (err != GLEW_OK) {
 			std::cerr << "Couldn't initialize GLEW" << std::endl;
-
 			exit(1);
 		}
 #if SGL_DEBUG

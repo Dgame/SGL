@@ -16,31 +16,29 @@ namespace sgl {
 		T z = 0;
 
 		vec3() = default;
-
 		explicit vec3(T mx, T my, T mz);
 
 		template <typename U>
-		explicit vec3(const vec3<U>&);
+		vec3(const vec3<U>&);
 
 		float length() const {
 			return std::sqrt(std::pow(this->x, 2) + std::pow(this->y, 2) + std::pow(this->z, 2));
 		}
 	};
 
-	using vec3i = vec3<int32>;
-	using vec3s = vec3<int16>;
-	using vec3f = vec3<float>;
-
 	template <typename T>
-	vec3<T>::vec3(T mx, T my, T mz) : x(mx), y(my), z(mz) {
+	vec3<T>::vec3(T mx, T my, T mz) : 
+		x(mx), y(my), z(mz)
+	{
 
 	}
 
 	template <typename T>
 	template <typename U>
-	vec3<T>::vec3(const vec3<U>& vec) : x(static_cast<T>(vec.x)),
-										y(static_cast<T>(vec.y)),
-										z(static_cast<T>(vec.z))
+	vec3<T>::vec3(const vec3<U>& vec) : 
+		x(static_cast<T>(vec.x)),
+		y(static_cast<T>(vec.y)),
+		z(static_cast<T>(vec.z))
 	{
 
 	}
@@ -72,17 +70,17 @@ namespace sgl {
 			return vec / len;
 		return vec;
 	}
-
+	// TODO: const method
 	template <typename T>
 	float Dot(const vec3<T>& lhs, const vec3<T>& rhs) {
 		return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z;
 	}
-
+	// TODO: const method
 	template <typename T>
 	float Angle(const vec3<T>& lhs, const vec3<T>& rhs) {
 		return acosf(Dot(lhs, rhs) / (lhs.length() * rhs.length()));
 	}
-
+	// TODO: const method
 	template <typename T>
 	float Diff(const vec3<T>& lhs, const vec3<T>& rhs) {
 		const float vx = std::pow(lhs.x - rhs.x, 2);
@@ -171,6 +169,10 @@ namespace sgl {
 	bool operator !=(const vec3<T>& lhs, const vec3<T>& rhs) {
 		return !(lhs == rhs);
 	}
+
+	using vec3i = vec3<int32>;
+	using vec3s = vec3<int16>;
+	using vec3f = vec3<float>;
 }
 
 #endif

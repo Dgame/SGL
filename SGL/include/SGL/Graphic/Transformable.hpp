@@ -6,31 +6,26 @@
 namespace sgl {
 	class Transformable {
 	protected:
-		enum Update : char {
-			None = 0,
-			Position = 1,
-			Center = 2,
-			Rotation = 4,
-			Scale = 8
-		};
-
-		virtual void _update(Update which);
-
 		vec2f _center;
 		vec2f _position;
 
-		float _scale = 1;
-		float _rotation = 0;
+		float _scale = 1.f;
+		float _rotation = 0.f;
+
+	protected:
+		void _updateTransform() {
+			_update = true;
+		}
 
 	private:
 		mutable mat4x4 _matrix;
-		mutable Update _updateMode = Update::None;
+		mutable bool _update = true;
 
 	public:
 		const mat4x4& getMatrix() const;
 		
-		virtual void setPosition(float x, float y);
-		virtual void setPosition(const vec2f&);
+		void setPosition(float x, float y);
+		void setPosition(const vec2f&);
 
 		const vec2f& getPosition() const {
 			return _position;

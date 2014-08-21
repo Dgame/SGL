@@ -36,13 +36,13 @@ namespace sgl {
 		IMG_SavePNG(_surface, filename.c_str());
 	}
 
-	void Surface::blit(const Surface& srfc, const ShortRect& src, const ShortRect* dest) const {
+	void Surface::blit(const Surface& srfc, const ShortRect& src, const ShortRect* dst) const {
 		SDL_Rect a, b;
 
-		if (dest != nullptr)
-			SDL_BlitSurface(srfc._surface, src.copyTo(&a), _surface, dest->copyTo(&b));
+		if (dst != nullptr)
+			SDL_BlitSurface(srfc._surface, Copy(src, &a), _surface, Copy(*dst, &b));
 		else
-			SDL_BlitSurface(srfc._surface, src.copyTo(&a), _surface, nullptr);
+			SDL_BlitSurface(srfc._surface, Copy(src, &a), _surface, nullptr);
 	}
 
 	Surface Surface::subSurface(const ShortRect& rect) const {

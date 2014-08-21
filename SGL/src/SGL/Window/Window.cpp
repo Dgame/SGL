@@ -190,6 +190,8 @@ namespace sgl {
 	}
 
 	void Window::draw(Geometry geo, const mat4x4& mat, const std::vector<Vertex>& vertices, const Texture* texture) const {
+		glCheck(glLoadMatrixf(mat.values));
+
 		if (texture) {
 			glCheck(glTexCoordPointer(3, GL_FLOAT, sizeof(Vertex), &vertices[0].texCoord.x));
 			texture->bind();
@@ -197,46 +199,44 @@ namespace sgl {
 			glCheck(glDisable(GL_TEXTURE_2D));
 		}
 
-		glCheck(glColorPointer(4, GL_FLOAT, sizeof(Vertex), &vertices[0].color.red));
-		glCheck(glVertexPointer(2, GL_FLOAT, sizeof(Vertex), &vertices[0].position.x));
+		glCheck(glEnableClientState(GL_COLOR_ARRAY));
 
+		glCheck(glVertexPointer(2, GL_FLOAT, sizeof(Vertex), &vertices[0].position.x));
+		glCheck(glColorPointer(4, GL_FLOAT, sizeof(Vertex), &vertices[0].color.red));
 		glCheck(glDrawArrays(static_cast<GLenum>(geo), 0, 8));
-		glCheck(glMatrixMode(GL_MODELVIEW));
-		glCheck(glLoadMatrixf(mat.values));
+
+		glCheck(glDisableClientState(GL_COLOR_ARRAY));
 
 		if (texture)
 			texture->unbind();
 	}
 
 	void Window::draw(Geometry geo, const mat4x4& mat, const Texture& texture, const FloatRect& rect) const {
-		const float texCoords[8] = {
-			0, 0,
-			1, 0,
-			1, 1,
-			0, 1
-		};
-
-		/*
-		rect.x / texture.width(),
-			rect.y / texture.height(),
-			rect.width / texture.width(),
-			rect.height / texture.height()
-		*/
-
-		static const float vertices[8] = {
-			0, 0,
-			1, 0,
-			1, 1,
-			0, 1
-		};
-
-		glCheck(glTexCoordPointer(2, GL_FLOAT, 0, texCoords));
-		texture.bind();
-		glCheck(glVertexPointer(2, GL_FLOAT, 0, vertices));
-
-		glCheck(glDrawArrays(static_cast<GLenum>(geo), 0, 8));
-		glCheck(glMatrixMode(GL_MODELVIEW));
 		glCheck(glLoadMatrixf(mat.values));
+		texture.bind();
+
+		const float tx = rect.x / texture.width();
+		const float ty = rect.y / texture.height();
+		const float tw = rect.width / texture.width();
+		const float th = rect.height / texture.height();
+
+		const float texCoords[8] = {
+			tx, ty,
+			tx + tw, ty,
+			tx + tw, ty + th,
+			tx, ty + th
+		};
+
+		const float vertices[8] = {
+			0, 0,
+			rect.width, 0,
+			rect.width, rect.height,
+			0, rect.height
+		};
+
+		glCheck(glVertexPointer(2, GL_FLOAT, 0, vertices));
+		glCheck(glTexCoordPointer(2, GL_FLOAT, 0, texCoords));
+		glCheck(glDrawArrays(static_cast<GLenum>(geo), 0, 8));
 
 		texture.unbind();
 	}

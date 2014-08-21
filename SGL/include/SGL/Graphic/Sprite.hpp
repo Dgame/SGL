@@ -13,11 +13,12 @@ namespace sgl {
 	class Sprite : public Drawable, public Transformable {
 	protected:
 		Texture* _texture;
-		FloatRect _boundingBox;
 
 		virtual void draw(const Window*) const override;
 
 	public:
+		FloatRect view;
+
 		explicit Sprite(Texture&);
 
 		void setTexture(Texture&);
@@ -26,19 +27,10 @@ namespace sgl {
 			return _texture;
 		}
 
-		void setBoundingBox(const FloatRect& bounds) {
-			_boundingBox = bounds;
-		}
-
-		const FloatRect& getBoundingBox() const {
-			return _boundingBox;
-		}
+		FloatRect getBoundingBox() const;
 
 		bool collideWith(const FloatRect&) const;
 		bool collideWith(const Sprite&) const;
-
-		void setPosition(float x, float y) override;
-		void setPosition(const vec2f&) override;
 
 		void move(float x, float y);
 		void move(const vec2f&);

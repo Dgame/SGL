@@ -29,8 +29,9 @@ namespace sgl {
 						  (this->values[7] * this->values[1] - this->values[3] * this->values[5]) / det,
 						  -(this->values[7] * this->values[0] - this->values[3] * this->values[4]) / det,
 						  (this->values[5] * this->values[0] - this->values[1] * this->values[4]) / det);
-		} else
-			return Identity;
+		}
+
+		return Identity;
 	}
 
 	mat4x4& mat4x4::translate(const vec2f& vec) {

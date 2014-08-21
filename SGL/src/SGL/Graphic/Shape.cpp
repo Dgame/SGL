@@ -84,7 +84,7 @@ namespace sgl {
 
 		_position.x = x;
 		_position.y = y;
-		_update(Update::Position);
+		_updateTransform();
 		_moved = true;
 	}
 

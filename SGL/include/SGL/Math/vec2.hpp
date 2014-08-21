@@ -16,17 +16,14 @@ namespace sgl {
 		T y = 0;
 
 		vec2() = default;
-
 		explicit vec2(T mx, T my);
 
 		template <typename U>
-		explicit vec2(const vec2<U>&);
+		vec2(const vec2<U>&);
 
 		float length() const {
 			return std::sqrt(std::pow(this->x, 2) + std::pow(this->y, 2));
 		}
-
-		SDL_Point* copyTo(const SDL_Point*) const;
 	};
 
 	template <typename T>
@@ -37,16 +34,15 @@ namespace sgl {
 	template <typename T>
 	template <typename U>
 	vec2<T>::vec2(const vec2<U>& vec) : x(static_cast<T>(vec.x)),
-										y(static_cast<T>(vec.y))
-	{
+		y(static_cast<T>(vec.y)) {
 
 	}
 
 	template <typename T>
-	SDL_Point* vec2<T>::copyTo(const SDL_Point* dst) const {
+	SDL_Point* Copy(const vec2<T>& vec, const SDL_Point* dst) {
 		if (dst != nullptr) {
-			dst->x = static_cast<int>(this->x);
-			dst->y = static_cast<int>(this->y);
+			dst->x = static_cast<int>(vec.x);
+			dst->y = static_cast<int>(vec.y);
 		}
 
 		return dst;
@@ -69,16 +65,17 @@ namespace sgl {
 		return vec;
 	}
 
+	// TODO: const method
 	template <typename T>
 	float Dot(const vec2<T>& lhs, const vec2<T>& rhs) {
 		return lhs.x * rhs.x + lhs.y * rhs.y;
 	}
-
+	// TODO: const method
 	template <typename T>
 	float Angle(const vec2<T>& lhs, const vec2<T>& rhs) {
 		return acosf(Dot(lhs, rhs) / (lhs.length() * rhs.length()));
 	}
-
+	// TODO: const method
 	template <typename T>
 	float Diff(const vec2<T>& lhs, const vec2<T>& rhs) {
 		const float vx = std::pow(lhs.x - rhs.x, 2);
