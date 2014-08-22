@@ -14,7 +14,6 @@ namespace sgl {
 
 	void Shape::append(const Vertex& vertex) {
 		_vertices.push_back(vertex);
-		_moved = true;
 	}
 
 	void Shape::setTexture(Texture* texture, const FloatRect* texRect) {
@@ -43,31 +42,26 @@ namespace sgl {
 		}
 	}
 
-	const FloatRect& Shape::getBoundingRect() const {
-		if (_moved) {
-			float left = _vertices[0].position.x;
-			float top = _vertices[0].position.y;
-			float right = _vertices[0].position.x;
-			float bottom = _vertices[0].position.y;
+	FloatRect Shape::getBoundingRect() const {
+		float left = _vertices[0].position.x;
+		float top = _vertices[0].position.y;
+		float right = _vertices[0].position.x;
+		float bottom = _vertices[0].position.y;
 
-			for (const Vertex& v : _vertices) {
-				// Update left and right
-				if (v.position.x < left)
-					left = v.position.x;
-				else if (v.position.x > right)
-					right = v.position.x;
-				// Update top and bottom
-				if (v.position.y < top)
-					top = v.position.y;
-				else if (v.position.y > bottom)
-					bottom = v.position.y;
-			}
-
-			_moved = false;
-			_bounds = FloatRect(left, top, right - left, bottom - top);
+		for (const Vertex& v : _vertices) {
+			// Update left and right
+			if (v.position.x < left)
+				left = v.position.x;
+			else if (v.position.x > right)
+				right = v.position.x;
+			// Update top and bottom
+			if (v.position.y < top)
+				top = v.position.y;
+			else if (v.position.y > bottom)
+				bottom = v.position.y;
 		}
 
-		return _bounds;
+		return FloatRect(left, top, right - left, bottom - top);
 	}
 
 	void Shape::setColor(const Color4b& col) {
@@ -84,8 +78,9 @@ namespace sgl {
 
 		_position.x = x;
 		_position.y = y;
-		_updateTransform();
-		_moved = true;
+
+		Transformable::updated();
+		Transformable::move(x, y);
 	}
 
 	void Shape::move(const vec2f& offset) {

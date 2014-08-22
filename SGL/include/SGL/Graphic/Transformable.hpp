@@ -13,7 +13,7 @@ namespace sgl {
 		float _rotation = 0.f;
 
 	protected:
-		void _updateTransform() {
+		void updated() {
 			_update = true;
 		}
 
@@ -26,6 +26,9 @@ namespace sgl {
 		
 		void setPosition(float x, float y);
 		void setPosition(const vec2f&);
+
+		virtual void move(float x, float y);
+		virtual void move(const vec2f&);
 
 		const vec2f& getPosition() const {
 			return _position;

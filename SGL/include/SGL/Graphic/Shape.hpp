@@ -14,9 +14,6 @@ namespace sgl {
 	class Shape : public Drawable, public Transformable {
 	private:
 		Texture* _texture = nullptr;
-		mutable FloatRect _bounds;
-		mutable bool _moved = false;
-
 		std::vector<Vertex> _vertices;
 
 	protected:
@@ -35,7 +32,7 @@ namespace sgl {
 		}
 
 		void setTextureRect(const FloatRect&);
-		const FloatRect& getBoundingRect() const;
+		FloatRect getBoundingRect() const;
 
 		const std::vector<Vertex>& getVertices() const {
 			return _vertices;
@@ -43,8 +40,8 @@ namespace sgl {
 
 		void setColor(const Color4b&);
 
-		void move(float x, float y);
-		void move(const vec2f&);
+		void move(float x, float y) override;
+		void move(const vec2f&) override;
 	};
 }
 

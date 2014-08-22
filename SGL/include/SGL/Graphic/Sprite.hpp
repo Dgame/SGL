@@ -32,8 +32,8 @@ namespace sgl {
 		bool collideWith(const FloatRect&) const;
 		bool collideWith(const Sprite&) const;
 
-		void move(float x, float y);
-		void move(const vec2f&);
+		void move(float x, float y) override;
+		void move(const vec2f&) override;
 	};
 }
 

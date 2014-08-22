@@ -17,12 +17,25 @@ namespace sgl {
 	void Transformable::setPosition(float x, float y) {
 		_position.x = x;
 		_position.y = y;
+
 		_update = true;
+		_center = _position;
 	}
 
 	void Transformable::setPosition(const vec2f& pos) {
 		_position = pos;
+
 		_update = true;
+		_center = _position;
+	}
+
+	void Transformable::move(float x, float y) {
+		_center.x += x;
+		_center.y += y;
+	}
+
+	void Transformable::move(const vec2f& vec) {
+		_center += vec;
 	}
 
 	void Transformable::setCenter(const vec2f& center) {
@@ -33,6 +46,7 @@ namespace sgl {
 	void Transformable::setCenter(float x, float y) {
 		_center.x = x;
 		_center.y = y;
+
 		_update = true;
 	}
 
@@ -51,6 +65,7 @@ namespace sgl {
 		_rotation = static_cast<float>(fmod(_rotation, 360));
 		if (_rotation < 0)
 			_rotation += 360;
+
 		_update = true;
 	}
 
@@ -59,6 +74,7 @@ namespace sgl {
 		_rotation = static_cast<float>(fmod(_rotation, 360));
 		if (_rotation < 0)
 			_rotation += 360;
+
 		_update = true;
 	}
 }

@@ -33,12 +33,14 @@ namespace sgl {
 		_position.x += x;
 		_position.y += y;
 
-		_updateTransform();
+		Transformable::updated();
+		Transformable::move(x, y);
 	}
 
 	void Sprite::move(const vec2f& vec) {
 		_position += vec;
 
-		_updateTransform();
+		Transformable::updated();
+		Transformable::move(vec);
 	}
 }
