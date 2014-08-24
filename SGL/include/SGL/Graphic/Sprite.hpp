@@ -1,7 +1,6 @@
 #ifndef SGL_SPRITE_HPP
 #define SGL_SPRITE_HPP
 
-#include <SGL/Core/Types.hpp>
 #include <SGL/Graphic/Drawable.hpp>
 #include <SGL/Graphic/Transformable.hpp>
 #include <SGL/Math/vec2.hpp>
@@ -17,7 +16,7 @@ namespace sgl {
 		virtual void draw(const Window*) const override;
 
 	public:
-		FloatRect view;
+		FloatRect clipRect;
 
 		explicit Sprite(Texture&);
 
@@ -27,10 +26,7 @@ namespace sgl {
 			return _texture;
 		}
 
-		FloatRect getBoundingBox() const;
-
-		bool collideWith(const FloatRect&) const;
-		bool collideWith(const Sprite&) const;
+		FloatRect getBoundingRect() const;
 
 		void move(float x, float y) override;
 		void move(const vec2f&) override;

@@ -25,9 +25,18 @@ int main() {
 	sprite.setPosition(100, 200);
 	sprite.setCenter(170, 270);
 
+	sgl::StopWatch sw;
+	//sgl::Battery bat = sgl::RemainingBattery();
+
+	//std::cout << bat.seconds << std::endl;
+
 	sgl::Event event;
 	while (wnd.isOpen()) {
 		wnd.clear();
+
+		//std::cout << sw.getFPS() << std::endl;
+		sgl::Time t = sw.getElapsedTime();
+		//printf("Passed time: %d hours, %d minutes, %d seconds and %d msecs.\n", t.hours, t.minutes, t.seconds, t.msecs);
 
 		while (sgl::PollEvent(&event)) {
 			switch (event.type) {
@@ -47,7 +56,7 @@ int main() {
 
 				case sgl::Event::Mouse::Button::Down:
 					shape.rotate(5);
-					sprite.rotate(5);
+					sprite.rotate(-5);
 					printf("Mouse down @ %d:%d -> Button = %d\n",
 							event.mouse.button.x, event.mouse.button.y,
 							static_cast<int>(event.mouse.button.button));

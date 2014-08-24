@@ -102,9 +102,6 @@
     <ClInclude Include="include\SGL\Window.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="include\SGL\System\Clock.hpp">
-      <Filter>Headerdateien\System</Filter>
-    </ClInclude>
     <ClInclude Include="include\SGL\all.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
@@ -128,6 +125,12 @@
     </ClInclude>
     <ClInclude Include="include\SGL\Graphic\Sprite.hpp">
       <Filter>Headerdateien\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SGL\System\Battery.hpp">
+      <Filter>Headerdateien\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SGL\System\StopWatch.hpp">
+      <Filter>Headerdateien\System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -155,9 +158,6 @@
     <ClCompile Include="src\SGL\System\Event.cpp">
       <Filter>Quelldateien\System</Filter>
     </ClCompile>
-    <ClCompile Include="src\SGL\System\Clock.cpp">
-      <Filter>Quelldateien\System</Filter>
-    </ClCompile>
     <ClCompile Include="src\SGL\Core\GLCheck.cpp">
       <Filter>Quelldateien\Core</Filter>
     </ClCompile>
@@ -172,6 +172,12 @@
     </ClCompile>
     <ClCompile Include="src\SGL\Graphic\Sprite.cpp">
       <Filter>Quelldateien\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SGL\System\Battery.cpp">
+      <Filter>Quelldateien\System</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SGL\System\StopWatch.cpp">
+      <Filter>Quelldateien\System</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

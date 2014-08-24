@@ -65,17 +65,16 @@ namespace sgl {
 		return vec;
 	}
 
-	// TODO: const method
 	template <typename T>
 	float Dot(const vec2<T>& lhs, const vec2<T>& rhs) {
 		return lhs.x * rhs.x + lhs.y * rhs.y;
 	}
-	// TODO: const method
+
 	template <typename T>
 	float Angle(const vec2<T>& lhs, const vec2<T>& rhs) {
 		return acosf(Dot(lhs, rhs) / (lhs.length() * rhs.length()));
 	}
-	// TODO: const method
+
 	template <typename T>
 	float Diff(const vec2<T>& lhs, const vec2<T>& rhs) {
 		const float vx = std::pow(lhs.x - rhs.x, 2);

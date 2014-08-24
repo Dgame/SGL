@@ -105,10 +105,11 @@
     <ClInclude Include="include\SGL\Math\vec2.hpp" />
     <ClInclude Include="include\SGL\Math\vec3.hpp" />
     <ClInclude Include="include\SGL\Math\Vertex.hpp" />
-    <ClInclude Include="include\SGL\System\Clock.hpp" />
+    <ClInclude Include="include\SGL\System\Battery.hpp" />
     <ClInclude Include="include\SGL\System\Event.hpp" />
     <ClInclude Include="include\SGL\System\Keyboard.hpp" />
     <ClInclude Include="include\SGL\System\Mouse.hpp" />
+    <ClInclude Include="include\SGL\System\StopWatch.hpp" />
     <ClInclude Include="include\SGL\Window.hpp" />
     <ClInclude Include="include\SGL\Window\Window.hpp" />
   </ItemGroup>
@@ -124,8 +125,9 @@
     <ClCompile Include="src\SGL\Graphic\Transformable.cpp" />
     <ClCompile Include="src\SGL\Math\mat4.cpp" />
     <ClCompile Include="src\SGL\Math\Vertex.cpp" />
-    <ClCompile Include="src\SGL\System\Clock.cpp" />
+    <ClCompile Include="src\SGL\System\Battery.cpp" />
     <ClCompile Include="src\SGL\System\Event.cpp" />
+    <ClCompile Include="src\SGL\System\StopWatch.cpp" />
     <ClCompile Include="src\SGL\Window\Window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

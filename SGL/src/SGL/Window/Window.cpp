@@ -2,7 +2,6 @@
 #include <SGL/Graphic/Drawable.hpp>
 #include <SGL/Graphic/Texture.hpp>
 #include <SGL/Graphic/Surface.hpp>
-#include <SGL/Math/Geometry.hpp>
 
 namespace sgl {
 	uint8 Window::_count = 0;
@@ -23,8 +22,7 @@ namespace sgl {
 			rect.y,
 			rect.width,
 			rect.height,
-			style | SDL_WINDOW_OPENGL
-			);
+			style | SDL_WINDOW_OPENGL);
 
 		if (!_window) {
 			std::cerr << "Could not create window: " << SDL_GetError() << std::endl;
@@ -181,7 +179,6 @@ namespace sgl {
 
 	std::string Window::getTitle() const {
 		const char* str = SDL_GetWindowTitle(_window);
-
 		return std::string(str);
 	}
 
@@ -189,7 +186,7 @@ namespace sgl {
 		d.draw(this);
 	}
 
-	void Window::draw(Geometry geo, const mat4x4& mat, const std::vector<Vertex>& vertices, const Texture* texture) const {
+	void Window::draw(Geometry::Type geo, const mat4x4& mat, const std::vector<Vertex>& vertices, const Texture* texture) const {
 		glCheck(glLoadMatrixf(mat.values));
 
 		if (texture) {
@@ -203,7 +200,7 @@ namespace sgl {
 
 		glCheck(glVertexPointer(2, GL_FLOAT, sizeof(Vertex), &vertices[0].position.x));
 		glCheck(glColorPointer(4, GL_FLOAT, sizeof(Vertex), &vertices[0].color.red));
-		glCheck(glDrawArrays(static_cast<GLenum>(geo), 0, 8));
+		glCheck(glDrawArrays(geo, 0, 8));
 
 		glCheck(glDisableClientState(GL_COLOR_ARRAY));
 
@@ -211,7 +208,7 @@ namespace sgl {
 			texture->unbind();
 	}
 
-	void Window::draw(Geometry geo, const mat4x4& mat, const Texture& texture, const FloatRect& rect) const {
+	void Window::draw(Geometry::Type geo, const mat4x4& mat, const Texture& texture, const FloatRect& rect) const {
 		glCheck(glLoadMatrixf(mat.values));
 		texture.bind();
 
@@ -236,7 +233,7 @@ namespace sgl {
 
 		glCheck(glVertexPointer(2, GL_FLOAT, 0, vertices));
 		glCheck(glTexCoordPointer(2, GL_FLOAT, 0, texCoords));
-		glCheck(glDrawArrays(static_cast<GLenum>(geo), 0, 8));
+		glCheck(glDrawArrays(geo, 0, 8));
 
 		texture.unbind();
 	}

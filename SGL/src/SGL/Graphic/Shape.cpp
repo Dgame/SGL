@@ -1,6 +1,5 @@
 #include <SGL/Graphic/Shape.hpp>
 #include <SGL/Graphic/Texture.hpp>
-#include <SGL/Math/Geometry.hpp>
 #include <SGL/Window/Window.hpp>
 
 namespace sgl {
@@ -8,7 +7,7 @@ namespace sgl {
 		wnd->draw(this->geometry, this->getMatrix(), _vertices, _texture);
 	}
 
-	Shape::Shape(Geometry geo) : geometry(geo) {
+	Shape::Shape(Geometry::Type geo) : geometry(geo) {
 
 	}
 
@@ -75,9 +74,6 @@ namespace sgl {
 			v.position.x += x;
 			v.position.y += y;
 		}
-
-		_position.x = x;
-		_position.y = y;
 
 		Transformable::updated();
 		Transformable::move(x, y);

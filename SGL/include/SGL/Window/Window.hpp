@@ -7,12 +7,12 @@
 #include <SGL/Math/mat4.hpp>
 #include <SGL/Math/vec2.hpp>
 #include <SGL/Math/Vertex.hpp>
+#include <SGL/Math/Geometry.hpp>
 
 namespace sgl {
 	class Texture;
 	class Drawable;
 	struct Surface;
-	enum class Geometry;
 
 	class Window {
 	public:
@@ -102,8 +102,8 @@ namespace sgl {
 		std::string getTitle() const;
 
 		void draw(const Drawable&) const;
-		void draw(Geometry geo, const mat4x4& mat, const std::vector<Vertex>& vertices, const Texture* texture) const;
-		void draw(Geometry geo, const mat4x4& mat, const Texture& texture, const FloatRect& rect) const;
+		void draw(Geometry::Type geo, const mat4x4& mat, const std::vector<Vertex>& vertices, const Texture* texture) const;
+		void draw(Geometry::Type geo, const mat4x4& mat, const Texture& texture, const FloatRect& rect) const;
 		void display() const;
 	};
 }

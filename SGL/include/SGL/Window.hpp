@@ -4,6 +4,8 @@
 #include <SGL/System/Keyboard.hpp>
 #include <SGL/System/Mouse.hpp>
 #include <SGL/System/Event.hpp>
+#include <SGL/System/Battery.hpp>
+#include <SGL/System/StopWatch.hpp>
 #include <SGL/Window/Window.hpp>
 
 #endif

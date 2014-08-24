@@ -4,29 +4,21 @@
 #include <SGL/Window/Window.hpp>
 
 namespace sgl {
-	Sprite::Sprite(Texture& tex) : _texture(&tex), view(0, 0, tex.width(), tex.height()) {
+	Sprite::Sprite(Texture& tex) : _texture(&tex), clipRect(0, 0, tex.width(), tex.height()) {
 
 	}
 
 	void Sprite::draw(const Window* wnd) const {
-		wnd->draw(Geometry::Quad, this->getMatrix(), *_texture, this->view);
+		wnd->draw(Geometry::Quad, this->getMatrix(), *_texture, this->clipRect);
 	}
 
 	void Sprite::setTexture(Texture& tex) {
 		_texture = &tex;
-		this->view = FloatRect(0, 0, tex.width(), tex.height());
+		this->clipRect = FloatRect(0, 0, tex.width(), tex.height());
 	}
 
-	FloatRect Sprite::getBoundingBox() const {
+	FloatRect Sprite::getBoundingRect() const {
 		return FloatRect(_position.x, _position.y, _texture->width(), _texture->height());
-	}
-	
-	bool Sprite::collideWith(const FloatRect& rect) const {
-		return this->getBoundingBox().intersects(rect);
-	}
-
-	bool Sprite::collideWith(const Sprite& other) const {
-		return this->collideWith(other.getBoundingBox());
 	}
 
 	void Sprite::move(float x, float y) {

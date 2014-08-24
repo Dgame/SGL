@@ -6,10 +6,10 @@
 #include <SGL/Graphic/Drawable.hpp>
 #include <SGL/Graphic/Transformable.hpp>
 #include <SGL/Math/Vertex.hpp>
+#include <SGL/Math/Geometry.hpp>
 
 namespace sgl {
 	class Texture;
-	enum class Geometry;
 
 	class Shape : public Drawable, public Transformable {
 	private:
@@ -20,9 +20,9 @@ namespace sgl {
 		virtual void draw(const Window*) const override;
 
 	public:
-		Geometry geometry;
+		Geometry::Type geometry;
 
-		explicit Shape(Geometry geo);
+		explicit Shape(Geometry::Type geo);
 
 		void append(const Vertex&);
 		void setTexture(Texture*, const FloatRect* texRect = nullptr);
