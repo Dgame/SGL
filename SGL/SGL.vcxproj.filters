@@ -43,6 +43,12 @@
     <Filter Include="Quelldateien\Core">
       <UniqueIdentifier>{4c160be6-fc17-45be-8502-02f10ef8e205}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\Audio">
+      <UniqueIdentifier>{03215074-91d5-4569-8b5f-1d2c52011eb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Audio">
+      <UniqueIdentifier>{438b3f8b-3f44-4cad-ba3e-3078a4622e2b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\SGL\Graphic\Color.hpp">
@@ -111,9 +117,6 @@
     <ClInclude Include="include\SGL\Math\Geometry.hpp">
       <Filter>Headerdateien\Math</Filter>
     </ClInclude>
-    <ClInclude Include="include\SGL\Core\GLCheck.hpp">
-      <Filter>Headerdateien\Core</Filter>
-    </ClInclude>
     <ClInclude Include="include\SGL\Core\Init.hpp">
       <Filter>Headerdateien\Core</Filter>
     </ClInclude>
@@ -131,6 +134,12 @@
     </ClInclude>
     <ClInclude Include="include\SGL\System\StopWatch.hpp">
       <Filter>Headerdateien\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SGL\Audio\Sound.hpp">
+      <Filter>Headerdateien\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SGL\Core\Check.hpp">
+      <Filter>Headerdateien\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -158,9 +167,6 @@
     <ClCompile Include="src\SGL\System\Event.cpp">
       <Filter>Quelldateien\System</Filter>
     </ClCompile>
-    <ClCompile Include="src\SGL\Core\GLCheck.cpp">
-      <Filter>Quelldateien\Core</Filter>
-    </ClCompile>
     <ClCompile Include="src\SGL\Core\Init.cpp">
       <Filter>Quelldateien\Core</Filter>
     </ClCompile>
@@ -178,6 +184,12 @@
     </ClCompile>
     <ClCompile Include="src\SGL\System\StopWatch.cpp">
       <Filter>Quelldateien\System</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SGL\Audio\Sound.cpp">
+      <Filter>Quelldateien\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SGL\Core\Check.cpp">
+      <Filter>Quelldateien\Core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

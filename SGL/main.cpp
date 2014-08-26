@@ -1,3 +1,4 @@
+#include <iostream>
 #include <vector>
 #include <SGL/all.hpp>
 
@@ -25,9 +26,22 @@ int main() {
 	sprite.setPosition(100, 200);
 	sprite.setCenter(170, 270);
 
+	sgl::Surface qs("quinn.png");
+	sgl::Texture quinn_tex(qs);
+
+	sgl::Shape box(sgl::Geometry::Quad);
+	box.append(sgl::Vertex(100, 100));
+	box.append(sgl::Vertex(200, 100));
+	box.append(sgl::Vertex(200, 200));
+	box.append(sgl::Vertex(100, 200));
+	box.setCenter(150, 150);
+	box.setColor(sgl::Color4b::White);
+	box.setTexture(&quinn_tex);
+
+	//sgl::Surface copy = qs;
+
 	sgl::StopWatch sw;
 	//sgl::Battery bat = sgl::RemainingBattery();
-
 	//std::cout << bat.seconds << std::endl;
 
 	sgl::Event event;
@@ -35,7 +49,7 @@ int main() {
 		wnd.clear();
 
 		//std::cout << sw.getFPS() << std::endl;
-		sgl::Time t = sw.getElapsedTime();
+		//sgl::Time t = sw.getElapsedTime();
 		//printf("Passed time: %d hours, %d minutes, %d seconds and %d msecs.\n", t.hours, t.minutes, t.seconds, t.msecs);
 
 		while (sgl::PollEvent(&event)) {
@@ -71,6 +85,7 @@ int main() {
 
 			wnd.draw(sprite);
 			wnd.draw(shape);
+			wnd.draw(box);
 
 			wnd.display();
 		}

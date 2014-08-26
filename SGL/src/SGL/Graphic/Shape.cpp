@@ -27,11 +27,7 @@ namespace sgl {
 	}
 
 	void Shape::setTextureRect(const FloatRect& texRect) {
-		if (_texture == nullptr)
-			return;
-
 		const FloatRect bounds = this->getBoundingRect();
-
 		for (Vertex& v : _vertices) {
 			const float xratio = bounds.width > 0 ? (v.position.x - bounds.x) / bounds.width : 0;
 			const float yratio = bounds.height > 0 ? (v.position.y - bounds.y) / bounds.height : 0;

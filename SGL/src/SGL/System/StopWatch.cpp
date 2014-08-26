@@ -14,7 +14,7 @@ namespace sgl {
 			this->hours++;
 		}
 		
-		this->msecs = fmod(ms, 1000);
+		this->msecs = static_cast<uint16>(fmod(ms, 1000));
 	}
 
 	StopWatch::StopWatch() {

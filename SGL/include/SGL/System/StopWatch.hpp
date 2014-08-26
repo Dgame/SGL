@@ -6,10 +6,10 @@
 
 namespace sgl {
 	struct Time {
-		uint16 msecs = 0;
-		uint16 hours = 0;
-		uint16 seconds = 0;
-		uint16 minutes = 0;
+		uint16 seconds;
+		uint16 minutes;
+		uint16 msecs;
+		uint16 hours;
 
 		explicit Time(uint32 ms);
 	};

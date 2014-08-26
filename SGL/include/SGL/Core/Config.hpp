@@ -22,10 +22,6 @@
 #endif
 
 #define SGL_MAYOR 0
-#define SGL_MINOR 1
-
-#if SGL_DEBUG
-#include <iostream>
-#endif
+#define SGL_MINOR 2
 
 #endif

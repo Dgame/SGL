@@ -51,11 +51,11 @@
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <DisableSpecificWarnings>4244</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4820;4710;4668;4514;4350;4365;4244;4242</DisableSpecificWarnings>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
@@ -84,9 +84,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\SGL\all.hpp" />
+    <ClInclude Include="include\SGL\Audio\Sound.hpp" />
     <ClInclude Include="include\SGL\Core\Config.hpp" />
     <ClInclude Include="include\SGL\Core\GL.hpp" />
-    <ClInclude Include="include\SGL\Core\GLCheck.hpp" />
+    <ClInclude Include="include\SGL\Core\Check.hpp" />
     <ClInclude Include="include\SGL\Core\Init.hpp" />
     <ClInclude Include="include\SGL\Core\SDL.hpp" />
     <ClInclude Include="include\SGL\Core\Types.hpp" />
@@ -115,7 +116,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="src\SGL\Core\GLCheck.cpp" />
+    <ClCompile Include="src\SGL\Audio\Sound.cpp" />
+    <ClCompile Include="src\SGL\Core\Check.cpp" />
     <ClCompile Include="src\SGL\Core\Init.cpp" />
     <ClCompile Include="src\SGL\Graphic\Color.cpp" />
     <ClCompile Include="src\SGL\Graphic\Shape.cpp" />

@@ -1,14 +1,13 @@
-#include <iostream>
 #include <string>
-#include <SGL/Core/GLCheck.hpp>
+#include <SGL/Core/Check.hpp>
 #include <SGL/Core/GL.hpp>
+#include <SGL/Core/SDL.hpp>
 
 void glCheckError(const char* file, unsigned int line) {
 	// Get the last error
 	const GLenum errorCode = glGetError();
 
 	if (errorCode != GL_NO_ERROR) {
-		const std::string fileString(file);
 		std::string error = "unknown error";
 		std::string description = "no description";
 
@@ -42,7 +41,16 @@ void glCheckError(const char* file, unsigned int line) {
 		}
 
 		// Log the error
-		std::cerr << "An internal OpenGL call failed in " << fileString << " on line " << line << ": " << error << " -> " << description << std::endl;
+		std::cerr << "An internal OpenGL call failed in " << file << " on line " << line << ": " << error << " -> " << description << std::endl;
+		//exit(1);
+	}
+}
+
+void SDL_CheckError(const char* file, unsigned int line) {
+	const char* error = SDL_GetError();
+	if (strlen(error) != 0) {
+		// Log the error
+		std::cerr << "An SDL error happens in " << file << " on line " << line << ": " << error << std::endl;
 		//exit(1);
 	}
 }

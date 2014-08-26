@@ -2,16 +2,17 @@
 #define SGL_TEXTURE_HPP
 
 #include <SGL/Core/Types.hpp>
-#include <SGL/Core/GLCheck.hpp>
+#include <SGL/Core/Check.hpp>
+#include <SGL/Core/GL.hpp>
 
 namespace sgl {
-	struct Surface;
+	class Surface;
 
 	class Texture {
 	private:
-		uint32 _texId = 0;
 		uint16 _width = 0;
 		uint16 _height = 0;
+		uint32 _texId = 0;
 
 		bool _smooth = false;
 		bool _repeat = false;

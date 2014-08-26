@@ -23,15 +23,14 @@ namespace sgl {
 			rect.width,
 			rect.height,
 			style | SDL_WINDOW_OPENGL);
-
 		if (!_window) {
-			std::cerr << "Could not create window: " << SDL_GetError() << std::endl;
+			std::cerr << SDL_GetError() << std::endl;
 			exit(1);
 		}
 
 		_context = SDL_GL_CreateContext(_window);
 		if (!_context) {
-			std::cerr << "Could not create GL Context: " << SDL_GetError() << std::endl;
+			std::cerr << SDL_GetError() << std::endl;
 			exit(1);
 		}
 
@@ -43,7 +42,6 @@ namespace sgl {
 		const uint8* GL_version = glGetString(GL_VERSION);
 		const uint8* GL_vendor = glGetString(GL_VENDOR);
 		const uint8* GL_renderer = glGetString(GL_RENDERER);
-
 		printf("Version: %s - %s - %s\n", GL_version, GL_vendor, GL_renderer);
 #endif
 #if 1
@@ -113,7 +111,7 @@ namespace sgl {
 	}
 
 	void Window::setIcon(const Surface& icon) const {
-		SDL_SetWindowIcon(_window, icon._surface);
+		SDL_SetWindowIcon(_window, icon.ptr());
 	}
 
 	void Window::setSwapInterval(Interval interval) const {

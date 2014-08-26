@@ -1,63 +1,73 @@
 #include <SGL/Graphic/Surface.hpp>
 
 namespace sgl {
-	Surface::Surface(SDL_Surface* srfc) : _surface(srfc) {
-
-	}
-
 	Surface::Surface(const std::string& filename) {
 		this->loadFromFile(filename);
 	}
 
 	Surface::Surface(uint16 width, uint16 height, uint8 depth, void* pixels) {
-		if (pixels == nullptr)
-			_surface = SDL_CreateRGBSurface(0, width, height, depth, 0, 0, 0, 0);
-		else
+		if (!pixels) {
+			_surface = SDL_CreateRGBSurface(0, width, height, depth, R_MASK, G_MASK, B_MASK, A_MASK);
+			if (!_surface)
+				std::cerr << SDL_GetError() << std::endl;
+		}  else
 			this->loadFromMemory(pixels, width, height, depth);
 	}
 
+	Surface::Surface(const Surface& other) {
+		_surface = other._surface;
+		_surface->refcount++;
+	}
+
 	Surface::~Surface() {
-		if (_surface != nullptr)
-			SDL_FreeSurface(_surface);
+		_freeSurface();
+	}
+
+	void Surface::_freeSurface() {
+		if (_surface && !(--_surface->refcount)) {
+			SDL_Check(SDL_FreeSurface(_surface));
+		}
 	}
 
 	void Surface::loadFromFile(const std::string& filename) {
-		if (_surface != nullptr)
-			SDL_FreeSurface(_surface);
-
+		_freeSurface();
 		_surface = IMG_Load(filename.c_str());
+		if (!_surface)
+			std::cerr << SDL_GetError() << std::endl;
 	}
 
 	void Surface::loadFromMemory(void* pixels, uint16 width, uint16 height, uint8 depth) {
-		_surface = SDL_CreateRGBSurfaceFrom(pixels, width, height, depth, width * (depth / 8), 0, 0, 0, 0);
+		if (pixels) {
+			_freeSurface();
+			const uint16 pitch = width * (depth / 8);
+			_surface = SDL_CreateRGBSurfaceFrom(pixels, width, height, depth, pitch, R_MASK, G_MASK, B_MASK, A_MASK);
+			if (!_surface)
+				std::cerr << SDL_GetError() << std::endl;
+		}
 	}
 
 	void Surface::saveToFile(const std::string& filename) const {
-		IMG_SavePNG(_surface, filename.c_str());
+		SDL_Check(IMG_SavePNG(_surface, filename.c_str()));
 	}
 
-	void Surface::blit(const Surface& srfc, const ShortRect& src, const ShortRect* dst) const {
+	void Surface::blit(const Surface& other, const ShortRect& src, const ShortRect* dst) const {
 		SDL_Rect a, b;
 
 		if (dst != nullptr)
-			SDL_BlitSurface(srfc._surface, Copy(src, &a), _surface, Copy(*dst, &b));
+			SDL_Check(SDL_BlitSurface(other._surface, Copy(src, &a), _surface, Copy(*dst, &b)));
 		else
-			SDL_BlitSurface(srfc._surface, Copy(src, &a), _surface, nullptr);
+			SDL_Check(SDL_BlitSurface(other._surface, Copy(src, &a), _surface, nullptr));
 	}
 
 	Surface Surface::subSurface(const ShortRect& rect) const {
 		Surface sub(rect.width, rect.height, this->bits());
 		sub.blit(*this, rect);
 
-		// SDL_Surface* s = sub._surface;
-		// sub._surface = nullptr;
-
-		// return Surface(s);
 		return sub;
 	}
 
 	bool operator ==(const Surface& lhs, const Surface& rhs) {
-		return lhs._surface == rhs._surface;
+		return lhs.getSurface() == rhs.getSurface();
 	}
 
 	bool operator !=(const Surface& lhs, const Surface& rhs) {

@@ -12,7 +12,7 @@
 namespace sgl {
 	class Texture;
 	class Drawable;
-	struct Surface;
+	class Surface;
 
 	class Window {
 	public:
