@@ -21,9 +21,7 @@ namespace sgl {
 		uint8 red, green, blue, alpha;
 
 		explicit Color4(uint8 r, uint8 g, uint8 b, uint8 a = 255);
-		Color4(const Color4<float>& col);
-
-		SDL_Color* copyTo(SDL_Color*) const;
+		Color4(const Color4<float>&);
 	};
 
 	template <>
@@ -39,11 +37,13 @@ namespace sgl {
 
 		explicit Color4(uint8 r, uint8 g, uint8 b, uint8 a = 255);
 		explicit Color4(float r, float g, float b, float a = 1.0f);
-		Color4(const Color4<uint8>& col);
+		Color4(const Color4<uint8>&);
 	};
-
+	
 	using Color4b = Color4<uint8>;
 	using Color4f = Color4<float>;
+
+	SDL_Color* Copy(const Color4b&, SDL_Color*);
 
 	Color4b& operator +=(Color4b&, uint8 value);
 	Color4b& operator -=(Color4b&, uint8 value);

@@ -5,8 +5,7 @@ namespace sgl {
 
 	Sound::Sound(const std::string& filename, int8 volume) : _channel(Sound::ChannelCount++) {
 		this->loadFromFile(filename);
-		if (volume != -1)
-			this->setVolume(volume);
+		this->setVolume(volume);
 	}
 
 	Sound::~Sound() {
@@ -14,10 +13,14 @@ namespace sgl {
 			Mix_FreeChunk(_chunk);
 	}
 
-	void Sound::loadFromFile(const std::string& filename) {
+	bool Sound::loadFromFile(const std::string& filename) {
 		_chunk = Mix_LoadWAV(filename.c_str());
-		if (!_chunk)
+		if (!_chunk) {
 			std::cerr << Mix_GetError() << std::endl;
+			return false;
+		}
+
+		return true;
 	}
 
 	void Sound::setVolume(int8 volume) const {
@@ -28,7 +31,7 @@ namespace sgl {
 		return Mix_VolumeChunk(_chunk, -1);
 	}
 
-	void Sound::play(int8 loops, int16 delay) const {
+	void Sound::play(int16 loops, int16 delay) const {
 		loops = loops > 0 ? loops - 1 : loops;
 		SDL_Check(Mix_PlayChannelTimed(_channel, _chunk, loops, delay));
 	}

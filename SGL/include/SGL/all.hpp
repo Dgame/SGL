@@ -4,5 +4,6 @@
 #include <SGL/Window.hpp>
 #include <SGL/Math.hpp>
 #include <SGL/Graphic.hpp>
+#include <SGL/Audio.hpp>
 
 #endif

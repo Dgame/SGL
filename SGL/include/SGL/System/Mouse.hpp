@@ -11,7 +11,7 @@ namespace sgl {
 		/**
 		 * Supported mouse buttons
 		 */
-		enum class Button {
+		enum Button {
 			Left = 1, /** */
 			Middle = 2, /** */
 			Right = 3, /** */
@@ -20,7 +20,7 @@ namespace sgl {
 			Other = 6 /** */
 		};
 
-		enum class Cursor {
+		enum Cursor {
 			Arrow = SDL_SYSTEM_CURSOR_ARROW,
 			IBeam = SDL_SYSTEM_CURSOR_IBEAM,
 			Wait = SDL_SYSTEM_CURSOR_WAIT,

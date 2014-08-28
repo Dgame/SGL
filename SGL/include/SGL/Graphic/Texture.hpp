@@ -27,6 +27,7 @@ namespace sgl {
 
 		Texture() = default;
 		explicit Texture(const Surface&);
+		Texture(const Texture&) = delete;
 
 		virtual ~Texture();
 

@@ -15,19 +15,19 @@ namespace sgl {
 		static uint16 ChannelCount;
 
 	public:
-		explicit Sound(const std::string& filename, int8 volume = -1);
-
+		explicit Sound(const std::string&, int8 volume = -1);
+		Sound(const Sound&) = delete;
 		virtual ~Sound();
 
 		uint16 getChannel() const {
 			return _channel;
 		}
 
-		void loadFromFile(const std::string& filename);
+		bool loadFromFile(const std::string&);
 		void setVolume(int8 volume) const;
 		int8 getVolume() const;
 
-		void play(int8 loops = 1, int16 delay = -1) const;
+		void play(int16 loops = 1, int16 delay = -1) const;
 		void resume() const;
 		void stop() const;
 		void pause() const;

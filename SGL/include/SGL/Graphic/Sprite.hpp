@@ -4,6 +4,7 @@
 #include <SGL/Graphic/Drawable.hpp>
 #include <SGL/Graphic/Transformable.hpp>
 #include <SGL/Math/vec2.hpp>
+#include <SGL/Math/Vertex.hpp>
 #include <SGL/Math/Rect.hpp>
 
 namespace sgl {
@@ -12,12 +13,13 @@ namespace sgl {
 	class Sprite : public Drawable, public Transformable {
 	protected:
 		Texture* _texture;
+		FloatRect _clipRect;
+		Vertex _vertices[4];
 
 		virtual void draw(const Window*) const override;
+		void _updateVertices();
 
 	public:
-		FloatRect clipRect;
-
 		explicit Sprite(Texture&);
 
 		void setTexture(Texture&);
@@ -26,7 +28,13 @@ namespace sgl {
 			return _texture;
 		}
 
-		FloatRect getBoundingRect() const;
+		void setColor(const Color4b&);
+
+		void setClipRect(const FloatRect&);
+
+		const FloatRect& getClipRect() const {
+			return _clipRect;
+		}
 
 		void move(float x, float y) override;
 		void move(const vec2f&) override;

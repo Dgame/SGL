@@ -141,6 +141,18 @@
     <ClInclude Include="include\SGL\Core\Check.hpp">
       <Filter>Headerdateien\Core</Filter>
     </ClInclude>
+    <ClInclude Include="include\SGL\Audio\Music.hpp">
+      <Filter>Headerdateien\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SGL\System\Font.hpp">
+      <Filter>Headerdateien\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SGL\Graphic\Text.hpp">
+      <Filter>Headerdateien\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SGL\Audio.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\SGL\Graphic\Color.cpp">
@@ -190,6 +202,15 @@
     </ClCompile>
     <ClCompile Include="src\SGL\Core\Check.cpp">
       <Filter>Quelldateien\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SGL\Audio\Music.cpp">
+      <Filter>Quelldateien\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SGL\System\Font.cpp">
+      <Filter>Quelldateien\System</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SGL\Graphic\Text.cpp">
+      <Filter>Quelldateien\Graphic</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

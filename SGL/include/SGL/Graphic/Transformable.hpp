@@ -13,8 +13,12 @@ namespace sgl {
 		float _rotation = 0.f;
 
 	protected:
-		void updated() {
+		void transformed() {
 			_update = true;
+		}
+
+		bool wasTransformed() const {
+			return _update;
 		}
 
 	private:

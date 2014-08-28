@@ -6,6 +6,7 @@
 #include <SGL/System/Event.hpp>
 #include <SGL/System/Battery.hpp>
 #include <SGL/System/StopWatch.hpp>
+#include <SGL/System/Font.hpp>
 #include <SGL/Window/Window.hpp>
 
 #endif

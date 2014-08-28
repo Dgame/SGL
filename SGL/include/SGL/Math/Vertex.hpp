@@ -10,6 +10,7 @@ namespace sgl {
 		vec3f texCoord;
 		Color4f color = Color4f::Black;
 
+		Vertex() = default;
 		explicit Vertex(float x, float y, float z = 0);
 		explicit Vertex(const vec3f&, const vec3f&, const Color4b&);
 

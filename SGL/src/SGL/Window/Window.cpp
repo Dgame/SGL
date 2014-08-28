@@ -2,9 +2,10 @@
 #include <SGL/Graphic/Drawable.hpp>
 #include <SGL/Graphic/Texture.hpp>
 #include <SGL/Graphic/Surface.hpp>
+#include <SGL/Math/Geometry.hpp>
 
 namespace sgl {
-	uint8 Window::_count = 0;
+	int32 Window::_count = 0;
 
 	Window::Window(uint16 width, uint16 height, const std::string& title, Style style)
 		: Window(ShortRect(100, 100, width, height), title, style)
@@ -14,14 +15,11 @@ namespace sgl {
 
 	Window::Window(const ShortRect& rect, const std::string& title, Style style) {
 		Intern::initSDL();
-
 		// Create an application window with the following settings:
 		_window = SDL_CreateWindow(
 			title.c_str(),
-			rect.x,
-			rect.y,
-			rect.width,
-			rect.height,
+			rect.x, rect.y,
+			rect.width, rect.height,
 			style | SDL_WINDOW_OPENGL);
 		if (!_window) {
 			std::cerr << SDL_GetError() << std::endl;
@@ -35,7 +33,6 @@ namespace sgl {
 		}
 
 		SDL_GL_MakeCurrent(_window, _context);
-
 		Intern::initGL();
 
 #if SGL_DEBUG
@@ -44,16 +41,10 @@ namespace sgl {
 		const uint8* GL_renderer = glGetString(GL_RENDERER);
 		printf("Version: %s - %s - %s\n", GL_version, GL_vendor, GL_renderer);
 #endif
-#if 1
 		_projection.ortho(rect);
 		this->loadProjection();
-#else
-		glCheck(glMatrixMode(GL_PROJECTION));
-		glCheck(glLoadIdentity());
-		glCheck(glOrtho(0, rect.width, rect.height, 0, 1, -1));
-		glCheck(glMatrixMode(GL_MODELVIEW));
-#endif
-		this->setSwapInterval(Interval::Synchronize);
+
+		this->setSwapInterval(SwapInterval::Immediate);
 		this->setClearColor(Color4b::White);
 
 		_open = true;
@@ -80,7 +71,7 @@ namespace sgl {
 	}
 
 	void Window::toggle(Style style) const {
-		SDL_SetWindowFullscreen(_window, style);
+		SDL_Check(SDL_SetWindowFullscreen(_window, style));
 	}
 
 	void Window::setBorder(bool enable) const {
@@ -114,12 +105,12 @@ namespace sgl {
 		SDL_SetWindowIcon(_window, icon.ptr());
 	}
 
-	void Window::setSwapInterval(Interval interval) const {
-		SDL_GL_SetSwapInterval(static_cast<int>(interval));
+	void Window::setSwapInterval(SwapInterval interval) const {
+		SDL_Check(SDL_GL_SetSwapInterval(static_cast<int>(interval)));
 	}
 
-	Window::Interval Window::getSwapInterval() const {
-		return static_cast<Interval>(SDL_GL_GetSwapInterval());
+	Window::SwapInterval Window::getSwapInterval() const {
+		return static_cast<SwapInterval>(SDL_GL_GetSwapInterval());
 	}
 
 	bool Window::hasScreenSaver() const {
@@ -184,54 +175,38 @@ namespace sgl {
 		d.draw(this);
 	}
 
-	void Window::draw(Geometry::Type geo, const mat4x4& mat, const std::vector<Vertex>& vertices, const Texture* texture) const {
+	void Window::draw(Geometry geo, const mat4x4& mat, const std::vector<Vertex>& vertices, const Texture* texture) const {
+		if (vertices.size() == 0)
+			return;
+
 		glCheck(glLoadMatrixf(mat.values));
 
-		if (texture) {
-			glCheck(glTexCoordPointer(3, GL_FLOAT, sizeof(Vertex), &vertices[0].texCoord.x));
+		if (texture)
 			texture->bind();
-		} else {
+		else
 			glCheck(glDisable(GL_TEXTURE_2D));
-		}
-
-		glCheck(glEnableClientState(GL_COLOR_ARRAY));
 
 		glCheck(glVertexPointer(2, GL_FLOAT, sizeof(Vertex), &vertices[0].position.x));
 		glCheck(glColorPointer(4, GL_FLOAT, sizeof(Vertex), &vertices[0].color.red));
-		glCheck(glDrawArrays(geo, 0, 8));
-
-		glCheck(glDisableClientState(GL_COLOR_ARRAY));
+		if (texture)
+			glCheck(glTexCoordPointer(3, GL_FLOAT, sizeof(Vertex), &vertices[0].texCoord.x));
+		glCheck(glDrawArrays(static_cast<int>(geo), 0, vertices.size()));
 
 		if (texture)
 			texture->unbind();
 	}
 
-	void Window::draw(Geometry::Type geo, const mat4x4& mat, const Texture& texture, const FloatRect& rect) const {
+	void Window::draw(Geometry geo, const mat4x4& mat, const Texture& texture, const Vertex* vertices, uint16 vCount) const {
+		if (!vertices || vCount == 0)
+			return;
+
 		glCheck(glLoadMatrixf(mat.values));
 		texture.bind();
 
-		const float tx = rect.x / texture.width();
-		const float ty = rect.y / texture.height();
-		const float tw = rect.width / texture.width();
-		const float th = rect.height / texture.height();
-
-		const float texCoords[8] = {
-			tx, ty,
-			tx + tw, ty,
-			tx + tw, ty + th,
-			tx, ty + th
-		};
-
-		const float vertices[8] = {
-			0, 0,
-			rect.width, 0,
-			rect.width, rect.height,
-			0, rect.height
-		};
-
-		glCheck(glVertexPointer(2, GL_FLOAT, 0, vertices));
-		glCheck(glTexCoordPointer(2, GL_FLOAT, 0, texCoords));
-		glCheck(glDrawArrays(geo, 0, 8));
+		glCheck(glVertexPointer(2, GL_FLOAT, sizeof(Vertex), &vertices->position.x));
+		glCheck(glColorPointer(4, GL_FLOAT, sizeof(Vertex), &vertices[0].color.red));
+		glCheck(glTexCoordPointer(3, GL_FLOAT, sizeof(Vertex), &vertices->texCoord.x));
+		glCheck(glDrawArrays(static_cast<int>(geo), 0, 8));
 
 		texture.unbind();
 	}

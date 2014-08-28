@@ -40,7 +40,7 @@ namespace sgl {
 
 	template <typename T>
 	SDL_Point* Copy(const vec2<T>& vec, const SDL_Point* dst) {
-		if (dst != nullptr) {
+		if (dst) {
 			dst->x = static_cast<int>(vec.x);
 			dst->y = static_cast<int>(vec.y);
 		}

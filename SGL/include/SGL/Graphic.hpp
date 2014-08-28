@@ -8,5 +8,6 @@
 #include <SGL/Graphic/Texture.hpp>
 #include <SGL/Graphic/Shape.hpp>
 #include <SGL/Graphic/Sprite.hpp>
+#include <SGL/Graphic/Text.hpp>
 
 #endif

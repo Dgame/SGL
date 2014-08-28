@@ -26,12 +26,12 @@ namespace sgl {
 		this->alpha = static_cast<uint8>(col.alpha * 255);
 	}
 
-	SDL_Color* Color4b::copyTo(SDL_Color* dst) const {
-		if (dst != nullptr) {
-			dst->r = this->red;
-			dst->g = this->green;
-			dst->b = this->blue;
-			dst->a = this->alpha;
+	SDL_Color* Copy(const Color4b& src, SDL_Color* dst) {
+		if (dst) {
+			dst->r = src.red;
+			dst->g = src.green;
+			dst->b = src.blue;
+			dst->a = src.alpha;
 		}
 
 		return dst;

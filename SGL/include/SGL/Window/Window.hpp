@@ -7,12 +7,12 @@
 #include <SGL/Math/mat4.hpp>
 #include <SGL/Math/vec2.hpp>
 #include <SGL/Math/Vertex.hpp>
-#include <SGL/Math/Geometry.hpp>
 
 namespace sgl {
 	class Texture;
 	class Drawable;
 	class Surface;
+	enum class Geometry;
 
 	class Window {
 	public:
@@ -35,14 +35,14 @@ namespace sgl {
 			Default = Shown | HighDPI
 		};
 
-		enum Interval {
+		enum class SwapInterval {
 			Immediate = 0,
 			Synchronize = 1,
 			LateSwapTearing = -1
 		};
 
 	private:
-		static uint8 _count;
+		static int32 _count;
 		bool _open;
 
 		mat4x4 _projection;
@@ -53,7 +53,6 @@ namespace sgl {
 	public:
 		explicit Window(uint16 width, uint16 height, const std::string&, Style style = Style::Default);
 		explicit Window(const ShortRect&, const std::string&, Style style = Style::Default);
-
 		Window(const Window&) = delete;
 
 		virtual ~Window();
@@ -83,8 +82,8 @@ namespace sgl {
 		void setScreenSaver(bool enable) const;
 		bool hasScreenSaver() const;
 		void setIcon(const Surface&) const;
-		void setSwapInterval(Interval interval) const;
-		Interval getSwapInterval() const;
+		void setSwapInterval(SwapInterval interval) const;
+		SwapInterval getSwapInterval() const;
 
 		void maximize() const;
 		void minimize() const;
@@ -102,8 +101,8 @@ namespace sgl {
 		std::string getTitle() const;
 
 		void draw(const Drawable&) const;
-		void draw(Geometry::Type geo, const mat4x4& mat, const std::vector<Vertex>& vertices, const Texture* texture) const;
-		void draw(Geometry::Type geo, const mat4x4& mat, const Texture& texture, const FloatRect& rect) const;
+		void draw(Geometry geo, const mat4x4&, const std::vector<Vertex>&, const Texture*) const;
+		void draw(Geometry geo, const mat4x4&, const Texture&, const Vertex*, uint16 vCount) const;
 		void display() const;
 	};
 }

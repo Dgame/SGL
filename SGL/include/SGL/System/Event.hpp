@@ -7,21 +7,30 @@
 
 namespace sgl {
 	struct Event {
-		enum class Focus {
-			Lost = SDL_WINDOWEVENT_FOCUS_GAINED,
-			Gain = SDL_WINDOWEVENT_FOCUS_LOST
-		};
+		enum Type {
+			Quit = SDL_QUIT,
 
-		struct Window {
-			enum Event {
-				Moved = SDL_WINDOWEVENT_MOVED,
-				Restored = SDL_WINDOWEVENT_RESTORED,
-				Resized = SDL_WINDOWEVENT_RESIZED,
-				Maximized = SDL_WINDOWEVENT_MAXIMIZED,
-				Minimized = SDL_WINDOWEVENT_MINIMIZED,
-				Close = SDL_WINDOWEVENT_CLOSE,
-				Focus = SDL_WINDOW_INPUT_FOCUS
-			};
+			KeyUp = SDL_KEYUP,
+			KeyDown = SDL_KEYDOWN,
+
+			MouseButtonDown = SDL_MOUSEBUTTONDOWN,
+			MouseButtonUp = SDL_MOUSEBUTTONUP,
+			MouseWheel = SDL_MOUSEWHEEL,
+			MouseMotion = SDL_MOUSEMOTION,
+
+			WindowExposed = SDL_WINDOWEVENT_EXPOSED,
+			WindowShown = SDL_WINDOWEVENT_SHOWN,
+			WindowEnter = SDL_WINDOWEVENT_ENTER,
+			WindowFocusGained = SDL_WINDOWEVENT_FOCUS_GAINED,
+			WindowHidden = SDL_WINDOWEVENT_HIDDEN,
+			WindowLeave = SDL_WINDOWEVENT_LEAVE,
+			WindowFocusLost = SDL_WINDOWEVENT_FOCUS_LOST,
+			WindowClose = SDL_WINDOWEVENT_CLOSE,
+			WindowMoved = SDL_WINDOWEVENT_MOVED,
+			WindowResized = SDL_WINDOWEVENT_RESIZED,
+			WindowMinimized = SDL_WINDOWEVENT_MINIMIZED,
+			WindowMaximized = SDL_WINDOWEVENT_MAXIMIZED,
+			WindowRestored = SDL_WINDOWEVENT_RESTORED
 		};
 
 		struct SizeEvent {
@@ -35,23 +44,14 @@ namespace sgl {
 		} MoveEvent, Delta;
 
 		struct WindowEvent {
-			Focus focus;
-
 			union {
 				SizeEvent size;
 				MoveEvent move;
 			};
 		};
 
-		struct Key {
-			enum Type {
-				Down = SDL_KEYDOWN,
-				Up = SDL_KEYUP
-			};
-		};
-
 		struct KeyboardEvent {
-			Keyboard::Key key;
+			sgl::Key key;
 			
 			bool repeat;
 			bool alt;
@@ -61,21 +61,6 @@ namespace sgl {
 			bool capslock;
 			bool numpad;
 			bool mode;
-		};
-
-		struct Mouse {
-			enum Type {
-				Button = 0x10,
-				Wheel = 0x20,
-				Motion = 0x30
-			};
-
-			struct Button {
-				enum Type {
-					Down = SDL_MOUSEBUTTONDOWN,
-					Up = SDL_MOUSEBUTTONUP
-				};
-			};
 		};
 
 		struct MouseButtonEvent {
@@ -90,8 +75,6 @@ namespace sgl {
 
 			int16 x;
 			int16 y;
-
-			Mouse::Button::Type button;
 		};
 
 		struct MouseWheelEvent {
@@ -102,20 +85,12 @@ namespace sgl {
 		};
 
 		struct MouseEvent {
-			Mouse::Type type;
-
 			union {
 				MouseButtonEvent button;
 				MouseMotionEvent motion;
 				MouseWheelEvent wheel;
 			};
 		};
-
-		enum {
-			Quit = SDL_QUIT
-		};
-
-		typedef uint32 Type;
 
 		Type type;
 

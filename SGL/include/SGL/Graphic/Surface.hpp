@@ -22,18 +22,19 @@ namespace sgl {
 	private:
 		SDL_Surface* _surface = nullptr;
 
-		void _freeSurface();
+		void _release();
 
 	public:
 		Surface() = default;
 		Surface(const Surface&);
 		explicit Surface(const std::string&);
 		explicit Surface(uint16 width, uint16 height, uint8 depth = 32, void* pixels = nullptr);
+		explicit Surface(SDL_Surface*);
 
 		virtual ~Surface();
 
-		void loadFromFile(const std::string&);
-		void loadFromMemory(void*, uint16 width, uint16 height, uint8 depth = 32);
+		bool loadFromFile(const std::string&);
+		bool loadFromMemory(void*, uint16 width, uint16 height, uint8 depth = 32);
 		void saveToFile(const std::string&) const;
 
 		void blit(const Surface&, const ShortRect&, const ShortRect* dest = nullptr) const;

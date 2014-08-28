@@ -74,7 +74,7 @@ namespace sgl {
 		SDL_Rect a;
 		SDL_Point point(x, y);
 
-		return SDL_PointInRect(&point, this->copyTo(&a));
+		return SDL_PointInRect(&point, Copy(*this, &a));
 	}
 
 	template <typename T>
@@ -82,7 +82,7 @@ namespace sgl {
 		SDL_Rect a;
 		SDL_Point point;
 
-		return SDL_PointInRect(vec.copyTo(&point), this->copyTo(&a));
+		return SDL_PointInRect(Copy(vec, &point), Copy(*this, &a));
 	}
 
 	template <typename T>
@@ -103,7 +103,7 @@ namespace sgl {
 
 	template <typename T>
 	SDL_Rect* Copy(const Rect<T>& rect, SDL_Rect* dst) {
-		if (dst != nullptr) {
+		if (dst) {
 			dst->x = static_cast<int>(rect.x);
 			dst->y = static_cast<int>(rect.y);
 			dst->w = static_cast<int>(rect.width);
@@ -115,7 +115,7 @@ namespace sgl {
 
 	template <typename T>
 	void Copy(const SDL_Rect* src, Rect<T>& rect) {
-		if (src != nullptr) {
+		if (src) {
 			rect.x = static_cast<T>(src->x);
 			rect.y = static_cast<T>(src->y);
 			rect.width  = static_cast<T>(src->w);
@@ -127,7 +127,7 @@ namespace sgl {
 	bool operator ==(const Rect<T>& lhs, const Rect<T>& rhs) {
 		SDL_Rect a, b;
 
-		return SDL_RectEquals(lhs->copyTo(&a), rhs->copyTo(&b));
+		return SDL_RectEquals(Copy(lhs, &a), Copy(rhs, &b));
 	}
 
 	template <typename T>
