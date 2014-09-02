@@ -29,9 +29,7 @@ namespace sgl {
 	}
 
 	void Surface::_release() {
-		if (_surface && !(--_surface->refcount)) {
-			SDL_Check(SDL_FreeSurface(_surface));
-		}
+		SDL_Check(SDL_FreeSurface(_surface));
 	}
 
 	bool Surface::loadFromFile(const std::string& filename) {
@@ -70,19 +68,74 @@ namespace sgl {
 			std::cerr << "Surface is null" << std::endl;
 	}
 
-	void Surface::blit(const Surface& other, const ShortRect& src, const ShortRect* dst) const {
+	void Surface::blit(const Surface& other, const ShortRect* src, const ShortRect* dest) const {
+		this->blit(other._surface, src, dest);
+	}
+
+	void Surface::blit(SDL_Surface* other, const ShortRect* src, const ShortRect* dest) const {
 		SDL_Rect a, b;
-		if (dst != nullptr)
-			SDL_Check(SDL_BlitSurface(other._surface, Copy(src, &a), _surface, Copy(*dst, &b)));
-		else
-			SDL_Check(SDL_BlitSurface(other._surface, Copy(src, &a), _surface, nullptr));
+		const SDL_Rect* srcp = src ? Copy(*src, &a) : nullptr;
+		SDL_Rect* destp = dest ? Copy(*dest, &b) : nullptr;
+
+		SDL_Check(SDL_BlitSurface(other, srcp, _surface, destp));
 	}
 
 	Surface Surface::subSurface(const ShortRect& rect) const {
 		Surface sub(rect.width, rect.height, this->bits());
-		sub.blit(*this, rect);
+		sub.blit(*this, &rect);
 
 		return sub;
+	}
+
+	void Surface::setColorMod(const Color4b& col) const {
+		if (_surface) {
+			SDL_Check(SDL_SetSurfaceColorMod(_surface, col.red, col.green, col.blue));
+			SDL_Check(SDL_SetSurfaceAlphaMod(_surface, col.alpha));
+		}
+	}
+
+	Color4b Surface::getColorMod() const {
+		Color4b col = Color4b::Black;
+		if (_surface) {
+			SDL_Check(SDL_GetSurfaceColorMod(_surface, &col.red, &col.green, &col.blue));
+			SDL_Check(SDL_GetSurfaceAlphaMod(_surface, &col.alpha));
+		}
+
+		return col;
+	}
+
+	Color4b Surface::getMask() const {
+		if (!_surface)
+			return Color4b::Black;
+
+		return Color4b(_surface->format->Rmask, _surface->format->Gmask, _surface->format->Bmask, _surface->format->Amask);
+	}
+
+	void Surface::fill(const Color4b& col) const {
+		if (_surface) {
+			const uint32 key = SDL_MapRGBA(_surface->format, col.red, col.green, col.blue, col.alpha);
+			SDL_Check(SDL_FillRect(_surface, &_surface->clip_rect, key));
+		}
+	}
+
+	void Surface::setRLE(bool enable) const {
+		if (_surface)
+			SDL_Check(SDL_SetSurfaceRLE(_surface, enable ? 1 : 0));
+	}
+
+	void* Surface::pixels() const {
+		if (!_surface)
+			return nullptr;
+
+		if (SDL_MUSTLOCK(_surface))
+			SDL_LockSurface(_surface);
+
+		void* pixels = _surface->pixels;
+
+		if (SDL_MUSTLOCK(_surface))
+			SDL_UnlockSurface(_surface);
+
+		return pixels;
 	}
 
 	bool operator ==(const Surface& lhs, const Surface& rhs) {

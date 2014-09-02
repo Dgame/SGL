@@ -7,8 +7,7 @@ namespace sgl {
 	}
 
 	Font::~Font() {
-		if (_ttf)
-			TTF_CloseFont(_ttf);
+		TTF_CloseFont(_ttf);
 	}
 
 	void Font::loadFromFile(const std::string& filename, uint8 fontSize) {
@@ -35,8 +34,10 @@ namespace sgl {
 	}
 
 	Surface Font::render(const std::string& text, const Color4b& fg, const Color4b& bg, Mode mode) const {
-		if (!_ttf)
+		if (!_ttf) {
 			std::cerr << "Font is null:" << TTF_GetError() << std::endl;
+			exit(1);
+		}
 
 		SDL_Color a;
 		SDL_Color b;
@@ -60,16 +61,11 @@ namespace sgl {
 		if (!srfc)
 			std::cerr << SDL_GetError() << std::endl;
 		else if (srfc->format->BitsPerPixel < 24) {
-			SDL_PixelFormat fmt = *(srfc->format);
-			fmt.BitsPerPixel = 24;
-
-			SDL_Surface* new_srfc = SDL_ConvertSurface(srfc, &fmt, 0);
+			Surface result(srfc->w, srfc->h, 32);
+			result.blit(srfc);
 			SDL_FreeSurface(srfc);
 
-			if (!new_srfc)
-				std::cerr << SDL_GetError() << std::endl;
-
-			return Surface(new_srfc);
+			return result;
 		}
 
 		return Surface(srfc);

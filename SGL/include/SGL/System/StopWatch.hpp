@@ -4,6 +4,12 @@
 #include <SGL/Core/SDL.hpp>
 #include <SGL/Core/Types.hpp>
 
+namespace {
+	sgl::uint32 FpsStartTime = 0;
+	sgl::uint32 NumFrames = 0;
+	sgl::uint32 CurrentFps = 0;
+}
+
 namespace sgl {
 	struct Time {
 		uint16 seconds;
@@ -17,9 +23,6 @@ namespace sgl {
 	class StopWatch {
 	private:
 		uint32 _startTime = 0;
-		uint32 _numFrames = 0;
-		uint32 _currentFps = 0;
-		float _fpsTime = 0;
 
 	public:
 		StopWatch();
@@ -35,10 +38,6 @@ namespace sgl {
 		* Returns the milliseconds since the last reset.
 		*/
 		uint32 getElapsedMs() const;
-		/**
-		* Returns the current framerate per second.
-		*/
-		uint32 getFPS(uint32* elapsedMs = nullptr);
 	};
 
 	/**
@@ -53,6 +52,10 @@ namespace sgl {
 	* Wait for msecs milliseconds, which means that the application freeze for this time.
 	*/
 	void WaitFor(uint32 msecs);
+	/**
+	* Returns the current framerate per second.
+	*/
+	uint32 GetFPS(uint32* elapsedMs = nullptr);
 }
 
 #endif

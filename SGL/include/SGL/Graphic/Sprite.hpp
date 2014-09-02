@@ -13,7 +13,7 @@ namespace sgl {
 	class Sprite : public Drawable, public Transformable {
 	protected:
 		Texture* _texture;
-		FloatRect _clipRect;
+		ShortRect _clipRect;
 		Vertex _vertices[4];
 
 		virtual void draw(const Window*) const override;
@@ -29,10 +29,9 @@ namespace sgl {
 		}
 
 		void setColor(const Color4b&);
+		void setClipRect(const ShortRect&);
 
-		void setClipRect(const FloatRect&);
-
-		const FloatRect& getClipRect() const {
+		const ShortRect& getClipRect() const {
 			return _clipRect;
 		}
 

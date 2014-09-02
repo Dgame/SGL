@@ -34,7 +34,26 @@ namespace sgl {
 	}
 
 	void Texture::load(const Surface& srfc) {
-		this->loadFromMemory(srfc.pixels(), srfc.width(), srfc.height(), srfc.bits() == 32 ? Format::RGBA : Format::RGB);
+		Format fmt;
+		switch (srfc.bytes()) {
+			case 3: // no alpha channel
+				if (srfc.getMask().red == 255)
+					fmt = Format::RGB;
+				else
+					fmt = Format::BGR;
+				break;
+			case 4: // contains an alpha channel
+				if (srfc.getMask().red == 255)
+					fmt = Format::RGBA;
+				else
+					fmt = Format::BGRA;
+				break;
+			default:
+				std::cerr << "Warning: the image is not truecolor." << std::endl;
+				return;
+		}
+
+		this->loadFromMemory(srfc.pixels(), srfc.width(), srfc.height(), fmt);
 	}
 
 	void Texture::loadFromMemory(void* pixels, uint16 width, uint16 height, Format fmt) {

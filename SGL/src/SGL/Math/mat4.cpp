@@ -125,16 +125,22 @@ namespace sgl {
 		Merge(*this, mat);
 	}
 
-	bool mat4x4::ortho(const ShortRect& rect, float nearp, float farp) {
-		if (!rect.isEmpty() && nearp != farp) {
+	bool mat4x4::ortho(const ShortRect& rect, float zNear, float zFar) {
+		if (!rect.isEmpty()) {
 			mat4x4 mat;
-			mat.values[0] = 2.f / (rect.width - rect.x);
-			mat.values[5] = 2.f / (rect.y - rect.height);
-			mat.values[10] = -2.f / (farp - nearp);
-			mat.values[12] = -(rect.width + rect.x) / (rect.width - rect.x);
-			mat.values[13] = -(rect.y + rect.height) / (rect.y - rect.height);
-			mat.values[14] = -(farp + nearp) / (farp - nearp);
-			mat.values[15] = 1;
+			const float inv_z = 1.0f / (zFar - zNear);
+			const float inv_y = 1.0f / (rect.x - rect.height);
+			const float inv_x = 1.0f / (rect.width - rect.y);
+			// first column
+			mat[0] = 2.0f * inv_x;
+			// second
+			mat[5] = 2.0f * inv_y;
+			// third
+			mat[10] = -2.0f * inv_z;
+			// fourth
+			mat[12] = -(rect.width + rect.y) * inv_x;
+			mat[13] = -(rect.x + rect.height) * inv_y;
+			mat[14] = -(zFar + zNear) * inv_z;
 
 			Merge(*this, mat);
 

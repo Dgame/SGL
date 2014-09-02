@@ -10,10 +10,10 @@ namespace sgl {
 	}
 
 	void Sprite::_updateVertices() {
-		const float tx = _clipRect.x == 0 ? 0 : _clipRect.x / _texture->width();
-		const float ty = _clipRect.y == 0 ? 0 : _clipRect.y / _texture->height();
-		const float tw = _clipRect.width == _texture->width() ? 1 : _clipRect.width / _texture->width();
-		const float th = _clipRect.height == _texture->height() ? 1 : _clipRect.height / _texture->height();
+		const float tx = _clipRect.x == 0 ? 0 : static_cast<float>(_clipRect.x) / _texture->width();
+		const float ty = _clipRect.y == 0 ? 0 : static_cast<float>(_clipRect.y) / _texture->height();
+		const float tw = _clipRect.width == _texture->width() ? 1 : static_cast<float>(_clipRect.width) / _texture->width();
+		const float th = _clipRect.height == _texture->height() ? 1 : static_cast<float>(_clipRect.height) / _texture->height();
 		// #1
 		_vertices[0].texCoord.x = tx;
 		_vertices[0].texCoord.y = ty;
@@ -51,9 +51,8 @@ namespace sgl {
 		}
 	}
 
-	void Sprite::setClipRect(const FloatRect& clipRect) {
+	void Sprite::setClipRect(const ShortRect& clipRect) {
 		_clipRect = clipRect;
-
 		_updateVertices();
 	}
 

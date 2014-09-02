@@ -34,23 +34,22 @@ namespace sgl {
 	}
 
 	/**
-	* Returns the current framerate per seconds.
+	* Returns the current framerate per second.
 	*/
-	uint32 StopWatch::getFPS(uint32* elapsedMs) {
-		const uint32 elapsed_ms = this->getElapsedMs();
+	uint32 GetFPS(uint32* elapsedMs) {
+		const uint32 elapsed_ms = DurationMs() - FpsStartTime;
 		if (elapsedMs)
 			*elapsedMs = elapsed_ms;
 
 		if (elapsed_ms >= 1000) {
-			_currentFps = _numFrames;
-			_numFrames = 0;
-
-			this->reset();
+			CurrentFps = NumFrames;
+			NumFrames = 0;
+			FpsStartTime = DurationMs();
 		}
 
-		_numFrames++;
+		NumFrames++;
 
-		return _currentFps;
+		return CurrentFps;
 	}
 
 	/**

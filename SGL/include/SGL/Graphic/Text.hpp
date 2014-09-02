@@ -25,8 +25,8 @@ namespace sgl {
 		void _init();
 
 	public:
-		Color4b foreground = Color4b::White;
-		Color4b background = Color4b::Black;
+		Color4b foreground = Color4b::Black;
+		Color4b background = Color4b::White;
 		Font::Mode mode = Font::Mode::Solid;
 
 		explicit Text(Font&, const std::string& str = "");

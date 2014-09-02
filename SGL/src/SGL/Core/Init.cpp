@@ -64,6 +64,7 @@ namespace Intern {
 		glCheck(glEnable(GL_CULL_FACE));
 		glCheck(glEnable(GL_TEXTURE_2D));
 		glCheck(glEnable(GL_BLEND));
+		glCheck(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
 		glCheck(glCullFace(GL_FRONT));
 		glCheck(glShadeModel(GL_FLAT));

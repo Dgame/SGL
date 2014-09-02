@@ -9,8 +9,7 @@ namespace sgl {
 	}
 
 	Sound::~Sound() {
-		if (_chunk)
-			Mix_FreeChunk(_chunk);
+		Mix_FreeChunk(_chunk);
 	}
 
 	bool Sound::loadFromFile(const std::string& filename) {

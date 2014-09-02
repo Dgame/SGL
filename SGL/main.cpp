@@ -3,7 +3,7 @@
 #include <SGL/all.hpp>
 
 int main() {
-	sgl::Window wnd(400, 600, "Hallo Welt");
+	sgl::Window wnd(64 * 15, 64 * 15, "Hallo Welt");
 	
 	sgl::Shape shape(sgl::Geometry::Quad);
 	shape.append(sgl::Vertex(10,  10));
@@ -26,17 +26,11 @@ int main() {
 	sprite.setPosition(100, 200);
 	sprite.setCenter(170, 270);
 
-	sgl::Surface qs("samples/Images/quinn.png");
-	sgl::Texture quinn_tex(qs);
-
-	sgl::Shape box(sgl::Geometry::Quad);
-	box.append(sgl::Vertex(100, 100));
-	box.append(sgl::Vertex(200, 100));
-	box.append(sgl::Vertex(200, 200));
-	box.append(sgl::Vertex(100, 200));
-	box.setCenter(150, 150);
-	box.setColor(sgl::Color4b::White);
-	box.setTexture(&quinn_tex);
+	sgl::Surface bug1("samples/Images/bug.png");
+	sgl::Texture bug1_tex(bug1);
+	sgl::Sprite bug_sprite(bug1_tex);
+	bug_sprite.setPosition(100, 100);
+	bug_sprite.setClipRect(sgl::ShortRect(0, 0, 112, 62));
 
 	sgl::StopWatch sw;
 
@@ -83,16 +77,26 @@ int main() {
 
 		wnd.clear();
 
-		txt = std::to_string(sw.getFPS());
+		txt = std::to_string(sgl::GetFPS());
 		//sgl::Time t = sw.getElapsedTime();
 		//printf("Passed time: %d hours, %d minutes, %d seconds and %d msecs.\n", t.hours, t.minutes, t.seconds, t.msecs);
 
 		//mus.play();
 
+		wnd.draw(bug_sprite);
 		wnd.draw(txt);
 		wnd.draw(sprite);
 		wnd.draw(shape);
-		wnd.draw(box);
+
+		if (sw.getElapsedMs() >= 200) {
+			if (bug_sprite.getClipRect().x == 0) {
+				bug_sprite.setClipRect(sgl::ShortRect(113, 0, 117, 62));
+			} else {
+				bug_sprite.setClipRect(sgl::ShortRect(0, 0, 112, 62));
+			}
+
+			sw.reset();
+		}
 
 		wnd.display();
 	}

@@ -21,6 +21,7 @@ namespace sgl {
 			rect.x, rect.y,
 			rect.width, rect.height,
 			style | SDL_WINDOW_OPENGL);
+
 		if (!_window) {
 			std::cerr << SDL_GetError() << std::endl;
 			exit(1);
@@ -34,17 +35,16 @@ namespace sgl {
 
 		SDL_GL_MakeCurrent(_window, _context);
 		Intern::initGL();
-
 #if SGL_DEBUG
 		const uint8* GL_version = glGetString(GL_VERSION);
 		const uint8* GL_vendor = glGetString(GL_VENDOR);
 		const uint8* GL_renderer = glGetString(GL_RENDERER);
 		printf("Version: %s - %s - %s\n", GL_version, GL_vendor, GL_renderer);
 #endif
-		_projection.ortho(rect);
+		_projection.ortho(ShortRect(0, 0, rect.width, rect.height));
 		this->loadProjection();
 
-		this->setSwapInterval(SwapInterval::Immediate);
+		this->setSwapInterval(SwapInterval::Synchronize);
 		this->setClearColor(Color4b::White);
 
 		_open = true;
@@ -204,7 +204,7 @@ namespace sgl {
 		texture.bind();
 
 		glCheck(glVertexPointer(2, GL_FLOAT, sizeof(Vertex), &vertices->position.x));
-		glCheck(glColorPointer(4, GL_FLOAT, sizeof(Vertex), &vertices[0].color.red));
+		glCheck(glColorPointer(4, GL_FLOAT, sizeof(Vertex), &vertices->color.red));
 		glCheck(glTexCoordPointer(3, GL_FLOAT, sizeof(Vertex), &vertices->texCoord.x));
 		glCheck(glDrawArrays(static_cast<int>(geo), 0, 8));
 

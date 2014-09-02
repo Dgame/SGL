@@ -7,8 +7,7 @@ namespace sgl {
 	}
 
 	Music::~Music() {
-		if (_music)
-			Mix_FreeMusic(_music);
+		Mix_FreeMusic(_music);
 	}
 
 	bool Music::loadFromFile(const std::string& filename) {

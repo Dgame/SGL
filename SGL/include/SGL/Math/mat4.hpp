@@ -20,10 +20,10 @@ namespace sgl {
 		mat4x4 getInverse() const;
 
 		mat4x4& loadIdentity() {
-			this->values[0] = 1.f; this->values[4] = 0.f; this->values[8] = 0.f; this->values[12] = 0.f;
-			this->values[1] = 0.f; this->values[5] = 1.f; this->values[9] = 0.f; this->values[13] = 0.f;
-			this->values[2] = 0.f; this->values[6] = 0.f; this->values[10] = 1.f; this->values[14] = 0.f;
-			this->values[3] = 0.f; this->values[7] = 0.f; this->values[11] = 0.f; this->values[15] = 1.f;
+			this->values[0] = 1.0f; this->values[4] = 0.0f; this->values[8] = 0.0f; this->values[12] = 0.0f;
+			this->values[1] = 0.0f; this->values[5] = 1.0f; this->values[9] = 0.0f; this->values[13] = 0.0f;
+			this->values[2] = 0.0f; this->values[6] = 0.0f; this->values[10] = 1.0f; this->values[14] = 0.0f;
+			this->values[3] = 0.0f; this->values[7] = 0.0f; this->values[11] = 0.0f; this->values[15] = 1.0f;
 
 			return *this;
 		}
@@ -44,8 +44,8 @@ namespace sgl {
 
 		void lookAt(const vec3f&, const vec3f&, const vec3f&);
 
-		void perspective(float fov, float ratio, float nearp, float farp);
-		bool ortho(const ShortRect&, float nearp = 1, float farp = -1);
+		void perspective(float fov, float ratio, float zNear = -1, float zFar = 1);
+		bool ortho(const ShortRect&, float zNear = -1, float zFar = 1);
 
 		float& operator [](uint8 index);
 
