@@ -40,8 +40,8 @@ namespace sgl {
 
 		void setColor(const Color4b&);
 
-		void move(float x, float y) override;
-		void move(const vec2f&) override;
+		void move(float x, float y);
+		void move(const vec2f&);
 	};
 }
 

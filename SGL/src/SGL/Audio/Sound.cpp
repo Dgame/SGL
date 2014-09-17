@@ -23,16 +23,21 @@ namespace sgl {
 	}
 
 	void Sound::setVolume(int8 volume) const {
-		Mix_VolumeChunk(_chunk, volume);
+	    if (_chunk)
+		    Mix_VolumeChunk(_chunk, volume);
 	}
 
 	int8 Sound::getVolume() const {
-		return Mix_VolumeChunk(_chunk, -1);
+	    if (_chunk)
+		    return Mix_VolumeChunk(_chunk, -1);
+        return 0;
 	}
 
 	void Sound::play(int16 loops, int16 delay) const {
-		loops = loops > 0 ? loops - 1 : loops;
-		SDL_Check(Mix_PlayChannelTimed(_channel, _chunk, loops, delay));
+	    if (_chunk) {
+            loops = loops > 0 ? loops - 1 : loops;
+            SDL_Check(Mix_PlayChannelTimed(_channel, _chunk, loops, delay));
+	    }
 	}
 
 	void Sound::resume() const {
@@ -45,6 +50,10 @@ namespace sgl {
 
 	void Sound::pause() const {
 		Mix_Pause(_channel);
+	}
+
+	void Sound::expire(uint16 ticks) {
+	    Mix_ExpireChannel(_channel, ticks);
 	}
 
 	bool Sound::isPlaying() const {

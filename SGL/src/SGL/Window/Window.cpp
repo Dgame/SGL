@@ -44,7 +44,7 @@ namespace sgl {
 		_projection.ortho(ShortRect(0, 0, rect.width, rect.height));
 		this->loadProjection();
 
-		this->setSwapInterval(SwapInterval::Synchronize);
+		this->setSwapMode(SwapMode::Synchronize);
 		this->setClearColor(Color4b::White);
 
 		_open = true;
@@ -102,15 +102,15 @@ namespace sgl {
 	}
 
 	void Window::setIcon(const Surface& icon) const {
-		SDL_SetWindowIcon(_window, icon.ptr());
+		SDL_SetWindowIcon(_window, icon._surface);
 	}
 
-	void Window::setSwapInterval(SwapInterval interval) const {
-		SDL_Check(SDL_GL_SetSwapInterval(static_cast<int>(interval)));
+	void Window::setSwapMode(SwapMode mode) const {
+		SDL_Check(SDL_GL_SetSwapInterval(static_cast<int>(mode)));
 	}
 
-	Window::SwapInterval Window::getSwapInterval() const {
-		return static_cast<SwapInterval>(SDL_GL_GetSwapInterval());
+	SwapMode Window::getSwapMode() const {
+		return static_cast<SwapMode>(SDL_GL_GetSwapInterval());
 	}
 
 	bool Window::hasScreenSaver() const {
@@ -131,6 +131,10 @@ namespace sgl {
 
 	void Window::raise() const {
 		SDL_RaiseWindow(_window);
+	}
+
+	void Window::setPosition(int16 x, int16 y) const {
+		SDL_SetWindowPosition(_window, x, y);
 	}
 
 	void Window::setPosition(const vec2s& pos) const {
@@ -206,7 +210,7 @@ namespace sgl {
 		glCheck(glVertexPointer(2, GL_FLOAT, sizeof(Vertex), &vertices->position.x));
 		glCheck(glColorPointer(4, GL_FLOAT, sizeof(Vertex), &vertices->color.red));
 		glCheck(glTexCoordPointer(3, GL_FLOAT, sizeof(Vertex), &vertices->texCoord.x));
-		glCheck(glDrawArrays(static_cast<int>(geo), 0, 8));
+		glCheck(glDrawArrays(static_cast<int>(geo), 0, vCount));
 
 		texture.unbind();
 	}

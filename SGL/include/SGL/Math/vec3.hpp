@@ -26,8 +26,12 @@ namespace sgl {
 		}
 	};
 
+	using vec3i = vec3<int32>;
+	using vec3s = vec3<int16>;
+	using vec3f = vec3<float>;
+
 	template <typename T>
-	vec3<T>::vec3(T mx, T my, T mz) : 
+	vec3<T>::vec3(T mx, T my, T mz) :
 		x(mx), y(my), z(mz)
 	{
 
@@ -35,7 +39,7 @@ namespace sgl {
 
 	template <typename T>
 	template <typename U>
-	vec3<T>::vec3(const vec3<U>& vec) : 
+	vec3<T>::vec3(const vec3<U>& vec) :
 		x(static_cast<T>(vec.x)),
 		y(static_cast<T>(vec.y)),
 		z(static_cast<T>(vec.z))
@@ -45,8 +49,8 @@ namespace sgl {
 
 	template <typename T>
 	vec3<T> Rotate(const vec3<T>& vec, float angle, const vec3<T>& rot) {
-		const vec3f norm1 = Normalize(vec);
-		const vec3f norm2 = Normalize(rot);
+		const vec3<T> norm1 = Normalize(vec);
+		const vec3<T> norm2 = Normalize(rot);
 
 		const float rho_rad = angle / 180 * M_PI;
 		const float c = std::cos(rho_rad);
@@ -169,10 +173,6 @@ namespace sgl {
 	bool operator !=(const vec3<T>& lhs, const vec3<T>& rhs) {
 		return !(lhs == rhs);
 	}
-
-	using vec3i = vec3<int32>;
-	using vec3s = vec3<int16>;
-	using vec3f = vec3<float>;
 }
 
 #endif

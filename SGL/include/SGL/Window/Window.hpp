@@ -14,6 +14,12 @@ namespace sgl {
 	class Surface;
 	enum class Geometry;
 
+    enum class SwapMode {
+        Immediate = 0,
+        Synchronize = 1,
+        LateSwapTearing = -1
+    };
+
 	class Window {
 	public:
 		enum Style {
@@ -33,12 +39,6 @@ namespace sgl {
 			Windowed = 0,
 
 			Default = Shown | HighDPI
-		};
-
-		enum class SwapInterval {
-			Immediate = 0,
-			Synchronize = 1,
-			LateSwapTearing = -1
 		};
 
 	private:
@@ -82,14 +82,15 @@ namespace sgl {
 		void setScreenSaver(bool enable) const;
 		bool hasScreenSaver() const;
 		void setIcon(const Surface&) const;
-		void setSwapInterval(SwapInterval interval) const;
-		SwapInterval getSwapInterval() const;
+		void setSwapMode(SwapMode mode) const;
+		SwapMode getSwapMode() const;
 
 		void maximize() const;
 		void minimize() const;
 		void restore() const;
 		void raise() const;
 
+        void setPosition(int16 x, int16 y) const;
 		void setPosition(const vec2s&) const;
 		void setSize(uint16 width, uint16 height) const;
 		void setRect(const ShortRect&) const;

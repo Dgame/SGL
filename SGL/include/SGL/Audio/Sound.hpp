@@ -31,6 +31,7 @@ namespace sgl {
 		void resume() const;
 		void stop() const;
 		void pause() const;
+		void expire(uint16 ticks);
 		bool isPlaying() const;
 		bool isPaused() const;
 	};

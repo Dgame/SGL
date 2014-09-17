@@ -25,15 +25,11 @@ namespace sgl {
 	}
 
 	Surface::~Surface() {
-		_release();
-	}
-
-	void Surface::_release() {
-		SDL_Check(SDL_FreeSurface(_surface));
+		SDL_FreeSurface(_surface);
 	}
 
 	bool Surface::loadFromFile(const std::string& filename) {
-		_release();
+		SDL_FreeSurface(_surface);
 
 		_surface = IMG_Load(filename.c_str());
 		if (!_surface) {
@@ -46,7 +42,7 @@ namespace sgl {
 
 	bool Surface::loadFromMemory(void* pixels, uint16 width, uint16 height, uint8 depth) {
 		if (pixels) {
-			_release();
+			SDL_FreeSurface(_surface);
 
 			const uint16 pitch = width * (depth / 8);
 			_surface = SDL_CreateRGBSurfaceFrom(pixels, width, height, depth, pitch, R_MASK, G_MASK, B_MASK, A_MASK);
@@ -61,23 +57,18 @@ namespace sgl {
 		return false;
 	}
 
-	void Surface::saveToFile(const std::string& filename) const {
-		if (_surface)
-			SDL_Check(IMG_SavePNG(_surface, filename.c_str()));
-		else
-			std::cerr << "Surface is null" << std::endl;
+    bool Surface::saveToFile(const std::string& filename) const {
+        const int result = IMG_SavePNG(_surface, filename.c_str());
+        SDL_Check(result);
+        return result == 0;
 	}
 
 	void Surface::blit(const Surface& other, const ShortRect* src, const ShortRect* dest) const {
-		this->blit(other._surface, src, dest);
-	}
-
-	void Surface::blit(SDL_Surface* other, const ShortRect* src, const ShortRect* dest) const {
 		SDL_Rect a, b;
 		const SDL_Rect* srcp = src ? Copy(*src, &a) : nullptr;
 		SDL_Rect* destp = dest ? Copy(*dest, &b) : nullptr;
 
-		SDL_Check(SDL_BlitSurface(other, srcp, _surface, destp));
+		SDL_Check(SDL_BlitSurface(other._surface, srcp, _surface, destp));
 	}
 
 	Surface Surface::subSurface(const ShortRect& rect) const {
@@ -107,7 +98,6 @@ namespace sgl {
 	Color4b Surface::getMask() const {
 		if (!_surface)
 			return Color4b::Black;
-
 		return Color4b(_surface->format->Rmask, _surface->format->Gmask, _surface->format->Bmask, _surface->format->Amask);
 	}
 
@@ -138,13 +128,13 @@ namespace sgl {
 		return pixels;
 	}
 
-	bool operator ==(const Surface& lhs, const Surface& rhs) {
-		if (!lhs.ptr() || !rhs.ptr())
+	bool Surface::operator ==(const Surface& other) {
+		if (!_surface || !other._surface)
 			return false;
-		return lhs.ptr() == rhs.ptr();
+		return _surface == other._surface;
 	}
 
-	bool operator !=(const Surface& lhs, const Surface& rhs) {
-		return !(lhs == rhs);
+	bool Surface::operator !=(const Surface& other) {
+		return !(*this == other);
 	}
 }

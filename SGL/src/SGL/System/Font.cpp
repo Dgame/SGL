@@ -61,9 +61,9 @@ namespace sgl {
 		if (!srfc)
 			std::cerr << SDL_GetError() << std::endl;
 		else if (srfc->format->BitsPerPixel < 24) {
+            Surface temp(srfc);
 			Surface result(srfc->w, srfc->h, 32);
-			result.blit(srfc);
-			SDL_FreeSurface(srfc);
+			result.blit(temp);
 
 			return result;
 		}

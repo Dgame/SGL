@@ -1,18 +1,18 @@
 #ifndef SGL_TYPES_HPP
 #define SGL_TYPES_HPP
 
-#include <cstdint>
-
 namespace sgl {
-	using int8  = std::int8_t;
-	using int16 = std::int16_t;
-	using int32 = std::int32_t;
-	using int64 = std::int64_t;
+    using int8  = signed char;
+    using uint8 = unsigned char;
 
-	using uint8  = std::uint8_t;
-	using uint16 = std::uint16_t;
-	using uint32 = std::uint32_t;
-	using uint64 = std::uint64_t;
+    using int16  = signed short int;
+    using uint16 = unsigned short int;
+
+    using int32  = signed int;
+    using uint32 = unsigned int;
+
+    using int64  = signed long long int;
+    using uint64 = unsigned long long int;
 }
 
 #endif

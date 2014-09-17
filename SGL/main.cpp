@@ -4,7 +4,8 @@
 
 int main() {
 	sgl::Window wnd(64 * 15, 64 * 15, "Hallo Welt");
-	
+	wnd.setSwapMode(sgl::SwapMode::Immediate);
+
 	sgl::Shape shape(sgl::Geometry::Quad);
 	shape.append(sgl::Vertex(10,  10));
 	shape.append(sgl::Vertex(110, 10));
@@ -13,20 +14,20 @@ int main() {
 	shape.setCenter(60, 60);
 	shape.setColor(sgl::Color4b::White);
 
-	sgl::Surface wood("samples/Images/holz.jpg");
+	sgl::Surface wood("../../samples/Images/holz.jpg");
 	sgl::Texture wood_tex(wood);
 
 	shape.setTexture(&wood_tex);
 	shape.setTextureRect(sgl::FloatRect(50, 50, 80, 80));
-	
-	sgl::Surface wiki("samples/Images/wiki.png");
+
+	sgl::Surface wiki("../../samples/Images/wiki.png");
 	sgl::Texture wiki_tex(wiki);
 
 	sgl::Sprite sprite(wiki_tex);
 	sprite.setPosition(100, 200);
-	sprite.setCenter(170, 270);
+	sprite.setCenter(70, 70);
 
-	sgl::Surface bug1("samples/Images/bug.png");
+	sgl::Surface bug1("../../samples/Images/bug.png");
 	sgl::Texture bug1_tex(bug1);
 	sgl::Sprite bug_sprite(bug1_tex);
 	bug_sprite.setPosition(100, 100);
@@ -34,12 +35,13 @@ int main() {
 
 	sgl::StopWatch sw;
 
-	sgl::Font font("samples/Font/arial.ttf", 12);
+	sgl::Font font("../../samples/Font/arial.ttf", 12);
 	sgl::Text txt(font);
 	txt.mode = sgl::Font::Shaded;
 	txt.setPosition(250, 10);
 
-	sgl::Music mus("samples/Audio/orchestral.ogg");
+	//sgl::Music mus("samples/Audio/orchestral.ogg");
+	sgl::Sound snd("../../samples/Audio/expl.wav");
 
 	sgl::Event event;
 	while (wnd.isOpen()) {
@@ -56,6 +58,9 @@ int main() {
 						std::cout << static_cast<int>(event.key.key) << std::endl;
 						shape.move(25, 25);
 						sprite.move(25, 25);
+
+						if (event.key.key == sgl::Key::Space)
+                            snd.play();
 					}
 				break;
 
@@ -77,7 +82,7 @@ int main() {
 
 		wnd.clear();
 
-		txt = std::to_string(sgl::GetFPS());
+		txt.setData(sgl::GetFPS());
 		//sgl::Time t = sw.getElapsedTime();
 		//printf("Passed time: %d hours, %d minutes, %d seconds and %d msecs.\n", t.hours, t.minutes, t.seconds, t.msecs);
 

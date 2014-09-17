@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="SGL" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/SGL" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/Debug" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/SGL" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-fexpensive-optimizations" />
+					<Add option="-O3" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wnon-virtual-dtor" />
+			<Add option="-Wshadow" />
+			<Add option="-Winit-self" />
+			<Add option="-Wredundant-decls" />
+			<Add option="-Wcast-align" />
+			<Add option="-Wundef" />
+			<Add option="-Wfloat-equal" />
+			<Add option="-Winline" />
+			<Add option="-Wunreachable-code" />
+			<Add option="-Wmissing-declarations" />
+			<Add option="-Wmissing-include-dirs" />
+			<Add option="-Wmain" />
+			<Add option="-pedantic" />
+			<Add option="-Wzero-as-null-pointer-constant" />
+			<Add option="-Wextra" />
+			<Add option="-Wall" />
+			<Add directory="libs/Glew/include" />
+			<Add directory="libs/SDL2/i686-w64-mingw32/include/SDL2" />
+			<Add directory="libs/SDL2_image/i686-w64-mingw32/include/SDL2" />
+			<Add directory="libs/SDL2_mixer/i686-w64-mingw32/include/SDL2" />
+			<Add directory="libs/SDL2_ttf/i686-w64-mingw32/include/SDL2" />
+			<Add directory="include" />
+		</Compiler>
+		<Linker>
+			<Add option="-lopengl32" />
+			<Add option="-lmingw32" />
+			<Add option="-lSDL2main" />
+			<Add option="-lSDL2" />
+			<Add option="-lSDL2_image" />
+			<Add option="-lSDL2_mixer" />
+			<Add option="-lSDL2_ttf" />
+			<Add library="libs\Glew\lib\Release\Win32\glew32.lib" />
+			<Add directory="libs/SDL2/i686-w64-mingw32/lib" />
+			<Add directory="libs/SDL2_image/i686-w64-mingw32/lib" />
+			<Add directory="libs/SDL2_mixer/i686-w64-mingw32/lib" />
+			<Add directory="libs/SDL2_ttf/i686-w64-mingw32/lib" />
+		</Linker>
+		<Unit filename="include/SGL/Audio.hpp" />
+		<Unit filename="include/SGL/Audio/Music.hpp" />
+		<Unit filename="include/SGL/Audio/Sound.hpp" />
+		<Unit filename="include/SGL/Core/Check.hpp" />
+		<Unit filename="include/SGL/Core/Config.hpp" />
+		<Unit filename="include/SGL/Core/GL.hpp" />
+		<Unit filename="include/SGL/Core/Init.hpp" />
+		<Unit filename="include/SGL/Core/SDL.hpp" />
+		<Unit filename="include/SGL/Core/Types.hpp" />
+		<Unit filename="include/SGL/Graphic.hpp" />
+		<Unit filename="include/SGL/Graphic/Color.hpp" />
+		<Unit filename="include/SGL/Graphic/Drawable.hpp" />
+		<Unit filename="include/SGL/Graphic/Shape.hpp" />
+		<Unit filename="include/SGL/Graphic/Sprite.hpp" />
+		<Unit filename="include/SGL/Graphic/Surface.hpp" />
+		<Unit filename="include/SGL/Graphic/Text.hpp" />
+		<Unit filename="include/SGL/Graphic/Texture.hpp" />
+		<Unit filename="include/SGL/Graphic/Transformable.hpp" />
+		<Unit filename="include/SGL/Math.hpp" />
+		<Unit filename="include/SGL/Math/Geometry.hpp" />
+		<Unit filename="include/SGL/Math/Rect.hpp" />
+		<Unit filename="include/SGL/Math/Vertex.hpp" />
+		<Unit filename="include/SGL/Math/mat4.hpp" />
+		<Unit filename="include/SGL/Math/vec2.hpp" />
+		<Unit filename="include/SGL/Math/vec3.hpp" />
+		<Unit filename="include/SGL/System/Battery.hpp" />
+		<Unit filename="include/SGL/System/Event.hpp" />
+		<Unit filename="include/SGL/System/Font.hpp" />
+		<Unit filename="include/SGL/System/Keyboard.hpp" />
+		<Unit filename="include/SGL/System/Mouse.hpp" />
+		<Unit filename="include/SGL/System/StopWatch.hpp" />
+		<Unit filename="include/SGL/Window.hpp" />
+		<Unit filename="include/SGL/Window/Window.hpp" />
+		<Unit filename="include/SGL/all.hpp" />
+		<Unit filename="main.cpp" />
+		<Unit filename="src/SGL/Audio/Music.cpp" />
+		<Unit filename="src/SGL/Audio/Sound.cpp" />
+		<Unit filename="src/SGL/Core/Check.cpp" />
+		<Unit filename="src/SGL/Core/Init.cpp" />
+		<Unit filename="src/SGL/Graphic/Color.cpp" />
+		<Unit filename="src/SGL/Graphic/Shape.cpp" />
+		<Unit filename="src/SGL/Graphic/Sprite.cpp" />
+		<Unit filename="src/SGL/Graphic/Surface.cpp" />
+		<Unit filename="src/SGL/Graphic/Text.cpp" />
+		<Unit filename="src/SGL/Graphic/Texture.cpp" />
+		<Unit filename="src/SGL/Graphic/Transformable.cpp" />
+		<Unit filename="src/SGL/Math/Vertex.cpp" />
+		<Unit filename="src/SGL/Math/mat4.cpp" />
+		<Unit filename="src/SGL/System/Battery.cpp" />
+		<Unit filename="src/SGL/System/Event.cpp" />
+		<Unit filename="src/SGL/System/Font.cpp" />
+		<Unit filename="src/SGL/System/StopWatch.cpp" />
+		<Unit filename="src/SGL/Window/Window.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

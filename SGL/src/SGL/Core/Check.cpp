@@ -1,4 +1,3 @@
-#include <string>
 #include <SGL/Core/Check.hpp>
 #include <SGL/Core/GL.hpp>
 #include <SGL/Core/SDL.hpp>
@@ -40,17 +39,13 @@ void glCheckError(const char* file, unsigned int line) {
 				break;
 		}
 
-		// Log the error
 		std::cerr << "An internal OpenGL call failed in " << file << " on line " << line << ": " << error << " -> " << description << std::endl;
-		//exit(1);
 	}
 }
 
-void SDL_CheckError(const char* file, unsigned int line) {
-	const char* error = SDL_GetError();
-	if (strlen(error) != 0) {
-		// Log the error
-		std::cerr << "An SDL error happens in " << file << " on line " << line << ": " << error << std::endl;
-		//exit(1);
+void SDL_CheckError(int ret, const char* file, unsigned int line) {
+	if (ret != 0) {
+		std::cerr << "An SDL error happens in " << file << " on line " << line << ": " << SDL_GetError() << std::endl;
+		SDL_ClearError();
 	}
 }

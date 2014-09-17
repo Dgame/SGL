@@ -23,13 +23,13 @@ namespace sgl {
 		wnd->draw(Geometry::TriangleStrip, this->getMatrix(), _texture, _vertices, 8);
 	}
 
-	Text::Text(Font& font, const std::string& str) : _text(str), _font(&font) {
+	Text::Text(Font& font, const std::string& str) : _font(&font), _text(str) {
 		_init();
 	}
 
 	Text::Text(const Text& other) :
-		_text(other._text), _font(other._font), mode(other.mode),
-		foreground(other.foreground), background(other.background)
+		_font(other._font), _text(other._text),
+		foreground(other.foreground), background(other.background), mode(other.mode)
 	{
 		_init();
 	}
@@ -46,6 +46,11 @@ namespace sgl {
 		for (Vertex& v : _vertices) {
 			v.setColor(Color4b::White);
 		}
+	}
+
+	void Text::operator =(const Text& txt) {
+	    _text = txt._text;
+	    _redraw = true;
 	}
 
 	void Text::operator =(const std::string& str) {

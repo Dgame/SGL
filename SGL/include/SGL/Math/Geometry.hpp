@@ -14,6 +14,6 @@ namespace sgl {
 		TriangleStrip = GL_TRIANGLE_STRIP,
 		Polygon = GL_POLYGON
 	};
-};
+}
 
 #endif

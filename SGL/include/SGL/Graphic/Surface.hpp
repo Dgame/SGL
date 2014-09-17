@@ -21,11 +21,13 @@
 #endif
 
 namespace sgl {
+    class Window;
+
 	class Surface {
 	private:
-		SDL_Surface* _surface = nullptr;
+	    friend class Window;
 
-		void _release();
+		SDL_Surface* _surface = nullptr;
 
 	public:
 		Surface() = default;
@@ -38,10 +40,9 @@ namespace sgl {
 
 		bool loadFromFile(const std::string&);
 		bool loadFromMemory(void*, uint16 width, uint16 height, uint8 depth = 32);
-		void saveToFile(const std::string&) const;
+		bool saveToFile(const std::string&) const;
 
 		void blit(const Surface&, const ShortRect* src = nullptr, const ShortRect* dest = nullptr) const;
-		void blit(SDL_Surface*, const ShortRect* src = nullptr, const ShortRect* dest = nullptr) const;
 		Surface subSurface(const ShortRect&) const;
 
 		void setColorMod(const Color4b&) const;
@@ -77,19 +78,15 @@ namespace sgl {
 
 		void* pixels() const;
 
-		SDL_Surface* ptr() const {
-			return _surface;
-		}
-
 		int32 useCount() const {
 			if (!_surface)
 				return 0;
 			return _surface->refcount;
 		}
-	};
 
-	bool operator ==(const Surface& lhs, const Surface& rhs);
-	bool operator !=(const Surface& lhs, const Surface& rhs);
+		bool operator ==(const Surface&);
+	    bool operator !=(const Surface&);
+	};
 }
 
 #endif

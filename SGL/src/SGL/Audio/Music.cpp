@@ -28,9 +28,11 @@ namespace sgl {
 		return Mix_VolumeMusic(-1);
 	}
 
-	void Music::play(int16 loops, int16 delay) const {
-		loops = loops > 0 ? loops - 1 : loops;
-		SDL_Check(Mix_FadeInMusic(_music, loops, delay));
+	void Music::play(int8 loops, int16 delay) const {
+	    if (_music) {
+            loops = loops > 0 ? loops - 1 : loops;
+            SDL_Check(Mix_FadeInMusic(_music, loops, delay));
+	    }
 	}
 
 	void Music::pause() const {

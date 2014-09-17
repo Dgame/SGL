@@ -21,7 +21,7 @@ namespace sgl {
 		void setVolume(int8 volume) const;
 		int8 getVolume() const;
 
-		void play(int16 loops = 1, int16 delay = -1) const;
+		void play(int8 loops = 1, int16 delay = -1) const;
 
 		void pause() const;
 		void resume() const;

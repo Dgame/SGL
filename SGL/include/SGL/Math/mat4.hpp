@@ -54,13 +54,13 @@ namespace sgl {
 		}
 	};
 
-	bool operator ==(const mat4x4& lhs, const mat4x4&);
-	bool operator !=(const mat4x4& lhs, const mat4x4&);
+	bool operator ==(const mat4x4&, const mat4x4&);
+	bool operator !=(const mat4x4&, const mat4x4&);
 
 	mat4x4& Merge(mat4x4&, const mat4x4&);
 
-	mat4x4 operator *(const mat4x4&, const mat4x4& right);
-	mat4x4& operator *=(mat4x4&, const mat4x4& right);
+	mat4x4 operator *(const mat4x4&, const mat4x4&);
+	mat4x4& operator *=(mat4x4&, const mat4x4&);
 }
 
 #endif

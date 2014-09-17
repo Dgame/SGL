@@ -122,24 +122,6 @@ namespace {
 				event->mouse.wheel.delta.y = src->wheel.y;
 
 				return true;
-			/*
-			case sgl::Event::Type::TextInput:
-				event->timestamp = src->text.timestamp;
-				event->windowId = src->text.windowID;
-
-				std::memcpy(&event->input.text, &src->text.text, sizeof(char) * 32);
-
-				return true;
-			case sgl::Event::Type::TextEdit:
-				event->timestamp = src->edit.timestamp;
-				event->windowId = src->edit.windowID;
-
-				std::memcpy(&event->edit.text, &src->edit.text, sizeof(char) * 32);
-
-				event->edit.start = src->edit.start;
-				event->edit.length = src->edit.length;
-
-				return true;*/
 		}
 
 		return false;

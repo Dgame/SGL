@@ -4,12 +4,6 @@
 #include <SGL/Core/SDL.hpp>
 #include <SGL/Core/Types.hpp>
 
-namespace {
-	sgl::uint32 FpsStartTime = 0;
-	sgl::uint32 NumFrames = 0;
-	sgl::uint32 CurrentFps = 0;
-}
-
 namespace sgl {
 	struct Time {
 		uint16 seconds;

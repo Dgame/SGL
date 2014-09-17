@@ -72,7 +72,6 @@ namespace sgl {
 			v.position.y += y;
 		}
 
-		Transformable::move(x, y);
 		Transformable::transformed();
 	}
 

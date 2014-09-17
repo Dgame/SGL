@@ -1,4 +1,12 @@
+#include <cmath>
+#include <limits>
 #include <SGL/Math/mat4.hpp>
+
+namespace {
+    inline bool feq(float a, float b) {
+        return std::fabs(a - b) > std::numeric_limits<float>::epsilon();
+    }
+}
 
 namespace sgl {
 	const mat4x4 mat4x4::Identity;
@@ -19,7 +27,7 @@ namespace sgl {
 	mat4x4 mat4x4::getInverse() const {
 		const float det = this->det();
 
-		if (det != 0.f) {
+		if (det > 0.0f) {
 			return mat4x4((this->values[15] * this->values[5] - this->values[7] * this->values[13]) / det,
 						  -(this->values[15] * this->values[4] - this->values[7] * this->values[12]) / det,
 						  (this->values[13] * this->values[4] - this->values[5] * this->values[12]) / det,
@@ -155,25 +163,12 @@ namespace sgl {
 	}
 
 	bool operator ==(const mat4x4& lhs, const mat4x4& rhs) {
-		return lhs.values[0] == rhs.values[0] &&
-			lhs.values[1] == rhs.values[1] &&
-			lhs.values[2] == rhs.values[2] &&
-			lhs.values[3] == rhs.values[3] &&
+		for (uint8 i = 0; i < 16; i++) {
+            if (!feq(lhs.at(i), rhs.at(i)))
+                return false;
+		}
 
-			lhs.values[4] == rhs.values[4] &&
-			lhs.values[5] == rhs.values[5] &&
-			lhs.values[6] == rhs.values[6] &&
-			lhs.values[7] == rhs.values[7] &&
-
-			lhs.values[8] == rhs.values[8] &&
-			lhs.values[9] == rhs.values[9] &&
-			lhs.values[10] == rhs.values[10] &&
-			lhs.values[11] == rhs.values[11] &&
-
-			lhs.values[12] == rhs.values[12] &&
-			lhs.values[13] == rhs.values[13] &&
-			lhs.values[14] == rhs.values[14] &&
-			lhs.values[15] == rhs.values[15];
+		return true;
 	}
 
 	bool operator !=(const mat4x4& lhs, const mat4x4& rhs) {

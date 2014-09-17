@@ -1,16 +1,16 @@
 #include <iostream>
+#include <SGL/Core/SDL.hpp>
 #include <SDL_image.h>
 #include <SDL_mixer.h>
 #include <SDL_ttf.h>
-#include <SGL/Core/SDL.hpp>
-#include <SGL/Core/Check.hpp>
 #include <SGL/Core/GL.hpp>
+#include <SGL/Core/Check.hpp>
 #include <SGL/Core/Init.hpp>
 
 namespace Intern {
 	void initSDL() {
 		if (SDL_WasInit(SDL_INIT_VIDEO) == 0) {
-			if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_EVENTS) != 0) {
+            if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) {
 				std::cerr << "SDL init failed: " << SDL_GetError() << std::endl;
 				exit(1);
 			}
@@ -29,27 +29,28 @@ namespace Intern {
 				exit(1);
 			}
 
-			if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024) != 0) {
+			if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 4096) != 0) {
 				std::cerr << "Error by Mix_OpenAudio: " << Mix_GetError() << std::endl;
 				exit(1);
 			}
+
+            const int channels = Mix_AllocateChannels(256);
+            if (channels < 256)
+			    std::cerr << "Could not reserve 256 channels, only " << channels << " " << Mix_GetError() << std::endl;
 
 			if (TTF_Init() != 0) {
 				std::cerr << "TTF_Init failed: " << TTF_GetError() << std::endl;
 				exit(1);
 			}
 		}
-
 	}
 
 	void quitSDL(int count) {
 		if (count <= 0) {
 			TTF_Quit();
+			Mix_ReserveChannels(0);
 			Mix_CloseAudio();
-			// force a quit
-			while (Mix_Init(0)) {
-				Mix_Quit();
-			}
+			Mix_Quit();
 			IMG_Quit();
 			SDL_Quit();
 		}
@@ -81,7 +82,7 @@ namespace Intern {
 
 		const GLenum err = glewInit();
 		if (err != GLEW_OK) {
-			std::cerr << "Couldn't initialize GLEW" << std::endl;
+			std::cerr << "Couldn't initialize GLEW: " << glewGetErrorString(err) << std::endl;
 			exit(1);
 		}
 	}

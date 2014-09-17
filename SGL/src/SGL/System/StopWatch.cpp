@@ -1,5 +1,11 @@
-#include <SGL/System/StopWatch.hpp>
 #include <cmath>
+#include <SGL/System/StopWatch.hpp>
+
+namespace {
+	sgl::uint32 FpsStartTime = 0;
+	sgl::uint32 NumFrames = 0;
+	sgl::uint32 CurrentFps = 0;
+}
 
 namespace sgl {
 	Time::Time(uint32 ms) {
@@ -13,7 +19,7 @@ namespace sgl {
 			this->minutes -= 60;
 			this->hours++;
 		}
-		
+
 		this->msecs = static_cast<uint16>(fmod(ms, 1000));
 	}
 

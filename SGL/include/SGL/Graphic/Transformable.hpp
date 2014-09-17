@@ -6,7 +6,7 @@
 namespace sgl {
 	class Transformable {
 	protected:
-		vec2f _center;
+		vec2f _local_center;
 		vec2f _position;
 
 		float _scale = 1.f;
@@ -26,13 +26,12 @@ namespace sgl {
 		mutable bool _update = true;
 
 	public:
+	    virtual ~Transformable() { }
+
 		const mat4x4& getMatrix() const;
-		
+
 		void setPosition(float x, float y);
 		void setPosition(const vec2f&);
-
-		virtual void move(float x, float y);
-		virtual void move(const vec2f&);
 
 		const vec2f& getPosition() const {
 			return _position;
@@ -42,7 +41,7 @@ namespace sgl {
 		void setCenter(const vec2f&);
 
 		const vec2f& getCenter() const {
-			return _center;
+			return _local_center;
 		}
 
 		void setScale(float scale);

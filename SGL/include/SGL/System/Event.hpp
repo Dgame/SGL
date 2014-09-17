@@ -52,7 +52,7 @@ namespace sgl {
 
 		struct KeyboardEvent {
 			sgl::Key key;
-			
+
 			bool repeat;
 			bool alt;
 			bool shift;
@@ -119,7 +119,7 @@ namespace {
 	while (sgl::PollEvent(&event)) {
 		switch (event.type) {
 			case sgl::Event::Key::Down:
-				
+
 			break;
 		}
 	}

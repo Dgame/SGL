@@ -39,7 +39,7 @@ namespace sgl {
 		explicit Color4(float r, float g, float b, float a = 1.0f);
 		Color4(const Color4<uint8>&);
 	};
-	
+
 	using Color4b = Color4<uint8>;
 	using Color4f = Color4<float>;
 

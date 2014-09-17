@@ -9,7 +9,7 @@
 
 namespace sgl {
 	class Texture;
-	
+
 	class Sprite : public Drawable, public Transformable {
 	protected:
 		Texture* _texture;
@@ -35,8 +35,8 @@ namespace sgl {
 			return _clipRect;
 		}
 
-		void move(float x, float y) override;
-		void move(const vec2f&) override;
+		void move(float x, float y);
+		void move(const vec2f&);
 	};
 }
 

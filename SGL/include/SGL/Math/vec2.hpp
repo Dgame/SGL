@@ -26,6 +26,10 @@ namespace sgl {
 		}
 	};
 
+	using vec2i = vec2<int32>;
+	using vec2s = vec2<int16>;
+	using vec2f = vec2<float>;
+
 	template <typename T>
 	vec2<T>::vec2(T mx, T my) : x(mx), y(my) {
 
@@ -149,10 +153,6 @@ namespace sgl {
 	bool operator !=(const vec2<T>& lhs, const vec2<T>& rhs) {
 		return !(lhs == rhs);
 	}
-
-	using vec2i = vec2<int32>;
-	using vec2s = vec2<int16>;
-	using vec2f = vec2<float>;
 }
 
 #endif
