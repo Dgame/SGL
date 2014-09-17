@@ -1,177 +1,107 @@
 #include <SGL/Graphic/Color.hpp>
 
 namespace sgl {
-	Array<uint16, 4> convertFromHex(const std::string& hex) {
-		uint8 offset = 0;
-		if (hex[0] == '#')
-			offset = 1;
-		else if (hex[0] == '0' && hex[1] == 'x')
-			offset = 2;
+	const Color4b Color4b::Red(255, 0, 0);
+	const Color4b Color4b::Green(0, 255, 0);
+	const Color4b Color4b::Blue(0, 0, 255);
+	const Color4b Color4b::Yellow(0, 255, 255);
+	const Color4b Color4b::Black(0, 0, 0);
+	const Color4b Color4b::White(255, 255, 255);
 
-		const uint32 len = hex.size() - offset;
+	const Color4f Color4f::Red(Color4b::Red);
+	const Color4f Color4f::Green(Color4b::Green);
+	const Color4f Color4f::Blue(Color4b::Blue);
+	const Color4f Color4f::Yellow(Color4b::Yellow);
+	const Color4f Color4f::Black(Color4b::Black);
+	const Color4f Color4f::White(Color4b::White);
 
-		Array<char, 3> rc;
-		Array<char, 3> gc;
-		Array<char, 3> bc;
-		Array<char, 3> ac;
+	Color4b::Color4(uint8 r, uint8 g, uint8 b, uint8 a) : red(r), green(g), blue(b), alpha(a) {
 
-		if (len == 3) {
-			rc = {hex[offset], hex[offset], '\0'};
-			gc = {hex[offset + 1], hex[offset + 1], '\0'};
-			bc = {hex[offset + 2], hex[offset + 2], '\0'};
-		} else if (len == 6) {
-			rc = {hex[offset], hex[offset + 1], '\0'};
-			gc = {hex[offset + 2], hex[offset + 3], '\0'};
-			bc = {hex[offset + 4], hex[offset + 5], '\0'};
-		} else if (len == 8) {
-			rc = {hex[offset], hex[offset + 1], '\0'};
-			gc = {hex[offset + 2], hex[offset + 3], '\0'};
-			bc = {hex[offset + 4], hex[offset + 5], '\0'};
-			ac = {hex[offset + 6], hex[offset + 7], '\0'};
-		} else {
-			rc = {0, 0, '\0'};
-			gc = {0, 0, '\0'};
-			bc = {0, 0, '\0'};
+	}
+
+	Color4b::Color4(const Color4<float>& col) {
+		this->red = static_cast<uint8>(col.red * 255);
+		this->green = static_cast<uint8>(col.green * 255);
+		this->blue = static_cast<uint8>(col.blue * 255);
+		this->alpha = static_cast<uint8>(col.alpha * 255);
+	}
+
+	SDL_Color* Copy(const Color4b& src, SDL_Color* dst) {
+		if (dst) {
+			dst->r = src.red;
+			dst->g = src.green;
+			dst->b = src.blue;
+			dst->a = src.alpha;
 		}
 
-		std::stringstream ss;
-		Array<uint16, 4> rgba;
-
-		ss << std::hex << rc.data;
-		ss >> rgba.data[0];
-		ss.clear();
-		ss << std::hex << gc.data;
-		ss >> rgba.data[1];
-		ss.clear();
-		ss << std::hex << bc.data;
-		ss >> rgba.data[2];
-
-		if (len == 8) {
-			ss.clear();
-			ss << std::hex << ac.data;
-			ss >> rgba.data[3];
-		} else {
-			rgba.data[3] = 255;
-		}
-
-		return std::move(rgba);
+		return dst;
 	}
 
-	GLColor::GLColor(float r, float g, float b, float a) : red(r), green(g), blue(b), alpha(a) {
+	Color4<float>::Color4(uint8 r, uint8 g, uint8 b, uint8 a) : red(r / 255.f), green(g / 255.f), blue(b / 255.f), alpha(a / 255.f) {
 
 	}
 
-	const Color Color::Black(0, 0, 0);
-	const Color Color::White(255, 255, 255);
-	const Color Color::Red(255, 0, 0);
-	const Color Color::Green(0, 255, 0);
-	const Color Color::Blue(0, 0, 255);
-	const Color Color::Yellow(255, 255, 0);
-
-	Color::Color(uint8 pr, uint8 pg, uint8 pb, uint8 pa) : red(pr), green(pg), blue(pb), alpha(pa) {
+	Color4<float>::Color4(float r, float g, float b, float a) : red(r), green(g), blue(b), alpha(a) {
 
 	}
 
-	Color::Color(const std::string& hex) {
-		const Array<uint16, 4> rgba = convertFromHex(hex);
+	Color4<float>::Color4(const Color4b& col) : Color4(col.red, col.green, col.blue, col.alpha) {
 
-		this->red = rgba.at(0) % 256;
-		this->green = rgba.at(1) % 256;
-		this->blue = rgba.at(2) % 256;
-		this->alpha = rgba.at(3) % 256;
 	}
 
-	Color Color::FromGLMode(const GLColor& gl_col) {
-		return Color::FromGLMode(gl_col.red, gl_col.green, gl_col.blue, gl_col.alpha);
-	}
-
-	Color Color::FromGLMode(float pr, float pg, float pb, float pa) {
-		const uint8 r = static_cast<uint8>(pr > 1.f ? pr : pr * 255);
-		const uint8 g = static_cast<uint8>(pg > 1.f ? pg : pg * 255);
-		const uint8 b = static_cast<uint8>(pb > 1.f ? pb : pb * 255);
-		const uint8 a = static_cast<uint8>(pa > 1.f ? pa : pa * 255);
-
-		return Color(r, g, b, a);
-	}
-
-	GLColor Color::InGLMode(const Color& col) {
-		const float r = col.red / 255.f;
-		const float g = col.green / 255.f;
-		const float b = col.blue / 255.f;
-		const float a = col.alpha / 255.f;
-
-		return GLColor(r, g, b, a);
-	}
-
-	void Color::Copy(const Color* from, SDL_Color& too, const Color& def) {
-		if (from == nullptr) {
-			too.r = def.red;
-			too.g = def.green;
-			too.b = def.blue;
-			too.a = def.alpha;
-		} else {
-			too.r = from->red;
-			too.g = from->green;
-			too.b = from->blue;
-			too.a = from->alpha;
-		}
-	}
-
-	void operator +=(Color& lhs, uint8 value) {
+	Color4b& operator +=(Color4b& lhs, uint8 value) {
 		lhs.red += value;
 		lhs.green += value;
 		lhs.blue += value;
 		lhs.alpha += value;
+
+		return lhs;
 	}
 
-	void operator -=(Color& lhs, uint8 value) {
+	Color4b& operator -=(Color4b& lhs, uint8 value) {
 		lhs.red -= value;
 		lhs.green -= value;
 		lhs.blue -= value;
 		lhs.alpha -= value;
+
+		return lhs;
 	}
 
-	void operator *=(Color& lhs, uint8 value) {
+	Color4b& operator *=(Color4b& lhs, uint8 value) {
 		lhs.red *= value;
 		lhs.green *= value;
 		lhs.blue *= value;
 		lhs.alpha *= value;
+
+		return lhs;
 	}
 
-	Color operator +(const Color& lhs, const Color& rhs) {
-		return Color(std::min(lhs.red + rhs.red, 255),
+	Color4b operator +(const Color4b& lhs, const Color4b& rhs) {
+		return Color4b(std::min(lhs.red + rhs.red, 255),
 					 std::min(lhs.green + rhs.green, 255),
 					 std::min(lhs.blue + rhs.blue, 255),
 					 std::min(lhs.alpha + rhs.alpha, 255));
 	}
 
-	Color operator -(const Color& lhs, const Color& rhs) {
-		return Color(std::min(lhs.red - rhs.red, 0),
+	Color4b operator -(const Color4b& lhs, const Color4b& rhs) {
+		return Color4b(std::min(lhs.red - rhs.red, 0),
 					 std::min(lhs.green - rhs.green, 0),
 					 std::min(lhs.blue - rhs.blue, 0),
 					 std::min(lhs.alpha - rhs.alpha, 0));
 	}
 
-	Color operator *(const Color& lhs, const Color& rhs) {
-		return Color((lhs.red * rhs.red) / 255,
+	Color4b operator *(const Color4b& lhs, const Color4b& rhs) {
+		return Color4b((lhs.red * rhs.red) / 255,
 					 (lhs.green * rhs.green) / 255,
 					 (lhs.blue * rhs.blue) / 255,
 					 (lhs.alpha * rhs.alpha) / 255);
 	}
 
-	bool operator ==(const Color& lhs, const Color& rhs) {
+	bool operator ==(const Color4b& lhs, const Color4b& rhs) {
 		return lhs.red == rhs.red && lhs.green == rhs.green && lhs.blue == rhs.blue && lhs.alpha == rhs.alpha;
 	}
 
-	bool operator !=(const Color& lhs, const Color& rhs) {
+	bool operator !=(const Color4b& lhs, const Color4b& rhs) {
 		return !(lhs == rhs);
-	}
-
-	std::ostream& operator <<(std::ostream& strm, const Color& col) {
-		return strm << "Color("
-			<< static_cast<int16>(col.red)
-			<< ',' << static_cast<int16>(col.green)
-			<< ',' << static_cast<int16>(col.blue)
-			<< ',' << static_cast<int16>(col.alpha) << ")";
 	}
 }

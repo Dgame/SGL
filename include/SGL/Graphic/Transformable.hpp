@@ -1,104 +1,58 @@
-#ifndef TRANSFORMABLE_HPP
-#define TRANSFORMABLE_HPP
+#ifndef SGL_TRANSFORMABLE_HPP
+#define SGL_TRANSFORMABLE_HPP
 
-#include <SGL/Core/OpenGL.hpp>
-#include <SGL/Math/Vector2.hpp>
-#include <SGL/Math/Matrix4x4.hpp>
+#include <SGL/Math/mat4.hpp>
 
 namespace sgl {
 	class Transformable {
 	protected:
-		mutable Matrix4x4 _transform;
-		mutable bool _update = false;
+		vec2f _local_center;
+		vec2f _position;
 
-		FloatRect _viewport;
-		Vector2f _position;
+		float _scale = 1.f;
+		float _rotation = 0.f;
 
-		float _rotation = 0;
-		float _scale = 1;
+	protected:
+		void transformed() {
+			_update = true;
+		}
+
+		bool wasTransformed() const {
+			return _update;
+		}
 
 	private:
-		void _syncronizeViewport() {
-			_viewport.setPosition(_position);
-			_update = true;
-		}
-
-		void _syncronizePosition() {
-			_position.set(_viewport.x, _viewport.y);
-			_update = true;
-		}
+		mutable mat4x4 _matrix;
+		mutable bool _update = true;
 
 	public:
-		virtual ~Transformable() {
+	    virtual ~Transformable() { }
 
-		}
+		const mat4x4& getMatrix() const;
 
-		void applyTransformation() const;
+		void setPosition(float x, float y);
+		void setPosition(const vec2f&);
 
-		const Matrix4x4& getMatrix() const {
-			return _transform;
-		}
-
-		void move(float x, float y) {
-			_position.move(x, y);
-			
-			_syncronizeViewport();
-		}
-
-		void move(const Vector2f& vec) {
-			_position += vec;
-			
-			_syncronizeViewport();
-		}
-
-		void setPosition(float x, float y) {
-			_position.set(x, y);
-			
-			_syncronizeViewport();
-		}
-
-		void setPosition(const Vector2f& vec) {
-			_position = vec;
-
-			_syncronizeViewport();
-		}
-
-		const Vector2f& getPosition() const {
+		const vec2f& getPosition() const {
 			return _position;
 		}
 
-		void setViewport(const FloatRect& viewport) {
-			_viewport = viewport;
+		void setCenter(float x, float y);
+		void setCenter(const vec2f&);
 
-			_syncronizePosition();
+		const vec2f& getCenter() const {
+			return _local_center;
 		}
 
-		void setViewport(float x, float y, float w, float h);
-
-		const FloatRect& getViewport() const {
-			return _viewport;
-		}
-
-		void setScale(float scale) {
-			_scale = scale;
-			_update = true;
-		}
-
-		void scale(float scale) {
-			_scale += scale;
-			_update = true;
-		}
+		void setScale(float scale);
+		void scale(float scale);
 
 		float getScale() const {
 			return _scale;
 		}
 
-		void setRotation(float angle);
-
-		void rotate(float angle) {
-			this->setRotation(_rotation + angle);
-			_update = true;
-		}
+		void setRotation(float rotation);
+		void rotate(float rotation);
 
 		float getRotation() const {
 			return _rotation;

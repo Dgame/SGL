@@ -1,8 +1,12 @@
-#ifndef SGL_WINDOW_HPP
-#define SGL_WINDOW_HPP
+#ifndef SGL_WINDOW_ALL_HPP
+#define SGL_WINDOW_ALL_HPP
 
-#include <SGL/Window/Event.hpp>
+#include <SGL/System/Keyboard.hpp>
+#include <SGL/System/Mouse.hpp>
+#include <SGL/System/Event.hpp>
+#include <SGL/System/Battery.hpp>
+#include <SGL/System/StopWatch.hpp>
+#include <SGL/System/Font.hpp>
 #include <SGL/Window/Window.hpp>
-#include <SGL/Window/DrawOptions.hpp>
 
 #endif

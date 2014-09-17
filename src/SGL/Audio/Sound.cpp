@@ -5,29 +5,62 @@ namespace sgl {
 
 	Sound::Sound(const std::string& filename, int8 volume) : _channel(Sound::ChannelCount++) {
 		this->loadFromFile(filename);
-		if (volume > 0)
-			this->setVolume(volume);
+		this->setVolume(volume);
 	}
 
-	void Sound::loadFromFile(const std::string& filename) {
+	Sound::~Sound() {
+		Mix_FreeChunk(_chunk);
+	}
+
+	bool Sound::loadFromFile(const std::string& filename) {
 		_chunk = Mix_LoadWAV(filename.c_str());
-		if (_chunk == nullptr)
-			error("Could not load Wave File ", filename.c_str(), ':', Mix_GetError());
-	}
-
-	void Sound::play(int8 loops, int16 delay) const {
-		loops = loops > 0 ? loops - 1 : loops;
-
-		if (Mix_PlayChannelTimed(_channel, _chunk, loops, delay) == -1) {
-			error("Could not play Sound: ", Mix_GetError());
+		if (!_chunk) {
+			std::cerr << Mix_GetError() << std::endl;
+			return false;
 		}
+
+		return true;
 	}
 
-	uint16 Sound::CountPlaying() {
-		return Mix_Playing(-1);
+	void Sound::setVolume(int8 volume) const {
+	    if (_chunk)
+		    Mix_VolumeChunk(_chunk, volume);
 	}
 
-	uint16 Sound::CountPaused() {
-		return Mix_Paused(-1);
+	int8 Sound::getVolume() const {
+	    if (_chunk)
+		    return Mix_VolumeChunk(_chunk, -1);
+        return 0;
+	}
+
+	void Sound::play(int16 loops, int16 delay) const {
+	    if (_chunk) {
+            loops = loops > 0 ? loops - 1 : loops;
+            SDL_Check(Mix_PlayChannelTimed(_channel, _chunk, loops, delay));
+	    }
+	}
+
+	void Sound::resume() const {
+		Mix_Resume(_channel);
+	}
+
+	void Sound::stop() const {
+		Mix_HaltChannel(_channel);
+	}
+
+	void Sound::pause() const {
+		Mix_Pause(_channel);
+	}
+
+	void Sound::expire(uint16 ticks) {
+	    Mix_ExpireChannel(_channel, ticks);
+	}
+
+	bool Sound::isPlaying() const {
+		return Mix_Playing(_channel) != 0;
+	}
+
+	bool Sound::isPaused() const {
+		return Mix_Paused(_channel) == 0;
 	}
 }

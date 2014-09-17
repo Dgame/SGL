@@ -1,5 +1,5 @@
-#ifndef CONFIG_HPP
-#define CONFIG_HPP
+#ifndef SGL_CONFIG_HPP
+#define SGL_CONFIG_HPP
 
 #if defined(_WIN32) || defined(__WIN32__)
 #define SGL_OS_WIN32
@@ -9,18 +9,6 @@
 #define SGL_OS_MAC
 #elif defined(__FreeBSD__) || defined(__FreeBSD_kernel__)
 #define SGL_OS_FREE_BSD
-#endif
-
-#if defined(SGL_OS_WIN32)
-#include <GL/glew.h>
-#elif defined(SGL_OS_LINUX)
-#include <gl/gl.h>
-#elif defined(SGL_OS_MAC)
-#include <OpenGL/gl.h>
-#elif defined(SGL_OS_FREE_BSD)
-#include <gl/gl.h>
-#else
-#error Unsupported OS
 #endif
 
 #ifndef _DEBUG
@@ -34,6 +22,6 @@
 #endif
 
 #define SGL_MAYOR 0
-#define SGL_MINOR 1
+#define SGL_MINOR 2
 
 #endif

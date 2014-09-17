@@ -1,64 +1,39 @@
-#ifndef SOUND_HPP
-#define SOUND_HPP
+#ifndef SGL_SOUND_HPP
+#define SGL_SOUND_HPP
 
 #include <string>
 #include <SDL_mixer.h>
 #include <SGL/Core/Types.hpp>
-#include <SGL/Core/Output.hpp>
+#include <SGL/Core/Check.hpp>
 
 namespace sgl {
 	class Sound {
 	private:
-		Mix_Chunk* _chunk = nullptr;
-		uint16 _channel = 0;
+		Mix_Chunk* _chunk;
+		uint16 _channel;
 
 		static uint16 ChannelCount;
 
 	public:
-		explicit Sound(const std::string& filename, int8 volume = -1);
+		explicit Sound(const std::string&, int8 volume = -1);
+		Sound(const Sound&) = delete;
+		virtual ~Sound();
 
-		virtual ~Sound() {
-			Mix_FreeChunk(_chunk);
-		}
-
-		uint16 channel() const {
+		uint16 getChannel() const {
 			return _channel;
 		}
 
-		virtual void loadFromFile(const std::string& filename);
+		bool loadFromFile(const std::string&);
+		void setVolume(int8 volume) const;
+		int8 getVolume() const;
 
-		void setVolume(int8 volume) const {
-			Mix_VolumeChunk(_chunk, volume);
-		}
-
-		int8 getVolume() const {
-			return Mix_VolumeChunk(_chunk, -1);
-		}
-
-		void play(int8 loops = 1, int16 delay = -1) const;
-
-		void resume() const {
-			Mix_Resume(_channel);
-		}
-
-		void stop() const {
-			Mix_HaltChannel(_channel);
-		}
-
-		void pause() const {
-			Mix_Pause(_channel);
-		}
-
-		bool isPlaying() const {
-			return Mix_Playing(_channel) != 0;
-		}
-
-		bool isPaused() const {
-			return Mix_Paused(_channel) == 0;
-		}
-
-		static uint16 CountPlaying();
-		static uint16 CountPaused();
+		void play(int16 loops = 1, int16 delay = -1) const;
+		void resume() const;
+		void stop() const;
+		void pause() const;
+		void expire(uint16 ticks);
+		bool isPlaying() const;
+		bool isPaused() const;
 	};
 }
 

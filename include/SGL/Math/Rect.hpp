@@ -1,9 +1,9 @@
-#ifndef RECT_HPP
-#define RECT_HPP
+#ifndef SGL_RECT_HPP
+#define SGL_RECT_HPP
 
-#include <SDL.h>
-#include <typeinfo>
-#include <SGL/Math/Vector2.hpp>
+#include <SGL/Core/SDL.hpp>
+#include <SGL/Core/Types.hpp>
+#include <SGL/Math/vec2.hpp>
 
 namespace sgl {
 	template <typename T>
@@ -14,148 +14,120 @@ namespace sgl {
 		T height = 0;
 
 		Rect() = default;
-		explicit Rect(T px, T py, T pw, T ph);
-		explicit Rect(const Vector2<T>& vec, T pw, T ph);
+		explicit Rect(T mx, T my, T w, T h);
 
-		static SDL_Rect* Copy(const Rect<T>* from, SDL_Rect& too);
+		template <typename U>
+		explicit Rect(const Rect<U>& rect);
 
-		bool isEmpty() const;
-		Rect<T> getUnion(const Rect<T>& rect) const;
+		vec2<T> getCenter() const;
 
-		/**
-		* Checks whether this Rect contains the given coordinates.
-		*/
-		bool contains(T x, T y) const {
-			return (x >= this->x)
-				&& (x <= this->x + this->width)
-				&& (y >= this->y)
-				&& (y <= this->y + this->height);
-		}
-
-		bool contains(const Vector2<T>& vec) const {
-			return this->contains(vec.x, vec.y);
-		}
-
-		bool intersects(const Rect<T>& rect, Rect<T>* overlap = nullptr) const;
-
-		void setSize(T width, T height) {
-			this->width = width;
-			this->height = height;
-		}
-
-		/**
-		* Increase current size.
-		*/
-		void increase(T width, T height) {
-			this->width += width;
-			this->height += height;
-		}
-
-		/**
-		* Move the object.
-		*/
 		void move(T x, T y) {
 			this->x += x;
 			this->y += y;
 		}
 
-		void move(const Vector2<T>& vec) {
-			this->move(vec.x vec.y);
+		void move(const vec2<T>& vec) {
+			this->move(vec.x, vec.y);
 		}
 
-		void setPosition(T x, T y) {
-			this->x = x;
-			this->y = y;
+		void increase(T w, T h) {
+			this->width += w;
+			this->height += h;
 		}
 
-		void setPosition(const Vector2<T>& vec) {
-			this->setPosition(vec.x, vec.y);
-		}
-
-		Vector2<T> getPosition() const {
-			return Vector2<T>(x, y);
-		}
-
-		Vector2<T> getCenterPoint() const {
-			return Vector2<T>(this->x + this->width / 2, this->y + this->height / 2);
-		}
+		bool isEmpty() const;
+		bool contains(T x, T y) const;
+		bool contains(const vec2<T>&) const;
+		bool intersects(const Rect<T>&, Rect<T>* intersection = nullptr) const;
 	};
 
 	template <typename T>
-	Rect<T>::Rect(T px, T py, T pw, T ph) : x(px), y(py), width(pw), height(ph) {
+	Rect<T>::Rect(T mx, T my, T w, T h) : x(mx), y(my), width(w), height(h) {
 
 	}
 
 	template <typename T>
-	Rect<T>::Rect(const Vector2<T>& vec, T pw, T ph) : Rect(vec.x, vec.y, pw, ph) {
+	template <typename U>
+	Rect<T>::Rect(const Rect<U>& rect) : 
+		x(static_cast<T>(rect.x)),
+		y(static_cast<T>(rect.y)),
+		width(static_cast<T>(rect.width)),
+		height(static_cast<T>(rect.height))
+	{
 
 	}
 
 	template <typename T>
-	SDL_Rect* Rect<T>::Copy(const Rect<T>* from, SDL_Rect& too) {
-		if (!from)
-			return nullptr;
-		else {
-			too.x = from->x;
-			too.y = from->y;
-			too.w = from->width;
-			too.h = from->height;
-		}
-
-		return &too;
+	vec2<T> Rect<T>::getCenter() const {
+		return vec2<T>(this->width / 2 + this->x, this->height / 2 + this->y);
 	}
 
 	template <typename T>
 	bool Rect<T>::isEmpty() const {
 		SDL_Rect a;
-		Rect<T>::Copy(this, &a);
 
-		return SDL_RectEmpty(&a) == SDL_TRUE;
+		return SDL_RectEmpty(Copy(*this, &a)) == SDL_TRUE;
 	}
 
 	template <typename T>
-	Rect<T> Rect<T>::getUnion(const Rect<T>& rect) const {
+	bool Rect<T>::contains(T x, T y) const {
 		SDL_Rect a;
-		SDL_Rect b;
-		SDL_Rect c;
+		SDL_Point point(x, y);
 
-		Rect<T>::Copy(this, a);
-		Rect<T>::Copy(&rect, b);
-
-		SDL_UnionRect(&a, &b, &c);
-
-		return Rect<T>(c.x, c.y, c.w, c.h);
+		return SDL_PointInRect(&point, Copy(*this, &a));
 	}
 
 	template <typename T>
-	bool Rect<T>::intersects(const Rect<T>& rect, Rect<T>* overlap) const {
+	bool Rect<T>::contains(const vec2<T>& vec) const {
 		SDL_Rect a;
-		SDL_Rect b;
+		SDL_Point point;
 
-		Rect<T>::Copy(this, a);
-		Rect<T>::Copy(&rect, b);
+		return SDL_PointInRect(Copy(vec, &point), Copy(*this, &a));
+	}
 
-		if (overlap == nullptr)
-			return SDL_HasIntersection(&a, &b) == SDL_TRUE;
+	template <typename T>
+	bool Rect<T>::intersects(const Rect<T>& other, Rect<T>* intersection) const {
+		SDL_Rect a, b;
 
-		SDL_Rect c;
-		const bool intersects = SDL_IntersectRect(&a, &b, &c) == SDL_TRUE;
+		if (intersection != nullptr) {
+			SDL_Rect c;
 
-		overlap->setPosition(c.x, c.y);
-		overlap->setSize(c.w, c.h);
+			const bool result = SDL_IntersectRect(Copy(*this, &a), Copy(other, &b), &c) == SDL_TRUE;
+			Copy(&c, *intersection);
 
-		return intersects;
+			return result;
+		}
+
+		return SDL_HasIntersection(Copy(*this, &a), Copy(*this, &b)) == SDL_TRUE;
+	}
+
+	template <typename T>
+	SDL_Rect* Copy(const Rect<T>& rect, SDL_Rect* dst) {
+		if (dst) {
+			dst->x = static_cast<int>(rect.x);
+			dst->y = static_cast<int>(rect.y);
+			dst->w = static_cast<int>(rect.width);
+			dst->h = static_cast<int>(rect.height);
+		}
+		
+		return dst;
+	}
+
+	template <typename T>
+	void Copy(const SDL_Rect* src, Rect<T>& rect) {
+		if (src) {
+			rect.x = static_cast<T>(src->x);
+			rect.y = static_cast<T>(src->y);
+			rect.width  = static_cast<T>(src->w);
+			rect.height = static_cast<T>(src->h);
+		}
 	}
 
 	template <typename T>
 	bool operator ==(const Rect<T>& lhs, const Rect<T>& rhs) {
-		SDL_Rect a;
-		SDL_Rect b;
+		SDL_Rect a, b;
 
-		Rect<T>::Copy(&lhs, a);
-		Rect<T>::Copy(&rhs, b);
-
-		return SDL_RectEquals(&a, &b);
+		return SDL_RectEquals(Copy(lhs, &a), Copy(rhs, &b));
 	}
 
 	template <typename T>
@@ -163,14 +135,9 @@ namespace sgl {
 		return !(lhs == rhs);
 	}
 
-	template <typename T>
-	std::ostream& operator <<(std::ostream& strm, const Rect<T>& rect) {
-		return strm << "Rect<" << typeid(T).name() << ">(" << rect.x << ',' << rect.y << ',' << rect.width << ',' << rect.height << ")";
-	}
-
-	using FloatRect = Rect<float>;
+	using IntRect   = Rect<int32>;
 	using ShortRect = Rect<int16>;
-	using IntRect = Rect<int>;
+	using FloatRect = Rect<float>;
 }
 
 #endif

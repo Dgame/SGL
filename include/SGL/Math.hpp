@@ -1,10 +1,11 @@
-#ifndef SGL_MATH_HPP
-#define SGL_MATH_HPP
+#ifndef SGL_MATH_ALL_HPP
+#define SGL_MATH_ALL_HPP
 
+#include <SGL/Math/mat4.hpp>
 #include <SGL/Math/Rect.hpp>
-#include <SGL/Math/Vector2.hpp>
-#include <SGL/Math/Vector3.hpp>
+#include <SGL/Math/vec2.hpp>
+#include <SGL/Math/vec3.hpp>
 #include <SGL/Math/Vertex.hpp>
-#include <SGL/Math/Matrix4x4.hpp>
+#include <SGL/Math/Geometry.hpp>
 
 #endif

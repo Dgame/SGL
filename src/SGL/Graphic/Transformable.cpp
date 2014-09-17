@@ -1,36 +1,70 @@
 #include <SGL/Graphic/Transformable.hpp>
+#include <SGL/Core/Config.hpp>
 
 namespace sgl {
-	void Transformable::applyTransformation() const {
+	const mat4x4& Transformable::getMatrix() const {
 		if (_update) {
-			const Vector2f center = _viewport.getCenterPoint();
+            const vec2f global_center = _position + _local_center;
 
-			_transform.loadIdentity();
-			_transform.rotate(_rotation, center);
-
-			if (_scale > 1.0f || _scale < 1.0f)
-				_transform.scale(_scale, _scale, center.x, center.y);
-
+			_matrix.loadIdentity().rotate(_rotation, global_center).scale(_scale, global_center).translate(_position);
 			_update = false;
 #if SGL_DEBUG
-			printf("Update Transform\n");
+			printf("Update Transform Matrix\n");
 #endif
 		}
 
-		glCheck(glLoadMatrixf(_transform.values));
+		return _matrix;
 	}
 
-	void Transformable::setViewport(float x, float y, float w, float h) {
-		_viewport.setPosition(x, y);
-		_viewport.setSize(w, h);
+	void Transformable::setPosition(float x, float y) {
+		_position.x = x;
+		_position.y = y;
 
-		_syncronizePosition();
+		_update = true;
 	}
 
-	void Transformable::setRotation(float angle) {
-		_rotation = static_cast<float>(std::fmod(angle, 360));
+	void Transformable::setPosition(const vec2f& pos) {
+		_position = pos;
+		_update = true;
+	}
+
+	void Transformable::setCenter(const vec2f& center) {
+		_local_center = center;
+		_update = true;
+	}
+
+	void Transformable::setCenter(float x, float y) {
+		_local_center.x = x;
+		_local_center.y = y;
+
+		_update = true;
+	}
+
+	void Transformable::setScale(float scale) {
+		_scale = scale;
+		_update = true;
+	}
+
+	void Transformable::scale(float scale) {
+		_scale += scale;
+		_update = true;
+	}
+
+	void Transformable::setRotation(float rotation) {
+		_rotation = rotation;
+		_rotation = fmod(_rotation, 360);
 		if (_rotation < 0)
 			_rotation += 360;
+
+		_update = true;
+	}
+
+	void Transformable::rotate(float rotation) {
+		_rotation += rotation;
+		_rotation = fmod(_rotation, 360);
+		if (_rotation < 0)
+			_rotation += 360;
+
 		_update = true;
 	}
 }

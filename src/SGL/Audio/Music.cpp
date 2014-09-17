@@ -6,26 +6,60 @@ namespace sgl {
 		this->setVolume(volume);
 	}
 
-	void Music::loadFromFile(const std::string& filename) {
+	Music::~Music() {
+		Mix_FreeMusic(_music);
+	}
+
+	bool Music::loadFromFile(const std::string& filename) {
 		_music = Mix_LoadMUS(filename.c_str());
-		if (_music == nullptr)
-			error("Unable to load Music: ", filename, ':', Mix_GetError());
+		if (!_music) {
+			std::cerr << Mix_GetError() << std::endl;
+			return false;
+		}
+
+		return true;
+	}
+
+	void Music::setVolume(int8 volume) const {
+		Mix_VolumeMusic(volume);
+	}
+
+	int8 Music::getVolume() const {
+		return Mix_VolumeMusic(-1);
 	}
 
 	void Music::play(int8 loops, int16 delay) const {
-		loops = loops > 0 ? loops - 1 : loops;
-		Mix_FadeInMusic(_music, loops, delay);
+	    if (_music) {
+            loops = loops > 0 ? loops - 1 : loops;
+            SDL_Check(Mix_FadeInMusic(_music, loops, delay));
+	    }
 	}
 
-	Music::Type Music::getType() const {
-		Mix_MusicType mt = Mix_GetMusicType(_music);
-
-		return static_cast<Type>(mt);
+	void Music::pause() const {
+		Mix_PauseMusic();
 	}
 
-	Music::Fading Music::isFading() const {
-		Mix_Fading mf = Mix_FadingMusic();
+	void Music::resume() const {
+		Mix_ResumeMusic();
+	}
 
-		return static_cast<Fading>(mf);
+	void Music::stop() const {
+		Mix_HaltMusic();
+	}
+
+	void Music::rewind() const {
+		Mix_RewindMusic();
+	}
+
+	void Music::setPosition(float seconds) const {
+		SDL_Check(Mix_SetMusicPosition(seconds));
+	}
+
+	bool Music::isPlaying() const {
+		return Mix_PlayingMusic() != 0;
+	}
+
+	bool Music::isPaused() const {
+		return Mix_PausedMusic() != 0;
 	}
 }

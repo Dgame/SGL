@@ -1,84 +1,36 @@
-#ifndef MUSIC_HPP
-#define MUSIC_HPP
+#ifndef SGL_MUSIC_HPP
+#define SGL_MUSIC_HPP
 
 #include <string>
 #include <SDL_mixer.h>
 #include <SGL/Core/Types.hpp>
-#include <SGL/Core/Output.hpp>
-#include <SGL/Math/Vector2.hpp>
+#include <SGL/Core/Check.hpp>
 
 namespace sgl {
 	class Music {
-	public:
-		enum class Type {
-			None = MUS_NONE,
-			Cmd = MUS_CMD,
-			Wave = MUS_WAV,
-			Mod = MUS_MOD,
-			Midi = MUS_MID,
-			Ogg = MUS_OGG,
-			Mp3 = MUS_MP3
-		};
-
-		enum class Fading {
-			No = MIX_NO_FADING,
-			Out = MIX_FADING_OUT,
-			In = MIX_FADING_IN
-		};
-
 	private:
-		Mix_Music* _music = nullptr;
+		Mix_Music* _music;
 
 	public:
-		explicit Music(const std::string& filename, int8 volume = -1);
+		explicit Music(const std::string&, int8 volume = -1);
+		Music(const Music&) = delete;
+		virtual ~Music();
 
-		virtual ~Music() {
-			Mix_FreeMusic(_music);
-		}
+		bool loadFromFile(const std::string&);
 
-		void loadFromFile(const std::string& filename);
-
-		void setVolume(int8 volume) const {
-			Mix_VolumeMusic(volume);
-		}
-
-		int8 getVolume() const {
-			Mix_VolumeMusic(-1);
-		}
+		void setVolume(int8 volume) const;
+		int8 getVolume() const;
 
 		void play(int8 loops = 1, int16 delay = -1) const;
 
-		void pause() const {
-			Mix_PauseMusic();
-		}
+		void pause() const;
+		void resume() const;
+		void stop() const;
+		void rewind() const;
+		void setPosition(float seconds) const;
 
-		void resume() const {
-			Mix_ResumeMusic();
-		}
-
-		void stop() const {
-			Mix_HaltMusic();
-		}
-
-		void rewind() const {
-			Mix_RewindMusic();
-		}
-
-		void setPosition(float seconds) const {
-			Mix_SetMusicPosition(seconds);
-		}
-
-		Type getType() const;
-
-		bool isPlaying() const {
-			return Mix_PlayingMusic() != 0;
-		}
-
-		bool isPaused() const {
-			return Mix_PausedMusic() != 0;
-		}
-
-		Fading isFading() const;
+		bool isPlaying() const;
+		bool isPaused() const;
 	};
 }
 
