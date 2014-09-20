@@ -8,41 +8,41 @@
 #include <SGL/Math/Vertex.hpp>
 
 namespace sgl {
-	class Texture;
-	enum class Geometry;
+    class Texture;
+    enum class Geometry;
 
-	class Shape : public Drawable, public Transformable {
-	private:
-		Texture* _texture = nullptr;
-		std::vector<Vertex> _vertices;
+    class Shape : public Drawable, public Transformable {
+    private:
+        Texture* _texture = nullptr;
+        std::vector<Vertex> _vertices;
 
-	protected:
-		virtual void draw(const Window*) const override;
+    protected:
+        virtual void draw(const Window*) const override;
 
-	public:
-		Geometry geometry;
+    public:
+        Geometry geometry;
 
-		explicit Shape(Geometry geo);
+        explicit Shape(Geometry geo);
 
-		void append(const Vertex&);
-		void setTexture(Texture*, const FloatRect* texRect = nullptr);
+        void append(const Vertex&);
+        void setTexture(Texture*, const FloatRect* texRect = nullptr);
 
-		const Texture* getTexture() const {
-			return _texture;
-		}
+        const Texture* getTexture() const {
+            return _texture;
+        }
 
-		void setTextureRect(const FloatRect&);
-		FloatRect getBoundingRect() const;
+        void setTextureRect(const FloatRect&);
+        FloatRect getBoundingRect() const;
 
-		const std::vector<Vertex>& getVertices() const {
-			return _vertices;
-		}
+        const std::vector<Vertex>& getVertices() const {
+            return _vertices;
+        }
 
-		void setColor(const Color4b&);
+        void setColor(const Color4b&);
 
-		void move(float x, float y);
-		void move(const vec2f&);
-	};
+        void move(float x, float y);
+        void move(const vec2f&);
+    };
 }
 
 #endif

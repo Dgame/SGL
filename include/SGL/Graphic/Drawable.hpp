@@ -2,17 +2,17 @@
 #define SGL_DRAWABLE_HPP
 
 namespace sgl {
-	class Window;
+    class Window;
 
-	class Drawable {
-	public:
-		virtual ~Drawable() { }
+    class Drawable {
+    public:
+        virtual ~Drawable() { }
 
-	protected:
-		friend class Window;
+    protected:
+        friend class Window;
 
-		virtual void draw(const Window*) const = 0;
-	};
+        virtual void draw(const Window*) const = 0;
+    };
 }
 
 #endif

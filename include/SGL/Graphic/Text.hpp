@@ -22,50 +22,50 @@ namespace {
 }
 
 namespace sgl {
-	class Window;
+    class Window;
 
-	class Text : public Drawable, public Transformable {
-	private:
-		mutable bool _redraw = true;
-		mutable Texture _texture;
-		mutable Vertex _vertices[4];
-		Font* _font;
-		std::string _text;
+    class Text : public Drawable, public Transformable {
+    private:
+        mutable bool _redraw = true;
+        mutable Texture _texture;
+        mutable Vertex _vertices[4];
+        Font* _font;
+        std::string _text;
 
-	protected:
-		virtual void draw(const Window*) const override;
-		void _init();
+    protected:
+        virtual void draw(const Window*) const override;
+        void _init();
 
-	public:
-		Color4b foreground = Color4b::Black;
-		Color4b background = Color4b::White;
-		Font::Mode mode = Font::Mode::Solid;
+    public:
+        Color4b foreground = Color4b::Black;
+        Color4b background = Color4b::White;
+        Font::Mode mode = Font::Mode::Solid;
 
-		explicit Text(Font&, const std::string& str = "");
-		Text(const Text&);
+        explicit Text(Font&, const std::string& str = "");
+        Text(const Text&);
 
-		virtual ~Text() {
+        virtual ~Text() {
 
-		}
+        }
 
-		void operator =(const Text&);
-		void operator =(const std::string&);
+        void operator =(const Text&);
+        void operator =(const std::string&);
 
-		template <typename T>
-		void setData(const T&);
+        template <typename T>
+        void setData(const T&);
 
-		const std::string& getText() const {
-			return _text;
-		}
+        const std::string& getText() const {
+            return _text;
+        }
 
-		void setFont(Font&);
+        void setFont(Font&);
 
-		const Font* getFont() const {
-			return _font;
-		}
-	};
+        const Font* getFont() const {
+            return _font;
+        }
+    };
 
-	template <typename T>
+    template <typename T>
     void Text::setData(const T& data) {
         _text = to_string(data);
         _redraw = true;
