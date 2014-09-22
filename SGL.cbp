@@ -8,9 +8,9 @@
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/SGL" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="bin/Debug" />
+				<Option working_dir="" />
 				<Option object_output="obj/Debug/" />
-				<Option type="1" />
+				<Option type="2" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
@@ -47,11 +47,7 @@
 			<Add option="-Wzero-as-null-pointer-constant" />
 			<Add option="-Wextra" />
 			<Add option="-Wall" />
-			<Add directory="libs/Glew/include" />
-			<Add directory="libs/SDL2/i686-w64-mingw32/include/SDL2" />
-			<Add directory="libs/SDL2_image/i686-w64-mingw32/include/SDL2" />
-			<Add directory="libs/SDL2_mixer/i686-w64-mingw32/include/SDL2" />
-			<Add directory="libs/SDL2_ttf/i686-w64-mingw32/include/SDL2" />
+			<Add option="-std=c++1y" />
 			<Add directory="include" />
 		</Compiler>
 		<Linker>
@@ -62,11 +58,8 @@
 			<Add option="-lSDL2_image" />
 			<Add option="-lSDL2_mixer" />
 			<Add option="-lSDL2_ttf" />
-			<Add library="libs\Glew\lib\Release\Win32\glew32.lib" />
-			<Add directory="libs/SDL2/i686-w64-mingw32/lib" />
-			<Add directory="libs/SDL2_image/i686-w64-mingw32/lib" />
-			<Add directory="libs/SDL2_mixer/i686-w64-mingw32/lib" />
-			<Add directory="libs/SDL2_ttf/i686-w64-mingw32/lib" />
+			<Add library="libs\32\lib\glew32.lib" />
+			<Add directory="libs/32/lib" />
 		</Linker>
 		<Unit filename="include/SGL/Audio.hpp" />
 		<Unit filename="include/SGL/Audio/Music.hpp" />
