@@ -4,10 +4,6 @@
 #include <algorithm>
 #include <SGL/Core/Types.hpp>
 
-#ifndef M_PI
-#define M_PI 3.14159265358979323846
-#endif
-
 namespace sgl {
     template <typename T>
     struct vec3 {
@@ -31,9 +27,7 @@ namespace sgl {
     using vec3f = vec3<float>;
 
     template <typename T>
-    vec3<T>::vec3(T mx, T my, T mz) :
-        x(mx), y(my), z(mz)
-    {
+    vec3<T>::vec3(T mx, T my, T mz) : x(mx), y(my), z(mz) {
 
     }
 
@@ -49,10 +43,12 @@ namespace sgl {
 
     template <typename T>
     vec3<T> Rotate(const vec3<T>& vec, float angle, const vec3<T>& rot) {
+        static const double PI = 3.14159265358979;
+
         const vec3<T> norm1 = Normalize(vec);
         const vec3<T> norm2 = Normalize(rot);
 
-        const float rho_rad = angle / 180 * M_PI;
+        const float rho_rad = angle / 180 * PI;
         const float c = std::cos(rho_rad);
         const float s = std::sin(rho_rad);
         const float t = 1 - c;

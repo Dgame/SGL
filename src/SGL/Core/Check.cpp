@@ -32,7 +32,6 @@ void glCheckError(const char* file, unsigned int line) {
                 error = "GL_STACK_UNDERFLOW";
                 description = "this command would cause a stack underflow";
                 break;
-
             case GL_OUT_OF_MEMORY:
                 error = "GL_OUT_OF_MEMORY";
                 description = "there is not enough memory left to execute the command";
@@ -43,9 +42,11 @@ void glCheckError(const char* file, unsigned int line) {
     }
 }
 
-void SDL_CheckError(int ret, const char* file, unsigned int line) {
+int SDL_CheckError(int ret, const char* file, unsigned int line) {
     if (ret != 0) {
         std::cerr << "An SDL error happens in " << file << " on line " << line << ": " << SDL_GetError() << std::endl;
         SDL_ClearError();
     }
+
+    return ret;
 }

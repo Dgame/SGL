@@ -4,7 +4,7 @@
 
 int main() {
     sgl::Window wnd(64 * 15, 64 * 15, "Hallo Welt");
-    wnd.setSwapMode(sgl::SwapMode::Immediate);
+    wnd.setSwapInterval(sgl::SwapInterval::Immediate);
 
     sgl::Shape shape(sgl::Geometry::Quad);
     shape.append(sgl::Vertex(10,  10));

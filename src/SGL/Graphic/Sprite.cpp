@@ -10,30 +10,35 @@ namespace sgl {
     }
 
     void Sprite::_updateVertices() {
-        const float tx = _clipRect.x == 0 ? 0 : static_cast<float>(_clipRect.x) / _texture->width();
-        const float ty = _clipRect.y == 0 ? 0 : static_cast<float>(_clipRect.y) / _texture->height();
-        const float tw = _clipRect.width == _texture->width() ? 1 : static_cast<float>(_clipRect.width) / _texture->width();
-        const float th = _clipRect.height == _texture->height() ? 1 : static_cast<float>(_clipRect.height) / _texture->height();
-        // #1
-        _vertices[0].texCoord.x = tx;
-        _vertices[0].texCoord.y = ty;
-        // #2
-        _vertices[1].position.x = _clipRect.width;
-        _vertices[1].texCoord.x = tx + tw;
-        _vertices[1].texCoord.y = ty;
-        // #3
-        _vertices[2].position.y = _clipRect.height;
-        _vertices[2].texCoord.x = tx;
-        _vertices[2].texCoord.y = ty + th;
-        // #4
-        _vertices[3].position.x = _clipRect.width;
-        _vertices[3].position.y = _clipRect.height;
-        _vertices[3].texCoord.x = tx + tw;
-        _vertices[3].texCoord.y = ty + th;
+        float tx = 0, ty = 0, tw = 1, th = 1;
+
+        if (!_clipRect.isEmpty()) {
+            const FloatRect fclip(_clipRect);
+
+            tx = fclip.x / _texture->width();
+            ty = fclip.y / _texture->height();
+            tw = fclip.width / _texture->width();
+            th = fclip.height / _texture->height();
+        }
+
+        const float tx_tw = tx + tw;
+        const float ty_th = ty + th;
+
+        _vertices[0].position = vec2f(0, 0);
+        _vertices[0].texCoord = vec2f(tx, ty);
+
+        _vertices[1].position = vec2f(_clipRect.width, 0);
+        _vertices[1].texCoord = vec2f(tx_tw, ty);
+
+        _vertices[2].position = vec2f(0, _clipRect.height);
+        _vertices[2].texCoord = vec2f(tx, ty_th);
+
+        _vertices[3].position = vec2f(_clipRect.width, _clipRect.height);
+        _vertices[3].texCoord = vec2f(tx_tw, ty_th);
     }
 
     void Sprite::draw(const Window* wnd) const {
-        wnd->draw(Geometry::TriangleStrip, this->getMatrix(), *_texture, _vertices, 8);
+        wnd->draw(Geometry::TriangleStrip, this->getMatrix(), *_texture, _vertices, 4);
     }
 
     void Sprite::setTexture(Texture& tex) {
@@ -53,6 +58,7 @@ namespace sgl {
 
     void Sprite::setClipRect(const ShortRect& clipRect) {
         _clipRect = clipRect;
+
         _updateVertices();
     }
 
@@ -60,12 +66,12 @@ namespace sgl {
         _position.x += x;
         _position.y += y;
 
-        Transformable::transformed();
+        _notifyTransform();
     }
 
     void Sprite::move(const vec2f& vec) {
         _position += vec;
 
-        Transformable::transformed();
+        _notifyTransform();
     }
 }

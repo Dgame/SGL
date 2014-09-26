@@ -7,6 +7,8 @@
 #include <SGL/Math/mat4.hpp>
 #include <SGL/Math/vec2.hpp>
 #include <SGL/Math/Vertex.hpp>
+#include <SGL/Window/Style.hpp>
+#include <SGL/Window/SwapInterval.hpp>
 
 namespace sgl {
     class Texture;
@@ -14,33 +16,7 @@ namespace sgl {
     class Surface;
     enum class Geometry;
 
-    enum class SwapMode {
-        Immediate = 0,
-        Synchronize = 1,
-        LateSwapTearing = -1
-    };
-
     class Window {
-    public:
-        enum Style {
-            Fullscreen = SDL_WINDOW_FULLSCREEN,
-            Desktop = SDL_WINDOW_FULLSCREEN_DESKTOP,
-            Shown = SDL_WINDOW_SHOWN,
-            Hidden = SDL_WINDOW_HIDDEN,
-            Borderless = SDL_WINDOW_BORDERLESS,
-            Resizeable = SDL_WINDOW_RESIZABLE,
-            Minimized = SDL_WINDOW_MINIMIZED,
-            Maximized = SDL_WINDOW_MAXIMIZED,
-            Focus = SDL_WINDOW_INPUT_GRABBED,
-            InputFocus = SDL_WINDOW_INPUT_FOCUS,
-            MouseFocus = SDL_WINDOW_MOUSE_FOCUS,
-            HighDPI = SDL_WINDOW_ALLOW_HIGHDPI,
-
-            Windowed = 0,
-
-            Default = Shown | HighDPI
-        };
-
     private:
         static int32 _count;
         bool _open;
@@ -79,11 +55,14 @@ namespace sgl {
 
         void setVisible(bool visible) const;
         void setBorder(bool enable) const;
+
         void setScreenSaver(bool enable) const;
         bool hasScreenSaver() const;
+
         void setIcon(const Surface&) const;
-        void setSwapMode(SwapMode mode) const;
-        SwapMode getSwapMode() const;
+
+        void setSwapInterval(SwapInterval interval) const;
+        SwapInterval getSwapInterval() const;
 
         void maximize() const;
         void minimize() const;

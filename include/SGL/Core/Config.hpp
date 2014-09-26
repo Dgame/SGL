@@ -19,12 +19,8 @@
 
 #define SGL_USE_X64 0
 
-#ifndef _DEBUG
-    #ifndef NDEBUG
-        #define SGL_DEBUG 1
-    #else
-        #define SGL_DEBUG 0
-    #endif
+#if defined(NDEBUG)
+    #define SGL_DEBUG 0
 #else
     #define SGL_DEBUG 1
 #endif
@@ -32,7 +28,5 @@
 #define SGL_MAYOR 0
 #define SGL_MINOR 3
 #define SGL_PATCH 0
-
-#define SGL_AT_LEAST(may, min, patch) (may >= SGL_MAYOR && min >= SGL_MINOR && patch >= SGL_PATCH)
 
 #endif

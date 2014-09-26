@@ -13,6 +13,6 @@
 #endif
 
 void glCheckError(const char*, unsigned int line);
-void SDL_CheckError(int ret, const char*, unsigned int line);
+int SDL_CheckError(int ret, const char*, unsigned int line);
 
 #endif

@@ -21,6 +21,7 @@ namespace sgl {
 
     public:
         explicit Sprite(Texture&);
+        virtual ~Sprite() { }
 
         void setTexture(Texture&);
 

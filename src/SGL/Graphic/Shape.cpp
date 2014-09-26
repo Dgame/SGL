@@ -72,7 +72,7 @@ namespace sgl {
             v.position.y += y;
         }
 
-        Transformable::transformed();
+        _notifyTransform();
     }
 
     void Shape::move(const vec2f& offset) {

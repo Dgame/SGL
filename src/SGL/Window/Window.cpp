@@ -15,12 +15,14 @@ namespace sgl {
 
     Window::Window(const ShortRect& rect, const std::string& title, Style style) {
         Intern::initSDL();
-        // Create an application window with the following settings:
+
+        style |= SDL_WINDOW_OPENGL;
+
         _window = SDL_CreateWindow(
             title.c_str(),
             rect.x, rect.y,
             rect.width, rect.height,
-            style | SDL_WINDOW_OPENGL);
+            static_cast<int>(style));
 
         if (!_window) {
             std::cerr << SDL_GetError() << std::endl;
@@ -44,7 +46,7 @@ namespace sgl {
         _projection.ortho(ShortRect(0, 0, rect.width, rect.height));
         this->loadProjection();
 
-        this->setSwapMode(SwapMode::Synchronize);
+        this->setSwapInterval(SwapInterval::Synchronize);
         this->setClearColor(Color4b::White);
 
         _open = true;
@@ -66,12 +68,12 @@ namespace sgl {
         glCheck(glMatrixMode(GL_MODELVIEW));
     }
 
-    Window::Style Window::getStyle() const {
+    Style Window::getStyle() const {
         return static_cast<Style>(SDL_GetWindowFlags(_window));
     }
 
     void Window::toggle(Style style) const {
-        SDL_Check(SDL_SetWindowFullscreen(_window, style));
+        SDL_Check(SDL_SetWindowFullscreen(_window, static_cast<int>(style)));
     }
 
     void Window::setBorder(bool enable) const {
@@ -105,12 +107,12 @@ namespace sgl {
         SDL_SetWindowIcon(_window, icon._surface);
     }
 
-    void Window::setSwapMode(SwapMode mode) const {
-        SDL_Check(SDL_GL_SetSwapInterval(static_cast<int>(mode)));
+    void Window::setSwapInterval(SwapInterval interval) const {
+        SDL_Check(SDL_GL_SetSwapInterval(static_cast<int>(interval)));
     }
 
-    SwapMode Window::getSwapMode() const {
-        return static_cast<SwapMode>(SDL_GL_GetSwapInterval());
+    SwapInterval Window::getSwapInterval() const {
+        return static_cast<SwapInterval>(SDL_GL_GetSwapInterval());
     }
 
     bool Window::hasScreenSaver() const {
@@ -193,7 +195,7 @@ namespace sgl {
         glCheck(glVertexPointer(2, GL_FLOAT, sizeof(Vertex), &vertices[0].position.x));
         glCheck(glColorPointer(4, GL_FLOAT, sizeof(Vertex), &vertices[0].color.red));
         if (texture)
-            glCheck(glTexCoordPointer(3, GL_FLOAT, sizeof(Vertex), &vertices[0].texCoord.x));
+            glCheck(glTexCoordPointer(2, GL_FLOAT, sizeof(Vertex), &vertices[0].texCoord.x));
         glCheck(glDrawArrays(static_cast<int>(geo), 0, vertices.size()));
 
         if (texture)
@@ -209,7 +211,7 @@ namespace sgl {
 
         glCheck(glVertexPointer(2, GL_FLOAT, sizeof(Vertex), &vertices->position.x));
         glCheck(glColorPointer(4, GL_FLOAT, sizeof(Vertex), &vertices->color.red));
-        glCheck(glTexCoordPointer(3, GL_FLOAT, sizeof(Vertex), &vertices->texCoord.x));
+        glCheck(glTexCoordPointer(2, GL_FLOAT, sizeof(Vertex), &vertices->texCoord.x));
         glCheck(glDrawArrays(static_cast<int>(geo), 0, vCount));
 
         texture.unbind();

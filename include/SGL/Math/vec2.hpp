@@ -2,12 +2,7 @@
 #define SGL_VEC2_HPP
 
 #include <algorithm>
-#include <SGL/Core/SDL.hpp>
 #include <SGL/Core/Types.hpp>
-
-#ifndef M_PI
-#define M_PI 3.14159265358979323846
-#endif
 
 namespace sgl {
     template <typename T>
@@ -37,24 +32,18 @@ namespace sgl {
 
     template <typename T>
     template <typename U>
-    vec2<T>::vec2(const vec2<U>& vec) : x(static_cast<T>(vec.x)),
-        y(static_cast<T>(vec.y)) {
+    vec2<T>::vec2(const vec2<U>& vec) :
+        x(static_cast<T>(vec.x)),
+        y(static_cast<T>(vec.y))
+    {
 
-    }
-
-    template <typename T>
-    SDL_Point* Copy(const vec2<T>& vec, const SDL_Point* dst) {
-        if (dst) {
-            dst->x = static_cast<int>(vec.x);
-            dst->y = static_cast<int>(vec.y);
-        }
-
-        return dst;
     }
 
     template <typename T>
     vec2<T> Rotate(const vec2<T>& vec, float angle) {
-        const float radians = angle * M_PI / 180.f;
+        static const double PI = 3.14159265358979;
+
+        const float radians = angle * PI / 180.f;
         const T nx = vec.x * std::cos(radians) - vec.y * std::sin(radians);
         const T ny = vec.x * std::sin(radians) + vec.y * std::cos(radians);
 

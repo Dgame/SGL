@@ -3,11 +3,11 @@
 
 namespace sgl {
     const mat4x4& Transformable::getMatrix() const {
-        if (_update) {
+        if (_wasTransformed()) {
             const vec2f global_center = _position + _local_center;
-
             _matrix.loadIdentity().rotate(_rotation, global_center).scale(_scale, global_center).translate(_position);
-            _update = false;
+
+            _was_transformed = false;
 #if SGL_DEBUG
             printf("Update Transform Matrix\n");
 #endif
@@ -20,34 +20,38 @@ namespace sgl {
         _position.x = x;
         _position.y = y;
 
-        _update = true;
+        _notifyTransform();
     }
 
     void Transformable::setPosition(const vec2f& pos) {
         _position = pos;
-        _update = true;
+
+        _notifyTransform();
     }
 
     void Transformable::setCenter(const vec2f& center) {
         _local_center = center;
-        _update = true;
+
+        _notifyTransform();
     }
 
     void Transformable::setCenter(float x, float y) {
         _local_center.x = x;
         _local_center.y = y;
 
-        _update = true;
+        _notifyTransform();
     }
 
     void Transformable::setScale(float scale) {
         _scale = scale;
-        _update = true;
+
+        _notifyTransform();
     }
 
     void Transformable::scale(float scale) {
         _scale += scale;
-        _update = true;
+
+        _notifyTransform();
     }
 
     void Transformable::setRotation(float rotation) {
@@ -56,7 +60,7 @@ namespace sgl {
         if (_rotation < 0)
             _rotation += 360;
 
-        _update = true;
+        _notifyTransform();
     }
 
     void Transformable::rotate(float rotation) {
@@ -65,6 +69,6 @@ namespace sgl {
         if (_rotation < 0)
             _rotation += 360;
 
-        _update = true;
+        _notifyTransform();
     }
 }

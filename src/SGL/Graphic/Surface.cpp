@@ -58,9 +58,7 @@ namespace sgl {
     }
 
     bool Surface::saveToFile(const std::string& filename) const {
-        const int result = IMG_SavePNG(_surface, filename.c_str());
-        SDL_Check(result);
-        return result == 0;
+        return SDL_Check(IMG_SavePNG(_surface, filename.c_str()));
     }
 
     void Surface::blit(const Surface& other, const ShortRect* src, const ShortRect* dest) const {

@@ -5,9 +5,11 @@
 
 namespace sgl {
     void Text::draw(const Window* wnd) const {
-        if (_redraw || this->wasTransformed()) {
+        if (_redraw || _wasTransformed()) {
             _redraw = false;
+
             _texture.load(_font->render(_text, this->foreground, this->background, this->mode));
+
             // Update Vertices
             const float tw = _texture.width();
             const float th = _texture.height();

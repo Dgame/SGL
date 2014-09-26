@@ -13,17 +13,17 @@ namespace sgl {
         float _rotation = 0.f;
 
     protected:
-        void transformed() {
-            _update = true;
+        void _notifyTransform() {
+            _was_transformed = true;
         }
 
-        bool wasTransformed() const {
-            return _update;
+        bool _wasTransformed() const {
+            return _was_transformed;
         }
 
     private:
         mutable mat4x4 _matrix;
-        mutable bool _update = true;
+        mutable bool _was_transformed = true;
 
     public:
         virtual ~Transformable() { }

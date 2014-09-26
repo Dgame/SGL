@@ -3,7 +3,7 @@
 
 #include <SGL/Core/Config.hpp>
 
-#if defined(SGL_OS_WIN64) && SGL_USE_X64 == 1
+#if defined(SGL_OS_WIN64) && SGL_USE_X64
     #include "../libs/64/SDL2/SDL.h"
     #include "../libs/64/SDL2/SDL_image.h"
     #include "../libs/64/SDL2/SDL_mixer.h"

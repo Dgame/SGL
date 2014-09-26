@@ -4,7 +4,7 @@
 #include <SGL/Core/Config.hpp>
 
 #if defined(SGL_OS_WINDOWS)
-    #if defined(SGL_OS_WIN64) && SGL_USE_X64 == 1
+    #if defined(SGL_OS_WIN64) && SGL_USE_X64
         #include "../libs/64/GL/glew.h"
     #else
         #include "../libs/32/GL/glew.h"
@@ -18,7 +18,9 @@
 #endif
 
 #if defined(SGL_OS_WINDOWS)
+    #define NOMINMAX 1
     #include <windows.h>
+    #undef NOMINMAX
 #endif
 
 #endif
