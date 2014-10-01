@@ -34,8 +34,8 @@ namespace sgl {
             std::cerr << SDL_GetError() << std::endl;
             exit(1);
         }
-
         SDL_GL_MakeCurrent(_window, _context);
+
         Intern::initGL();
 #if SGL_DEBUG
         const uint8* GL_version = glGetString(GL_VERSION);
