@@ -63,6 +63,10 @@ namespace sgl {
         Intern::quitSDL(_count);
     }
 
+    uint32 Window::getID() const {
+        return SDL_GetWindowID(_window);
+    }
+
     void Window::loadProjection() const {
         glCheck(glMatrixMode(GL_PROJECTION));
         glCheck(glLoadMatrixf(_projection.values));

@@ -967,28 +967,23 @@
 	<SGL/Graphic.hpp>
 	<SGL/Audio.hpp>
 
-1411394845 c:\users\besitzer\documents\github\sgl\include\sgl\window.hpp
+1412263007 c:\users\besitzer\documents\github\sgl\include\sgl\window.hpp
 	<SGL/System/Keyboard.hpp>
 	<SGL/System/Mouse.hpp>
 	<SGL/System/Event.hpp>
 	<SGL/System/Battery.hpp>
 	<SGL/System/StopWatch.hpp>
 	<SGL/System/Font.hpp>
+	<SGL/System/Display.hpp>
 	<SGL/Window/Window.hpp>
 
 1411394845 c:\users\besitzer\documents\github\sgl\include\sgl\system\keyboard.hpp
 	<SGL/Core/SDL.hpp>
 
-1411551843 c:\users\besitzer\documents\github\sgl\include\sgl\core\sdl.hpp
+1412262317 c:\users\besitzer\documents\github\sgl\include\sgl\core\sdl.hpp
 	<SGL/Core/Config.hpp>
 	"../libs/64/SDL2/SDL.h"
-	"../libs/64/SDL2/SDL_image.h"
-	"../libs/64/SDL2/SDL_mixer.h"
-	"../libs/64/SDL2/SDL_ttf.h"
 	"../libs/32/SDL2/SDL.h"
-	"../libs/32/SDL2/SDL_image.h"
-	"../libs/32/SDL2/SDL_mixer.h"
-	"../libs/32/SDL2/SDL_ttf.h"
 
 1411747945 c:\users\besitzer\documents\github\sgl\include\sgl\core\config.hpp
 
@@ -1684,16 +1679,16 @@
 1412260569 c:\users\besitzer\documents\github\sgl\include\sgl\system\stopwatch.hpp
 	<SGL/Core/Types.hpp>
 
-1412260550 c:\users\besitzer\documents\github\sgl\include\sgl\system\font.hpp
+1412262505 c:\users\besitzer\documents\github\sgl\include\sgl\system\font.hpp
 	<string>
-	<SGL/Core/SDL.hpp>
+	<SGL/Core/SDL_TTF.hpp>
 	<SGL/Core/Types.hpp>
 	<SGL/Graphic/Color.hpp>
 
 1412260880 c:\users\besitzer\documents\github\sgl\include\sgl\graphic\color.hpp
 	<SGL/Core/Types.hpp>
 
-1412260644 c:\users\besitzer\documents\github\sgl\include\sgl\window\window.hpp
+1412262915 c:\users\besitzer\documents\github\sgl\include\sgl\window\window.hpp
 	<string>
 	<vector>
 	<SGL/Math/mat4.hpp>
@@ -1779,9 +1774,9 @@
 1411636916 c:\users\besitzer\documents\github\sgl\include\sgl\graphic\transformable.hpp
 	<SGL/Math/mat4.hpp>
 
-1412260306 c:\users\besitzer\documents\github\sgl\include\sgl\graphic\surface.hpp
+1412262487 c:\users\besitzer\documents\github\sgl\include\sgl\graphic\surface.hpp
 	<string>
-	<SGL/Core/SDL.hpp>
+	<SGL/Core/SDL_Image.hpp>
 	<SGL/Core/Check.hpp>
 	<SGL/Math/Rect.hpp>
 	<SGL/Graphic/Color.hpp>
@@ -1823,22 +1818,22 @@
 	<SGL/Audio/Music.hpp>
 	<SGL/Audio/Sound.hpp>
 
-1412261131 c:\users\besitzer\documents\github\sgl\include\sgl\audio\music.hpp
+1412262469 c:\users\besitzer\documents\github\sgl\include\sgl\audio\music.hpp
 	<string>
+	<SGL/Core/SDL_Mixer.hpp>
 	<SGL/Core/Types.hpp>
 	<SGL/Core/Check.hpp>
 
-1412261114 c:\users\besitzer\documents\github\sgl\include\sgl\audio\sound.hpp
+1412262464 c:\users\besitzer\documents\github\sgl\include\sgl\audio\sound.hpp
 	<string>
+	<SGL/Core/SDL_Mixer.hpp>
 	<SGL/Core/Types.hpp>
 	<SGL/Core/Check.hpp>
 
-1412260973 source:c:\users\besitzer\documents\github\sgl\src\sgl\audio\music.cpp
+1412262436 source:c:\users\besitzer\documents\github\sgl\src\sgl\audio\music.cpp
 	<SGL/Audio/Music.hpp>
-	<SGL/Core/SDL.hpp>
 
-1412260465 source:c:\users\besitzer\documents\github\sgl\src\sgl\audio\sound.cpp
-	<SGL/Core/SDL.hpp>
+1412262447 source:c:\users\besitzer\documents\github\sgl\src\sgl\audio\sound.cpp
 	<SGL/Audio/Sound.hpp>
 
 1411765046 source:c:\users\besitzer\documents\github\sgl\src\sgl\core\check.cpp
@@ -1846,9 +1841,12 @@
 	<SGL/Core/GL.hpp>
 	<SGL/Core/SDL.hpp>
 
-1411755595 source:c:\users\besitzer\documents\github\sgl\src\sgl\core\init.cpp
+1412262544 source:c:\users\besitzer\documents\github\sgl\src\sgl\core\init.cpp
 	<iostream>
 	<SGL/Core/SDL.hpp>
+	<SGL/Core/SDL_Image.hpp>
+	<SGL/Core/SDL_Mixer.hpp>
+	<SGL/Core/SDL_TTF.hpp>
 	<SGL/Core/GL.hpp>
 	<SGL/Core/Check.hpp>
 	<SGL/Core/Init.hpp>
@@ -1911,7 +1909,7 @@
 	<SGL/Core/SDL.hpp>
 	<SGL/System/StopWatch.hpp>
 
-1412260662 source:c:\users\besitzer\documents\github\sgl\src\sgl\window\window.cpp
+1412262948 source:c:\users\besitzer\documents\github\sgl\src\sgl\window\window.cpp
 	<SGL/Window/Window.hpp>
 	<SGL/Graphic/Drawable.hpp>
 	<SGL/Graphic/Texture.hpp>
@@ -1926,4 +1924,29 @@
 
 1411756083 source:c:\users\besitzer\documents\github\sgl\src\sgl\window\style.cpp
 	<SGL/Window/Style.hpp>
+
+1412262411 c:\users\besitzer\documents\github\sgl\include\sgl\core\sdl_ttf.hpp
+	<SGL/Core/Config.hpp>
+	"../libs/64/SDL2/SDL_ttf.h"
+	"../libs/32/SDL2/SDL_ttf.h"
+
+1412262770 c:\users\besitzer\documents\github\sgl\include\sgl\system\display.hpp
+	<SGL/Core/Types.hpp>
+	<SGL/Math/Rect.hpp>
+
+1412262360 c:\users\besitzer\documents\github\sgl\include\sgl\core\sdl_image.hpp
+	<SGL/Core/Config.hpp>
+	"../libs/64/SDL2/SDL_image.h"
+	"../libs/32/SDL2/SDL_image.h"
+
+1412262385 c:\users\besitzer\documents\github\sgl\include\sgl\core\sdl_mixer.hpp
+	<SGL/Core/Config.hpp>
+	"../libs/64/SDL2/SDL_mixer.h"
+	"../libs/32/SDL2/SDL_mixer.h"
+
+1412263065 source:c:\users\besitzer\documents\github\sgl\src\sgl\system\display.cpp
+	<SGL/Core/SDL.hpp>
+	<SGL/Core/Check.hpp>
+	<SGL/System/Display.hpp>
+	<SGL/Window/Window.hpp>
 

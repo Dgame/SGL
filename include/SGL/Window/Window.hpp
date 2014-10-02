@@ -40,6 +40,8 @@ namespace sgl {
             return _open;
         }
 
+        uint32 getID() const;
+
         Style getStyle() const;
         void toggle(Style style) const;
 

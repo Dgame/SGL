@@ -7,6 +7,8 @@
 #include <SGL/System/Battery.hpp>
 #include <SGL/System/StopWatch.hpp>
 #include <SGL/System/Font.hpp>
+#include <SGL/System/Display.hpp>
+
 #include <SGL/Window/Window.hpp>
 
 #endif
