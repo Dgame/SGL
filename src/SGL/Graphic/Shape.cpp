@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <SGL/Graphic/Shape.hpp>
 #include <SGL/Graphic/Texture.hpp>
 #include <SGL/Math/Geometry.hpp>

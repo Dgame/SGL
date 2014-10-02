@@ -1,3 +1,5 @@
+#include <algorithm>
+#include <SGL/Core/SDL.hpp>
 #include <SGL/Graphic/Color.hpp>
 
 namespace sgl {

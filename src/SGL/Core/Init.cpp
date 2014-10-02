@@ -1,6 +1,12 @@
 #include <iostream>
+
 #include <SGL/Core/SDL.hpp>
+#include <SGL/Core/SDL_Image.hpp>
+#include <SGL/Core/SDL_Mixer.hpp>
+#include <SGL/Core/SDL_TTF.hpp>
+
 #include <SGL/Core/GL.hpp>
+
 #include <SGL/Core/Check.hpp>
 #include <SGL/Core/Init.hpp>
 

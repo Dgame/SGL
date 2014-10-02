@@ -1,7 +1,6 @@
 #ifndef SGL_SHAPE_HPP
 #define SGL_SHAPE_HPP
 
-#include <algorithm>
 #include <vector>
 #include <SGL/Graphic/Drawable.hpp>
 #include <SGL/Graphic/Transformable.hpp>

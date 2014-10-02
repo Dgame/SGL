@@ -1681,25 +1681,21 @@
 	<SGL/Core/SDL.hpp>
 	<SGL/Core/Types.hpp>
 
-1411394845 c:\users\besitzer\documents\github\sgl\include\sgl\system\stopwatch.hpp
-	<SGL/Core/SDL.hpp>
+1412260569 c:\users\besitzer\documents\github\sgl\include\sgl\system\stopwatch.hpp
 	<SGL/Core/Types.hpp>
 
-1411394845 c:\users\besitzer\documents\github\sgl\include\sgl\system\font.hpp
+1412260550 c:\users\besitzer\documents\github\sgl\include\sgl\system\font.hpp
 	<string>
 	<SGL/Core/SDL.hpp>
 	<SGL/Core/Types.hpp>
 	<SGL/Graphic/Color.hpp>
 
-1411394845 c:\users\besitzer\documents\github\sgl\include\sgl\graphic\color.hpp
-	<algorithm>
-	<SGL/Core/SDL.hpp>
+1412260880 c:\users\besitzer\documents\github\sgl\include\sgl\graphic\color.hpp
 	<SGL/Core/Types.hpp>
 
-1411754860 c:\users\besitzer\documents\github\sgl\include\sgl\window\window.hpp
+1412260644 c:\users\besitzer\documents\github\sgl\include\sgl\window\window.hpp
 	<string>
 	<vector>
-	<SGL/Core/Init.hpp>
 	<SGL/Math/mat4.hpp>
 	<SGL/Math/vec2.hpp>
 	<SGL/Math/Vertex.hpp>
@@ -1783,9 +1779,8 @@
 1411636916 c:\users\besitzer\documents\github\sgl\include\sgl\graphic\transformable.hpp
 	<SGL/Math/mat4.hpp>
 
-1411394845 c:\users\besitzer\documents\github\sgl\include\sgl\graphic\surface.hpp
+1412260306 c:\users\besitzer\documents\github\sgl\include\sgl\graphic\surface.hpp
 	<string>
-	<SGL/Core/SDL.hpp>
 	<SGL/Core/SDL.hpp>
 	<SGL/Core/Check.hpp>
 	<SGL/Math/Rect.hpp>
@@ -1800,8 +1795,7 @@
 	<SGL/Core/Check.hpp>
 	<SGL/Core/GL.hpp>
 
-1411394845 c:\users\besitzer\documents\github\sgl\include\sgl\graphic\shape.hpp
-	<algorithm>
+1412260594 c:\users\besitzer\documents\github\sgl\include\sgl\graphic\shape.hpp
 	<vector>
 	<SGL/Graphic/Drawable.hpp>
 	<SGL/Graphic/Transformable.hpp>
@@ -1814,7 +1808,7 @@
 	<SGL/Math/Vertex.hpp>
 	<SGL/Math/Rect.hpp>
 
-1411394845 c:\users\besitzer\documents\github\sgl\include\sgl\graphic\text.hpp
+1412260857 c:\users\besitzer\documents\github\sgl\include\sgl\graphic\text.hpp
 	<string>
 	<sstream>
 	<SGL/Core/Config.hpp>
@@ -1822,29 +1816,29 @@
 	<SGL/Graphic/Transformable.hpp>
 	<SGL/Graphic/Texture.hpp>
 	<SGL/Graphic/Color.hpp>
-	<SGL/System/Font.hpp>
 	<SGL/Math/Vertex.hpp>
+	<SGL/System/Font.hpp>
 
 1409250432 c:\users\besitzer\documents\github\sgl\include\sgl\audio.hpp
 	<SGL/Audio/Music.hpp>
 	<SGL/Audio/Sound.hpp>
 
-1411394845 c:\users\besitzer\documents\github\sgl\include\sgl\audio\music.hpp
+1412261131 c:\users\besitzer\documents\github\sgl\include\sgl\audio\music.hpp
 	<string>
-	<SGL/Core/SDL.hpp>
 	<SGL/Core/Types.hpp>
 	<SGL/Core/Check.hpp>
 
-1411394845 c:\users\besitzer\documents\github\sgl\include\sgl\audio\sound.hpp
+1412261114 c:\users\besitzer\documents\github\sgl\include\sgl\audio\sound.hpp
 	<string>
-	<SGL/Core/SDL.hpp>
 	<SGL/Core/Types.hpp>
 	<SGL/Core/Check.hpp>
 
-1411394846 source:c:\users\besitzer\documents\github\sgl\src\sgl\audio\music.cpp
+1412260973 source:c:\users\besitzer\documents\github\sgl\src\sgl\audio\music.cpp
 	<SGL/Audio/Music.hpp>
+	<SGL/Core/SDL.hpp>
 
-1411394846 source:c:\users\besitzer\documents\github\sgl\src\sgl\audio\sound.cpp
+1412260465 source:c:\users\besitzer\documents\github\sgl\src\sgl\audio\sound.cpp
+	<SGL/Core/SDL.hpp>
 	<SGL/Audio/Sound.hpp>
 
 1411765046 source:c:\users\besitzer\documents\github\sgl\src\sgl\core\check.cpp
@@ -1859,10 +1853,13 @@
 	<SGL/Core/Check.hpp>
 	<SGL/Core/Init.hpp>
 
-1411394846 source:c:\users\besitzer\documents\github\sgl\src\sgl\graphic\color.cpp
+1412260180 source:c:\users\besitzer\documents\github\sgl\src\sgl\graphic\color.cpp
+	<algorithm>
+	<SGL/Core/SDL.hpp>
 	<SGL/Graphic/Color.hpp>
 
-1411636670 source:c:\users\besitzer\documents\github\sgl\src\sgl\graphic\shape.cpp
+1412260603 source:c:\users\besitzer\documents\github\sgl\src\sgl\graphic\shape.cpp
+	<algorithm>
 	<SGL/Graphic/Shape.hpp>
 	<SGL/Graphic/Texture.hpp>
 	<SGL/Math/Geometry.hpp>
@@ -1877,7 +1874,7 @@
 1411764896 source:c:\users\besitzer\documents\github\sgl\src\sgl\graphic\surface.cpp
 	<SGL/Graphic/Surface.hpp>
 
-1411636714 source:c:\users\besitzer\documents\github\sgl\src\sgl\graphic\text.cpp
+1412260845 source:c:\users\besitzer\documents\github\sgl\src\sgl\graphic\text.cpp
 	<SGL/Graphic/Text.hpp>
 	<SGL/Graphic/Surface.hpp>
 	<SGL/Math/Geometry.hpp>
@@ -1909,16 +1906,18 @@
 	<SGL/System/Font.hpp>
 	<SGL/Graphic/Surface.hpp>
 
-1411394846 source:c:\users\besitzer\documents\github\sgl\src\sgl\system\stopwatch.cpp
+1412260577 source:c:\users\besitzer\documents\github\sgl\src\sgl\system\stopwatch.cpp
 	<cmath>
+	<SGL/Core/SDL.hpp>
 	<SGL/System/StopWatch.hpp>
 
-1411756099 source:c:\users\besitzer\documents\github\sgl\src\sgl\window\window.cpp
+1412260662 source:c:\users\besitzer\documents\github\sgl\src\sgl\window\window.cpp
 	<SGL/Window/Window.hpp>
 	<SGL/Graphic/Drawable.hpp>
 	<SGL/Graphic/Texture.hpp>
 	<SGL/Graphic/Surface.hpp>
 	<SGL/Math/Geometry.hpp>
+	<SGL/Core/Init.hpp>
 
 1411756249 c:\users\besitzer\documents\github\sgl\include\sgl\window\style.hpp
 	<SGL/Core/SDL.hpp>

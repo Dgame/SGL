@@ -1,9 +1,9 @@
 #ifndef SGL_COLOR_HPP
 #define SGL_COLOR_HPP
 
-#include <algorithm>
-#include <SGL/Core/SDL.hpp>
 #include <SGL/Core/Types.hpp>
+
+struct SDL_Color;
 
 namespace sgl {
     template <typename T>

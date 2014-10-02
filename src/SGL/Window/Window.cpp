@@ -3,6 +3,7 @@
 #include <SGL/Graphic/Texture.hpp>
 #include <SGL/Graphic/Surface.hpp>
 #include <SGL/Math/Geometry.hpp>
+#include <SGL/Core/Init.hpp>
 
 namespace sgl {
     int32 Window::_count = 0;

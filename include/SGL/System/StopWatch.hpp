@@ -1,7 +1,6 @@
 #ifndef SGL_STOPWATCH_HPP
 #define SGL_STOPWATCH_HPP
 
-#include <SGL/Core/SDL.hpp>
 #include <SGL/Core/Types.hpp>
 
 namespace sgl {

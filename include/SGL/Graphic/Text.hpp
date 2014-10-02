@@ -8,8 +8,8 @@
 #include <SGL/Graphic/Transformable.hpp>
 #include <SGL/Graphic/Texture.hpp>
 #include <SGL/Graphic/Color.hpp>
-#include <SGL/System/Font.hpp>
 #include <SGL/Math/Vertex.hpp>
+#include <SGL/System/Font.hpp>
 
 namespace {
     template <typename T>

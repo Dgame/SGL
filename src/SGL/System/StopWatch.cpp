@@ -1,4 +1,5 @@
 #include <cmath>
+#include <SGL/Core/SDL.hpp>
 #include <SGL/System/StopWatch.hpp>
 
 namespace {

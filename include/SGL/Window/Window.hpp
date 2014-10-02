@@ -3,7 +3,6 @@
 
 #include <string>
 #include <vector>
-#include <SGL/Core/Init.hpp>
 #include <SGL/Math/mat4.hpp>
 #include <SGL/Math/vec2.hpp>
 #include <SGL/Math/Vertex.hpp>

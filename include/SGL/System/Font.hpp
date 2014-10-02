@@ -2,7 +2,7 @@
 #define SGL_FONT_HPP
 
 #include <string>
-#include <SGL/Core/SDL.hpp>
+#include <SGL/Core/SDL_TTF.hpp>
 #include <SGL/Core/Types.hpp>
 #include <SGL/Graphic/Color.hpp>
 
@@ -53,7 +53,7 @@ namespace sgl {
         void setStyle(Style style);
         Style getStyle() const;
 
-        Surface render(const std::string&, const Color4b& fg, const Color4b& bg, Mode mode = Mode::Solid) const;
+        Surface render(const std::string&, const Color4b&, const Color4b&, Mode mode = Mode::Solid) const;
     };
 }
 

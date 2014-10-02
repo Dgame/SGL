@@ -2,7 +2,7 @@
 #define SGL_SOUND_HPP
 
 #include <string>
-#include <SGL/Core/SDL.hpp>
+#include <SGL/Core/SDL_Mixer.hpp>
 #include <SGL/Core/Types.hpp>
 #include <SGL/Core/Check.hpp>
 

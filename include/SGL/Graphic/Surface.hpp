@@ -2,8 +2,7 @@
 #define SGL_SURFACE_HPP
 
 #include <string>
-#include <SGL/Core/SDL.hpp>
-#include <SGL/Core/SDL.hpp>
+#include <SGL/Core/SDL_Image.hpp>
 #include <SGL/Core/Check.hpp>
 #include <SGL/Math/Rect.hpp>
 #include <SGL/Graphic/Color.hpp>
