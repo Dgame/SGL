@@ -50,14 +50,18 @@ namespace sgl {
         }
     }
 
-    void Text::operator =(const Text& txt) {
+    Text& Text::operator =(const Text& txt) {
         _text = txt._text;
         _redraw = true;
+
+        return *this;
     }
 
-    void Text::operator =(const std::string& str) {
+    Text& Text::operator =(const std::string& str) {
         _text = str;
         _redraw = true;
+
+        return *this;
     }
 
     void Text::setFont(Font& font) {

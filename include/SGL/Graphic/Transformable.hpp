@@ -44,8 +44,8 @@ namespace sgl {
             return _local_center;
         }
 
-        void setScale(float scale);
-        void scale(float scale);
+        void setScale(float the_scale);
+        void scale(float the_scale);
 
         float getScale() const {
             return _scale;

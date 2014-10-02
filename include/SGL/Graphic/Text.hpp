@@ -44,12 +44,10 @@ namespace sgl {
         explicit Text(Font&, const std::string& str = "");
         Text(const Text&);
 
-        virtual ~Text() {
+        virtual ~Text() { }
 
-        }
-
-        void operator =(const Text&);
-        void operator =(const std::string&);
+        Text& operator =(const Text&);
+        Text& operator =(const std::string&);
 
         template <typename T>
         void setData(const T&);

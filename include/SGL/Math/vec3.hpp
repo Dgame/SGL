@@ -12,7 +12,7 @@ namespace sgl {
         T z = 0;
 
         vec3() = default;
-        explicit vec3(T mx, T my, T mz);
+        explicit vec3(T cx, T cy, T cz);
 
         template <typename U>
         vec3(const vec3<U>&);
@@ -27,7 +27,7 @@ namespace sgl {
     using vec3f = vec3<float>;
 
     template <typename T>
-    vec3<T>::vec3(T mx, T my, T mz) : x(mx), y(my), z(mz) {
+    vec3<T>::vec3(T cx, T cy, T cz) : x(cx), y(cy), z(cz) {
 
     }
 

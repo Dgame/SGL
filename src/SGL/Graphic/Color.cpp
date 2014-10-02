@@ -21,11 +21,13 @@ namespace sgl {
 
     }
 
-    Color4b::Color4(const Color4<float>& col) {
-        this->red = static_cast<uint8>(col.red * 255);
-        this->green = static_cast<uint8>(col.green * 255);
-        this->blue = static_cast<uint8>(col.blue * 255);
-        this->alpha = static_cast<uint8>(col.alpha * 255);
+    Color4b::Color4(const Color4<float>& col) :
+        red(static_cast<uint8>(col.red * 255)),
+        green(static_cast<uint8>(col.green * 255)),
+        blue(static_cast<uint8>(col.blue * 255)),
+        alpha(static_cast<uint8>(col.alpha * 255))
+    {
+
     }
 
     SDL_Color* Copy(const Color4b& src, SDL_Color* dst) {

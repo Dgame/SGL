@@ -42,14 +42,14 @@ namespace sgl {
         _notifyTransform();
     }
 
-    void Transformable::setScale(float scale) {
-        _scale = scale;
+    void Transformable::setScale(float the_scale) {
+        _scale = the_scale;
 
         _notifyTransform();
     }
 
-    void Transformable::scale(float scale) {
-        _scale += scale;
+    void Transformable::scale(float the_scale) {
+        _scale += the_scale;
 
         _notifyTransform();
     }

@@ -25,18 +25,18 @@ namespace sgl {
     }
 
     mat4x4 mat4x4::getInverse() const {
-        const float det = this->det();
+        const float my_det = this->det();
 
-        if (det > 0.0f) {
-            return mat4x4((this->values[15] * this->values[5] - this->values[7] * this->values[13]) / det,
-                          -(this->values[15] * this->values[4] - this->values[7] * this->values[12]) / det,
-                          (this->values[13] * this->values[4] - this->values[5] * this->values[12]) / det,
-                          -(this->values[15] * this->values[1] - this->values[3] * this->values[13]) / det,
-                          (this->values[15] * this->values[0] - this->values[3] * this->values[12]) / det,
-                          -(this->values[13] * this->values[0] - this->values[1] * this->values[12]) / det,
-                          (this->values[7] * this->values[1] - this->values[3] * this->values[5]) / det,
-                          -(this->values[7] * this->values[0] - this->values[3] * this->values[4]) / det,
-                          (this->values[5] * this->values[0] - this->values[1] * this->values[4]) / det);
+        if (my_det > 0.0f) {
+            return mat4x4((this->values[15] * this->values[5] - this->values[7] * this->values[13]) / my_det,
+                          -(this->values[15] * this->values[4] - this->values[7] * this->values[12]) / my_det,
+                          (this->values[13] * this->values[4] - this->values[5] * this->values[12]) / my_det,
+                          -(this->values[15] * this->values[1] - this->values[3] * this->values[13]) / my_det,
+                          (this->values[15] * this->values[0] - this->values[3] * this->values[12]) / my_det,
+                          -(this->values[13] * this->values[0] - this->values[1] * this->values[12]) / my_det,
+                          (this->values[7] * this->values[1] - this->values[3] * this->values[5]) / my_det,
+                          -(this->values[7] * this->values[0] - this->values[3] * this->values[4]) / my_det,
+                          (this->values[5] * this->values[0] - this->values[1] * this->values[4]) / my_det);
         }
 
         return Identity;
@@ -74,17 +74,17 @@ namespace sgl {
         return Merge(*this, rotation);
     }
 
-    mat4x4& mat4x4::scale(float scale) {
-        mat4x4 scaling(scale, 0, 0,
-                       0, scale, 0,
+    mat4x4& mat4x4::scale(float the_scale) {
+        mat4x4 scaling(the_scale, 0, 0,
+                       0, the_scale, 0,
                        0, 0, 1);
 
         return Merge(*this, scaling);
     }
 
-    mat4x4& mat4x4::scale(float scale, const vec2f& center) {
-        mat4x4 scaling(scale, 0, center.x * (1 - scale),
-                       0, scale, center.y * (1 - scale),
+    mat4x4& mat4x4::scale(float the_scale, const vec2f& center) {
+        mat4x4 scaling(the_scale, 0, center.x * (1 - the_scale),
+                       0, the_scale, center.y * (1 - the_scale),
                        0, 0, 1);
 
         return Merge(*this, scaling);

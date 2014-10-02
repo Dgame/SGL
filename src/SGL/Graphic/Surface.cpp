@@ -5,13 +5,13 @@ namespace sgl {
         this->loadFromFile(filename);
     }
 
-    Surface::Surface(uint16 width, uint16 height, uint8 depth, void* pixels) {
-        if (!pixels) {
-            _surface = SDL_CreateRGBSurface(0, width, height, depth, R_MASK, G_MASK, B_MASK, A_MASK);
+    Surface::Surface(uint16 the_width, uint16 the_height, uint8 depth, void* the_pixels) {
+        if (!the_pixels) {
+            _surface = SDL_CreateRGBSurface(0, the_width, the_height, depth, R_MASK, G_MASK, B_MASK, A_MASK);
             if (!_surface)
                 std::cerr << SDL_GetError() << std::endl;
         }  else
-            this->loadFromMemory(pixels, width, height, depth);
+            this->loadFromMemory(the_pixels, the_width, the_height, depth);
     }
 
     Surface::Surface(SDL_Surface* surface) : _surface(surface) {
@@ -40,12 +40,12 @@ namespace sgl {
         return true;
     }
 
-    bool Surface::loadFromMemory(void* pixels, uint16 width, uint16 height, uint8 depth) {
-        if (pixels) {
+    bool Surface::loadFromMemory(void* the_pixels, uint16 the_width, uint16 the_height, uint8 depth) {
+        if (the_pixels) {
             SDL_FreeSurface(_surface);
 
-            const uint16 pitch = width * (depth / 8);
-            _surface = SDL_CreateRGBSurfaceFrom(pixels, width, height, depth, pitch, R_MASK, G_MASK, B_MASK, A_MASK);
+            const uint16 pitch = the_width * (depth / 8);
+            _surface = SDL_CreateRGBSurfaceFrom(the_pixels, the_width, the_height, depth, pitch, R_MASK, G_MASK, B_MASK, A_MASK);
             if (!_surface) {
                 std::cerr << SDL_GetError() << std::endl;
                 return false;
@@ -118,12 +118,12 @@ namespace sgl {
         if (SDL_MUSTLOCK(_surface))
             SDL_LockSurface(_surface);
 
-        void* pixels = _surface->pixels;
+        void* my_pixels = _surface->pixels;
 
         if (SDL_MUSTLOCK(_surface))
             SDL_UnlockSurface(_surface);
 
-        return pixels;
+        return my_pixels;
     }
 
     bool Surface::operator ==(const Surface& other) {

@@ -11,7 +11,7 @@ namespace sgl {
         T y = 0;
 
         vec2() = default;
-        explicit vec2(T mx, T my);
+        explicit vec2(T cx, T cy);
 
         template <typename U>
         vec2(const vec2<U>&);
@@ -26,7 +26,7 @@ namespace sgl {
     using vec2f = vec2<float>;
 
     template <typename T>
-    vec2<T>::vec2(T mx, T my) : x(mx), y(my) {
+    vec2<T>::vec2(T cx, T cy) : x(cx), y(cy) {
 
     }
 

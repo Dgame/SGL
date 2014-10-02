@@ -29,8 +29,8 @@ namespace sgl {
         }
     }
 
-    void Texture::create(uint16 width, uint16 height) {
-        this->loadFromMemory(nullptr, width, height, Format::RGB);
+    void Texture::create(uint16 the_width, uint16 the_height) {
+        this->loadFromMemory(nullptr, the_width, the_height, Format::RGB);
     }
 
     void Texture::load(const Surface& srfc) {
@@ -56,25 +56,25 @@ namespace sgl {
         this->loadFromMemory(srfc.pixels(), srfc.width(), srfc.height(), fmt);
     }
 
-    void Texture::loadFromMemory(void* pixels, uint16 width, uint16 height, Format fmt) {
+    void Texture::loadFromMemory(void* pixels, uint16 the_width, uint16 the_height, Format fmt) {
         if (_texId == 0)
             glCheck(glGenTextures(1, &_texId));
 
         this->bind();
 
-        glCheck(glTexImage2D(GL_TEXTURE_2D, 0, fmt, width, height, 0, fmt, GL_UNSIGNED_BYTE, pixels));
+        glCheck(glTexImage2D(GL_TEXTURE_2D, 0, fmt, the_width, the_height, 0, fmt, GL_UNSIGNED_BYTE, pixels));
         glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, _repeat ? GL_REPEAT : GL_CLAMP));
         glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, _repeat ? GL_REPEAT : GL_CLAMP));
         glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, _smooth ? GL_LINEAR : GL_NEAREST));
         glCheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, _smooth ? GL_LINEAR : GL_NEAREST));
 
-        _width = width;
-        _height = height;
+        _width = the_width;
+        _height = the_height;
 
         this->unbind();
     }
 
-    void Texture::fetchPixelData(void* pixels) const {
+    void Texture::fetchPixels(void* pixels) const {
         if (pixels != nullptr) {
             this->bind();
 

@@ -32,13 +32,13 @@ namespace sgl {
         Surface() = default;
         Surface(const Surface&);
         explicit Surface(const std::string&);
-        explicit Surface(uint16 width, uint16 height, uint8 depth = 32, void* pixels = nullptr);
+        explicit Surface(uint16 the_width, uint16 the_height, uint8 depth = 32, void* the_pixels = nullptr);
         explicit Surface(SDL_Surface*);
 
         virtual ~Surface();
 
         bool loadFromFile(const std::string&);
-        bool loadFromMemory(void*, uint16 width, uint16 height, uint8 depth = 32);
+        bool loadFromMemory(void*, uint16 the_width, uint16 the_height, uint8 depth = 32);
         bool saveToFile(const std::string&) const;
 
         void blit(const Surface&, const ShortRect* src = nullptr, const ShortRect* dest = nullptr) const;
@@ -77,7 +77,7 @@ namespace sgl {
 
         void* pixels() const;
 
-        int32 useCount() const {
+        int32 usage() const {
             if (!_surface)
                 return 0;
             return _surface->refcount;

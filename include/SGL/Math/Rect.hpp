@@ -14,16 +14,16 @@ namespace sgl {
         T height = 0;
 
         Rect() = default;
-        explicit Rect(T mx, T my, T w, T h);
+        explicit Rect(T cx, T cy, T w, T h);
 
         template <typename U>
-        explicit Rect(const Rect<U>& rect);
+        explicit Rect(const Rect<U>&);
 
         vec2<T> getCenter() const;
 
-        void move(T x, T y) {
-            this->x += x;
-            this->y += y;
+        void move(T cx, T cy) {
+            this->x += cx;
+            this->y += cy;
         }
 
         void move(const vec2<T>& vec) {
@@ -42,7 +42,7 @@ namespace sgl {
     };
 
     template <typename T>
-    Rect<T>::Rect(T mx, T my, T w, T h) : x(mx), y(my), width(w), height(h) {
+    Rect<T>::Rect(T cx, T cy, T w, T h) : x(cx), y(cy), width(w), height(h) {
 
     }
 
@@ -70,9 +70,9 @@ namespace sgl {
     }
 
     template <typename T>
-    bool Rect<T>::contains(T x, T y) const {
+    bool Rect<T>::contains(T cx, T cy) const {
         SDL_Rect a;
-        SDL_Point point(x, y);
+        SDL_Point point(cx, cy);
 
         return SDL_PointInRect(&point, Copy(*this, &a));
     }

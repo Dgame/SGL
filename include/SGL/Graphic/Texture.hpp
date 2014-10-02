@@ -50,9 +50,9 @@ namespace sgl {
             return _height;
         }
 
-        void create(uint16 width, uint16 height);
+        void create(uint16 the_width, uint16 the_height);
         void load(const Surface&);
-        void loadFromMemory(void*, uint16 width, uint16 height, Format fmt);
+        void loadFromMemory(void*, uint16 the_width, uint16 the_height, Format fmt);
 
         /**
         * Binds this Texture.
@@ -70,7 +70,7 @@ namespace sgl {
             glCheck(glBindTexture(GL_TEXTURE_2D, 0));
         }
 
-        void fetchPixelData(void*) const;
+        void fetchPixels(void*) const;
     };
 }
 

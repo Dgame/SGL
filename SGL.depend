@@ -1679,7 +1679,7 @@
 1412260569 c:\users\besitzer\documents\github\sgl\include\sgl\system\stopwatch.hpp
 	<SGL/Core/Types.hpp>
 
-1412262505 c:\users\besitzer\documents\github\sgl\include\sgl\system\font.hpp
+1412278769 c:\users\besitzer\documents\github\sgl\include\sgl\system\font.hpp
 	<string>
 	<SGL/Core/SDL_TTF.hpp>
 	<SGL/Core/Types.hpp>
@@ -1705,15 +1705,15 @@
 	<SGL/Math/vec3.hpp>
 	<SGL/Math/Rect.hpp>
 
-1411749726 c:\users\besitzer\documents\github\sgl\include\sgl\math\vec2.hpp
+1412279196 c:\users\besitzer\documents\github\sgl\include\sgl\math\vec2.hpp
 	<algorithm>
 	<SGL/Core/Types.hpp>
 
-1411749710 c:\users\besitzer\documents\github\sgl\include\sgl\math\vec3.hpp
+1412279234 c:\users\besitzer\documents\github\sgl\include\sgl\math\vec3.hpp
 	<algorithm>
 	<SGL/Core/Types.hpp>
 
-1411394845 c:\users\besitzer\documents\github\sgl\include\sgl\math\rect.hpp
+1412279166 c:\users\besitzer\documents\github\sgl\include\sgl\math\rect.hpp
 	<SGL/Core/SDL.hpp>
 	<SGL/Core/Types.hpp>
 	<SGL/Math/vec2.hpp>
@@ -1771,10 +1771,10 @@
 
 1411394845 c:\users\besitzer\documents\github\sgl\include\sgl\graphic\drawable.hpp
 
-1411636916 c:\users\besitzer\documents\github\sgl\include\sgl\graphic\transformable.hpp
+1412279958 c:\users\besitzer\documents\github\sgl\include\sgl\graphic\transformable.hpp
 	<SGL/Math/mat4.hpp>
 
-1412262487 c:\users\besitzer\documents\github\sgl\include\sgl\graphic\surface.hpp
+1412279606 c:\users\besitzer\documents\github\sgl\include\sgl\graphic\surface.hpp
 	<string>
 	<SGL/Core/SDL_Image.hpp>
 	<SGL/Core/Check.hpp>
@@ -1785,7 +1785,7 @@
 	<iostream>
 	<SGL/Core/Config.hpp>
 
-1411394845 c:\users\besitzer\documents\github\sgl\include\sgl\graphic\texture.hpp
+1412279844 c:\users\besitzer\documents\github\sgl\include\sgl\graphic\texture.hpp
 	<SGL/Core/Types.hpp>
 	<SGL/Core/Check.hpp>
 	<SGL/Core/GL.hpp>
@@ -1803,7 +1803,7 @@
 	<SGL/Math/Vertex.hpp>
 	<SGL/Math/Rect.hpp>
 
-1412260857 c:\users\besitzer\documents\github\sgl\include\sgl\graphic\text.hpp
+1412279632 c:\users\besitzer\documents\github\sgl\include\sgl\graphic\text.hpp
 	<string>
 	<sstream>
 	<SGL/Core/Config.hpp>
@@ -1851,7 +1851,7 @@
 	<SGL/Core/Check.hpp>
 	<SGL/Core/Init.hpp>
 
-1412260180 source:c:\users\besitzer\documents\github\sgl\src\sgl\graphic\color.cpp
+1412278870 source:c:\users\besitzer\documents\github\sgl\src\sgl\graphic\color.cpp
 	<algorithm>
 	<SGL/Core/SDL.hpp>
 	<SGL/Graphic/Color.hpp>
@@ -1869,20 +1869,20 @@
 	<SGL/Math/Geometry.hpp>
 	<SGL/Window/Window.hpp>
 
-1411764896 source:c:\users\besitzer\documents\github\sgl\src\sgl\graphic\surface.cpp
+1412279693 source:c:\users\besitzer\documents\github\sgl\src\sgl\graphic\surface.cpp
 	<SGL/Graphic/Surface.hpp>
 
-1412260845 source:c:\users\besitzer\documents\github\sgl\src\sgl\graphic\text.cpp
+1412279669 source:c:\users\besitzer\documents\github\sgl\src\sgl\graphic\text.cpp
 	<SGL/Graphic/Text.hpp>
 	<SGL/Graphic/Surface.hpp>
 	<SGL/Math/Geometry.hpp>
 	<SGL/Window/Window.hpp>
 
-1411394846 source:c:\users\besitzer\documents\github\sgl\src\sgl\graphic\texture.cpp
+1412279882 source:c:\users\besitzer\documents\github\sgl\src\sgl\graphic\texture.cpp
 	<SGL/Graphic/Texture.hpp>
 	<SGL/Graphic/Surface.hpp>
 
-1411636876 source:c:\users\besitzer\documents\github\sgl\src\sgl\graphic\transformable.cpp
+1412280090 source:c:\users\besitzer\documents\github\sgl\src\sgl\graphic\transformable.cpp
 	<SGL/Graphic/Transformable.hpp>
 	<SGL/Core/Config.hpp>
 
