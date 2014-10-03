@@ -956,7 +956,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1412333598 source:c:\users\besitzer\documents\github\sgl\main.cpp
+1412371704 source:c:\users\besitzer\documents\github\sgl\main.cpp
 	<iostream>
 	<vector>
 	<SGL/all.hpp>
@@ -1688,7 +1688,7 @@
 1412260880 c:\users\besitzer\documents\github\sgl\include\sgl\graphic\color.hpp
 	<SGL/Core/Types.hpp>
 
-1412333483 c:\users\besitzer\documents\github\sgl\include\sgl\window\window.hpp
+1412371617 c:\users\besitzer\documents\github\sgl\include\sgl\window\window.hpp
 	<string>
 	<vector>
 	<SGL/Math/mat4.hpp>
@@ -1706,18 +1706,21 @@
 	<SGL/Math/vec3.hpp>
 	<SGL/Math/Rect.hpp>
 
-1412279196 c:\users\besitzer\documents\github\sgl\include\sgl\math\vec2.hpp
+1412347202 c:\users\besitzer\documents\github\sgl\include\sgl\math\vec2.hpp
 	<algorithm>
 	<SGL/Core/Types.hpp>
+	<SGL/Math/vec2.inl>
 
-1412279234 c:\users\besitzer\documents\github\sgl\include\sgl\math\vec3.hpp
+1412347274 c:\users\besitzer\documents\github\sgl\include\sgl\math\vec3.hpp
 	<algorithm>
 	<SGL/Core/Types.hpp>
+	<SGL/Math/vec3.inl>
 
-1412279166 c:\users\besitzer\documents\github\sgl\include\sgl\math\rect.hpp
+1412348768 c:\users\besitzer\documents\github\sgl\include\sgl\math\rect.hpp
 	<SGL/Core/SDL.hpp>
 	<SGL/Core/Types.hpp>
 	<SGL/Math/vec2.hpp>
+	<SGL/Math/Rect.inl>
 
 1411750413 c:\users\besitzer\documents\github\sgl\include\sgl\math\vertex.hpp
 	<SGL/Math/vec2.hpp>
@@ -1775,7 +1778,7 @@
 1412279958 c:\users\besitzer\documents\github\sgl\include\sgl\graphic\transformable.hpp
 	<SGL/Math/mat4.hpp>
 
-1412279606 c:\users\besitzer\documents\github\sgl\include\sgl\graphic\surface.hpp
+1412371548 c:\users\besitzer\documents\github\sgl\include\sgl\graphic\surface.hpp
 	<string>
 	<SGL/Core/SDL_Image.hpp>
 	<SGL/Core/Check.hpp>
@@ -1870,7 +1873,7 @@
 	<SGL/Math/Geometry.hpp>
 	<SGL/Window/Window.hpp>
 
-1412279693 source:c:\users\besitzer\documents\github\sgl\src\sgl\graphic\surface.cpp
+1412371671 source:c:\users\besitzer\documents\github\sgl\src\sgl\graphic\surface.cpp
 	<SGL/Graphic/Surface.hpp>
 
 1412279669 source:c:\users\besitzer\documents\github\sgl\src\sgl\graphic\text.cpp
@@ -1910,7 +1913,7 @@
 	<SGL/Core/SDL.hpp>
 	<SGL/System/StopWatch.hpp>
 
-1412333676 source:c:\users\besitzer\documents\github\sgl\src\sgl\window\window.cpp
+1412371406 source:c:\users\besitzer\documents\github\sgl\src\sgl\window\window.cpp
 	<SGL/Window/Window.hpp>
 	<SGL/Graphic/Drawable.hpp>
 	<SGL/Graphic/Texture.hpp>
@@ -1931,7 +1934,7 @@
 	"../libs/64/SDL2/SDL_ttf.h"
 	"../libs/32/SDL2/SDL_ttf.h"
 
-1412333330 c:\users\besitzer\documents\github\sgl\include\sgl\system\display.hpp
+1412371646 c:\users\besitzer\documents\github\sgl\include\sgl\system\display.hpp
 	<SGL/Core/Types.hpp>
 	<SGL/Math/Rect.hpp>
 
@@ -1945,8 +1948,14 @@
 	"../libs/64/SDL2/SDL_mixer.h"
 	"../libs/32/SDL2/SDL_mixer.h"
 
-1412333614 source:c:\users\besitzer\documents\github\sgl\src\sgl\system\display.cpp
+1412371650 source:c:\users\besitzer\documents\github\sgl\src\sgl\system\display.cpp
+	<SGL/System/Display.hpp>
 	<SGL/Core/SDL.hpp>
 	<SGL/Core/Check.hpp>
-	<SGL/System/Display.hpp>
+
+1412347225 c:\users\besitzer\documents\github\sgl\include\sgl\math\vec2.inl
+
+1412348376 c:\users\besitzer\documents\github\sgl\include\sgl\math\rect.inl
+
+1412347608 c:\users\besitzer\documents\github\sgl\include\sgl\math\vec3.inl
 

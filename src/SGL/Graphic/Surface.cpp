@@ -111,6 +111,11 @@ namespace sgl {
             SDL_Check(SDL_SetSurfaceRLE(_surface, enable ? 1 : 0));
     }
 
+    void Surface::setAsIcon() const {
+        SDL_Window* window = SDL_GL_GetCurrentWindow();
+        SDL_SetWindowIcon(window, _surface);
+    }
+
     void* Surface::pixels() const {
         if (!_surface)
             return nullptr;
@@ -124,6 +129,10 @@ namespace sgl {
             SDL_UnlockSurface(_surface);
 
         return my_pixels;
+    }
+
+    Surface::operator bool() const {
+        return _surface != nullptr;
     }
 
     bool Surface::operator ==(const Surface& other) {

@@ -91,10 +91,6 @@ namespace sgl {
         return mode;
     }
 
-    int16 Window::getDisplayIndex() const {
-        return SDL_Check(SDL_GetWindowDisplayIndex(_window));
-    }
-
     void Window::loadProjection() const {
         glCheck(glMatrixMode(GL_PROJECTION));
         glCheck(glLoadMatrixf(_projection.values));
@@ -134,10 +130,6 @@ namespace sgl {
             SDL_EnableScreenSaver();
         else
             SDL_DisableScreenSaver();
-    }
-
-    void Window::setIcon(const Surface& icon) const {
-        SDL_SetWindowIcon(_window, icon._surface);
     }
 
     void Window::setSwapInterval(SwapInterval interval) const {

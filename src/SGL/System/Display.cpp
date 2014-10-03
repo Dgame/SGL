@@ -1,6 +1,6 @@
+#include <SGL/System/Display.hpp>
 #include <SGL/Core/SDL.hpp>
 #include <SGL/Core/Check.hpp>
-#include <SGL/System/Display.hpp>
 
 namespace sgl {
     DisplayMode::DisplayMode(uint16 the_width, uint16 the_height, uint16 the_refresh_rate) :
@@ -22,6 +22,12 @@ namespace sgl {
         sdl_mode->refresh_rate = mode.refresh_rate;
         sdl_mode->driverdata = nullptr;
 	}
+
+    int16 GetWindowDisplayIndex() {
+        SDL_Window* window = SDL_GL_GetCurrentWindow();
+
+        return SDL_Check(SDL_GetWindowDisplayIndex(window));
+    }
 
     DisplayMode GetDesktopDisplayMode(uint16 index) {
         SDL_DisplayMode sdl_mode;

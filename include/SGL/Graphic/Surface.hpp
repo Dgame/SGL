@@ -20,12 +20,8 @@
 #endif
 
 namespace sgl {
-    class Window;
-
     class Surface {
     private:
-        friend class Window;
-
         SDL_Surface* _surface = nullptr;
 
     public:
@@ -50,6 +46,7 @@ namespace sgl {
         void fill(const Color4b&) const;
 
         void setRLE(bool enable) const;
+        void setAsIcon() const;
 
         uint16 width() const {
             if (!_surface)
@@ -82,6 +79,8 @@ namespace sgl {
                 return 0;
             return _surface->refcount;
         }
+
+        explicit operator bool() const;
 
         bool operator ==(const Surface&);
         bool operator !=(const Surface&);

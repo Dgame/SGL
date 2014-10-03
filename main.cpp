@@ -17,6 +17,8 @@ int main() {
     sgl::Surface wood("../../samples/Images/holz.jpg");
     sgl::Texture wood_tex(wood);
 
+    wood.setAsIcon();
+
     shape.setTexture(&wood_tex);
     shape.setTextureRect(sgl::FloatRect(50, 50, 80, 80));
 

@@ -44,7 +44,6 @@ namespace sgl {
 
         void setDisplayMode(const DisplayMode&);
         DisplayMode getDisplayMode() const;
-        int16 getDisplayIndex() const;
 
         Style getStyle() const;
         void toggle(Style style) const;
@@ -63,8 +62,6 @@ namespace sgl {
 
         void setScreenSaver(bool enable) const;
         bool hasScreenSaver() const;
-
-        void setIcon(const Surface&) const;
 
         void setSwapInterval(SwapInterval interval) const;
         SwapInterval getSwapInterval() const;
