@@ -8,8 +8,14 @@
 namespace sgl {
     int32 Window::_count = 0;
 
-    Window::Window(uint16 width, uint16 height, const std::string& title, Style style)
-        : Window(ShortRect(100, 100, width, height), title, style)
+    Window::Window(uint16 width, uint16 height, const std::string& title, Style style) :
+        Window(ShortRect(100, 100, width, height), title, style)
+    {
+
+    }
+
+    Window::Window(const DisplayMode& mode, const std::string& title, Style style) :
+        Window(mode.width, mode.height, title, style)
     {
 
     }
@@ -63,8 +69,30 @@ namespace sgl {
         Intern::quitSDL(_count);
     }
 
-    uint32 Window::getID() const {
-        return SDL_GetWindowID(_window);
+    void Window::setDisplayMode(const DisplayMode& mode) {
+        if (this->getStyle() & Style::Fullscreen) {
+            SDL_DisplayMode sdl_mode;
+            Copy(mode, &sdl_mode);
+
+            SDL_Check(SDL_SetWindowDisplayMode(_window, &sdl_mode));
+        } else {
+            this->setSize(mode.width, mode.height);
+        }
+    }
+
+    DisplayMode Window::getDisplayMode() const {
+        SDL_DisplayMode sdl_mode;
+        DisplayMode mode;
+
+        const int result = SDL_Check(SDL_GetWindowDisplayMode(_window, &sdl_mode));
+        if (result == 0)
+            Copy(&sdl_mode, mode);
+
+        return mode;
+    }
+
+    int16 Window::getDisplayIndex() const {
+        return SDL_Check(SDL_GetWindowDisplayIndex(_window));
     }
 
     void Window::loadProjection() const {

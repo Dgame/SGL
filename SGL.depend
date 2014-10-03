@@ -956,7 +956,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1411754984 source:c:\users\besitzer\documents\github\sgl\main.cpp
+1412333598 source:c:\users\besitzer\documents\github\sgl\main.cpp
 	<iostream>
 	<vector>
 	<SGL/all.hpp>
@@ -1669,7 +1669,7 @@
 	<SGL/System/Keyboard.hpp>
 	<SGL/System/Mouse.hpp>
 
-1411554848 c:\users\besitzer\documents\github\sgl\include\sgl\core\types.hpp
+1412281825 c:\users\besitzer\documents\github\sgl\include\sgl\core\types.hpp
 	<cstdint>
 
 1411394845 c:\users\besitzer\documents\github\sgl\include\sgl\system\battery.hpp
@@ -1688,7 +1688,7 @@
 1412260880 c:\users\besitzer\documents\github\sgl\include\sgl\graphic\color.hpp
 	<SGL/Core/Types.hpp>
 
-1412262915 c:\users\besitzer\documents\github\sgl\include\sgl\window\window.hpp
+1412333483 c:\users\besitzer\documents\github\sgl\include\sgl\window\window.hpp
 	<string>
 	<vector>
 	<SGL/Math/mat4.hpp>
@@ -1696,6 +1696,7 @@
 	<SGL/Math/Vertex.hpp>
 	<SGL/Window/Style.hpp>
 	<SGL/Window/SwapInterval.hpp>
+	<SGL/System/Display.hpp>
 
 1411755570 c:\users\besitzer\documents\github\sgl\include\sgl\core\init.hpp
 
@@ -1886,7 +1887,7 @@
 	<SGL/Graphic/Transformable.hpp>
 	<SGL/Core/Config.hpp>
 
-1411394846 source:c:\users\besitzer\documents\github\sgl\src\sgl\math\mat4.cpp
+1412280121 source:c:\users\besitzer\documents\github\sgl\src\sgl\math\mat4.cpp
 	<cmath>
 	<limits>
 	<SGL/Math/mat4.hpp>
@@ -1909,7 +1910,7 @@
 	<SGL/Core/SDL.hpp>
 	<SGL/System/StopWatch.hpp>
 
-1412262948 source:c:\users\besitzer\documents\github\sgl\src\sgl\window\window.cpp
+1412333676 source:c:\users\besitzer\documents\github\sgl\src\sgl\window\window.cpp
 	<SGL/Window/Window.hpp>
 	<SGL/Graphic/Drawable.hpp>
 	<SGL/Graphic/Texture.hpp>
@@ -1930,7 +1931,7 @@
 	"../libs/64/SDL2/SDL_ttf.h"
 	"../libs/32/SDL2/SDL_ttf.h"
 
-1412262770 c:\users\besitzer\documents\github\sgl\include\sgl\system\display.hpp
+1412333330 c:\users\besitzer\documents\github\sgl\include\sgl\system\display.hpp
 	<SGL/Core/Types.hpp>
 	<SGL/Math/Rect.hpp>
 
@@ -1944,9 +1945,8 @@
 	"../libs/64/SDL2/SDL_mixer.h"
 	"../libs/32/SDL2/SDL_mixer.h"
 
-1412263065 source:c:\users\besitzer\documents\github\sgl\src\sgl\system\display.cpp
+1412333614 source:c:\users\besitzer\documents\github\sgl\src\sgl\system\display.cpp
 	<SGL/Core/SDL.hpp>
 	<SGL/Core/Check.hpp>
 	<SGL/System/Display.hpp>
-	<SGL/Window/Window.hpp>
 

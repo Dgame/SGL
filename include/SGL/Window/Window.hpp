@@ -8,6 +8,7 @@
 #include <SGL/Math/Vertex.hpp>
 #include <SGL/Window/Style.hpp>
 #include <SGL/Window/SwapInterval.hpp>
+#include <SGL/System/Display.hpp>
 
 namespace sgl {
     class Texture;
@@ -27,6 +28,7 @@ namespace sgl {
 
     public:
         explicit Window(uint16 width, uint16 height, const std::string&, Style style = Style::Default);
+        explicit Window(const DisplayMode&, const std::string&, Style style = Style::Default);
         explicit Window(const ShortRect&, const std::string&, Style style = Style::Default);
         Window(const Window&) = delete;
 
@@ -40,7 +42,9 @@ namespace sgl {
             return _open;
         }
 
-        uint32 getID() const;
+        void setDisplayMode(const DisplayMode&);
+        DisplayMode getDisplayMode() const;
+        int16 getDisplayIndex() const;
 
         Style getStyle() const;
         void toggle(Style style) const;
