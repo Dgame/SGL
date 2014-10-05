@@ -53,6 +53,8 @@ namespace sgl {
     void Sprite::setTexture(Texture& tex) {
         _texture = &tex;
 
+        this->setColor(Color4b::White);
+
         _adjustClipRect();
         _updateVertices();
     }

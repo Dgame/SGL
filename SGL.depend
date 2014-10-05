@@ -1706,16 +1706,14 @@
 	<SGL/Math/vec3.hpp>
 	<SGL/Math/Rect.hpp>
 
-1412528525 c:\users\besitzer\documents\github\sgl\include\sgl\math\vec2.hpp
+1412529149 c:\users\besitzer\documents\github\sgl\include\sgl\math\vec2.hpp
 	<algorithm>
 	<SGL/Core/Types.hpp>
-	<SGL/Core/Traits.hpp>
 	<SGL/Math/vec2.inl>
 
-1412528532 c:\users\besitzer\documents\github\sgl\include\sgl\math\vec3.hpp
+1412529202 c:\users\besitzer\documents\github\sgl\include\sgl\math\vec3.hpp
 	<algorithm>
 	<SGL/Core/Types.hpp>
-	<SGL/Core/Traits.hpp>
 	<SGL/Math/vec3.inl>
 
 1412348768 c:\users\besitzer\documents\github\sgl\include\sgl\math\rect.hpp
@@ -1869,7 +1867,7 @@
 	<SGL/Math/Geometry.hpp>
 	<SGL/Window/Window.hpp>
 
-1411764218 source:c:\users\besitzer\documents\github\sgl\src\sgl\graphic\sprite.cpp
+1412529451 source:c:\users\besitzer\documents\github\sgl\src\sgl\graphic\sprite.cpp
 	<SGL/Graphic/Sprite.hpp>
 	<SGL/Graphic/Texture.hpp>
 	<SGL/Math/Geometry.hpp>
@@ -1955,13 +1953,21 @@
 	<SGL/Core/SDL.hpp>
 	<SGL/Core/Check.hpp>
 
-1412528422 c:\users\besitzer\documents\github\sgl\include\sgl\math\vec2.inl
+1412529828 c:\users\besitzer\documents\github\sgl\include\sgl\math\vec2.inl
 
 1412528354 c:\users\besitzer\documents\github\sgl\include\sgl\math\rect.inl
 
-1412528405 c:\users\besitzer\documents\github\sgl\include\sgl\math\vec3.inl
+1412529171 c:\users\besitzer\documents\github\sgl\include\sgl\math\vec3.inl
 
 1412528493 c:\users\besitzer\documents\github\sgl\include\sgl\core\traits.hpp
 	<limits>
 	<type_traits>
+
+1412529231 source:c:\users\besitzer\documents\github\sgl\src\sgl\math\vec2.cpp
+	<SGL/Math/vec2.hpp>
+	<SGL/Core/Traits.hpp>
+
+1412529242 source:c:\users\besitzer\documents\github\sgl\src\sgl\math\vec3.cpp
+	<SGL/Math/vec3.hpp>
+	<SGL/Core/Traits.hpp>
 

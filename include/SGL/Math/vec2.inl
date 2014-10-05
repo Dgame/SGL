@@ -112,19 +112,13 @@ bool operator ==(const vec2<T>& lhs, const vec2<T>& rhs) {
 }
 
 template <>
-bool operator ==(const vec2<float>& lhs, const vec2<float>& rhs) {
-    return equal_floating_point(lhs.x, rhs.x) && equal_floating_point(lhs.y, rhs.y);
-}
+bool operator ==(const vec2<float>& lhs, const vec2<float>& rhs);
 
 template <>
-bool operator ==(const vec2<double>& lhs, const vec2<double>& rhs) {
-    return equal_floating_point(lhs.x, rhs.x) && equal_floating_point(lhs.y, rhs.y);
-}
+bool operator ==(const vec2<double>& lhs, const vec2<double>& rhs);
 
 template <>
-bool operator ==(const vec2<long double>& lhs, const vec2<long double>& rhs) {
-    return equal_floating_point(lhs.x, rhs.x) && equal_floating_point(lhs.y, rhs.y);
-}
+bool operator ==(const vec2<long double>& lhs, const vec2<long double>& rhs);
 
 template <typename T>
 bool operator !=(const vec2<T>& lhs, const vec2<T>& rhs) {
