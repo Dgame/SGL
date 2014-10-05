@@ -1957,11 +1957,12 @@
 
 1412528354 c:\users\besitzer\documents\github\sgl\include\sgl\math\rect.inl
 
-1412529171 c:\users\besitzer\documents\github\sgl\include\sgl\math\vec3.inl
+1412530047 c:\users\besitzer\documents\github\sgl\include\sgl\math\vec3.inl
 
-1412528493 c:\users\besitzer\documents\github\sgl\include\sgl\core\traits.hpp
+1412531230 c:\users\besitzer\documents\github\sgl\include\sgl\core\traits.hpp
 	<limits>
 	<type_traits>
+	<cmath>
 
 1412529231 source:c:\users\besitzer\documents\github\sgl\src\sgl\math\vec2.cpp
 	<SGL/Math/vec2.hpp>

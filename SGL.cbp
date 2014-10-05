@@ -12,7 +12,6 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="-g" />
 					<Add option="-D_DEBUG" />
@@ -20,11 +19,10 @@
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/SGL" prefix_auto="1" extension_auto="1" />
-				<Option working_dir="bin/Release" />
+				<Option working_dir="" />
 				<Option object_output="obj/Release/" />
-				<Option type="1" />
+				<Option type="2" />
 				<Option compiler="gcc" />
-				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="-fexpensive-optimizations" />
 					<Add option="-O3" />
@@ -74,6 +72,10 @@
 		<Unit filename="include/SGL/Core/GL.hpp" />
 		<Unit filename="include/SGL/Core/Init.hpp" />
 		<Unit filename="include/SGL/Core/SDL.hpp" />
+		<Unit filename="include/SGL/Core/SDL_Image.hpp" />
+		<Unit filename="include/SGL/Core/SDL_Mixer.hpp" />
+		<Unit filename="include/SGL/Core/SDL_TTF.hpp" />
+		<Unit filename="include/SGL/Core/Traits.hpp" />
 		<Unit filename="include/SGL/Core/Types.hpp" />
 		<Unit filename="include/SGL/Graphic.hpp" />
 		<Unit filename="include/SGL/Graphic/Color.hpp" />
@@ -87,11 +89,15 @@
 		<Unit filename="include/SGL/Math.hpp" />
 		<Unit filename="include/SGL/Math/Geometry.hpp" />
 		<Unit filename="include/SGL/Math/Rect.hpp" />
+		<Unit filename="include/SGL/Math/Rect.inl" />
 		<Unit filename="include/SGL/Math/Vertex.hpp" />
 		<Unit filename="include/SGL/Math/mat4.hpp" />
 		<Unit filename="include/SGL/Math/vec2.hpp" />
+		<Unit filename="include/SGL/Math/vec2.inl" />
 		<Unit filename="include/SGL/Math/vec3.hpp" />
+		<Unit filename="include/SGL/Math/vec3.inl" />
 		<Unit filename="include/SGL/System/Battery.hpp" />
+		<Unit filename="include/SGL/System/Display.hpp" />
 		<Unit filename="include/SGL/System/Event.hpp" />
 		<Unit filename="include/SGL/System/Font.hpp" />
 		<Unit filename="include/SGL/System/Keyboard.hpp" />
@@ -116,7 +122,10 @@
 		<Unit filename="src/SGL/Graphic/Transformable.cpp" />
 		<Unit filename="src/SGL/Math/Vertex.cpp" />
 		<Unit filename="src/SGL/Math/mat4.cpp" />
+		<Unit filename="src/SGL/Math/vec2.cpp" />
+		<Unit filename="src/SGL/Math/vec3.cpp" />
 		<Unit filename="src/SGL/System/Battery.cpp" />
+		<Unit filename="src/SGL/System/Display.cpp" />
 		<Unit filename="src/SGL/System/Event.cpp" />
 		<Unit filename="src/SGL/System/Font.cpp" />
 		<Unit filename="src/SGL/System/StopWatch.cpp" />
