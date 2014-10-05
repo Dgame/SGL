@@ -83,7 +83,6 @@ void Copy(const SDL_Rect* src, Rect<T>& rect) {
 template <typename T>
 bool operator ==(const Rect<T>& lhs, const Rect<T>& rhs) {
     SDL_Rect a, b;
-
     return SDL_RectEquals(Copy(lhs, &a), Copy(rhs, &b));
 }
 

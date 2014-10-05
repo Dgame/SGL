@@ -134,7 +134,22 @@ vec3<T>& operator /=(vec3<T>& lhs, T num) {
 
 template <typename T>
 bool operator ==(const vec3<T>& lhs, const vec3<T>& rhs) {
-    return lhs.x == rhs.x && lhs.y = rhs.y && lhs.z == rhs.z;
+    return lhs.x == rhs.x && lhs.y == rhs.y && lhs.z == rhs.z;
+}
+
+template <>
+bool operator ==(const vec3<float>& lhs, const vec3<float>& rhs) {
+    return equal_floating_point(lhs.x, rhs.x) && equal_floating_point(lhs.y, rhs.y) && equal_floating_point(lhs.z, rhs.z);
+}
+
+template <>
+bool operator ==(const vec3<double>& lhs, const vec3<double>& rhs) {
+    return equal_floating_point(lhs.x, rhs.x) && equal_floating_point(lhs.y, rhs.y) && equal_floating_point(lhs.z, rhs.z);
+}
+
+template <>
+bool operator ==(const vec3<long double>& lhs, const vec3<long double>& rhs) {
+    return equal_floating_point(lhs.x, rhs.x) && equal_floating_point(lhs.y, rhs.y) && equal_floating_point(lhs.z, rhs.z);
 }
 
 template <typename T>

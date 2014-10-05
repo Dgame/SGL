@@ -3,6 +3,7 @@
 
 #include <algorithm>
 #include <SGL/Core/Types.hpp>
+#include <SGL/Core/Traits.hpp>
 
 namespace sgl {
     template <typename T>
