@@ -29,7 +29,7 @@ namespace sgl {
     }
 
     void StopWatch::reset() {
-        _startTime = DurationMs();
+        _startTime = DurationAsMs();
     }
 
     Time StopWatch::getElapsedTime() const {
@@ -37,40 +37,21 @@ namespace sgl {
     }
 
     uint32 StopWatch::getElapsedMs() const {
-        return DurationMs() - _startTime;
-    }
-
-    /**
-    * Returns the current framerate per second.
-    */
-    uint32 GetFPS(uint32* elapsedMs) {
-        const uint32 elapsed_ms = DurationMs() - FpsStartTime;
-        if (elapsedMs)
-            *elapsedMs = elapsed_ms;
-
-        if (elapsed_ms >= 1000) {
-            CurrentFps = NumFrames;
-            NumFrames = 0;
-            FpsStartTime = DurationMs();
-        }
-
-        NumFrames++;
-
-        return CurrentFps;
+        return DurationAsMs() - _startTime;
     }
 
     /**
     * Returns the milliseconds since the application was started.
     */
-    uint32 DurationMs() {
+    uint32 DurationAsMs() {
         return SDL_GetTicks();
     }
 
     /**
     * Returns the Time since the application was started.
     */
-    Time DurationTime() {
-        return Time(DurationMs());
+    Time DurationAsTime() {
+        return Time(DurationAsMs());
     }
 
     /**
@@ -78,5 +59,24 @@ namespace sgl {
     */
     void WaitFor(uint32 msecs) {
         SDL_Delay(msecs);
+    }
+
+    /**
+    * Returns the current framerate per second.
+    */
+    uint32 GetFPS(uint32* elapsedMs) {
+        const uint32 elapsed_ms = DurationAsMs() - FpsStartTime;
+        if (elapsedMs)
+            *elapsedMs = elapsed_ms;
+
+        if (elapsed_ms >= 1000) {
+            CurrentFps = NumFrames;
+            NumFrames = 0;
+            FpsStartTime = DurationAsMs();
+        }
+
+        NumFrames++;
+
+        return CurrentFps;
     }
 }

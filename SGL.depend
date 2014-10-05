@@ -1676,7 +1676,7 @@
 	<SGL/Core/SDL.hpp>
 	<SGL/Core/Types.hpp>
 
-1412260569 c:\users\besitzer\documents\github\sgl\include\sgl\system\stopwatch.hpp
+1412372833 c:\users\besitzer\documents\github\sgl\include\sgl\system\stopwatch.hpp
 	<SGL/Core/Types.hpp>
 
 1412278769 c:\users\besitzer\documents\github\sgl\include\sgl\system\font.hpp
@@ -1800,7 +1800,7 @@
 	<SGL/Graphic/Transformable.hpp>
 	<SGL/Math/Vertex.hpp>
 
-1411559889 c:\users\besitzer\documents\github\sgl\include\sgl\graphic\sprite.hpp
+1412374119 c:\users\besitzer\documents\github\sgl\include\sgl\graphic\sprite.hpp
 	<SGL/Graphic/Drawable.hpp>
 	<SGL/Graphic/Transformable.hpp>
 	<SGL/Math/vec2.hpp>
@@ -1908,7 +1908,7 @@
 	<SGL/System/Font.hpp>
 	<SGL/Graphic/Surface.hpp>
 
-1412260577 source:c:\users\besitzer\documents\github\sgl\src\sgl\system\stopwatch.cpp
+1412374150 source:c:\users\besitzer\documents\github\sgl\src\sgl\system\stopwatch.cpp
 	<cmath>
 	<SGL/Core/SDL.hpp>
 	<SGL/System/StopWatch.hpp>

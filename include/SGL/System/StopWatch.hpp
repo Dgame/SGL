@@ -5,9 +5,9 @@
 
 namespace sgl {
     struct Time {
+        uint16 msecs;
         uint16 seconds;
         uint16 minutes;
-        uint16 msecs;
         uint16 hours;
 
         explicit Time(uint32 ms);
@@ -36,11 +36,11 @@ namespace sgl {
     /**
     * Returns the milliseconds since the application was started.
     */
-    uint32 DurationMs();
+    uint32 DurationAsMs();
     /**
     * Returns the Time since the application was started.
     */
-    Time DurationTime();
+    Time DurationAsTime();
     /**
     * Wait for msecs milliseconds, which means that the application freeze for this time.
     */

@@ -43,6 +43,7 @@ namespace sgl {
 
     void Sprite::setTexture(Texture& tex) {
         _texture = &tex;
+
         _clipRect.x = _clipRect.y = 0;
         _clipRect.width = tex.width();
         _clipRect.height = tex.height();

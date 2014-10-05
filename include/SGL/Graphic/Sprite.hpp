@@ -29,10 +29,18 @@ namespace sgl {
             return _texture;
         }
 
+        Texture* getTexture() {
+            return _texture;
+        }
+
         void setColor(const Color4b&);
         void setClipRect(const ShortRect&);
 
         const ShortRect& getClipRect() const {
+            return _clipRect;
+        }
+
+        ShortRect& getClipRect() {
             return _clipRect;
         }
 
