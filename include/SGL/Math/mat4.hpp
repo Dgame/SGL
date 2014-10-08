@@ -1,7 +1,6 @@
 #ifndef SGL_MATRIX_HPP
 #define SGL_MATRIX_HPP
 
-#include <algorithm>
 #include <SGL/Math/vec2.hpp>
 #include <SGL/Math/vec3.hpp>
 #include <SGL/Math/Rect.hpp>

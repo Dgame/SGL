@@ -6,7 +6,6 @@ namespace sgl {
         if (_wasTransformed()) {
             const vec2f global_center = _position + _local_center;
             _matrix.loadIdentity().rotate(_rotation, global_center).scale(_scale, global_center).translate(_position);
-
             _was_transformed = false;
 #if SGL_DEBUG
             printf("Update Transform Matrix\n");
@@ -56,18 +55,16 @@ namespace sgl {
 
     void Transformable::setRotation(float rotation) {
         _rotation = rotation;
-        _rotation = fmod(_rotation, 360);
-        if (_rotation < 0)
-            _rotation += 360;
+        if (_rotation < 0 || _rotation > 360)
+            _rotation = 0;
 
         _notifyTransform();
     }
 
     void Transformable::rotate(float rotation) {
         _rotation += rotation;
-        _rotation = fmod(_rotation, 360);
-        if (_rotation < 0)
-            _rotation += 360;
+        if (_rotation < 0 || _rotation > 360)
+            _rotation = 0;
 
         _notifyTransform();
     }
