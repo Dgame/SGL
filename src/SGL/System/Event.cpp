@@ -1,43 +1,5 @@
 #include <SGL/System/Event.hpp>
 
-namespace sgl {
-    bool PollEvent(Event* event) {
-        SDL_Event src;
-        if (SDL_PollEvent(&src) == 0)
-            return false;
-
-        return TranslateEvent(&src, event);
-    }
-
-    bool PushEvent(Event::Type type) {
-        SDL_Event dst;
-        dst.type = static_cast<SDL_EventType>(type);
-
-        return SDL_PushEvent(&dst) == 1;
-    }
-
-    bool WaitEvent(Event* event, int32 timeout) {
-        SDL_Event src;
-
-        int result = 0;
-        if (timeout < 0)
-            result = SDL_WaitEvent(&src);
-        else
-            result = SDL_WaitEventTimeout(&src, timeout);
-
-        if (result != 0)
-            return TranslateEvent(&src, event);
-
-        return false;
-    }
-
-    bool HasEvent(Event::Type type) {
-        if (type == Event::Quit)
-            return SDL_QuitRequested();
-        return SDL_HasEvent(static_cast<int>(type)) == SDL_TRUE;
-    }
-}
-
 namespace {
     bool TranslateEvent(const SDL_Event* src, sgl::Event* event) {
         if (src->type == SDL_WINDOWEVENT) {
@@ -125,5 +87,43 @@ namespace {
         }
 
         return false;
+    }
+}
+
+namespace sgl {
+    bool PollEvent(Event* event) {
+        SDL_Event src;
+        if (SDL_PollEvent(&src) == 0)
+            return false;
+
+        return TranslateEvent(&src, event);
+    }
+
+    bool PushEvent(Event::Type type) {
+        SDL_Event dst;
+        dst.type = static_cast<SDL_EventType>(type);
+
+        return SDL_PushEvent(&dst) == 1;
+    }
+
+    bool WaitEvent(Event* event, int32 timeout) {
+        SDL_Event src;
+
+        int result = 0;
+        if (timeout < 0)
+            result = SDL_WaitEvent(&src);
+        else
+            result = SDL_WaitEventTimeout(&src, timeout);
+
+        if (result != 0)
+            return TranslateEvent(&src, event);
+
+        return false;
+    }
+
+    bool HasEvent(Event::Type type) {
+        if (type == Event::Quit)
+            return SDL_QuitRequested();
+        return SDL_HasEvent(static_cast<SDL_EventType>(type)) == SDL_TRUE;
     }
 }

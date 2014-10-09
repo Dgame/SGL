@@ -110,10 +110,6 @@ namespace sgl {
     bool HasEvent(Event::Type type);
 }
 
-namespace {
-    bool TranslateEvent(const SDL_Event*, sgl::Event*);
-}
-
 /**
     sgl::Event event;
     while (sgl::PollEvent(&event)) {

@@ -1664,7 +1664,7 @@
 1411218041 c:\users\besitzer\documents\github\sgl\include\sgl\system\mouse.hpp
 	<SGL/Core/SDL.hpp>
 
-1411218041 c:\users\besitzer\documents\github\sgl\include\sgl\system\event.hpp
+1412844739 c:\users\besitzer\documents\github\sgl\include\sgl\system\event.hpp
 	<SGL/Core/Types.hpp>
 	<SGL/System/Keyboard.hpp>
 	<SGL/System/Mouse.hpp>
@@ -1900,7 +1900,7 @@
 1411218041 source:c:\users\besitzer\documents\github\sgl\src\sgl\system\battery.cpp
 	<SGL/System/Battery.hpp>
 
-1411218041 source:c:\users\besitzer\documents\github\sgl\src\sgl\system\event.cpp
+1412845272 source:c:\users\besitzer\documents\github\sgl\src\sgl\system\event.cpp
 	<SGL/System/Event.hpp>
 
 1411218041 source:c:\users\besitzer\documents\github\sgl\src\sgl\system\font.cpp
