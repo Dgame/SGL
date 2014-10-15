@@ -33,6 +33,9 @@ namespace sgl {
         void setPosition(float x, float y);
         void setPosition(const vec2f&);
 
+        void move(float x, float y);
+        void move(const vec2f&);
+
         const vec2f& getPosition() const {
             return _position;
         }

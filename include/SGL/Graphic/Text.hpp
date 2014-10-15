@@ -3,13 +3,12 @@
 
 #include <string>
 #include <sstream>
-#include <SGL/Core/Config.hpp>
 #include <SGL/Graphic/Drawable.hpp>
 #include <SGL/Graphic/Transformable.hpp>
 #include <SGL/Graphic/Texture.hpp>
 #include <SGL/Graphic/Color.hpp>
-#include <SGL/Math/Vertex.hpp>
 #include <SGL/System/Font.hpp>
+#include <SGL/Math/Vertex.hpp>
 
 namespace {
     template <typename T>
@@ -29,6 +28,7 @@ namespace sgl {
         mutable bool _redraw = true;
         mutable Texture _texture;
         mutable Vertex _vertices[4];
+
         Font* _font;
         std::string _text;
 
@@ -43,7 +43,6 @@ namespace sgl {
 
         explicit Text(Font&, const std::string& str = "");
         Text(const Text&);
-
         virtual ~Text() { }
 
         Text& operator =(const Text&);

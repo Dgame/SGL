@@ -67,20 +67,6 @@ namespace sgl {
 
     void Sprite::setClipRect(const ShortRect& clipRect) {
         _clipRect = clipRect;
-
         _updateVertices();
-    }
-
-    void Sprite::move(float x, float y) {
-        _position.x += x;
-        _position.y += y;
-
-        _notifyTransform();
-    }
-
-    void Sprite::move(const vec2f& vec) {
-        _position += vec;
-
-        _notifyTransform();
     }
 }

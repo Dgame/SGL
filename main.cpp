@@ -47,11 +47,9 @@ int main() {
 
     sgl::DisplayMode desktop_mode0 = sgl::GetDesktopDisplayMode(0);
     sgl::DisplayMode desktop_mode1 = sgl::GetDesktopDisplayMode(1);
-    sgl::DisplayMode win_mode = wnd.getDisplayMode();
 
     std::cout << "Desktop #0: " << desktop_mode0.width << ", " << desktop_mode0.height << ", " << desktop_mode0.refresh_rate << std::endl;
     std::cout << "Desktop #1: " << desktop_mode1.width << ", " << desktop_mode1.height << ", " << desktop_mode1.refresh_rate << std::endl;
-    std::cout << "Window: " << win_mode.width << ", " << win_mode.height << ", " << win_mode.refresh_rate << std::endl;
 
     sgl::Event event;
     while (wnd.isOpen()) {

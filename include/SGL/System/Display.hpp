@@ -17,7 +17,7 @@ namespace sgl {
 	void Copy(const SDL_DisplayMode*, DisplayMode&);
 	void Copy(const DisplayMode&, SDL_DisplayMode*);
 
-	int16 GetWindowDisplayIndex();
+	int16 GetCurrentWindowDisplayIndex();
 
 	DisplayMode GetDesktopDisplayMode(uint16 index = 0);
 	DisplayMode GetCurrentDisplayMode(uint16 index = 0);

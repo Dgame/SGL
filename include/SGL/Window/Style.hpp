@@ -25,9 +25,6 @@ namespace sgl {
 
     Style& operator |=(Style&, Style rhs);
     bool operator &(Style lhs, Style rhs);
-
-    Style& operator |=(Style&, int right);
-    bool operator &(Style lhs, int right);
 }
 
 #endif // SGL_WINDOW_STYLE_HPP

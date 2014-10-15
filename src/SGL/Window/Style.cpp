@@ -16,18 +16,4 @@ namespace sgl {
 
         return (left & right) != 0;
     }
-
-    Style& operator |=(Style& lhs, int right) {
-        const int left = static_cast<int>(lhs);
-
-        lhs = static_cast<Style>(left | right);
-
-        return lhs;
-    }
-
-    bool operator &(Style lhs, int right) {
-        const int left = static_cast<int>(lhs);
-
-        return (left & right) != 0;
-    }
 }

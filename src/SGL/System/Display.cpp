@@ -23,7 +23,7 @@ namespace sgl {
         sdl_mode->driverdata = nullptr;
 	}
 
-    int16 GetWindowDisplayIndex() {
+    int16 GetCurrentWindowDisplayIndex() {
         SDL_Window* window = SDL_GL_GetCurrentWindow();
 
         return SDL_Check(SDL_GetWindowDisplayIndex(window));

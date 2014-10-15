@@ -11,45 +11,49 @@ namespace sgl {
             printf("Update Transform Matrix\n");
 #endif
         }
-
         return _matrix;
     }
 
     void Transformable::setPosition(float x, float y) {
         _position.x = x;
         _position.y = y;
-
         _notifyTransform();
     }
 
     void Transformable::setPosition(const vec2f& pos) {
         _position = pos;
+        _notifyTransform();
+    }
 
+    void Transformable::move(float x, float y) {
+        _position.x += x;
+        _position.y += y;
+        _notifyTransform();
+    }
+
+    void Transformable::move(const vec2f& offset) {
+        _position += offset;
         _notifyTransform();
     }
 
     void Transformable::setCenter(const vec2f& center) {
         _local_center = center;
-
         _notifyTransform();
     }
 
     void Transformable::setCenter(float x, float y) {
         _local_center.x = x;
         _local_center.y = y;
-
         _notifyTransform();
     }
 
     void Transformable::setScale(float the_scale) {
         _scale = the_scale;
-
         _notifyTransform();
     }
 
     void Transformable::scale(float the_scale) {
         _scale += the_scale;
-
         _notifyTransform();
     }
 
@@ -57,7 +61,6 @@ namespace sgl {
         _rotation = rotation;
         if (_rotation < 0 || _rotation > 360)
             _rotation = 0;
-
         _notifyTransform();
     }
 
@@ -65,7 +68,6 @@ namespace sgl {
         _rotation += rotation;
         if (_rotation < 0 || _rotation > 360)
             _rotation = 0;
-
         _notifyTransform();
     }
 }

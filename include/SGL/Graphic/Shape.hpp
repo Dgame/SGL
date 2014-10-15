@@ -22,6 +22,7 @@ namespace sgl {
         Geometry geometry;
 
         explicit Shape(Geometry geo);
+        virtual ~Shape() { }
 
         void append(const Vertex&);
         void setTexture(Texture*, const FloatRect* texRect = nullptr);
@@ -37,10 +38,11 @@ namespace sgl {
             return _vertices;
         }
 
-        void setColor(const Color4b&);
+        std::vector<Vertex>& getVertices() {
+            return _vertices;
+        }
 
-        void move(float x, float y);
-        void move(const vec2f&);
+        void setColor(const Color4b&);
     };
 }
 

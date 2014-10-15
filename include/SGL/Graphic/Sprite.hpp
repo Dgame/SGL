@@ -37,9 +37,6 @@ namespace sgl {
         const ShortRect& getClipRect() const {
             return _clipRect;
         }
-
-        void move(float x, float y);
-        void move(const vec2f&);
     };
 }
 

@@ -66,17 +66,4 @@ namespace sgl {
             v.setColor(col);
         }
     }
-
-    void Shape::move(float x, float y) {
-        for (Vertex& v : _vertices) {
-            v.position.x += x;
-            v.position.y += y;
-        }
-
-        _notifyTransform();
-    }
-
-    void Shape::move(const vec2f& offset) {
-        this->move(offset.x, offset.y);
-    }
 }
