@@ -46,7 +46,7 @@ namespace sgl {
         _projection.ortho(ShortRect(0, 0, rect.width, rect.height));
         this->loadProjection();
 
-        this->setSwapInterval(SwapInterval::Synchronize);
+        this->setUpdateInterval(UpdateInterval::Synchronize);
         this->setClearColor(Color4b::White);
 
         _open = true;
@@ -103,12 +103,12 @@ namespace sgl {
             SDL_DisableScreenSaver();
     }
 
-    void Window::setSwapInterval(SwapInterval interval) const {
+    void Window::setUpdateInterval(UpdateInterval interval) const {
         SDL_Check(SDL_GL_SetSwapInterval(static_cast<int>(interval)));
     }
 
-    SwapInterval Window::getSwapInterval() const {
-        return static_cast<SwapInterval>(SDL_GL_GetSwapInterval());
+    UpdateInterval Window::getUpdateInterval() const {
+        return static_cast<UpdateInterval>(SDL_GL_GetSwapInterval());
     }
 
     bool Window::hasScreenSaver() const {

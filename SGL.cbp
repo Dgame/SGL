@@ -61,8 +61,8 @@
 			<Add option="-lSDL2_image" />
 			<Add option="-lSDL2_mixer" />
 			<Add option="-lSDL2_ttf" />
-			<Add library="libs\32\lib\glew32.lib" />
-			<Add directory="libs/32/lib" />
+			<Add library="libs\64\lib\glew32.lib" />
+			<Add directory="libs/64/lib" />
 		</Linker>
 		<Unit filename="include/SGL/Audio.hpp" />
 		<Unit filename="include/SGL/Audio/Music.hpp" />
@@ -105,7 +105,7 @@
 		<Unit filename="include/SGL/System/StopWatch.hpp" />
 		<Unit filename="include/SGL/Window.hpp" />
 		<Unit filename="include/SGL/Window/Style.hpp" />
-		<Unit filename="include/SGL/Window/SwapInterval.hpp" />
+		<Unit filename="include/SGL/Window/UpdateInterval.hpp" />
 		<Unit filename="include/SGL/Window/Window.hpp" />
 		<Unit filename="include/SGL/all.hpp" />
 		<Unit filename="main.cpp" />

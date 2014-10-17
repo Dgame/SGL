@@ -7,7 +7,7 @@
 #include <SGL/Math/vec2.hpp>
 #include <SGL/Math/Vertex.hpp>
 #include <SGL/Window/Style.hpp>
-#include <SGL/Window/SwapInterval.hpp>
+#include <SGL/Window/UpdateInterval.hpp>
 
 namespace sgl {
     class Texture;
@@ -58,8 +58,8 @@ namespace sgl {
         void setScreenSaver(bool enable) const;
         bool hasScreenSaver() const;
 
-        void setSwapInterval(SwapInterval interval) const;
-        SwapInterval getSwapInterval() const;
+        void setUpdateInterval(UpdateInterval interval) const;
+        UpdateInterval getUpdateInterval() const;
 
         void maximize() const;
         void minimize() const;

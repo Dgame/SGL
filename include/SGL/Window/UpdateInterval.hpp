@@ -2,7 +2,7 @@
 #define SGL_WINDOW_SWAP_INTERVAL_HPP
 
 namespace sgl {
-    enum class SwapInterval : char {
+    enum class UpdateInterval : char {
         Immediate = 0,
         Synchronize = 1,
         LateSwapTearing = -1

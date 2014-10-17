@@ -956,7 +956,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1413392639 source:c:\users\besitzer\documents\github\sgl\main.cpp
+1413480099 source:c:\users\besitzer\documents\github\sgl\main.cpp
 	<iostream>
 	<vector>
 	<SGL/all.hpp>
@@ -1688,14 +1688,14 @@
 1412260880 c:\users\besitzer\documents\github\sgl\include\sgl\graphic\color.hpp
 	<SGL/Core/Types.hpp>
 
-1413392572 c:\users\besitzer\documents\github\sgl\include\sgl\window\window.hpp
+1413480097 c:\users\besitzer\documents\github\sgl\include\sgl\window\window.hpp
 	<string>
 	<vector>
 	<SGL/Math/mat4.hpp>
 	<SGL/Math/vec2.hpp>
 	<SGL/Math/Vertex.hpp>
 	<SGL/Window/Style.hpp>
-	<SGL/Window/SwapInterval.hpp>
+	<SGL/Window/UpdateInterval.hpp>
 
 1411755570 c:\users\besitzer\documents\github\sgl\include\sgl\core\init.hpp
 
@@ -1910,7 +1910,7 @@
 	<SGL/Core/SDL.hpp>
 	<SGL/System/StopWatch.hpp>
 
-1413392591 source:c:\users\besitzer\documents\github\sgl\src\sgl\window\window.cpp
+1413480203 source:c:\users\besitzer\documents\github\sgl\src\sgl\window\window.cpp
 	<SGL/Window/Window.hpp>
 	<SGL/Graphic/Drawable.hpp>
 	<SGL/Graphic/Texture.hpp>
@@ -1968,4 +1968,6 @@
 1412529242 source:c:\users\besitzer\documents\github\sgl\src\sgl\math\vec3.cpp
 	<SGL/Math/vec3.hpp>
 	<SGL/Core/Traits.hpp>
+
+1413480096 c:\users\besitzer\documents\github\sgl\include\sgl\window\updateinterval.hpp
 
